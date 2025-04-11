@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 import time
 import unicodedata
+import json
 
 
 class F1RaceChartBuilder:
@@ -159,5 +160,11 @@ class F1RaceChartBuilder:
 
         print(f"\n✅ Fichier exporté : {self.output_file}")
         print(df)
+
+        # export au format JSON
+        json_file = self.output_file.replace('.csv', '.json')
+        with open(json_file, 'w', encoding='utf-8') as f:
+            json.dump(self.drivers_data, f, ensure_ascii=False, indent=2)
+        print(f"✅ Fichier exporté : {json_file}")
 
 
