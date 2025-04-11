@@ -1,11 +1,11 @@
 
 
----
 
-## 📄 `README.md` (copier/coller prêt)
-
-```markdown
 # 🏁 Beautifull F1 — Automated Data Storytelling with Formula 1
+
+![Python](https://img.shields.io/badge/Made%20with-Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Flourish](https://img.shields.io/badge/Flourish-Ready-ff69b4?style=for-the-badge&logo=flourish&logoColor=white)
+
 
 **Beautifull F1** is a data storytelling project focused on **automated visualizations using Formula 1 data**.  
 The goal is to explore open F1 data sources (APIs, public datasets, etc.) and generate dynamic, narrative-driven visualizations using platforms like **Flourish** and other tools.
@@ -105,9 +105,3 @@ Data from third-party APIs (openf1.org, jolpi.ca) remains the property of their 
 ## 👤 Author
 
 Made by **[Heric Libong](https://github.com/hericlibong)** — developer and journalist passionate about visual storytelling and Formula 1.
-```
-
----
-
-🟢 Tu peux maintenant le copier-coller dans ton `README.md` à la racine du dépôt.  
-Souhaites-tu aussi un petit badge "Made with Python" ou "Flourish ready" à placer dans l’en-tête ?
