@@ -59,7 +59,7 @@ This folder contains a Python program that:
 
 ### 📊 See the Chart in Action
 
-You can view the animated race chart here: [Flourish Visualization](https://flo.uri.sh/visualisation/22260899/embed)
+You can view the animated race chart here: [Race Chart Viz](https://flo.uri.sh/visualisation/22260899/embed)
 
 ### ⚙️ Installation
 
