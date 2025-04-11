@@ -5,6 +5,8 @@
 
 ![Python](https://img.shields.io/badge/Made%20with-Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Flourish](https://img.shields.io/badge/Flourish-Ready-ff69b4?style=for-the-badge&logo=flourish&logoColor=white)
+![OpenF1](https://img.shields.io/badge/OpenF1%20API-Used-blue?style=for-the-badge)
+
 
 
 **Beautifull F1** is a data storytelling project focused on **automated visualizations using Formula 1 data**.  
