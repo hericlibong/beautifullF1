@@ -164,7 +164,7 @@ class F1RaceChartBuilder:
         # export au format JSON
         json_file = self.output_file.replace('.csv', '.json')
         with open(json_file, 'w', encoding='utf-8') as f:
-            json.dump(self.drivers_data, f, ensure_ascii=False, indent=2)
+            json.dump(self.drivers_data, f, ensure_ascii=False, indent=4)
         print(f"✅ Fichier exporté : {json_file}")
 
 

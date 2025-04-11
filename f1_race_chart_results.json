@@ -1,0 +1,182 @@
+{
+  "Lando Norris": {
+    "Pilote": "Lando Norris",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LANNOR01_Lando_Norris/lannor01.png.transform/1col/image.png",
+    "team": "McLaren",
+    "start": 0,
+    "Australia": 25.0,
+    "China": 44.0,
+    "Japan": 62.0
+  },
+  "Max Verstappen": {
+    "Pilote": "Max Verstappen",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png.transform/1col/image.png",
+    "team": "Red Bull",
+    "start": 0,
+    "Australia": 18.0,
+    "China": 36.0,
+    "Japan": 61.0
+  },
+  "George Russell": {
+    "Pilote": "George Russell",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/G/GEORUS01_George_Russell/georus01.png.transform/1col/image.png",
+    "team": "Mercedes",
+    "start": 0,
+    "Australia": 15.0,
+    "China": 35.0,
+    "Japan": 45.0
+  },
+  "Andrea Kimi Antonelli": {
+    "Pilote": "Andrea Kimi Antonelli",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/A/ANDANT01_Andrea%20Kimi_Antonelli/andant01.png.transform/1col/image.png",
+    "team": "Mercedes",
+    "start": 0,
+    "Australia": 12.0,
+    "China": 22.0,
+    "Japan": 30.0
+  },
+  "Alexander Albon": {
+    "Pilote": "Alexander Albon",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/A/ALEALB01_Alexander_Albon/alealb01.png.transform/1col/image.png",
+    "team": "Williams",
+    "start": 0,
+    "Australia": 10.0,
+    "China": 16.0,
+    "Japan": 18.0
+  },
+  "Lance Stroll": {
+    "Pilote": "Lance Stroll",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LANSTR01_Lance_Stroll/lanstr01.png.transform/1col/image.png",
+    "team": "Aston Martin",
+    "start": 0,
+    "Australia": 8.0,
+    "China": 10.0,
+    "Japan": 10.0
+  },
+  "Nico Hülkenberg": {
+    "Pilote": "Nico Hülkenberg",
+    "image": "",
+    "team": "Sauber",
+    "start": 0,
+    "Australia": 6.0,
+    "China": 6.0,
+    "Japan": 6.0
+  },
+  "Charles Leclerc": {
+    "Pilote": "Charles Leclerc",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/C/CHALEC01_Charles_Leclerc/chalec01.png.transform/1col/image.png",
+    "team": "Ferrari",
+    "start": 0,
+    "Australia": 4.0,
+    "China": 8.0,
+    "Japan": 20.0
+  },
+  "Oscar Piastri": {
+    "Pilote": "Oscar Piastri",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/O/OSCPIA01_Oscar_Piastri/oscpia01.png.transform/1col/image.png",
+    "team": "McLaren",
+    "start": 0,
+    "Australia": 2.0,
+    "China": 34.0,
+    "Japan": 49.0
+  },
+  "Lewis Hamilton": {
+    "Pilote": "Lewis Hamilton",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LEWHAM01_Lewis_Hamilton/lewham01.png.transform/1col/image.png",
+    "team": "Ferrari",
+    "start": 0,
+    "Australia": 1.0,
+    "China": 9.0,
+    "Japan": 15.0
+  },
+  "Pierre Gasly": {
+    "Pilote": "Pierre Gasly",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/P/PIEGAS01_Pierre_Gasly/piegas01.png.transform/1col/image.png",
+    "team": "Alpine F1 Team",
+    "start": 0,
+    "Australia": 0.0,
+    "China": 0.0,
+    "Japan": 0.0
+  },
+  "Yuki Tsunoda": {
+    "Pilote": "Yuki Tsunoda",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/Y/YUKTSU01_Yuki_Tsunoda/yuktsu01.png.transform/1col/image.png",
+    "team": "RB F1 Team",
+    "start": 0,
+    "Australia": 0.0,
+    "China": 3.0,
+    "Japan": 3.0
+  },
+  "Esteban Ocon": {
+    "Pilote": "Esteban Ocon",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/E/ESTOCO01_Esteban_Ocon/estoco01.png.transform/1col/image.png",
+    "team": "Haas F1 Team",
+    "start": 0,
+    "Australia": 0.0,
+    "China": 10.0,
+    "Japan": 10.0
+  },
+  "Oliver Bearman": {
+    "Pilote": "Oliver Bearman",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/O/OLIBEA01_Oliver_Bearman/olibea01.png.transform/1col/image.png",
+    "team": "Haas F1 Team",
+    "start": 0,
+    "Australia": 0.0,
+    "China": 4.0,
+    "Japan": 5.0
+  },
+  "Liam Lawson": {
+    "Pilote": "Liam Lawson",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LIALAW01_Liam_Lawson/lialaw01.png.transform/1col/image.png",
+    "team": "Red Bull",
+    "start": 0,
+    "Australia": 0.0,
+    "China": 0.0,
+    "Japan": 0.0
+  },
+  "Gabriel Bortoleto": {
+    "Pilote": "Gabriel Bortoleto",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/G/GABBOR01_Gabriel_Bortoleto/gabbor01.png.transform/1col/image.png",
+    "team": "Sauber",
+    "start": 0,
+    "Australia": 0.0,
+    "China": 0.0,
+    "Japan": 0.0
+  },
+  "Fernando Alonso": {
+    "Pilote": "Fernando Alonso",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/F/FERALO01_Fernando_Alonso/feralo01.png.transform/1col/image.png",
+    "team": "Aston Martin",
+    "start": 0,
+    "Australia": 0.0,
+    "China": 0.0,
+    "Japan": 0.0
+  },
+  "Carlos Sainz": {
+    "Pilote": "Carlos Sainz",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/C/CARSAI01_Carlos_Sainz/carsai01.png.transform/1col/image.png",
+    "team": "Williams",
+    "start": 0,
+    "Australia": 0.0,
+    "China": 1.0,
+    "Japan": 1.0
+  },
+  "Jack Doohan": {
+    "Pilote": "Jack Doohan",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/J/JACDOO01_Jack_Doohan/jacdoo01.png.transform/1col/image.png",
+    "team": "Alpine F1 Team",
+    "start": 0,
+    "Australia": 0.0,
+    "China": 0.0,
+    "Japan": 0.0
+  },
+  "Isack Hadjar": {
+    "Pilote": "Isack Hadjar",
+    "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/I/ISAHAD01_Isack_Hadjar/isahad01.png.transform/1col/image.png",
+    "team": "RB F1 Team",
+    "start": 0,
+    "Australia": 0.0,
+    "China": 0.0,
+    "Japan": 4.0
+  }
+}
