@@ -57,6 +57,10 @@ This folder contains a Python program that:
 
 ---
 
+### 📊 See the Chart in Action
+
+You can view the animated race chart here: [Flourish Visualization](https://flo.uri.sh/visualisation/22260899/embed)
+
 ### ⚙️ Installation
 
 Clone the repository and install the required dependencies:
@@ -84,6 +88,8 @@ The script generates:
 
 ---
 
+
+
 ### 🧱 Requirements
 
 Minimal dependencies:
@@ -108,4 +114,4 @@ Data from third-party APIs (openf1.org, jolpi.ca) remains the property of their 
 
 Made by **[Heric Libong](https://github.com/hericlibong)** — developer and journalist passionate about visual storytelling and Formula 1.
 
-<iframe src='https://flo.uri.sh/visualisation/22260899/embed' title='Interactive or visual content' class='flourish-embed-iframe' frameborder='0' scrolling='no' style='width:100%;height:600px;' sandbox='allow-same-origin allow-forms allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation'></iframe><div style='width:100%!;margin-top:4px!important;text-align:right!important;'><a class='flourish-credit' href='https://public.flourish.studio/visualisation/22260899/?utm_source=embed&utm_campaign=visualisation/22260899' target='_top' style='text-decoration:none!important'><img alt='Made with Flourish' src='https://public.flourish.studio/resources/made_with_flourish.svg' style='width:105px!important;height:16px!important;border:none!important;margin:0!important;'> </a></div>
+
