@@ -5,6 +5,11 @@ import unicodedata
 import json
 
 
+def normalize_name(name):
+    # Retire accents, espaces et passe en minuscule
+    return unicodedata.normalize('NFKD', name).encode('ascii', 'ignore').decode('utf-8').lower().strip()
+
+
 class F1RaceChartBuilder:
     def __init__(self, season:int, rounds:int, meeting_key:int, output_file: str="f1_race_chart_results.csv"):
         """
@@ -64,7 +69,15 @@ class F1RaceChartBuilder:
                 points = float(result.get("points", 0))
                 self.sprint_points_by_country[col_name][full_name] = points
 
-                
+    @staticmethod
+    def get_fallback_headshot(full_name):
+        fallback = {
+            "nico hulkenberg": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/N/NICHUL01_Nico_Hulkenberg/nichul01.png.transform/1col/image.png",
+            "franco colapinto": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/F/FRACOL01_Franco_Colapinto/fracol01.png.transform/1col/image.png"
+        }
+        return fallback.get(normalize_name(full_name), "")
+
+            
     def fetch_driver_images(self):
         """
         Récupère les images des pilotes via l'API OpenF1 (meeting_key requis)
@@ -77,10 +90,14 @@ class F1RaceChartBuilder:
         drivers = response.json()
 
         for d in drivers:
-            full_name = d["full_name"].title()  # Exemple : Max Verstappen
+            full_name = d["full_name"].title()
             image_url = d.get("headshot_url", "")
+            # Si image_url est vide OU générique OU incomplète
+            if not image_url or image_url.strip() == "" or image_url.endswith('d_driver_fallback_image.png'):
+                image_url = self.get_fallback_headshot(full_name)
             if full_name and image_url:
                 self.photo_map[full_name] = image_url
+
 
     def build_results_table(self):
         """
@@ -123,7 +140,9 @@ class F1RaceChartBuilder:
                 points += sprint_points
 
                 team = constructor['name']
-                image = self.photo_map.get(full_name, "")
+                # image = self.photo_map.get(full_name, "")
+                image = self.photo_map.get(full_name, "") or self.get_fallback_headshot(full_name)
+
 
                 if full_name not in self.drivers_data:
                     self.drivers_data[full_name] = {
@@ -151,6 +170,7 @@ class F1RaceChartBuilder:
 
             time.sleep(1)
 
+
     def export_csv(self):
         """
         Exporte le tableau des pilotes vers un fichier CSV, prêt à être utilisé dans Flourish.
@@ -166,5 +186,3 @@ class F1RaceChartBuilder:
         with open(json_file, 'w', encoding='utf-8') as f:
             json.dump(self.drivers_data, f, ensure_ascii=False, indent=4)
         print(f"✅ Fichier exporté : {json_file}")
-
-

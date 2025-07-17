@@ -8,7 +8,14 @@
         "China": 44.0,
         "Japan": 62.0,
         "Bahrain": 77.0,
-        "Saudi Arabia": 89.0
+        "Saudi Arabia": 89.0,
+        "USA - Miami": 115.0,
+        "Italy - Imola": 133.0,
+        "Monaco": 158.0,
+        "Spain": 176.0,
+        "Canada": 176.0,
+        "Austria": 201.0,
+        "UK": 226.0
     },
     "Max Verstappen": {
         "Pilote": "Max Verstappen",
@@ -19,7 +26,14 @@
         "China": 36.0,
         "Japan": 61.0,
         "Bahrain": 69.0,
-        "Saudi Arabia": 87.0
+        "Saudi Arabia": 87.0,
+        "USA - Miami": 99.0,
+        "Italy - Imola": 124.0,
+        "Monaco": 136.0,
+        "Spain": 137.0,
+        "Canada": 155.0,
+        "Austria": 155.0,
+        "UK": 165.0
     },
     "George Russell": {
         "Pilote": "George Russell",
@@ -30,7 +44,14 @@
         "China": 35.0,
         "Japan": 45.0,
         "Bahrain": 63.0,
-        "Saudi Arabia": 73.0
+        "Saudi Arabia": 73.0,
+        "USA - Miami": 93.0,
+        "Italy - Imola": 99.0,
+        "Monaco": 99.0,
+        "Spain": 111.0,
+        "Canada": 136.0,
+        "Austria": 146.0,
+        "UK": 147.0
     },
     "Andrea Kimi Antonelli": {
         "Pilote": "Andrea Kimi Antonelli",
@@ -41,7 +62,14 @@
         "China": 22.0,
         "Japan": 30.0,
         "Bahrain": 30.0,
-        "Saudi Arabia": 38.0
+        "Saudi Arabia": 38.0,
+        "USA - Miami": 48.0,
+        "Italy - Imola": 48.0,
+        "Monaco": 48.0,
+        "Spain": 48.0,
+        "Canada": 63.0,
+        "Austria": 63.0,
+        "UK": 63.0
     },
     "Alexander Albon": {
         "Pilote": "Alexander Albon",
@@ -52,7 +80,14 @@
         "China": 16.0,
         "Japan": 18.0,
         "Bahrain": 18.0,
-        "Saudi Arabia": 20.0
+        "Saudi Arabia": 20.0,
+        "USA - Miami": 30.0,
+        "Italy - Imola": 40.0,
+        "Monaco": 42.0,
+        "Spain": 42.0,
+        "Canada": 42.0,
+        "Austria": 42.0,
+        "UK": 46.0
     },
     "Lance Stroll": {
         "Pilote": "Lance Stroll",
@@ -63,18 +98,32 @@
         "China": 10.0,
         "Japan": 10.0,
         "Bahrain": 10.0,
-        "Saudi Arabia": 10.0
+        "Saudi Arabia": 10.0,
+        "USA - Miami": 14.0,
+        "Italy - Imola": 14.0,
+        "Monaco": 14.0,
+        "Spain": 14.0,
+        "Canada": 14.0,
+        "Austria": 14.0,
+        "UK": 20.0
     },
     "Nico Hülkenberg": {
         "Pilote": "Nico Hülkenberg",
-        "image": "",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/N/NICHUL01_Nico_Hulkenberg/nichul01.png.transform/1col/image.png",
         "team": "Sauber",
         "start": 0,
         "Australia": 6.0,
         "China": 6.0,
         "Japan": 6.0,
         "Bahrain": 6.0,
-        "Saudi Arabia": 6.0
+        "Saudi Arabia": 6.0,
+        "USA - Miami": 6.0,
+        "Italy - Imola": 6.0,
+        "Monaco": 6.0,
+        "Spain": 16.0,
+        "Canada": 20.0,
+        "Austria": 22.0,
+        "UK": 37.0
     },
     "Charles Leclerc": {
         "Pilote": "Charles Leclerc",
@@ -85,7 +134,14 @@
         "China": 8.0,
         "Japan": 20.0,
         "Bahrain": 32.0,
-        "Saudi Arabia": 47.0
+        "Saudi Arabia": 47.0,
+        "USA - Miami": 53.0,
+        "Italy - Imola": 61.0,
+        "Monaco": 79.0,
+        "Spain": 94.0,
+        "Canada": 104.0,
+        "Austria": 119.0,
+        "UK": 119.0
     },
     "Oscar Piastri": {
         "Pilote": "Oscar Piastri",
@@ -96,7 +152,14 @@
         "China": 34.0,
         "Japan": 49.0,
         "Bahrain": 74.0,
-        "Saudi Arabia": 99.0
+        "Saudi Arabia": 99.0,
+        "USA - Miami": 131.0,
+        "Italy - Imola": 146.0,
+        "Monaco": 161.0,
+        "Spain": 186.0,
+        "Canada": 198.0,
+        "Austria": 216.0,
+        "UK": 234.0
     },
     "Lewis Hamilton": {
         "Pilote": "Lewis Hamilton",
@@ -107,7 +170,14 @@
         "China": 9.0,
         "Japan": 15.0,
         "Bahrain": 25.0,
-        "Saudi Arabia": 31.0
+        "Saudi Arabia": 31.0,
+        "USA - Miami": 41.0,
+        "Italy - Imola": 53.0,
+        "Monaco": 63.0,
+        "Spain": 71.0,
+        "Canada": 79.0,
+        "Austria": 91.0,
+        "UK": 103.0
     },
     "Pierre Gasly": {
         "Pilote": "Pierre Gasly",
@@ -118,7 +188,14 @@
         "China": 0.0,
         "Japan": 0.0,
         "Bahrain": 6.0,
-        "Saudi Arabia": 6.0
+        "Saudi Arabia": 6.0,
+        "USA - Miami": 7.0,
+        "Italy - Imola": 7.0,
+        "Monaco": 7.0,
+        "Spain": 11.0,
+        "Canada": 11.0,
+        "Austria": 11.0,
+        "UK": 19.0
     },
     "Yuki Tsunoda": {
         "Pilote": "Yuki Tsunoda",
@@ -129,7 +206,14 @@
         "China": 3.0,
         "Japan": 3.0,
         "Bahrain": 5.0,
-        "Saudi Arabia": 5.0
+        "Saudi Arabia": 5.0,
+        "USA - Miami": 9.0,
+        "Italy - Imola": 10.0,
+        "Monaco": 10.0,
+        "Spain": 10.0,
+        "Canada": 10.0,
+        "Austria": 10.0,
+        "UK": 10.0
     },
     "Esteban Ocon": {
         "Pilote": "Esteban Ocon",
@@ -140,7 +224,14 @@
         "China": 10.0,
         "Japan": 10.0,
         "Bahrain": 14.0,
-        "Saudi Arabia": 14.0
+        "Saudi Arabia": 14.0,
+        "USA - Miami": 14.0,
+        "Italy - Imola": 14.0,
+        "Monaco": 20.0,
+        "Spain": 20.0,
+        "Canada": 22.0,
+        "Austria": 23.0,
+        "UK": 23.0
     },
     "Oliver Bearman": {
         "Pilote": "Oliver Bearman",
@@ -151,7 +242,14 @@
         "China": 4.0,
         "Japan": 5.0,
         "Bahrain": 6.0,
-        "Saudi Arabia": 6.0
+        "Saudi Arabia": 6.0,
+        "USA - Miami": 6.0,
+        "Italy - Imola": 6.0,
+        "Monaco": 6.0,
+        "Spain": 6.0,
+        "Canada": 6.0,
+        "Austria": 6.0,
+        "UK": 6.0
     },
     "Liam Lawson": {
         "Pilote": "Liam Lawson",
@@ -162,7 +260,14 @@
         "China": 0.0,
         "Japan": 0.0,
         "Bahrain": 0.0,
-        "Saudi Arabia": 0.0
+        "Saudi Arabia": 0.0,
+        "USA - Miami": 0.0,
+        "Italy - Imola": 0.0,
+        "Monaco": 4.0,
+        "Spain": 4.0,
+        "Canada": 4.0,
+        "Austria": 12.0,
+        "UK": 12.0
     },
     "Gabriel Bortoleto": {
         "Pilote": "Gabriel Bortoleto",
@@ -173,7 +278,14 @@
         "China": 0.0,
         "Japan": 0.0,
         "Bahrain": 0.0,
-        "Saudi Arabia": 0.0
+        "Saudi Arabia": 0.0,
+        "USA - Miami": 0.0,
+        "Italy - Imola": 0.0,
+        "Monaco": 0.0,
+        "Spain": 0.0,
+        "Canada": 0.0,
+        "Austria": 4.0,
+        "UK": 4.0
     },
     "Fernando Alonso": {
         "Pilote": "Fernando Alonso",
@@ -184,7 +296,14 @@
         "China": 0.0,
         "Japan": 0.0,
         "Bahrain": 0.0,
-        "Saudi Arabia": 0.0
+        "Saudi Arabia": 0.0,
+        "USA - Miami": 0.0,
+        "Italy - Imola": 0.0,
+        "Monaco": 0.0,
+        "Spain": 2.0,
+        "Canada": 8.0,
+        "Austria": 14.0,
+        "UK": 16.0
     },
     "Carlos Sainz": {
         "Pilote": "Carlos Sainz",
@@ -195,7 +314,14 @@
         "China": 1.0,
         "Japan": 1.0,
         "Bahrain": 1.0,
-        "Saudi Arabia": 5.0
+        "Saudi Arabia": 5.0,
+        "USA - Miami": 7.0,
+        "Italy - Imola": 11.0,
+        "Monaco": 12.0,
+        "Spain": 12.0,
+        "Canada": 13.0,
+        "Austria": 13.0,
+        "UK": 13.0
     },
     "Jack Doohan": {
         "Pilote": "Jack Doohan",
@@ -206,7 +332,14 @@
         "China": 0.0,
         "Japan": 0.0,
         "Bahrain": 0.0,
-        "Saudi Arabia": 0.0
+        "Saudi Arabia": 0.0,
+        "USA - Miami": 0.0,
+        "Italy - Imola": 0.0,
+        "Monaco": 0.0,
+        "Spain": 0.0,
+        "Canada": 0.0,
+        "Austria": 0.0,
+        "UK": 0.0
     },
     "Isack Hadjar": {
         "Pilote": "Isack Hadjar",
@@ -217,6 +350,31 @@
         "China": 0.0,
         "Japan": 4.0,
         "Bahrain": 4.0,
-        "Saudi Arabia": 5.0
+        "Saudi Arabia": 5.0,
+        "USA - Miami": 5.0,
+        "Italy - Imola": 7.0,
+        "Monaco": 15.0,
+        "Spain": 21.0,
+        "Canada": 21.0,
+        "Austria": 21.0,
+        "UK": 21.0
+    },
+    "Franco Colapinto": {
+        "Pilote": "Franco Colapinto",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/F/FRACOL01_Franco_Colapinto/fracol01.png.transform/1col/image.png",
+        "team": "Alpine F1 Team",
+        "start": 0,
+        "Australia": 0,
+        "China": 0,
+        "Japan": 0,
+        "Bahrain": 0,
+        "Saudi Arabia": 0,
+        "USA - Miami": 0,
+        "Italy - Imola": 0.0,
+        "Monaco": 0.0,
+        "Spain": 0.0,
+        "Canada": 0.0,
+        "Austria": 0.0,
+        "UK": 0.0
     }
 }
