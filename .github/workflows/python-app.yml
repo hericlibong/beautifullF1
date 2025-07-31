@@ -1,0 +1,42 @@
+name: Python scripts quality check
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"  # adapte si besoin
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-cov ruff black
+
+      - name: Run Ruff linter
+        run: ruff check .
+
+      - name: Run Black format (check)
+        run: black --check .
+
+      - name: Run Pytest (with coverage)
+        run: pytest
+
+      # (Optionnel) Publier le rapport de couverture dans les artefacts GitHub
+      # - name: Upload coverage report
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: coverage-report
+      #     path: .coverage
