@@ -1,5 +1,6 @@
-from race_chart_builder.race_chart_builder import normalize_name, F1RaceChartBuilder
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
+
+from race_chart_builder.race_chart_builder import F1RaceChartBuilder, normalize_name
 
 
 def test_normalize_name():
@@ -12,6 +13,7 @@ def test_get_fallback_headshot_known():
     # Exact name in the fallback table
     assert F1RaceChartBuilder.get_fallback_headshot("Nico Hulkenberg").startswith("https://")
     assert F1RaceChartBuilder.get_fallback_headshot("Franco Colapinto").startswith("https://")
+
 
 def test_get_fallback_headshot_unknown():
     # Name not present returns empty string

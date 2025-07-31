@@ -1,6 +1,6 @@
-import requests
 import pandas as pd
-import json
+import requests
+
 
 class QualifyingDuelBuilder:
     def __init__(self, season: int, total_rounds: int = 24):
@@ -8,12 +8,13 @@ class QualifyingDuelBuilder:
         self.total_rounds = total_rounds
         self.duels = []
 
-    def time_to_seconds(self, t):
+    def time_to_seconds(t):
         try:
             m, s = t.split(":")
             return int(m) * 60 + float(s)
-        except:
+        except ValueError:
             return None
+
 
     def fetch_duels_for_all_rounds(self):
         for round_num in range(1, self.total_rounds + 1):
@@ -46,18 +47,20 @@ class QualifyingDuelBuilder:
                 q3 = result.get("Q3")
                 best_time = q3 or q2 or q1
 
-                records.append({
-                    "Grand Prix": gp_name,
-                    "Date": gp_date,
-                    "Round": round_num,
-                    "Team": team,
-                    "Driver": full_name,
-                    "Position": position,
-                    "Q1": q1,
-                    "Q2": q2,
-                    "Q3": q3,
-                    "Best Time": best_time
-                })
+                records.append(
+                    {
+                        "Grand Prix": gp_name,
+                        "Date": gp_date,
+                        "Round": round_num,
+                        "Team": team,
+                        "Driver": full_name,
+                        "Position": position,
+                        "Q1": q1,
+                        "Q2": q2,
+                        "Q3": q3,
+                        "Best Time": best_time,
+                    }
+                )
 
             df = pd.DataFrame(records)
 
@@ -74,20 +77,22 @@ class QualifyingDuelBuilder:
                         gap = None
                         winner = "N/A"
 
-                    self.duels.append({
-                        "Grand Prix": gp_name,
-                        "Date": gp_date,
-                        "Round": round_num,
-                        "Team": team,
-                        "Driver A": p1["Driver"],
-                        "Position A": p1["Position"],
-                        "Q3 A": p1["Q3"],
-                        "Driver B": p2["Driver"],
-                        "Position B": p2["Position"],
-                        "Q3 B": p2["Q3"],
-                        "Winner": winner,
-                        "Gap (s)": gap
-                    })
+                    self.duels.append(
+                        {
+                            "Grand Prix": gp_name,
+                            "Date": gp_date,
+                            "Round": round_num,
+                            "Team": team,
+                            "Driver A": p1["Driver"],
+                            "Position A": p1["Position"],
+                            "Q3 A": p1["Q3"],
+                            "Driver B": p2["Driver"],
+                            "Position B": p2["Position"],
+                            "Q3 B": p2["Q3"],
+                            "Winner": winner,
+                            "Gap (s)": gap,
+                        }
+                    )
 
     def to_dataframe(self):
         return pd.DataFrame(self.duels)
@@ -97,5 +102,3 @@ class QualifyingDuelBuilder:
         df.to_csv(filepath, index=False, encoding="utf-8-sig")
         print(f"✅ Exported to {filepath}")
         print(df)
-
-        

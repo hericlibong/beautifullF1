@@ -1,0 +1,55 @@
+[project]
+name = "beautifullF1"
+version = "0.1.0"
+description = "Automated data storytelling and visualization for Formula 1"
+authors = [
+    {name = "Heric Libong", email = "hericlibong@gmail.com"}
+]
+requires-python = ">=3.9"
+
+# --- Configuration pytest (tests unitaires) ---
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-ra -q --cov=. --cov-report=term-missing --cov-config=pyproject.toml"
+testpaths = [
+    "tests",
+]
+
+# --- Configuration coverage ---
+[tool.coverage.run]
+omit = [
+    "*/tests/*",
+    "*/__init__.py",
+    "test_computing/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+]
+
+# --- Configuration Ruff (linter moderne ultra-rapide) ---
+[tool.ruff]
+line-length = 100
+exclude = ["venv", "__pycache__", "test_computing"]  # On ne lintera jamais ces dossiers
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]  # E: erreurs pycodestyle, F: erreurs pyflakes, I: import sorting
+ignore = ["E501"] # optionnel : ignorer "line too long" (tu peux l'enlever)
+
+# --- Configuration Black (formatter de code automatique) ---
+[tool.black]
+line-length = 100
+target-version = ["py39"]
+exclude = '''
+/(
+    \.git
+  | \.venv
+  | venv
+  | __pycache__
+  | test_computing
+)/
+'''
