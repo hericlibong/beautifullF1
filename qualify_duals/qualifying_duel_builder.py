@@ -15,7 +15,6 @@ class QualifyingDuelBuilder:
         except ValueError:
             return None
 
-
     def fetch_duels_for_all_rounds(self):
         for round_num in range(1, self.total_rounds + 1):
             url = f"https://api.jolpi.ca/ergast/f1/{self.season}/{round_num}/qualifying.json"
