@@ -1,3 +1,9 @@
 venv/
 __pycache__/
 test_computing/
+*.ipynb
+*.pyc
+*.pyo
+.DS_Store
+.env
+
