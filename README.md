@@ -105,6 +105,53 @@ requests>=2.28
 
 ---
 
+Bien sûr, voici une **section “Tests & Quality”** prête à intégrer juste avant la licence ou après les requirements dans ton README actuel (en anglais, dans le ton de la doc) :
+
+---
+
+## 🧪 Tests & Quality
+
+This project uses modern Python tools to ensure code reliability and quality:
+
+* **Pytest** for unit testing
+* **pytest-cov** for code coverage
+* **Ruff** for fast linting and code quality (replaces flake8/isort)
+* **Black** for automatic code formatting
+
+### 🔍 Running the tests
+
+From the project root, run:
+
+```bash
+pytest
+```
+
+*(Coverage is reported automatically thanks to the configuration in `pyproject.toml`)*
+
+### 🔎 Checking code quality
+
+```bash
+ruff check .
+black --check .
+```
+
+*(To auto-fix code style, run: `black .` and/or `ruff check . --fix`)*
+
+### 🚦 Continuous Integration (CI)
+
+Each push or pull request to the `main` branch automatically runs:
+
+* Unit tests with coverage
+* Ruff linter checks
+* Black formatting checks
+  The CI build will fail if any of these steps fail.
+
+### 🗂️ Coverage Policy
+
+Only main scripts and modules are covered. Test files, `__init__.py`, and the non-versioned `test_computing` directory are excluded to keep the coverage rate meaningful.
+
+---
+
 ## 📜 License
 
 Open-source project under the MIT License.  
