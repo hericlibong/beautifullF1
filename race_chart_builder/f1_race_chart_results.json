@@ -16,7 +16,8 @@
         "Canada": 176.0,
         "Austria": 201.0,
         "UK": 226.0,
-        "Belgium": 244.0
+        "Belgium": 244.0,
+        "Hungary": 269.0
     },
     "Max Verstappen": {
         "Pilote": "Max Verstappen",
@@ -35,7 +36,8 @@
         "Canada": 155.0,
         "Austria": 155.0,
         "UK": 165.0,
-        "Belgium": 177.0
+        "Belgium": 177.0,
+        "Hungary": 179.0
     },
     "George Russell": {
         "Pilote": "George Russell",
@@ -54,7 +56,8 @@
         "Canada": 136.0,
         "Austria": 146.0,
         "UK": 147.0,
-        "Belgium": 157.0
+        "Belgium": 157.0,
+        "Hungary": 172.0
     },
     "Andrea Kimi Antonelli": {
         "Pilote": "Andrea Kimi Antonelli",
@@ -73,7 +76,8 @@
         "Canada": 63.0,
         "Austria": 63.0,
         "UK": 63.0,
-        "Belgium": 63.0
+        "Belgium": 63.0,
+        "Hungary": 64.0
     },
     "Alexander Albon": {
         "Pilote": "Alexander Albon",
@@ -92,7 +96,8 @@
         "Canada": 42.0,
         "Austria": 42.0,
         "UK": 46.0,
-        "Belgium": 54.0
+        "Belgium": 54.0,
+        "Hungary": 54.0
     },
     "Lance Stroll": {
         "Pilote": "Lance Stroll",
@@ -111,7 +116,8 @@
         "Canada": 14.0,
         "Austria": 14.0,
         "UK": 20.0,
-        "Belgium": 20.0
+        "Belgium": 20.0,
+        "Hungary": 26.0
     },
     "Nico Hülkenberg": {
         "Pilote": "Nico Hülkenberg",
@@ -130,7 +136,8 @@
         "Canada": 20.0,
         "Austria": 22.0,
         "UK": 37.0,
-        "Belgium": 37.0
+        "Belgium": 37.0,
+        "Hungary": 37.0
     },
     "Charles Leclerc": {
         "Pilote": "Charles Leclerc",
@@ -149,7 +156,8 @@
         "Canada": 104.0,
         "Austria": 119.0,
         "UK": 119.0,
-        "Belgium": 134.0
+        "Belgium": 134.0,
+        "Hungary": 146.0
     },
     "Oscar Piastri": {
         "Pilote": "Oscar Piastri",
@@ -168,7 +176,8 @@
         "Canada": 198.0,
         "Austria": 216.0,
         "UK": 234.0,
-        "Belgium": 259.0
+        "Belgium": 259.0,
+        "Hungary": 277.0
     },
     "Lewis Hamilton": {
         "Pilote": "Lewis Hamilton",
@@ -187,7 +196,8 @@
         "Canada": 79.0,
         "Austria": 91.0,
         "UK": 103.0,
-        "Belgium": 109.0
+        "Belgium": 109.0,
+        "Hungary": 109.0
     },
     "Pierre Gasly": {
         "Pilote": "Pierre Gasly",
@@ -206,7 +216,8 @@
         "Canada": 11.0,
         "Austria": 11.0,
         "UK": 19.0,
-        "Belgium": 20.0
+        "Belgium": 20.0,
+        "Hungary": 20.0
     },
     "Yuki Tsunoda": {
         "Pilote": "Yuki Tsunoda",
@@ -225,7 +236,8 @@
         "Canada": 10.0,
         "Austria": 10.0,
         "UK": 10.0,
-        "Belgium": 10.0
+        "Belgium": 10.0,
+        "Hungary": 10.0
     },
     "Esteban Ocon": {
         "Pilote": "Esteban Ocon",
@@ -244,7 +256,8 @@
         "Canada": 22.0,
         "Austria": 23.0,
         "UK": 23.0,
-        "Belgium": 23.0
+        "Belgium": 23.0,
+        "Hungary": 23.0
     },
     "Oliver Bearman": {
         "Pilote": "Oliver Bearman",
@@ -263,7 +276,8 @@
         "Canada": 6.0,
         "Austria": 6.0,
         "UK": 6.0,
-        "Belgium": 6.0
+        "Belgium": 6.0,
+        "Hungary": 6.0
     },
     "Liam Lawson": {
         "Pilote": "Liam Lawson",
@@ -282,7 +296,8 @@
         "Canada": 4.0,
         "Austria": 12.0,
         "UK": 12.0,
-        "Belgium": 16.0
+        "Belgium": 16.0,
+        "Hungary": 20.0
     },
     "Gabriel Bortoleto": {
         "Pilote": "Gabriel Bortoleto",
@@ -301,7 +316,8 @@
         "Canada": 0.0,
         "Austria": 4.0,
         "UK": 4.0,
-        "Belgium": 6.0
+        "Belgium": 6.0,
+        "Hungary": 14.0
     },
     "Fernando Alonso": {
         "Pilote": "Fernando Alonso",
@@ -320,7 +336,8 @@
         "Canada": 8.0,
         "Austria": 14.0,
         "UK": 16.0,
-        "Belgium": 16.0
+        "Belgium": 16.0,
+        "Hungary": 26.0
     },
     "Carlos Sainz": {
         "Pilote": "Carlos Sainz",
@@ -339,7 +356,8 @@
         "Canada": 13.0,
         "Austria": 13.0,
         "UK": 13.0,
-        "Belgium": 13.0
+        "Belgium": 13.0,
+        "Hungary": 13.0
     },
     "Jack Doohan": {
         "Pilote": "Jack Doohan",
@@ -358,7 +376,8 @@
         "Canada": 0.0,
         "Austria": 0.0,
         "UK": 0.0,
-        "Belgium": 0.0
+        "Belgium": 0.0,
+        "Hungary": 0.0
     },
     "Isack Hadjar": {
         "Pilote": "Isack Hadjar",
@@ -377,7 +396,8 @@
         "Canada": 21.0,
         "Austria": 21.0,
         "UK": 21.0,
-        "Belgium": 21.0
+        "Belgium": 21.0,
+        "Hungary": 21.0
     },
     "Franco Colapinto": {
         "Pilote": "Franco Colapinto",
@@ -396,6 +416,7 @@
         "Canada": 0.0,
         "Austria": 0.0,
         "UK": 0.0,
-        "Belgium": 0.0
+        "Belgium": 0.0,
+        "Hungary": 0.0
     }
 }

@@ -57,6 +57,8 @@ This folder contains a Python program that:
 - **[openf1.org](https://openf1.org/)**  
   Real-time open-source F1 API used here to retrieve driver photos
 
+- **[fastf1.dev](https://docs.fastf1.dev/)**
+  Python package for accessing and analyzing Formula 1 results, schedules, timing data and telemetry. 
 ---
 
 ### 📊 See the Chart in Action
@@ -88,7 +90,75 @@ The script generates:
 - `f1_race_chart_results.csv` → upload to Flourish to create a bar chart race
 - `f1_race_chart_results.json` → same data in JSON format for reuse or debugging
 
+
 ---
+
+## 📂 Project: `season_summary_heatmap`
+
+This folder contains a Python module and automation script that:
+
+✅ Retrieves full-season driver results (points, positions, grid, etc.) for any year — even a season in progress
+✅ Aggregates and ranks drivers by total points
+✅ Enriches each row with team name, grid position, finishing position, driver photo, and more
+✅ Generates a **CSV file** in the exact format required for **Flourish heatmap** templates
+✅ Allows direct integration of images and “narrative” data (pilot name, full GP name, etc.) in Flourish vignettes or tooltips
+
+---
+
+### 📈 Visualization Example
+
+See the live heatmap for the 2025 season (demo):
+[Season Summary Heatmap (Flourish)](https://flo.uri.sh/visualisation/XXXXX/embed)
+
+
+---
+
+### ⚡️ How to Use
+
+From the project root:
+
+```bash
+cd season_summary_heatmap
+python main.py
+```
+
+You can customize the season/year and output file in `main.py`.
+
+---
+
+### 🧩 Output
+
+The script produces:
+
+* `f1_2025_heatmap_flourish_enriched.csv` — ready for import into Flourish (“categorical heatmap” or similar)
+* The file is structured for maximum compatibility, with each row :
+
+  * Driver abbreviation and name
+  * Team name
+  * Grand Prix (short and full labels)
+  * Points (per round and total)
+  * Rank in championship
+  * Grid/start and finish positions
+  * Driver headshot image (for custom tooltips)
+
+---
+
+### 🖼️ Images & Enrichment
+
+Driver photos and other enriched data are fetched directly via Fast-F1 (or patched for substitute drivers).
+No manual intervention is needed — everything is automated.
+
+---
+
+### 💡 Why this format?
+
+* Compatible with Flourish heatmap and advanced “storytelling” templates
+* Automates missing data handling (in-progress season, rookies, etc.)
+* Reproducible, testable, and easy to extend for other seasons or new features
+
+---
+
+
 
 
 
