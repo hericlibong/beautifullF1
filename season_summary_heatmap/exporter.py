@@ -17,7 +17,6 @@ class F1FlourishExporter:
         schedule["ShortEventName"] = schedule["EventName"].str.replace("Grand Prix", "").str.strip()
         return schedule
 
-
     def fetch_results(self):
         # Boucle sur tous les GPs, extrait résultats et infos pilotes
         for _, event in self.schedule.iterrows():
@@ -38,22 +37,26 @@ class F1FlourishExporter:
                     team = driver_row["TeamName"]
                     driver_name = driver_row["FullName"]
                     points = driver_row["Points"]
-                    grid_position = driver_row.get("GridPosition", driver_row.get("grid_position", None))
+                    grid_position = driver_row.get(
+                        "GridPosition", driver_row.get("grid_position", None)
+                    )
                     finish_position = driver_row.get("Position", None)
                     headshot_url = driver_row.get("HeadshotUrl", None)
                     total_points = points + sprint_points.get(abbreviation, 0)
-                    self.standings.append({
-                        "Driver": abbreviation,
-                        "DriverName": driver_name,
-                        "Team": team,
-                        "EventName": round_label,
-                        "EventNameFull": event_name,
-                        "RoundNumber": round_number,
-                        "Points": total_points,
-                        "GridPosition": grid_position,
-                        "FinishPosition": finish_position,
-                        "HeadshotUrl": headshot_url
-                    })
+                    self.standings.append(
+                        {
+                            "Driver": abbreviation,
+                            "DriverName": driver_name,
+                            "Team": team,
+                            "EventName": round_label,
+                            "EventNameFull": event_name,
+                            "RoundNumber": round_number,
+                            "Points": total_points,
+                            "GridPosition": grid_position,
+                            "FinishPosition": finish_position,
+                            "HeadshotUrl": headshot_url,
+                        }
+                    )
             except Exception:
                 continue  # GP non couru ou data absente
 
@@ -61,10 +64,17 @@ class F1FlourishExporter:
         # Création du DataFrame principal
         self.df = pd.DataFrame(self.standings)
         # Ajout du total points par pilote
-        pilot_totals = self.df.groupby("Driver")["Points"].sum().reset_index().rename(columns={"Points": "TotalPoints"})
+        pilot_totals = (
+            self.df.groupby("Driver")["Points"]
+            .sum()
+            .reset_index()
+            .rename(columns={"Points": "TotalPoints"})
+        )
         self.df = self.df.merge(pilot_totals, on="Driver")
         # Calcul du classement (rank)
-        pilot_totals["Rank"] = pilot_totals["TotalPoints"].rank(method="min", ascending=False).astype(int)
+        pilot_totals["Rank"] = (
+            pilot_totals["TotalPoints"].rank(method="min", ascending=False).astype(int)
+        )
         self.df = self.df.merge(pilot_totals[["Driver", "Rank"]], on="Driver")
         # Label texte du rang
         self.df["RankLabel"] = self.df["Rank"].apply(self._rank_to_label)
@@ -92,10 +102,10 @@ class F1FlourishExporter:
         self.df["HeadshotUrl"] = self.df["HeadshotUrl"].astype(str)
         for drv, url in patch_urls.items():
             mask = (self.df["Driver"] == drv) & (
-                self.df["HeadshotUrl"].isnull() |
-                (self.df["HeadshotUrl"] == "") |
-                (self.df["HeadshotUrl"].str.lower() == "none") |
-                (self.df["HeadshotUrl"].str.lower() == "nan")
+                self.df["HeadshotUrl"].isnull()
+                | (self.df["HeadshotUrl"] == "")
+                | (self.df["HeadshotUrl"].str.lower() == "none")
+                | (self.df["HeadshotUrl"].str.lower() == "nan")
             )
             self.df.loc[mask, "HeadshotUrl"] = url
 
@@ -103,7 +113,9 @@ class F1FlourishExporter:
         # Prépare le DataFrame final pour Flourish
         df = self.df.copy()
         # Ordre des pilotes (classement) et GPs (calendrier)
-        pilot_order = df.groupby("Driver")["TotalPoints"].mean().sort_values(ascending=False).index.tolist()
+        pilot_order = (
+            df.groupby("Driver")["TotalPoints"].mean().sort_values(ascending=False).index.tolist()
+        )
         df["Driver"] = pd.Categorical(df["Driver"], categories=pilot_order, ordered=True)
         gp_order = self.schedule.sort_values("RoundNumber")["ShortEventName"].tolist()
         df["EventName"] = pd.Categorical(df["EventName"], categories=gp_order, ordered=True)
@@ -112,13 +124,24 @@ class F1FlourishExporter:
             if col in df.columns:
                 df[col] = pd.to_numeric(df[col], errors="coerce").astype(pd.Int64Dtype())
         # Colonnes finales pour Flourish
-        self.df_heatmap = df[[
-            "Driver", "DriverName", "Team", "EventName", "EventNameFull", "Points", "TotalPoints", "Rank", "RankLabel",
-            "HeadshotUrl", "GridPosition", "FinishPosition"
-        ]].sort_values(["Driver", "EventName"])
+        self.df_heatmap = df[
+            [
+                "Driver",
+                "DriverName",
+                "Team",
+                "EventName",
+                "EventNameFull",
+                "Points",
+                "TotalPoints",
+                "Rank",
+                "RankLabel",
+                "HeadshotUrl",
+                "GridPosition",
+                "FinishPosition",
+            ]
+        ].sort_values(["Driver", "EventName"])
 
     def export(self):
         # Export CSV final
         self.df_heatmap.to_csv(self.output_csv, index=False)
         print(f"Exported to {self.output_csv}")
-
