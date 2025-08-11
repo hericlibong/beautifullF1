@@ -1,0 +1,36 @@
+:root{
+  --bg:#0f1116;
+  --panel:#171923;
+  --text:#e8eaf0;
+  --muted:#9aa3b2;
+  --grid:#2a2f3a;
+  --axis:#cfd6e4;
+  --accent:#e0e0e0;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+.page-head{padding:16px 20px 8px}
+.page-head h1{font-size:20px;margin:0 0 6px 0}
+.page-head .sub{margin:0;color:var(--muted);font-size:14px}
+
+.viz-wrap{padding:8px 16px 24px}
+#chart{width:100%;max-width:1200px;margin:0 auto;background:var(--panel);border:1px solid #22242e;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,0.25);padding:12px}
+
+.axis text{fill:var(--axis);font-size:12px}
+.axis path,.axis line{stroke:var(--grid);shape-rendering:crispEdges}
+
+.cell{stroke:#111825;stroke-width:0.5;rx:2;ry:2}
+
+.tooltip{
+  position:fixed;pointer-events:none;z-index:10;
+  background:#111318;border:1px solid #2a2f3a;border-radius:10px;
+  padding:10px 12px;min-width:240px;max-width:320px;color:var(--text);
+  box-shadow:0 8px 30px rgba(0,0,0,0.45);backdrop-filter: blur(3px);
+}
+.tooltip h3{margin:0 0 8px 0;font-size:14px;line-height:1.25}
+.tooltip .meta{display:flex;gap:10px;align-items:flex-start}
+.tooltip img{width:64px;height:64px;object-fit:cover;border-radius:8px;border:1px solid #262b35;background:#0c0e13}
+.tooltip .kv{font-size:12px;color:var(--accent);line-height:1.35}
+.tooltip .kv b{color:var(--text)}
+.page-foot{padding:8px 20px 20px;color:var(--muted);font-size:12px}
