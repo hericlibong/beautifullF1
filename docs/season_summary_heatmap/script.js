@@ -1,7 +1,7 @@
 // v1 — Heatmap D3 (D3 v7)
 // Hypothèse de structure : d3_dataviz/ à côté du CSV à la racine du projet
 // Si besoin, dépose le CSV à côté de ces fichiers et remplace DATA_URL par "./f1_2025_flourish_enriched.csv"
-const DATA_URL = "../f1_2025_flourish_enriched.csv";
+const DATA_URL = "f1_2025_flourish_enriched.csv";
 
 const container = d3.select("#chart");
 const tooltip = d3.select("#tooltip");
