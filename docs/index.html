@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beautifull F1 — Galerie de Data Visualisations</title>
+  <style>
+    body {
+      background-color: #0f1116;
+      color: #e8eaf0;
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #ffffff;
+    }
+    header p {
+      color: #9aa3b2;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+    .gallery {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background-color: #171923;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+    .card img {
+      display: block;
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 1rem;
+    }
+    .card-content h2 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #ffffff;
+    }
+    .card-content p {
+      margin: 0.5rem 0 0;
+      font-size: 0.9rem;
+      color: #b0b9c8;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #777;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Beautifull F1 — Galerie</h1>
+    <p>Sélection de visualisations interactives Formula 1</p>
+  </header>
+
+  <main class="gallery">
+    <a class="card" href="season_summary_heatmap/index.html" target="_blank">
+      <img src="https://via.placeholder.com/400x200/1a202c/ffffff?text=Heatmap+Saison+2025" alt="Heatmap saison 2025">
+      <div class="card-content">
+        <h2>Heatmap — Saison 2025</h2>
+        <p>Points par GP et pilote, vue d'ensemble de la saison.</p>
+      </div>
+    </a>
+
+    <a class="card" href="wdc_projection_repo/index.html" target="_blank">
+      <img src="https://via.placeholder.com/400x200/1a202c/ffffff?text=WDC+Projection+2025" alt="Projection WDC 2025">
+      <div class="card-content">
+        <h2>Projection WDC — 2025</h2>
+        <p>Qui peut encore décrocher le championnat du monde ?</p>
+      </div>
+    </a>
+
+    <!-- Ajoute d'autres cartes ici au fur et à mesure -->
+  </main>
+
+  <footer>
+    &copy; 2025 Beautifull F1 — Projet de data storytelling
+  </footer>
+</body>
+</html>

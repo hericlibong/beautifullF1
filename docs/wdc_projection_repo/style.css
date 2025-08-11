@@ -1,0 +1,36 @@
+:root{
+  --bg:#f6f7f9; --panel:#ffffff; --text:#1b1f23; --muted:#6b7280;
+  --green:#2ecc71; --red:#e74c3c;
+}
+*{box-sizing:border-box}
+body{margin:0; font:14px/1.45 system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color:var(--text); background:var(--bg)}
+header{padding:18px 20px}
+h1{margin:0; font-weight:700; font-size:20px; text-align:center}
+
+.controls, .filters{
+  display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  background:var(--panel); padding:12px 14px; border-radius:12px; margin:12px 16px;
+  box-shadow:0 1px 0 rgba(0,0,0,0.04);
+}
+.control{display:flex; flex-direction:column; gap:8px}
+.control label{font-size:12px; color:var(--muted)}
+.slider{display:flex; align-items:center; gap:8px}
+#leaderPctValue,#pilotPctValue{min-width:40px; text-align:right; color:var(--muted)}
+
+.checkboxes{display:flex; flex-wrap:wrap; gap:12px}
+.checkboxes label{display:flex; align-items:center; gap:6px; font-size:13px}
+
+.summary{
+  margin:8px 16px; padding:10px 12px; background:var(--panel); border-radius:10px;
+  color:#374151; font-size:13px;
+}
+
+.chart{background:var(--panel); border-radius:12px; margin:12px 16px 24px; padding:10px}
+svg{width:100%; height:auto; display:block}
+.axis text{fill:#374151; font-size:12px}
+.axis path, .axis line{stroke:#e5e7eb}
+.rule0{stroke:#9ca3af}
+.bar{rx:4}
+.badge{font-size:12px; fill:#111}
+.driver-label{fill:#111; font-size:12px}
+.value-label{fill:#374151; font-size:12px}
