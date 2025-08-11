@@ -27,6 +27,8 @@ html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:
   background:#111318;border:1px solid #2a2f3a;border-radius:10px;
   padding:10px 12px;min-width:240px;max-width:320px;color:var(--text);
   box-shadow:0 8px 30px rgba(0,0,0,0.45);backdrop-filter: blur(3px);
+  max-width: min(360px, calc(100vw - 24px));
+  word-wrap: break-word;
 }
 .tooltip h3{margin:0 0 8px 0;font-size:14px;line-height:1.25}
 .tooltip .meta{display:flex;gap:10px;align-items:flex-start}

@@ -87,7 +87,7 @@ function render(data) {
       .attr("fill", d => color(d.Points ?? 0))
       .on("mousemove", (event, d) => showTooltip(event, d))
       .on("mouseleave", hideTooltip)
-
+      
         .text(d => `${d.DriverName} • ${d.Team}
 ${d.EventNameFull}
 Grid: ${fmtPos(d.GridPosition)} • Finish: ${fmtPos(d.FinishPosition)}
@@ -115,7 +115,8 @@ Points: ${d.Points} • Total: ${d.TotalPoints}`);
 
 // Tooltip HTML riche
 function showTooltip(event, d){
-  const html = `
+  // 1) Remplir le contenu
+  tooltip.html(`
     <h3>${d.DriverName} <span style="color:#9aa3b2">(${d.Driver})</span></h3>
     <div class="meta">
       <img src="${safeUrl(d.HeadshotUrl)}" alt="${d.DriverName}">
@@ -127,12 +128,37 @@ function showTooltip(event, d){
         <div><b>Total saison :</b> ${d.TotalPoints} • <b>Rang :</b> ${d.RankLabel ?? ""}</div>
       </div>
     </div>
-  `;
-  tooltip
-    .style("opacity", 1)
-    .html(html)
-    .style("left", `${event.clientX + 16}px`)
-    .style("top",  `${event.clientY + 16}px`);
+  `);
+
+  // 2) Rendre visible pour pouvoir mesurer
+  tooltip.style("opacity", 1);
+
+  // 3) Calculer une position qui ne sort pas de l'écran (clamp)
+  const OFFSET = 16;                          // marge autour du curseur
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+
+  // position par défaut: à droite et en dessous du curseur
+  let x = event.clientX + OFFSET;
+  let y = event.clientY + OFFSET;
+
+  // mesurer la taille réelle du tooltip
+  const rect = tooltip.node().getBoundingClientRect();
+
+  // s'il dépasse à droite, le basculer à gauche du curseur
+  if (x + rect.width > vw - 8) {
+    x = event.clientX - rect.width - OFFSET;
+  }
+  // s'il dépasse en bas, le remonter
+  if (y + rect.height > vh - 8) {
+    y = vh - rect.height - 8;
+  }
+  // garder une marge minimale en haut/gauche
+  if (x < 8) x = 8;
+  if (y < 8) y = 8;
+
+  // 4) appliquer
+  tooltip.style("left", `${x}px`).style("top", `${y}px`);
 }
 function hideTooltip(){
   tooltip.style("opacity", 0);
