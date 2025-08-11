@@ -87,7 +87,7 @@ function render(data) {
       .attr("fill", d => color(d.Points ?? 0))
       .on("mousemove", (event, d) => showTooltip(event, d))
       .on("mouseleave", hideTooltip)
-      .append("title") // fallback natif
+
         .text(d => `${d.DriverName} • ${d.Team}
 ${d.EventNameFull}
 Grid: ${fmtPos(d.GridPosition)} • Finish: ${fmtPos(d.FinishPosition)}
