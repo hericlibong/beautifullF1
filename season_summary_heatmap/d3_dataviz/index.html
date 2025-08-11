@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>F1 2025 — Heatmap D3</title>
+    <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  </head>
+  <body>
+    <header class="page-head">
+      <h1>F1 2025 — Heatmap des points par Grand Prix</h1>
+      <p class="sub">X : <em>EventName</em> • Y : <em>Driver</em> (tri par TotalPoints) • Couleur : <em>Points</em></p>
+    </header>
+
+    <main class="viz-wrap">
+      <!-- Le SVG est injecté par script.js -->
+      <div id="chart"></div>
+      <div id="tooltip" class="tooltip" style="opacity:0;"></div>
+    </main>
+
+    <footer class="page-foot">
+      <small>Données : CSV enrichi exporté depuis Fast-F1 • Version D3 v1 (baseline)</small>
+    </footer>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
