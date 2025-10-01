@@ -42,7 +42,6 @@ import math
 import re
 import time
 from dataclasses import dataclass
-from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional, Tuple
 
 import pandas as pd
@@ -52,7 +51,9 @@ try:
     import fastf1  # type: ignore
 except Exception as exc:  # pragma: no cover
     fastf1 = None
-    logging.warning("FastF1 non disponible (%s) – la détection de la coupure utilisera un fallback.", exc)
+    logging.warning(
+        "FastF1 non disponible (%s) – la détection de la coupure utilisera un fallback.", exc
+    )
 
 # -----------------------------------------------------------------------------
 # Config
@@ -90,6 +91,7 @@ def _is_finish_status(status: str) -> bool:
 # Client Ergast/Jolpica
 # -----------------------------------------------------------------------------
 
+
 class ErgastClient:
     def __init__(self, base_url: str = BASE_URL, timeout: int = HTTP_TIMEOUT):
         self.base_url = base_url.rstrip("/")
@@ -106,7 +108,7 @@ class ErgastClient:
                 return resp.json()
             except Exception as exc:  # pragma: no cover (réseau)
                 last_exc = exc
-                sleep_s = RETRY_BACKOFF ** attempt
+                sleep_s = RETRY_BACKOFF**attempt
                 logging.warning("HTTP retry %s/%s for %s (%s)", attempt, RETRY_COUNT, url, exc)
                 time.sleep(sleep_s)
         raise RuntimeError(f"HTTP error for {url}: {last_exc}")
@@ -131,6 +133,7 @@ class ErgastClient:
 # -----------------------------------------------------------------------------
 # Schedule (FastF1) – détection du round de coupure
 # -----------------------------------------------------------------------------
+
 
 @dataclass
 class CutoffInfo:
@@ -236,6 +239,7 @@ def _fallback_cutoff_from_schedule(df: pd.DataFrame) -> CutoffInfo:
 # -----------------------------------------------------------------------------
 # Transformations / Calculs
 # -----------------------------------------------------------------------------
+
 
 @dataclass
 class StandingsAtRound:
@@ -415,6 +419,7 @@ def teammate_points_at_round(std: StandingsAtRound, constructor_id: str) -> Opti
 # Assemblage & Export
 # -----------------------------------------------------------------------------
 
+
 @dataclass
 class YearRecord:
     year: int
@@ -516,6 +521,7 @@ def write_json(rows: List[YearRecord], path: str = OUTPUT_JSON, indent: int = 2)
 # Orchestration
 # -----------------------------------------------------------------------------
 
+
 def run_pipeline(year_start: int = SEASON_START, year_end: int = SEASON_END) -> List[YearRecord]:
     client = ErgastClient()
     out: List[YearRecord] = []
@@ -567,6 +573,7 @@ def run_pipeline(year_start: int = SEASON_START, year_end: int = SEASON_END) -> 
 # -----------------------------------------------------------------------------
 # CLI
 # -----------------------------------------------------------------------------
+
 
 def main(year_start: int = SEASON_START, year_end: int = SEASON_END) -> int:
     rows = run_pipeline(year_start, year_end)

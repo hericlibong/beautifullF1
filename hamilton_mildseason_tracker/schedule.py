@@ -55,6 +55,7 @@ def _compute_cutoff_from_df(df: pd.DataFrame) -> CutoffInfo:
         gp_date_iso=pd.to_datetime(df.loc[idx, "EventDate"]).date().isoformat(),
     )
 
+
 def find_round_cutoff(year: int, client: ErgastClient | None = None) -> CutoffInfo:
     """Primary: FastF1 schedule; Fallback: Jolpica calendar (Ergast /{year}.json)."""
     # --- Primary: FastF1 ---
@@ -69,7 +70,13 @@ def find_round_cutoff(year: int, client: ErgastClient | None = None) -> CutoffIn
             )
             if not df.empty:
                 cutoff = _compute_cutoff_from_df(df)
-                logging.info("Cutoff %s via FastF1: round=%s, GP=%s, date=%s", year, cutoff.round, cutoff.gp_name, cutoff.gp_date_iso)
+                logging.info(
+                    "Cutoff %s via FastF1: round=%s, GP=%s, date=%s",
+                    year,
+                    cutoff.round,
+                    cutoff.gp_name,
+                    cutoff.gp_date_iso,
+                )
                 return cutoff
         except Exception as exc:  # pragma: no cover
             logging.warning("FastF1 schedule KO (%s) – fallback Jolpica calendar.", exc)
@@ -89,9 +96,17 @@ def find_round_cutoff(year: int, client: ErgastClient | None = None) -> CutoffIn
         round_ = int(r.get("round"))
         name = str(r.get("raceName"))
         date_iso = str(r.get("date"))
-        df_rows.append({"RoundNumber": round_, "EventName": name, "EventDate": pd.to_datetime(date_iso)})
+        df_rows.append(
+            {"RoundNumber": round_, "EventName": name, "EventDate": pd.to_datetime(date_iso)}
+        )
 
     df = pd.DataFrame(df_rows)
     cutoff = _compute_cutoff_from_df(df)
-    logging.info("Cutoff %s via Jolpica calendar: round=%s, GP=%s, date=%s", year, cutoff.round, cutoff.gp_name, cutoff.gp_date_iso)
+    logging.info(
+        "Cutoff %s via Jolpica calendar: round=%s, GP=%s, date=%s",
+        year,
+        cutoff.round,
+        cutoff.gp_name,
+        cutoff.gp_date_iso,
+    )
     return cutoff

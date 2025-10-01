@@ -132,7 +132,9 @@ def run_pipeline(year_start: int = SEASON_START, year_end: int = SEASON_END) -> 
         try:
             results_payload = client.get_season_results(year, limit=1000, offset=0)
             # On calcule les agrégats 'course principale' (podiums, DNF, % scorés en course)
-            res_aggr = aggregate_from_results(results_payload, cutoff.round, sprint_points_by_round=None, driver_id=DRIVER_ID)
+            res_aggr = aggregate_from_results(
+                results_payload, cutoff.round, sprint_points_by_round=None, driver_id=DRIVER_ID
+            )
         except Exception as exc:
             logging.error("[%s] Erreur results: %s", year, exc)
             continue
@@ -147,15 +149,23 @@ def run_pipeline(year_start: int = SEASON_START, year_end: int = SEASON_END) -> 
 
         # === NOUVEAU: Comptage robuste des week-ends à 0 point via deltas standings ===
         try:
-            zero_weekends, scored_weekends = _compute_weekend_zero_via_standings(client, year, cutoff.round, DRIVER_ID)
+            zero_weekends, scored_weekends = _compute_weekend_zero_via_standings(
+                client, year, cutoff.round, DRIVER_ID
+            )
             # Denom pour le % = nb de courses réellement disputées (cohérent avec race_scored_pct_main)
-            denom = res_aggr.races_started if res_aggr.races_started > 0 else (zero_weekends + scored_weekends)
+            denom = (
+                res_aggr.races_started
+                if res_aggr.races_started > 0
+                else (zero_weekends + scored_weekends)
+            )
             weekend_scored_pct = (scored_weekends / denom) if denom else 0.0
             zero_point_weekends_to_date = zero_weekends
         except Exception as exc:
             logging.warning("[%s] Calcul week-ends 0 via standings indisponible: %s", year, exc)
             # fallback: garde ce qu'on avait (au pire 0)
-            weekend_scored_pct = getattr(res_aggr, "weekend_scored_pct", res_aggr.race_scored_pct_main)
+            weekend_scored_pct = getattr(
+                res_aggr, "weekend_scored_pct", res_aggr.race_scored_pct_main
+            )
             zero_point_weekends_to_date = getattr(res_aggr, "zero_point_weekends_to_date", 0)
 
         team_stats: Optional[TeammateStats] = None

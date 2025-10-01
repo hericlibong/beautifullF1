@@ -29,7 +29,9 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--log", default="INFO", help="Logging level (DEBUG/INFO/WARN/ERROR)")
     args = parser.parse_args(argv)
 
-    logging.basicConfig(level=getattr(logging, args.log.upper(), logging.INFO), format="[%(levelname)s] %(message)s")
+    logging.basicConfig(
+        level=getattr(logging, args.log.upper(), logging.INFO), format="[%(levelname)s] %(message)s"
+    )
     y0, y1 = _parse_years(args.years)
     rows = run_pipeline(y0, y1)
 
@@ -37,6 +39,10 @@ def main(argv: list[str] | None = None) -> int:
     if rows:
         worst = sorted(rows, key=lambda r: r.pct_of_leader)[0]
         logging.info(
-            "Pire mi-saison (%% leader) dans l'intervalle [%s-%s]: %s (%.3f)", y0, y1, worst.year, worst.pct_of_leader
+            "Pire mi-saison (%% leader) dans l'intervalle [%s-%s]: %s (%.3f)",
+            y0,
+            y1,
+            worst.year,
+            worst.pct_of_leader,
         )
     return 0

@@ -18,5 +18,9 @@ RETRY_COUNT: int = int(os.getenv("RETRY_COUNT", "3"))
 RETRY_BACKOFF: float = float(os.getenv("RETRY_BACKOFF", "1.5"))  # exponent base
 
 # Output
-OUTPUT_CSV: str = os.getenv("OUTPUT_CSV", "hamilton_mildseason_tracker/hamilton_midseason_snapshot.csv")
-OUTPUT_JSON: str = os.getenv("OUTPUT_JSON", "hamilton_mildseason_tracker/hamilton_midseason_snapshot.json")
+OUTPUT_CSV: str = os.getenv(
+    "OUTPUT_CSV", "hamilton_mildseason_tracker/hamilton_midseason_snapshot.csv"
+)
+OUTPUT_JSON: str = os.getenv(
+    "OUTPUT_JSON", "hamilton_mildseason_tracker/hamilton_midseason_snapshot.json"
+)

@@ -70,8 +70,8 @@ class ErgastClient:
         self,
         base_url: str = JOLPICA_BASE_URL,
         timeout: int = 20,
-        rate_limit_delay: float = 1.0,   # délai anti-429 après chaque appel
-        cache_expire_seconds: int = 86400  # 24h; mets 604800 (=7j) si tu veux
+        rate_limit_delay: float = 1.0,  # délai anti-429 après chaque appel
+        cache_expire_seconds: int = 86400,  # 24h; mets 604800 (=7j) si tu veux
     ) -> None:
         self.base_url = base_url.rstrip("/")
         self.timeout = timeout
@@ -79,9 +79,7 @@ class ErgastClient:
 
         # Cache SQLite (fichier .ergast_cache.sqlite) pour toutes les requêtes HTTP
         self.session = requests_cache.CachedSession(
-            cache_name=".ergast_cache",
-            backend="sqlite",
-            expire_after=cache_expire_seconds
+            cache_name=".ergast_cache", backend="sqlite", expire_after=cache_expire_seconds
         )
 
     def _url(self, path: str) -> str:
@@ -98,7 +96,7 @@ class ErgastClient:
 
                 if resp.status_code == 429:
                     # backoff simple + jitter
-                    sleep_s = (self.rate_limit_delay * (attempt ** 2)) + random.uniform(0.15, 0.45)
+                    sleep_s = (self.rate_limit_delay * (attempt**2)) + random.uniform(0.15, 0.45)
                     time.sleep(sleep_s)
                     continue
 

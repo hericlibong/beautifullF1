@@ -1,6 +1,7 @@
-import fastf1  # noqa: I001
-import pandas as pd
 from datetime import datetime
+
+import fastf1
+import pandas as pd
 
 # fastf1.Cache.enable_cache("cache")  # cache local
 
@@ -21,7 +22,9 @@ class RaceChartBuilderFastF1:
         schedule = fastf1.get_event_schedule(self.season)
 
         # 1) On collecte d'abord toutes les courses PASSÉES avec leurs données + date réelle de la session Race
-        past_events_payload = []  # liste de tuples (race_date, round, col_name, race_results_df, sprint_points_dict)
+        past_events_payload = (
+            []
+        )  # liste de tuples (race_date, round, col_name, race_results_df, sprint_points_dict)
 
         for _, event in schedule.iterrows():
             # ignorer les évènements futurs (basé sur la date d'évènement prévue)
@@ -40,7 +43,7 @@ class RaceChartBuilderFastF1:
             except Exception:
                 continue
 
-            race_date = pd.to_datetime(race.date)  # date réelle de la session Race (horodatée) 
+            race_date = pd.to_datetime(race.date)  # date réelle de la session Race (horodatée)
 
             # Sprint optionnel
             sprint_points = {}
@@ -49,7 +52,7 @@ class RaceChartBuilderFastF1:
                 sprint.load()
                 if sprint.results is not None and len(sprint.results) > 0:
                     for _, row in sprint.results.iterrows():
-                        # HeadshotUrl, FullName, TeamName/Colour dispo via results/driver_info 
+                        # HeadshotUrl, FullName, TeamName/Colour dispo via results/driver_info
                         sprint_points[row.FullName] = float(row.Points or 0.0)
             except Exception:
                 pass
@@ -62,14 +65,18 @@ class RaceChartBuilderFastF1:
         past_events_payload.sort(key=lambda x: x[0])
 
         # 3) Construire le cumul dans cet ordre
-        for idx, (race_date, round_no, col_name, race_results, sprint_points) in enumerate(past_events_payload):
+        for idx, (race_date, round_no, col_name, race_results, sprint_points) in enumerate(
+            past_events_payload
+        ):
             self.race_keys.append(col_name)
 
             # cumuler les points (Race + Sprint éventuel)
             for _, row in race_results.iterrows():
                 full_name = row.FullName
                 team = row.TeamName
-                image = getattr(row, "HeadshotUrl", "") or ""  # présent via driver_info/Session.results 
+                image = (
+                    getattr(row, "HeadshotUrl", "") or ""
+                )  # présent via driver_info/Session.results
                 race_pts = float(row.Points or 0.0)
                 total_pts = race_pts + float(sprint_points.get(full_name, 0.0))
 
@@ -78,7 +85,7 @@ class RaceChartBuilderFastF1:
                         "Pilote": full_name,
                         "image": image,
                         "team": team,
-                        "start": 0
+                        "start": 0,
                     }
                     # initialiser toutes les colonnes passées à 0
                     for past in self.race_keys:

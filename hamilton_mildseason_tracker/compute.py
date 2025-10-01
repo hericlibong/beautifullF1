@@ -11,12 +11,27 @@ _STATUS_FINISH_OK = re.compile(r"^(?:Finished|Winner|\+\d+ Laps?)$", re.IGNORECA
 
 # DNF strict : vrais abandons (retirements)
 RETIREMENT_KEYWORDS = {
-    "retired", "accident", "collision", "engine", "gearbox", "hydraulics",
-    "electrical", "power unit", "brakes", "suspension", "mechanical", "overheating"
+    "retired",
+    "accident",
+    "collision",
+    "engine",
+    "gearbox",
+    "hydraulics",
+    "electrical",
+    "power unit",
+    "brakes",
+    "suspension",
+    "mechanical",
+    "overheating",
 }
 # Statuts non-DNF (ne pas confondre avec abandons)
 NON_DNF_STATUSES = {
-    "disqualified", "excluded", "did not start", "did not qualify", "withdrawn", "not classified"
+    "disqualified",
+    "excluded",
+    "did not start",
+    "did not qualify",
+    "withdrawn",
+    "not classified",
 }
 
 
@@ -92,13 +107,15 @@ class ResultsAggregate:
     podiums_to_date: int
     dnf_to_date: int
     races_started: int
-    race_scored_pct_main: float         # % courses principales avec points
-    weekend_scored_pct: float           # % week-ends (GP+Sprint) avec points
-    zero_point_weekends_to_date: int    # nb de week-ends à 0 point
+    race_scored_pct_main: float  # % courses principales avec points
+    weekend_scored_pct: float  # % week-ends (GP+Sprint) avec points
+    zero_point_weekends_to_date: int  # nb de week-ends à 0 point
     constructor_id: str
 
 
-def build_sprint_points_map(sprint_payload: Dict[str, Any], driver_id: str = DRIVER_ID) -> dict[int, float]:
+def build_sprint_points_map(
+    sprint_payload: Dict[str, Any], driver_id: str = DRIVER_ID
+) -> dict[int, float]:
     """Construit {round: points_sprint_du_pilote} pour l'année."""
     mr = sprint_payload.get("MRData", {})
     races = mr.get("RaceTable", {}).get("Races", [])
@@ -139,7 +156,7 @@ def aggregate_from_results(
     results_payload: Dict[str, Any],
     round_cutoff: int,
     sprint_points_by_round: dict[int, float] | None = None,
-    driver_id: str = DRIVER_ID
+    driver_id: str = DRIVER_ID,
 ) -> ResultsAggregate:
     mr = results_payload.get("MRData", {})
     race_table = mr.get("RaceTable", {})
