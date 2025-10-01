@@ -17,7 +17,10 @@
         "Austria": 201.0,
         "UK": 226.0,
         "Belgium": 244.0,
-        "Hungary": 269.0
+        "Hungary": 269.0,
+        "Netherlands": 269.0,
+        "Italy - Monza": 287.0,
+        "Azerbaijan": 293.0
     },
     "Max Verstappen": {
         "Pilote": "Max Verstappen",
@@ -37,7 +40,10 @@
         "Austria": 155.0,
         "UK": 165.0,
         "Belgium": 177.0,
-        "Hungary": 179.0
+        "Hungary": 179.0,
+        "Netherlands": 197.0,
+        "Italy - Monza": 222.0,
+        "Azerbaijan": 247.0
     },
     "George Russell": {
         "Pilote": "George Russell",
@@ -57,7 +63,10 @@
         "Austria": 146.0,
         "UK": 147.0,
         "Belgium": 157.0,
-        "Hungary": 172.0
+        "Hungary": 172.0,
+        "Netherlands": 184.0,
+        "Italy - Monza": 194.0,
+        "Azerbaijan": 212.0
     },
     "Andrea Kimi Antonelli": {
         "Pilote": "Andrea Kimi Antonelli",
@@ -77,7 +86,10 @@
         "Austria": 63.0,
         "UK": 63.0,
         "Belgium": 63.0,
-        "Hungary": 64.0
+        "Hungary": 64.0,
+        "Netherlands": 64.0,
+        "Italy - Monza": 66.0,
+        "Azerbaijan": 78.0
     },
     "Alexander Albon": {
         "Pilote": "Alexander Albon",
@@ -97,7 +109,10 @@
         "Austria": 42.0,
         "UK": 46.0,
         "Belgium": 54.0,
-        "Hungary": 54.0
+        "Hungary": 54.0,
+        "Netherlands": 64.0,
+        "Italy - Monza": 70.0,
+        "Azerbaijan": 70.0
     },
     "Lance Stroll": {
         "Pilote": "Lance Stroll",
@@ -117,7 +132,10 @@
         "Austria": 14.0,
         "UK": 20.0,
         "Belgium": 20.0,
-        "Hungary": 26.0
+        "Hungary": 26.0,
+        "Netherlands": 32.0,
+        "Italy - Monza": 32.0,
+        "Azerbaijan": 32.0
     },
     "Nico Hülkenberg": {
         "Pilote": "Nico Hülkenberg",
@@ -137,7 +155,10 @@
         "Austria": 22.0,
         "UK": 37.0,
         "Belgium": 37.0,
-        "Hungary": 37.0
+        "Hungary": 37.0,
+        "Netherlands": 37.0,
+        "Italy - Monza": 37.0,
+        "Azerbaijan": 37.0
     },
     "Charles Leclerc": {
         "Pilote": "Charles Leclerc",
@@ -157,7 +178,10 @@
         "Austria": 119.0,
         "UK": 119.0,
         "Belgium": 134.0,
-        "Hungary": 146.0
+        "Hungary": 146.0,
+        "Netherlands": 146.0,
+        "Italy - Monza": 158.0,
+        "Azerbaijan": 160.0
     },
     "Oscar Piastri": {
         "Pilote": "Oscar Piastri",
@@ -177,7 +201,10 @@
         "Austria": 216.0,
         "UK": 234.0,
         "Belgium": 259.0,
-        "Hungary": 277.0
+        "Hungary": 277.0,
+        "Netherlands": 302.0,
+        "Italy - Monza": 317.0,
+        "Azerbaijan": 317.0
     },
     "Lewis Hamilton": {
         "Pilote": "Lewis Hamilton",
@@ -197,7 +224,10 @@
         "Austria": 91.0,
         "UK": 103.0,
         "Belgium": 109.0,
-        "Hungary": 109.0
+        "Hungary": 109.0,
+        "Netherlands": 109.0,
+        "Italy - Monza": 117.0,
+        "Azerbaijan": 121.0
     },
     "Pierre Gasly": {
         "Pilote": "Pierre Gasly",
@@ -217,7 +247,10 @@
         "Austria": 11.0,
         "UK": 19.0,
         "Belgium": 20.0,
-        "Hungary": 20.0
+        "Hungary": 20.0,
+        "Netherlands": 20.0,
+        "Italy - Monza": 20.0,
+        "Azerbaijan": 20.0
     },
     "Yuki Tsunoda": {
         "Pilote": "Yuki Tsunoda",
@@ -237,7 +270,10 @@
         "Austria": 10.0,
         "UK": 10.0,
         "Belgium": 10.0,
-        "Hungary": 10.0
+        "Hungary": 10.0,
+        "Netherlands": 12.0,
+        "Italy - Monza": 12.0,
+        "Azerbaijan": 20.0
     },
     "Esteban Ocon": {
         "Pilote": "Esteban Ocon",
@@ -257,7 +293,10 @@
         "Austria": 23.0,
         "UK": 23.0,
         "Belgium": 23.0,
-        "Hungary": 23.0
+        "Hungary": 23.0,
+        "Netherlands": 24.0,
+        "Italy - Monza": 24.0,
+        "Azerbaijan": 24.0
     },
     "Oliver Bearman": {
         "Pilote": "Oliver Bearman",
@@ -277,7 +316,10 @@
         "Austria": 6.0,
         "UK": 6.0,
         "Belgium": 6.0,
-        "Hungary": 6.0
+        "Hungary": 6.0,
+        "Netherlands": 14.0,
+        "Italy - Monza": 14.0,
+        "Azerbaijan": 14.0
     },
     "Liam Lawson": {
         "Pilote": "Liam Lawson",
@@ -297,7 +339,10 @@
         "Austria": 12.0,
         "UK": 12.0,
         "Belgium": 16.0,
-        "Hungary": 20.0
+        "Hungary": 20.0,
+        "Netherlands": 20.0,
+        "Italy - Monza": 20.0,
+        "Azerbaijan": 30.0
     },
     "Gabriel Bortoleto": {
         "Pilote": "Gabriel Bortoleto",
@@ -317,7 +362,10 @@
         "Austria": 4.0,
         "UK": 4.0,
         "Belgium": 6.0,
-        "Hungary": 14.0
+        "Hungary": 14.0,
+        "Netherlands": 14.0,
+        "Italy - Monza": 18.0,
+        "Azerbaijan": 18.0
     },
     "Fernando Alonso": {
         "Pilote": "Fernando Alonso",
@@ -337,7 +385,10 @@
         "Austria": 14.0,
         "UK": 16.0,
         "Belgium": 16.0,
-        "Hungary": 26.0
+        "Hungary": 26.0,
+        "Netherlands": 30.0,
+        "Italy - Monza": 30.0,
+        "Azerbaijan": 30.0
     },
     "Carlos Sainz": {
         "Pilote": "Carlos Sainz",
@@ -357,7 +408,10 @@
         "Austria": 13.0,
         "UK": 13.0,
         "Belgium": 13.0,
-        "Hungary": 13.0
+        "Hungary": 13.0,
+        "Netherlands": 13.0,
+        "Italy - Monza": 13.0,
+        "Azerbaijan": 28.0
     },
     "Jack Doohan": {
         "Pilote": "Jack Doohan",
@@ -377,7 +431,10 @@
         "Austria": 0.0,
         "UK": 0.0,
         "Belgium": 0.0,
-        "Hungary": 0.0
+        "Hungary": 0.0,
+        "Netherlands": 0.0,
+        "Italy - Monza": 0.0,
+        "Azerbaijan": 0.0
     },
     "Isack Hadjar": {
         "Pilote": "Isack Hadjar",
@@ -397,7 +454,10 @@
         "Austria": 21.0,
         "UK": 21.0,
         "Belgium": 21.0,
-        "Hungary": 21.0
+        "Hungary": 21.0,
+        "Netherlands": 36.0,
+        "Italy - Monza": 37.0,
+        "Azerbaijan": 38.0
     },
     "Franco Colapinto": {
         "Pilote": "Franco Colapinto",
@@ -417,6 +477,9 @@
         "Austria": 0.0,
         "UK": 0.0,
         "Belgium": 0.0,
-        "Hungary": 0.0
+        "Hungary": 0.0,
+        "Netherlands": 0.0,
+        "Italy - Monza": 0.0,
+        "Azerbaijan": 0.0
     }
 }
