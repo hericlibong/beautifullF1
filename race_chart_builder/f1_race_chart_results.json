@@ -20,7 +20,8 @@
         "Hungary": 269.0,
         "Netherlands": 269.0,
         "Italy - Monza": 287.0,
-        "Azerbaijan": 293.0
+        "Azerbaijan": 293.0,
+        "Singapore": 308.0
     },
     "Max Verstappen": {
         "Pilote": "Max Verstappen",
@@ -43,7 +44,8 @@
         "Hungary": 179.0,
         "Netherlands": 197.0,
         "Italy - Monza": 222.0,
-        "Azerbaijan": 247.0
+        "Azerbaijan": 247.0,
+        "Singapore": 265.0
     },
     "George Russell": {
         "Pilote": "George Russell",
@@ -66,7 +68,8 @@
         "Hungary": 172.0,
         "Netherlands": 184.0,
         "Italy - Monza": 194.0,
-        "Azerbaijan": 212.0
+        "Azerbaijan": 212.0,
+        "Singapore": 237.0
     },
     "Andrea Kimi Antonelli": {
         "Pilote": "Andrea Kimi Antonelli",
@@ -89,7 +92,8 @@
         "Hungary": 64.0,
         "Netherlands": 64.0,
         "Italy - Monza": 66.0,
-        "Azerbaijan": 78.0
+        "Azerbaijan": 78.0,
+        "Singapore": 88.0
     },
     "Alexander Albon": {
         "Pilote": "Alexander Albon",
@@ -112,7 +116,8 @@
         "Hungary": 54.0,
         "Netherlands": 64.0,
         "Italy - Monza": 70.0,
-        "Azerbaijan": 70.0
+        "Azerbaijan": 70.0,
+        "Singapore": 70.0
     },
     "Lance Stroll": {
         "Pilote": "Lance Stroll",
@@ -135,7 +140,8 @@
         "Hungary": 26.0,
         "Netherlands": 32.0,
         "Italy - Monza": 32.0,
-        "Azerbaijan": 32.0
+        "Azerbaijan": 32.0,
+        "Singapore": 32.0
     },
     "Nico Hülkenberg": {
         "Pilote": "Nico Hülkenberg",
@@ -158,7 +164,8 @@
         "Hungary": 37.0,
         "Netherlands": 37.0,
         "Italy - Monza": 37.0,
-        "Azerbaijan": 37.0
+        "Azerbaijan": 37.0,
+        "Singapore": 37.0
     },
     "Charles Leclerc": {
         "Pilote": "Charles Leclerc",
@@ -181,7 +188,8 @@
         "Hungary": 146.0,
         "Netherlands": 146.0,
         "Italy - Monza": 158.0,
-        "Azerbaijan": 160.0
+        "Azerbaijan": 160.0,
+        "Singapore": 168.0
     },
     "Oscar Piastri": {
         "Pilote": "Oscar Piastri",
@@ -204,7 +212,8 @@
         "Hungary": 277.0,
         "Netherlands": 302.0,
         "Italy - Monza": 317.0,
-        "Azerbaijan": 317.0
+        "Azerbaijan": 317.0,
+        "Singapore": 329.0
     },
     "Lewis Hamilton": {
         "Pilote": "Lewis Hamilton",
@@ -227,7 +236,8 @@
         "Hungary": 109.0,
         "Netherlands": 109.0,
         "Italy - Monza": 117.0,
-        "Azerbaijan": 121.0
+        "Azerbaijan": 121.0,
+        "Singapore": 125.0
     },
     "Pierre Gasly": {
         "Pilote": "Pierre Gasly",
@@ -250,7 +260,8 @@
         "Hungary": 20.0,
         "Netherlands": 20.0,
         "Italy - Monza": 20.0,
-        "Azerbaijan": 20.0
+        "Azerbaijan": 20.0,
+        "Singapore": 20.0
     },
     "Yuki Tsunoda": {
         "Pilote": "Yuki Tsunoda",
@@ -273,7 +284,8 @@
         "Hungary": 10.0,
         "Netherlands": 12.0,
         "Italy - Monza": 12.0,
-        "Azerbaijan": 20.0
+        "Azerbaijan": 20.0,
+        "Singapore": 20.0
     },
     "Esteban Ocon": {
         "Pilote": "Esteban Ocon",
@@ -296,7 +308,8 @@
         "Hungary": 23.0,
         "Netherlands": 24.0,
         "Italy - Monza": 24.0,
-        "Azerbaijan": 24.0
+        "Azerbaijan": 24.0,
+        "Singapore": 24.0
     },
     "Oliver Bearman": {
         "Pilote": "Oliver Bearman",
@@ -319,7 +332,8 @@
         "Hungary": 6.0,
         "Netherlands": 14.0,
         "Italy - Monza": 14.0,
-        "Azerbaijan": 14.0
+        "Azerbaijan": 14.0,
+        "Singapore": 16.0
     },
     "Liam Lawson": {
         "Pilote": "Liam Lawson",
@@ -342,7 +356,8 @@
         "Hungary": 20.0,
         "Netherlands": 20.0,
         "Italy - Monza": 20.0,
-        "Azerbaijan": 30.0
+        "Azerbaijan": 30.0,
+        "Singapore": 30.0
     },
     "Gabriel Bortoleto": {
         "Pilote": "Gabriel Bortoleto",
@@ -365,7 +380,8 @@
         "Hungary": 14.0,
         "Netherlands": 14.0,
         "Italy - Monza": 18.0,
-        "Azerbaijan": 18.0
+        "Azerbaijan": 18.0,
+        "Singapore": 18.0
     },
     "Fernando Alonso": {
         "Pilote": "Fernando Alonso",
@@ -388,7 +404,8 @@
         "Hungary": 26.0,
         "Netherlands": 30.0,
         "Italy - Monza": 30.0,
-        "Azerbaijan": 30.0
+        "Azerbaijan": 30.0,
+        "Singapore": 36.0
     },
     "Carlos Sainz": {
         "Pilote": "Carlos Sainz",
@@ -411,7 +428,8 @@
         "Hungary": 13.0,
         "Netherlands": 13.0,
         "Italy - Monza": 13.0,
-        "Azerbaijan": 28.0
+        "Azerbaijan": 28.0,
+        "Singapore": 29.0
     },
     "Jack Doohan": {
         "Pilote": "Jack Doohan",
@@ -434,7 +452,8 @@
         "Hungary": 0.0,
         "Netherlands": 0.0,
         "Italy - Monza": 0.0,
-        "Azerbaijan": 0.0
+        "Azerbaijan": 0.0,
+        "Singapore": 0.0
     },
     "Isack Hadjar": {
         "Pilote": "Isack Hadjar",
@@ -457,7 +476,8 @@
         "Hungary": 21.0,
         "Netherlands": 36.0,
         "Italy - Monza": 37.0,
-        "Azerbaijan": 38.0
+        "Azerbaijan": 38.0,
+        "Singapore": 38.0
     },
     "Franco Colapinto": {
         "Pilote": "Franco Colapinto",
@@ -480,6 +500,7 @@
         "Hungary": 0.0,
         "Netherlands": 0.0,
         "Italy - Monza": 0.0,
-        "Azerbaijan": 0.0
+        "Azerbaijan": 0.0,
+        "Singapore": 0.0
     }
 }
