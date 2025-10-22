@@ -7,6 +7,7 @@ Corrige les pôles ET les podiums, sans double écriture ni surcodage.
 
 from __future__ import annotations
 import argparse
+import os
 import time
 import pandas as pd
 import fastf1
@@ -333,6 +334,9 @@ def main():
 
     enable_cache(DEFAULT_CACHE)
     erg = Ergast(result_type="pandas", auto_cast=True)
+
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    args.out = os.path.join(script_dir, os.path.basename(args.out))
 
     k_global = get_cutoff_k_for_2025(erg)
 
