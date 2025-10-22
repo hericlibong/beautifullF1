@@ -15,11 +15,13 @@ from fastf1.ergast import Ergast
 LH_ID = "hamilton"
 DEFAULT_CACHE = ".fastf1cache"
 
+
 def enable_cache(path: str) -> None:
     try:
         fastf1.Cache.enable_cache(path)
     except Exception:
         pass
+
 
 def count_poles_strict(year: int, driver_id: str = LH_ID) -> tuple[int, list[int]]:
     erg = Ergast(result_type="pandas", auto_cast=True)
@@ -46,11 +48,21 @@ def count_poles_strict(year: int, driver_id: str = LH_ID) -> tuple[int, list[int
 
     return poles, rounds_with_pole
 
+
 def main():
-    parser = argparse.ArgumentParser(description="Compter les poles d'Hamilton pour UNE saison (fiable, par round).")
+    parser = argparse.ArgumentParser(
+        description="Compter les poles d'Hamilton pour UNE saison (fiable, par round)."
+    )
     parser.add_argument("--season", type=int, required=True, help="Saison (ex: 2007 ou 2008)")
-    parser.add_argument("--driver", type=str, default=LH_ID, help="driverId Ergast (défaut: hamilton)")
-    parser.add_argument("--cache", type=str, default=DEFAULT_CACHE, help="Dossier cache FastF1 (défaut .fastf1cache)")
+    parser.add_argument(
+        "--driver", type=str, default=LH_ID, help="driverId Ergast (défaut: hamilton)"
+    )
+    parser.add_argument(
+        "--cache",
+        type=str,
+        default=DEFAULT_CACHE,
+        help="Dossier cache FastF1 (défaut .fastf1cache)",
+    )
     args = parser.parse_args()
 
     enable_cache(args.cache)
@@ -59,6 +71,7 @@ def main():
     print(f"Saison {args.season} — {args.driver} — Poles: {poles}")
     if rounds_with_pole:
         print("Rounds avec pole:", ", ".join(map(str, rounds_with_pole)))
+
 
 if __name__ == "__main__":
     main()

@@ -1,13 +1,12 @@
-import fastf1
-from fastf1.ergast import Ergast
-import pandas as pd
-from typing import Optional
-
+import os
 import re
 import unicodedata
-import requests
+from typing import Optional
 
-import os
+import fastf1
+import pandas as pd
+import requests
+from fastf1.ergast import Ergast
 
 # --- Headshot overrides (prioritaires) ---
 HEADSHOT_OVERRIDES = {
@@ -33,25 +32,25 @@ OPENF1_TIMEOUT = 10
 
 # Coéquipier principal par saison (équipe, nom complet, driverId Ergast)
 TEAMMATES = {
-    2007: ("McLaren",  "Fernando Alonso",   "alonso"),
-    2008: ("McLaren",  "Heikki Kovalainen","kovalainen"),
-    2009: ("McLaren",  "Heikki Kovalainen","kovalainen"),
-    2010: ("McLaren",  "Jenson Button",    "button"),
-    2011: ("McLaren",  "Jenson Button",    "button"),
-    2012: ("McLaren",  "Jenson Button",    "button"),
-    2013: ("Mercedes", "Nico Rosberg",     "rosberg"),
-    2014: ("Mercedes", "Nico Rosberg",     "rosberg"),
-    2015: ("Mercedes", "Nico Rosberg",     "rosberg"),
-    2016: ("Mercedes", "Nico Rosberg",     "rosberg"),
-    2017: ("Mercedes", "Valtteri Bottas",  "bottas"),
-    2018: ("Mercedes", "Valtteri Bottas",  "bottas"),
-    2019: ("Mercedes", "Valtteri Bottas",  "bottas"),
-    2020: ("Mercedes", "Valtteri Bottas",  "bottas"),
-    2021: ("Mercedes", "Valtteri Bottas",  "bottas"),
-    2022: ("Mercedes", "George Russell",   "russell"),
-    2023: ("Mercedes", "George Russell",   "russell"),
-    2024: ("Mercedes", "George Russell",   "russell"),
-    2025: ("Ferrari",  "Charles Leclerc",  "leclerc"),
+    2007: ("McLaren", "Fernando Alonso", "alonso"),
+    2008: ("McLaren", "Heikki Kovalainen", "kovalainen"),
+    2009: ("McLaren", "Heikki Kovalainen", "kovalainen"),
+    2010: ("McLaren", "Jenson Button", "button"),
+    2011: ("McLaren", "Jenson Button", "button"),
+    2012: ("McLaren", "Jenson Button", "button"),
+    2013: ("Mercedes", "Nico Rosberg", "rosberg"),
+    2014: ("Mercedes", "Nico Rosberg", "rosberg"),
+    2015: ("Mercedes", "Nico Rosberg", "rosberg"),
+    2016: ("Mercedes", "Nico Rosberg", "rosberg"),
+    2017: ("Mercedes", "Valtteri Bottas", "bottas"),
+    2018: ("Mercedes", "Valtteri Bottas", "bottas"),
+    2019: ("Mercedes", "Valtteri Bottas", "bottas"),
+    2020: ("Mercedes", "Valtteri Bottas", "bottas"),
+    2021: ("Mercedes", "Valtteri Bottas", "bottas"),
+    2022: ("Mercedes", "George Russell", "russell"),
+    2023: ("Mercedes", "George Russell", "russell"),
+    2024: ("Mercedes", "George Russell", "russell"),
+    2025: ("Ferrari", "Charles Leclerc", "leclerc"),
 }
 
 HAM_DRIVER_ID = "hamilton"
@@ -59,6 +58,7 @@ HAM_NAME = "Lewis Hamilton"
 
 # fastf1.Cache.enable_cache("~/.cache/fastf1")  # optionnel
 erg = Ergast(result_type="pandas", auto_cast=True, limit=1000)
+
 
 def _safe_first(resp) -> pd.DataFrame:
     """ErgastMultiResponse.content -> list[DataFrame] ; retourne le premier DataFrame."""
@@ -68,6 +68,7 @@ def _safe_first(resp) -> pd.DataFrame:
             return content[0] if content else pd.DataFrame()
         return content if isinstance(content, pd.DataFrame) else pd.DataFrame()
     return pd.DataFrame()
+
 
 def _get_points(season: int, round_cutoff: int, driver_id: str) -> Optional[float]:
     """Points cumulés du pilote 'driver_id' au round donné (inclut sprints si présents)."""
@@ -92,6 +93,7 @@ def _get_points(season: int, round_cutoff: int, driver_id: str) -> Optional[floa
     except Exception:
         return None
 
+
 def _get_cutoff_event(season: int, round_wanted: int):
     """Retourne (round_eff, EventName, EventDate) via le calendrier FastF1."""
     sched = fastf1.get_event_schedule(season)
@@ -109,9 +111,11 @@ def _get_cutoff_event(season: int, round_wanted: int):
         date = row.get("EventDate", pd.NaT)
     return int(r_eff), str(name), pd.to_datetime(date)
 
+
 # -----------------------------
 #   Headshots (OpenF1 + FastF1)
 # -----------------------------
+
 
 def _norm(s: str) -> str:
     if not isinstance(s, str):
@@ -122,6 +126,7 @@ def _norm(s: str) -> str:
     s = "".join(ch for ch in s if not unicodedata.combining(ch))
     s = re.sub(r"[^a-z0-9]+", " ", s).strip()
     return s
+
 
 def get_headshot_url(name: str, year: int, team_hint: str | None = None) -> str | None:
     """
@@ -136,10 +141,7 @@ def get_headshot_url(name: str, year: int, team_hint: str | None = None) -> str 
     try:
         # On commence par last_name (plus large), puis full_name (plus précis)
         last_name = name.split()[-1]
-        queries = [
-            {"last_name": last_name},
-            {"full_name": name}
-        ]
+        queries = [{"last_name": last_name}, {"full_name": name}]
         best = None
         best_key = (-1, -1, "")  # tri: date/session_key, meeting_key, priorité de match
 
@@ -154,8 +156,8 @@ def get_headshot_url(name: str, year: int, team_hint: str | None = None) -> str 
                     continue
 
                 # Normalisations pour match
-                full_n  = _norm(d.get("full_name", ""))
-                last_n  = _norm(d.get("last_name", ""))
+                full_n = _norm(d.get("full_name", ""))
+                last_n = _norm(d.get("last_name", ""))
                 team_dn = _norm(d.get("team_name", ""))
 
                 # Score de nom: 2 = full_name exact, 1 = last_name, 0 = autre
@@ -215,7 +217,10 @@ def get_headshot_url(name: str, year: int, team_hint: str | None = None) -> str 
 
     return None
 
-def resolve_headshot_url(name: str, driver_id: str, year: int, team_hint: str | None = None) -> str | None:
+
+def resolve_headshot_url(
+    name: str, driver_id: str, year: int, team_hint: str | None = None
+) -> str | None:
     """
     Résolution d'image avec priorités:
     1) Override explicite (HEADSHOT_OVERRIDES)
@@ -237,9 +242,11 @@ def resolve_headshot_url(name: str, driver_id: str, year: int, team_hint: str | 
     # 3) logique existante OpenF1 -> FastF1
     return get_headshot_url(name, year, team_hint=team_hint)
 
+
 # ----------------------------------------------------------------------
 # *** AJOUT MINIMAL POUR CUT-OFF = PROCHAIN GP (last + 1) ***
 # ----------------------------------------------------------------------
+
 
 def _get_last_completed_round(season: int) -> Optional[int]:
     """Dernier round réellement clôturé pour 'season' (via standings Ergast)."""
@@ -258,6 +265,7 @@ def _get_last_completed_round(season: int) -> Optional[int]:
     except Exception:
         return None
 
+
 def _get_reference_next_round(reference_year: int = max(TEAMMATES.keys())) -> int:
     """Calcule K_next = (dernier round cloturé du REFERENCE_YEAR) + 1."""
     last_done = _get_last_completed_round(reference_year)
@@ -265,6 +273,7 @@ def _get_reference_next_round(reference_year: int = max(TEAMMATES.keys())) -> in
         # si indispo, on garde le comportement antérieur (R18) + 1
         return CUTOFF_ROUND + 1
     return int(last_done) + 1
+
 
 # -----------------------------
 #   Build dataset
@@ -279,25 +288,27 @@ for year, (team, teammate_name, teammate_id) in TEAMMATES.items():
     r_eff, gp_name, gp_date = _get_cutoff_event(year, k_next)
 
     ham_pts = _get_points(year, r_eff, HAM_DRIVER_ID)
-    tm_pts  = _get_points(year, r_eff, teammate_id)
+    tm_pts = _get_points(year, r_eff, teammate_id)
     gap = (ham_pts - tm_pts) if (ham_pts is not None and tm_pts is not None) else None
 
     ham_img = resolve_headshot_url(HAM_NAME, HAM_DRIVER_ID, year, team_hint=team)
-    tm_img  = resolve_headshot_url(teammate_name, teammate_id, year, team_hint=team)
+    tm_img = resolve_headshot_url(teammate_name, teammate_id, year, team_hint=team)
 
-    records.append({
-        "year": year,
-        "round_cutoff": r_eff,
-        "gp_name_cutoff": gp_name,
-        "gp_date_cutoff": gp_date,
-        "team": team,
-        "hamilton_points": ham_pts,
-        "teammate_name": teammate_name,
-        "teammate_points_to_date": tm_pts,
-        "teammate_gap": gap,
-        # "hamilton_headshot_url": ham_img,
-        # "teammate_headshot_url": tm_img
-    })
+    records.append(
+        {
+            "year": year,
+            "round_cutoff": r_eff,
+            "gp_name_cutoff": gp_name,
+            "gp_date_cutoff": gp_date,
+            "team": team,
+            "hamilton_points": ham_pts,
+            "teammate_name": teammate_name,
+            "teammate_points_to_date": tm_pts,
+            "teammate_gap": gap,
+            # "hamilton_headshot_url": ham_img,
+            # "teammate_headshot_url": tm_img
+        }
+    )
 
 out = pd.DataFrame.from_records(records)
 out.to_csv(OUTPUT_FILE, index=False)

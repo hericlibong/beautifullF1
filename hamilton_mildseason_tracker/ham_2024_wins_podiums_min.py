@@ -7,10 +7,12 @@ import pandas as pd
 LH_ID = "hamilton"
 YEAR = 2024
 
+
 def season_total_rounds(year: int) -> int:
     sched = fastf1.get_event_schedule(year)
     rounds = sched.loc[sched["RoundNumber"] > 0, "RoundNumber"]
     return int(rounds.max()) if not rounds.empty else 0
+
 
 def main():
     erg = Ergast(result_type="pandas", auto_cast=True)
@@ -39,6 +41,7 @@ def main():
     print(f"Saison {YEAR} — Lewis Hamilton")
     print(f"Victoires: {wins}")
     print(f"Podiums : {podiums}")
+
 
 if __name__ == "__main__":
     main()

@@ -6,14 +6,16 @@ Corrige les pôles ET les podiums, sans double écriture ni surcodage.
 """
 
 from __future__ import annotations
+
 import argparse
 import os
 import time
-import pandas as pd
+
 import fastf1
+import pandas as pd
 from fastf1.ergast import Ergast
-from fastf1.req import RateLimitExceededError
 from fastf1.ergast.interface import ErgastInvalidRequestError
+from fastf1.req import RateLimitExceededError
 
 LH_ID = "hamilton"
 START_SEASON = 2007
@@ -21,11 +23,29 @@ END_SEASON = 2025
 DEFAULT_CACHE = ".fastf1cache"
 
 COLS = [
-    "year","round_cutoff","gp_name_cutoff","gp_date_cutoff",
-    "hamilton_rank","hamilton_points","leader_points","points_behind","pct_of_leader",
-    "pct_to_leader_label","status_label","wins_to_date","podiums_to_date","poles_to_date","dnf_to_date",
-    "races_started","races_scored_pct","race_scored_pct_main","weekend_scored_pct",
-    "zero_point_weekends_to_date","team","teammate_points_to_date","teammate_gap"
+    "year",
+    "round_cutoff",
+    "gp_name_cutoff",
+    "gp_date_cutoff",
+    "hamilton_rank",
+    "hamilton_points",
+    "leader_points",
+    "points_behind",
+    "pct_of_leader",
+    "pct_to_leader_label",
+    "status_label",
+    "wins_to_date",
+    "podiums_to_date",
+    "poles_to_date",
+    "dnf_to_date",
+    "races_started",
+    "races_scored_pct",
+    "race_scored_pct_main",
+    "weekend_scored_pct",
+    "zero_point_weekends_to_date",
+    "team",
+    "teammate_points_to_date",
+    "teammate_gap",
 ]
 
 TEAM_LABELS = {"mclaren": "McLaren", "mercedes": "Mercedes", "ferrari": "Ferrari"}
@@ -131,9 +151,11 @@ def assemble_df(mr) -> pd.DataFrame:
 
     # Normalisation minimale
     if df.empty:
-        return pd.DataFrame(columns=["round","position","points","status","driverId","constructorId"])
+        return pd.DataFrame(
+            columns=["round", "position", "points", "status", "driverId", "constructorId"]
+        )
 
-    for col in ["round","position","points","status","driverId","constructorId"]:
+    for col in ["round", "position", "points", "status", "driverId", "constructorId"]:
         if col not in df.columns:
             df[col] = pd.NA
 
@@ -149,10 +171,7 @@ def assemble_df(mr) -> pd.DataFrame:
 # -------------------------------------------------------------
 def rounds_list(year: int, k_eff: int) -> list[int]:
     sched = fastf1.get_event_schedule(year)
-    rounds = (
-        sched.loc[sched["RoundNumber"] > 0, "RoundNumber"]
-        .dropna().astype(int).tolist()
-    )
+    rounds = sched.loc[sched["RoundNumber"] > 0, "RoundNumber"].dropna().astype(int).tolist()
     return [r for r in rounds if r <= int(k_eff)]
 
 
@@ -169,7 +188,11 @@ def race_df_hybrid(erg: Ergast, year: int, k_eff: int) -> pd.DataFrame:
     parts = [base]
     for rnd in need:
         rr = api_get(erg.get_race_results, season=year, round=int(rnd), limit=2000)
-        rdf = rr.content[0] if hasattr(rr, "content") and rr.content else (rr if isinstance(rr, pd.DataFrame) else pd.DataFrame())
+        rdf = (
+            rr.content[0]
+            if hasattr(rr, "content") and rr.content
+            else (rr if isinstance(rr, pd.DataFrame) else pd.DataFrame())
+        )
         if rdf is None or rdf.empty:
             continue
         rdf = assemble_df(rdf)
@@ -207,7 +230,11 @@ def count_poles_up_to_k_final(erg: Ergast, year: int, k_eff: int) -> int:
     need = [r for r in rounds_list(year, k_eff) if r not in ok_rounds]
     for rnd in need:
         q = api_get(erg.get_qualifying_results, season=year, round=int(rnd), limit=2000)
-        qdf_r = q.content[0] if hasattr(q, "content") and q.content else (q if isinstance(q, pd.DataFrame) else pd.DataFrame())
+        qdf_r = (
+            q.content[0]
+            if hasattr(q, "content") and q.content
+            else (q if isinstance(q, pd.DataFrame) else pd.DataFrame())
+        )
         if qdf_r is None or qdf_r.empty:
             continue
         qdf_r = assemble_df(qdf_r)
@@ -226,7 +253,11 @@ def count_podiums_up_to_k_strict(erg: Ergast, year: int, k_eff: int) -> int:
     podiums = 0
     for rnd in range(1, int(k_eff) + 1):
         resp = api_get(erg.get_race_results, season=year, round=rnd, limit=2000)
-        rr_df = resp.content[0] if hasattr(resp, "content") and resp.content else (resp if isinstance(resp, pd.DataFrame) else pd.DataFrame())
+        rr_df = (
+            resp.content[0]
+            if hasattr(resp, "content") and resp.content
+            else (resp if isinstance(resp, pd.DataFrame) else pd.DataFrame())
+        )
         if rr_df is None or rr_df.empty or "driverId" not in rr_df.columns:
             continue
 
@@ -244,8 +275,6 @@ def count_podiums_up_to_k_strict(erg: Ergast, year: int, k_eff: int) -> int:
     return int(podiums)
 
 
-
-
 # -------------------------------------------------------------
 def compute_row_for_season(erg: Ergast, year: int, k_global: int) -> dict:
     total_rounds = season_total_rounds(year)
@@ -253,7 +282,11 @@ def compute_row_for_season(erg: Ergast, year: int, k_global: int) -> dict:
 
     # Standings (points / rang / wins / leader)
     st = api_get(erg.get_driver_standings, season=year, round=k_eff, limit=2000)
-    st_df = st.content[0] if hasattr(st, "content") and st.content else (st if isinstance(st, pd.DataFrame) else pd.DataFrame())
+    st_df = (
+        st.content[0]
+        if hasattr(st, "content") and st.content
+        else (st if isinstance(st, pd.DataFrame) else pd.DataFrame())
+    )
     if st_df.empty or "driverId" not in st_df.columns:
         print(f"⚠️ Standings manquants {year} R{k_eff}")
         return {}
@@ -302,9 +335,11 @@ def compute_row_for_season(erg: Ergast, year: int, k_global: int) -> dict:
         last_cid = str(lh_race.dropna(subset=["constructorId"]).iloc[-1]["constructorId"]).lower()
         team = TEAM_LABELS.get(last_cid, last_cid.title() if last_cid else None)
         for _, row in lh_race.iterrows():
-            mates = race_k[(race_k["round"] == row["round"]) &
-                           (race_k["constructorId"] == row["constructorId"]) &
-                           (race_k["driverId"] != LH_ID)]
+            mates = race_k[
+                (race_k["round"] == row["round"])
+                & (race_k["constructorId"] == row["constructorId"])
+                & (race_k["driverId"] != LH_ID)
+            ]
             teammate_pts += pd.to_numeric(mates["points"], errors="coerce").fillna(0).sum()
     teammate_pts = float(teammate_pts)
     teammate_gap = round(hamilton_points - teammate_pts, 1)
@@ -315,14 +350,29 @@ def compute_row_for_season(erg: Ergast, year: int, k_global: int) -> dict:
     gp_name, gp_date = get_event_name_date(year, k_eff)
 
     return dict(
-        year=year, round_cutoff=k_eff, gp_name_cutoff=gp_name, gp_date_cutoff=gp_date,
-        hamilton_rank=hamilton_rank, hamilton_points=hamilton_points, leader_points=leader_points,
-        points_behind=points_behind, pct_of_leader=pct_of_leader,
-        pct_to_leader_label=pct_label, status_label=status_label, wins_to_date=wins,
-        podiums_to_date=podiums, poles_to_date=poles, dnf_to_date=dnf, races_started=started,
-        races_scored_pct=races_scored_pct, race_scored_pct_main=races_scored_pct,
-        weekend_scored_pct=weekend_scored_pct, zero_point_weekends_to_date=zero_points,
-        team=team, teammate_points_to_date=round(teammate_pts, 1), teammate_gap=teammate_gap
+        year=year,
+        round_cutoff=k_eff,
+        gp_name_cutoff=gp_name,
+        gp_date_cutoff=gp_date,
+        hamilton_rank=hamilton_rank,
+        hamilton_points=hamilton_points,
+        leader_points=leader_points,
+        points_behind=points_behind,
+        pct_of_leader=pct_of_leader,
+        pct_to_leader_label=pct_label,
+        status_label=status_label,
+        wins_to_date=wins,
+        podiums_to_date=podiums,
+        poles_to_date=poles,
+        dnf_to_date=dnf,
+        races_started=started,
+        races_scored_pct=races_scored_pct,
+        race_scored_pct_main=races_scored_pct,
+        weekend_scored_pct=weekend_scored_pct,
+        zero_point_weekends_to_date=zero_points,
+        team=team,
+        teammate_points_to_date=round(teammate_pts, 1),
+        teammate_gap=teammate_gap,
     )
 
 

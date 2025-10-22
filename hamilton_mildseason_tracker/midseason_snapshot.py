@@ -19,8 +19,8 @@ import fastf1
 from fastf1.ergast import Ergast
 
 # --- Paramètres de base
-LH_DRIVER_ID = "hamilton"       # Ergast driverId
-START_SEASON = 2007             # début de carrière F1 de LH
+LH_DRIVER_ID = "hamilton"  # Ergast driverId
+START_SEASON = 2007  # début de carrière F1 de LH
 DEFAULT_CACHE = ".fastf1cache"  # dossier cache pour FastF1
 
 
@@ -32,17 +32,17 @@ def enable_cache(path: str) -> None:
         pass
 
 
-def get_current_season_and_round(erg: Ergast,
-                                 season_arg: int | None,
-                                 round_arg: int | None) -> Tuple[int, int]:
+def get_current_season_and_round(
+    erg: Ergast, season_arg: int | None, round_arg: int | None
+) -> Tuple[int, int]:
     if season_arg and round_arg:
         return season_arg, round_arg
     year = season_arg or dt.date.today().year
-    standings = erg.get_driver_standings(season=year, round='last')
+    standings = erg.get_driver_standings(season=year, round="last")
     desc = getattr(standings, "description", None)
     if desc is None or desc.empty:
         return year, (round_arg or 1)
-    last_round = int(desc.iloc[-1]['round'])
+    last_round = int(desc.iloc[-1]["round"])
     return year, (round_arg or last_round)
 
 
@@ -71,7 +71,11 @@ def get_event_name_and_date(year: int, rnd: int) -> Tuple[str, str]:
 def _assemble_multiresponse(mr) -> pd.DataFrame:
     if hasattr(mr, "content") and isinstance(mr.content, list):
         desc = mr.description if mr.description is not None else pd.DataFrame()
-        rounds = list(pd.to_numeric(desc.get("round", pd.Series(range(1, len(mr.content) + 1))), errors="coerce"))
+        rounds = list(
+            pd.to_numeric(
+                desc.get("round", pd.Series(range(1, len(mr.content) + 1))), errors="coerce"
+            )
+        )
         parts = []
         for rnum, df_part in zip(rounds, mr.content):
             dfp = df_part.copy()
@@ -96,7 +100,7 @@ def _assemble_multiresponse(mr) -> pd.DataFrame:
 
 
 def prefetch_season_dfs(erg: Ergast, year: int) -> tuple[pd.DataFrame, pd.DataFrame]:
-    rr = erg.get_race_results(season=year, limit=1000)      # toutes les courses
+    rr = erg.get_race_results(season=year, limit=1000)  # toutes les courses
     race_df = _assemble_multiresponse(rr)
     qr = erg.get_qualifying_results(season=year, limit=1000)  # toutes les qualifs
     quali_df = _assemble_multiresponse(qr)
@@ -137,11 +141,9 @@ def _dnf_mask(df: pd.DataFrame) -> pd.Series:
 
 
 # ---------- Cumuls sur K premiers GP ----------
-def cumulate_to_round_k(erg: Ergast,
-                        year: int,
-                        k: int,
-                        race_df: pd.DataFrame,
-                        quali_df: pd.DataFrame) -> Dict[str, any]:
+def cumulate_to_round_k(
+    erg: Ergast, year: int, k: int, race_df: pd.DataFrame, quali_df: pd.DataFrame
+) -> Dict[str, any]:
     total_rounds = season_total_rounds(year)
     k_eff = min(k, total_rounds if total_rounds > 0 else k)
 
@@ -174,8 +176,12 @@ def cumulate_to_round_k(erg: Ergast,
     points_course = float(pd.to_numeric(lh_race.get("points"), errors="coerce").fillna(0).sum())
 
     # moyenne position d’arrivée (après DQ)
-    finishing_list = pd.to_numeric(lh_race.get("rank_after_dq"), errors="coerce").dropna().astype(int).tolist()
-    weekend_scored_pct = round(float(pd.Series(finishing_list).mean()) if finishing_list else 0.0, 2)
+    finishing_list = (
+        pd.to_numeric(lh_race.get("rank_after_dq"), errors="coerce").dropna().astype(int).tolist()
+    )
+    weekend_scored_pct = round(
+        float(pd.Series(finishing_list).mean()) if finishing_list else 0.0, 2
+    )
 
     # GP marqués (>0 pt)
     scored_rounds = int((pd.to_numeric(lh_race.get("points"), errors="coerce").fillna(0) > 0).sum())
@@ -194,7 +200,9 @@ def cumulate_to_round_k(erg: Ergast,
             rr_r = race_ranked[race_ranked["round"] == r]
             mates = rr_r[(rr_r["constructorId"] == cid) & (rr_r["driverId"] != LH_DRIVER_ID)]
             if not mates.empty:
-                teammate_points += float(pd.to_numeric(mates["points"], errors="coerce").fillna(0).sum())
+                teammate_points += float(
+                    pd.to_numeric(mates["points"], errors="coerce").fillna(0).sum()
+                )
             if r == k_eff:
                 constructor_id_at_k = cid
 
@@ -215,8 +223,16 @@ def cumulate_to_round_k(erg: Ergast,
                 h_rank = None
             h_points = float(pd.to_numeric(lh_row.iloc[0]["points"], errors="coerce"))
 
-    points_behind = round(leader_points - h_points, 2) if (leader_points is not None and h_points is not None) else None
-    pct_of_leader = round((h_points / leader_points), 3) if (leader_points and leader_points > 0 and h_points is not None) else None
+    points_behind = (
+        round(leader_points - h_points, 2)
+        if (leader_points is not None and h_points is not None)
+        else None
+    )
+    pct_of_leader = (
+        round((h_points / leader_points), 3)
+        if (leader_points and leader_points > 0 and h_points is not None)
+        else None
+    )
 
     gp_name_cutoff, gp_date_cutoff = get_event_name_and_date(year, k_eff)
 
@@ -246,28 +262,44 @@ def cumulate_to_round_k(erg: Ergast,
 
 
 # ---------- Construction du snapshot ----------
-def build_snapshot(season_current: int | None,
-                   round_cutoff: int | None,
-                   out_csv: str) -> pd.DataFrame:
-    erg = Ergast(result_type='pandas', auto_cast=True)
+def build_snapshot(
+    season_current: int | None, round_cutoff: int | None, out_csv: str
+) -> pd.DataFrame:
+    erg = Ergast(result_type="pandas", auto_cast=True)
     season, k = get_current_season_and_round(erg, season_current, round_cutoff)
 
     seasons = list(range(START_SEASON, season + 1))
     rows: List[Dict[str, any]] = []
 
     for y in seasons:
-        race_df, quali_df = prefetch_season_dfs(erg, y)               # 2 appels
-        row = cumulate_to_round_k(erg, y, k, race_df, quali_df)       # +1 appel (standings)
+        race_df, quali_df = prefetch_season_dfs(erg, y)  # 2 appels
+        row = cumulate_to_round_k(erg, y, k, race_df, quali_df)  # +1 appel (standings)
         rows.append(row)
         time.sleep(0.15)  # petite pause anti-429
 
     df = pd.DataFrame(rows)
     cols = [
-        'year','round_cutoff','gp_name_cutoff','gp_date_cutoff',
-        'hamilton_rank','hamilton_points','leader_points','points_behind','pct_of_leader',
-        'wins_to_date','podiums_to_date','poles_to_date','dnf_to_date',
-        'races_started','races_scored_pct','race_scored_pct_main','weekend_scored_pct',
-        'zero_point_weekends_to_date','constructor_id','teammate_points_to_date','teammate_gap'
+        "year",
+        "round_cutoff",
+        "gp_name_cutoff",
+        "gp_date_cutoff",
+        "hamilton_rank",
+        "hamilton_points",
+        "leader_points",
+        "points_behind",
+        "pct_of_leader",
+        "wins_to_date",
+        "podiums_to_date",
+        "poles_to_date",
+        "dnf_to_date",
+        "races_started",
+        "races_scored_pct",
+        "race_scored_pct_main",
+        "weekend_scored_pct",
+        "zero_point_weekends_to_date",
+        "constructor_id",
+        "teammate_points_to_date",
+        "teammate_gap",
     ]
     df = df[cols]
     if out_csv:
@@ -279,15 +311,29 @@ def main():
     parser = argparse.ArgumentParser(
         description="Snapshot mi-saison de Lewis Hamilton (2007→année courante) sur K GP."
     )
-    parser.add_argument("--season", type=int, default=None,
-                        help="Saison courante à évaluer (défaut = année système).")
-    parser.add_argument("--round", type=int, default=None,
-                        help="Cutoff K (nb de GP) ; défaut = dernier round clos.")
-    parser.add_argument("--out", "-o", nargs="?", const="hamilton_midseason_snapshot.csv",
-                        default="hamilton_midseason_snapshot.csv",
-                        help="CSV de sortie (défaut: hamilton_midseason_snapshot.csv).")
-    parser.add_argument("--cache", type=str, default=DEFAULT_CACHE,
-                        help="Dossier cache FastF1 (défaut: .fastf1cache).")
+    parser.add_argument(
+        "--season",
+        type=int,
+        default=None,
+        help="Saison courante à évaluer (défaut = année système).",
+    )
+    parser.add_argument(
+        "--round", type=int, default=None, help="Cutoff K (nb de GP) ; défaut = dernier round clos."
+    )
+    parser.add_argument(
+        "--out",
+        "-o",
+        nargs="?",
+        const="hamilton_midseason_snapshot.csv",
+        default="hamilton_midseason_snapshot.csv",
+        help="CSV de sortie (défaut: hamilton_midseason_snapshot.csv).",
+    )
+    parser.add_argument(
+        "--cache",
+        type=str,
+        default=DEFAULT_CACHE,
+        help="Dossier cache FastF1 (défaut: .fastf1cache).",
+    )
 
     args = parser.parse_args()
     enable_cache(args.cache)

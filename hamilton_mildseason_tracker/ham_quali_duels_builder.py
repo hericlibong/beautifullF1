@@ -12,18 +12,19 @@
 # Dépendances :
 #  pip install fastf1 pandas numpy
 
-import fastf1
-from fastf1.ergast import Ergast
-import pandas as pd
-import numpy as np
 from typing import Optional, Tuple
+
+import fastf1
+import numpy as np
+import pandas as pd
+from fastf1.ergast import Ergast
 
 # --------------------------
 # Paramètres généraux
 # --------------------------
 CUTOFF_ROUND = 18  # on aligne la comparaison sur R18 (ou dernier GP si saison < 18)
 SUMMARY_CSV = "hamilton_quali_duels_2007_2025_summary.csv"
-DETAIL_CSV  = "hamilton_quali_duels_2007_2025_rounds.csv"
+DETAIL_CSV = "hamilton_quali_duels_2007_2025_rounds.csv"
 
 # Coéquipier "principal" par saison (id Ergast)
 TEAMMATE_BY_YEAR = {
@@ -77,7 +78,7 @@ def _to_seconds(t: Optional[str]) -> Optional[float]:
 
 def best_quali_time_for_driver(year: int, rnd: int, driver_id: str) -> Optional[float]:
     """Meilleur chrono de qualif (min(Q1,Q2,Q3)) pour 'driver_id' sur un round donné.
-       Utilise Ergast: get_qualifying_results(season, round)."""
+    Utilise Ergast: get_qualifying_results(season, round)."""
     resp = erg.get_qualifying_results(season=year, round=rnd)
     # ErgastMultiResponse -> prenons le premier DF
     df = resp.content[0] if isinstance(resp.content, list) else resp.content
@@ -146,7 +147,7 @@ def build_quali_duels():
         for rnd in range(1, r_eff + 1):
             try:
                 ham_t = best_quali_time_for_driver(year, rnd, HAM_ID)
-                tm_t  = best_quali_time_for_driver(year, rnd, teammate_id)
+                tm_t = best_quali_time_for_driver(year, rnd, teammate_id)
             except Exception:
                 ham_t, tm_t = None, None
 
@@ -164,35 +165,39 @@ def build_quali_duels():
                 winner = "HAM"  # Hamilton plus rapide (temps plus petit)
                 ham_better += 1
             else:
-                winner = "TM"   # Teammate plus rapide
+                winner = "TM"  # Teammate plus rapide
                 tm_better += 1
 
-            detail_rows.append({
-                "year": year,
-                "round": rnd,
-                "ham_best_quali_s": ham_t,
-                "tm_best_quali_s": tm_t,
-                "delta_s": delta,          # tm - ham ; négatif => Hamilton devant
-                "winner": winner,
-                "ham_driverId": HAM_ID,
-                "teammate_driverId": teammate_id
-            })
+            detail_rows.append(
+                {
+                    "year": year,
+                    "round": rnd,
+                    "ham_best_quali_s": ham_t,
+                    "tm_best_quali_s": tm_t,
+                    "delta_s": delta,  # tm - ham ; négatif => Hamilton devant
+                    "winner": winner,
+                    "ham_driverId": HAM_ID,
+                    "teammate_driverId": teammate_id,
+                }
+            )
 
         rounds_compared = ham_better + tm_better + ties
         avg_delta = float(np.mean(deltas)) if deltas else None
         med_delta = float(np.median(deltas)) if deltas else None
 
-        summary_rows.append({
-            "year": year,
-            "rounds_compared": rounds_compared,
-            "ham_quali_wins": ham_better,
-            "teammate_quali_wins": tm_better,
-            "ties": ties,
-            # interprétation: delta < 0 => Hamilton devant (en moyenne négatif = Hamilton globalement plus rapide)
-            "avg_delta_s": avg_delta,
-            "median_delta_s": med_delta,
-            "teammate_driverId": teammate_id
-        })
+        summary_rows.append(
+            {
+                "year": year,
+                "rounds_compared": rounds_compared,
+                "ham_quali_wins": ham_better,
+                "teammate_quali_wins": tm_better,
+                "ties": ties,
+                # interprétation: delta < 0 => Hamilton devant (en moyenne négatif = Hamilton globalement plus rapide)
+                "avg_delta_s": avg_delta,
+                "median_delta_s": med_delta,
+                "teammate_driverId": teammate_id,
+            }
+        )
 
     # Export
     detail_df = pd.DataFrame(detail_rows)

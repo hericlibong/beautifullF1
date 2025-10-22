@@ -26,7 +26,9 @@ def assemble_season_df(mr) -> pd.DataFrame:
     """Ergast peut renvoyer un MultiResponse (liste de DF). On assemble + ajoute 'round'."""
     if hasattr(mr, "content") and isinstance(mr.content, list):
         desc = mr.description if mr.description is not None else pd.DataFrame()
-        rounds = list(pd.to_numeric(desc.get("round", range(1, len(mr.content)+1)), errors="coerce"))
+        rounds = list(
+            pd.to_numeric(desc.get("round", range(1, len(mr.content) + 1)), errors="coerce")
+        )
         parts = []
         for rnum, df_part in zip(rounds, mr.content):
             dfp = df_part.copy()
@@ -138,8 +140,12 @@ def compute_snapshot_2024() -> pd.DataFrame:
     zero_point_weekends_to_date = started - scored_rounds
 
     # Moyenne position d’arrivée (classement brut du dump saison – OK pour 2024)
-    finishing_list = pd.to_numeric(lh_race.get("position"), errors="coerce").dropna().astype(int).tolist()
-    weekend_scored_pct = round(float(pd.Series(finishing_list).mean()) if finishing_list else 0.0, 2)
+    finishing_list = (
+        pd.to_numeric(lh_race.get("position"), errors="coerce").dropna().astype(int).tolist()
+    )
+    weekend_scored_pct = round(
+        float(pd.Series(finishing_list).mean()) if finishing_list else 0.0, 2
+    )
 
     # Constructor au round K + points teammate cumulés
     constructor_id = None
@@ -152,7 +158,9 @@ def compute_snapshot_2024() -> pd.DataFrame:
             rr_r = race_k[race_k["round"] == r]
             mates = rr_r[(rr_r["constructorId"] == str(cid)) & (rr_r["driverId"] != LH_ID)]
             if not mates.empty:
-                teammate_points_to_date += float(pd.to_numeric(mates["points"], errors="coerce").fillna(0).sum())
+                teammate_points_to_date += float(
+                    pd.to_numeric(mates["points"], errors="coerce").fillna(0).sum()
+                )
 
     teammate_points_to_date = round(teammate_points_to_date, 1)
     teammate_gap = round(hamilton_points - teammate_points_to_date, 1)

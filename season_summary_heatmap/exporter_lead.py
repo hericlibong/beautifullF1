@@ -43,7 +43,7 @@ class F1FlourishExporterLead:
     def fetch_results(self):
         for _, event in self.schedule.iterrows():
             event_name = event["EventName"]
-            has_sprint = (event.get("EventFormat") == "sprint_qualifying")
+            has_sprint = event.get("EventFormat") == "sprint_qualifying"
             round_label = event["ShortEventName"] + ("*" if has_sprint else "")
             round_number = event["RoundNumber"]
 
@@ -63,7 +63,9 @@ class F1FlourishExporterLead:
                     team = driver_row["TeamName"]
                     driver_name = driver_row["FullName"]
                     points = driver_row["Points"]
-                    grid_position = driver_row.get("GridPosition", driver_row.get("grid_position", None))
+                    grid_position = driver_row.get(
+                        "GridPosition", driver_row.get("grid_position", None)
+                    )
                     finish_position = driver_row.get("Position", None)
                     headshot_url = driver_row.get("HeadshotUrl", None)
                     sprint_pts = sprint_points_map.get(abbreviation, 0)
@@ -75,11 +77,11 @@ class F1FlourishExporterLead:
                             "Driver": abbreviation,
                             "DriverName": driver_name,
                             "Team": team,
-                            "EventName": round_label,          # label court (+ "*" si Sprint)
+                            "EventName": round_label,  # label court (+ "*" si Sprint)
                             "EventNameFull": event_name,
                             "RoundNumber": round_number,
-                            "Points": total_points,             # Course + Sprint éventuel
-                            "SprintPoints": sprint_pts,         # <-- nouveau (pour tooltip)
+                            "Points": total_points,  # Course + Sprint éventuel
+                            "SprintPoints": sprint_pts,  # <-- nouveau (pour tooltip)
                             "GridPosition": grid_position,
                             "FinishPosition": finish_position,
                             "FinishIcon": self._finish_icon(finish_position),
@@ -102,7 +104,9 @@ class F1FlourishExporterLead:
         self.df = self.df.merge(pilot_totals, on="Driver")
 
         # Rang global
-        pilot_totals["Rank"] = pilot_totals["TotalPoints"].rank(method="min", ascending=False).astype(int)
+        pilot_totals["Rank"] = (
+            pilot_totals["TotalPoints"].rank(method="min", ascending=False).astype(int)
+        )
         self.df = self.df.merge(pilot_totals[["Driver", "Rank"]], on="Driver")
 
         # Label de rang
@@ -122,6 +126,7 @@ class F1FlourishExporterLead:
             if r == 4:
                 return "4e"
             return f"{r}e"
+
         return s.apply(f)
 
     def patch_headshots(self):
@@ -153,12 +158,21 @@ class F1FlourishExporterLead:
         # Ordre des GP (avec "*" si Sprint)
         gp_order = []
         for _, ev in self.schedule.sort_values("RoundNumber").iterrows():
-            label = ev["ShortEventName"] + ("*" if ev.get("EventFormat") == "sprint_qualifying" else "")
+            label = ev["ShortEventName"] + (
+                "*" if ev.get("EventFormat") == "sprint_qualifying" else ""
+            )
             gp_order.append(label)
         df["EventName"] = pd.Categorical(df["EventName"], categories=gp_order, ordered=True)
 
         # Cast numériques de base
-        for col in ["TotalPoints", "GridPosition", "FinishPosition", "Rank", "Points", "SprintPoints"]:
+        for col in [
+            "TotalPoints",
+            "GridPosition",
+            "FinishPosition",
+            "Rank",
+            "Points",
+            "SprintPoints",
+        ]:
             if col in df.columns:
                 df[col] = pd.to_numeric(df[col], errors="coerce")
 
@@ -179,18 +193,24 @@ class F1FlourishExporterLead:
         df["AvgPointsToDate"] = df["CumulativePoints"] / df["_gp_count"]
 
         # moyenne glissante 5 derniers GP (min_periods=1)
-        df["Last5Avg"] = g["Points"].rolling(window=5, min_periods=1).mean().reset_index(level=0, drop=True)
+        df["Last5Avg"] = (
+            g["Points"].rolling(window=5, min_periods=1).mean().reset_index(level=0, drop=True)
+        )
 
         # métriques de position (expanding)
         df["AvgFinish"] = g["FinishPosition"].expanding().mean().reset_index(level=0, drop=True)
-        df["MedianFinish"] = g["FinishPosition"].expanding().median().reset_index(level=0, drop=True)
+        df["MedianFinish"] = (
+            g["FinishPosition"].expanding().median().reset_index(level=0, drop=True)
+        )
 
         # taux cumulés
-        df["_is_podium"] = (df["FinishPosition"] <= 3).astype("float").where(df["FinishPosition"].notna())
+        df["_is_podium"] = (
+            (df["FinishPosition"] <= 3).astype("float").where(df["FinishPosition"].notna())
+        )
         df["_is_points"] = (df["Points"] > 0).astype("float")
 
-        df["PodiumRate"] = (g["_is_podium"].cumsum() / df["_gp_count"])
-        df["PointsRate"] = (g["_is_points"].cumsum() / df["_gp_count"])
+        df["PodiumRate"] = g["_is_podium"].cumsum() / df["_gp_count"]
+        df["PointsRate"] = g["_is_points"].cumsum() / df["_gp_count"]
 
         # moyenne cumulée du gain grille
         df["AvgGridGain"] = g["GridGain"].expanding().mean().reset_index(level=0, drop=True)
@@ -198,18 +218,20 @@ class F1FlourishExporterLead:
         # Nettoyage des colonnes techniques
         df = df.drop(columns=["_gp_count", "_is_podium", "_is_points"])
 
-                # --- Nettoyage d'affichage pour Flourish : entiers "propres"
+        # --- Nettoyage d'affichage pour Flourish : entiers "propres"
         int_cols = [
-            "TotalPoints", "GridPosition", "FinishPosition",
-            "Rank", "Points", "SprintPoints", "CumulativePoints"
+            "TotalPoints",
+            "GridPosition",
+            "FinishPosition",
+            "Rank",
+            "Points",
+            "SprintPoints",
+            "CumulativePoints",
         ]
 
         for col in int_cols:
             if col in df.columns:
-                df[col] = df[col].apply(
-                    lambda x: "" if pd.isna(x) else int(round(x))
-                )
-
+                df[col] = df[col].apply(lambda x: "" if pd.isna(x) else int(round(x)))
 
         # Cast "soft" (laisse float si nécessaire pour éviter les erreurs)
         # Colonnes finales pour Flourish (ajouts en fin)
