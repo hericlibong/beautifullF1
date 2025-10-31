@@ -98,6 +98,8 @@ These datasets power a series of Flourish visualizations forming the narrative:
 Together, they illustrate that **2025 is statistically Hamilton’s worst season** so far —
 both in results and intra-team comparison.
 
+* **[Hamilton’s points share vs. championship leader (2007–2025)](https://public.flourish.studio/visualisation/24689576/)**
+
 ---
 
 ## 📂 Project: `race_chart_builder`
