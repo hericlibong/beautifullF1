@@ -92,14 +92,17 @@ python -m hamilton_mildseason_tracker.ham_quali_duels_builder
 These datasets power a series of Flourish visualizations forming the narrative:
 
 1. **Hamilton’s points share vs. championship leader (2007–2025)**
-2. **Gap vs. teammate before the last six races**
+2. **Gap vs. teammate before the last aces**
 3. **Qualification duels: Hamilton vs. teammate**
 
 Together, they illustrate that **2025 is statistically Hamilton’s worst season** so far —
 both in results and intra-team comparison.
 
-* **[Hamilton’s points share vs. championship leader (2007–2025)](https://public.flourish.studio/visualisation/24689576/)**
+### See in action in Flourish :
 
+* **[Hamilton’s points share vs. championship leader (2007–2025)](https://public.flourish.studio/visualisation/24689576/)**
+* **[Gap vs. teammate before the last aces](https://public.flourish.studio/visualisation/25604375/)**
+* **[Qualification duels: Hamilton vs. teammate](https://public.flourish.studio/visualisation/25940671/)**
 ---
 
 ## 📂 Project: `race_chart_builder`
