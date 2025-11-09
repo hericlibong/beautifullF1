@@ -15,8 +15,11 @@ class RaceChartBuilderFastF1:
 
     @staticmethod
     def _col_name(country: str, locality: str) -> str:
-        # même logique que ta version API (USA/Italy dédoublés)
-        return f"{country} - {locality}" if country in ["USA", "Italy"] else country
+        # Dédoublage minimaliste et robuste pour les pays à plusieurs GPs
+        if country in ("United States", "USA", "Italy"):
+            return f"{country} - {locality}"
+        return country
+
 
     def build_results_table(self):
         schedule = fastf1.get_event_schedule(self.season)
@@ -26,15 +29,22 @@ class RaceChartBuilderFastF1:
             []
         )  # liste de tuples (race_date, round, col_name, race_results_df, sprint_points_dict)
 
+        from datetime import datetime, timezone
+
         for _, event in schedule.iterrows():
-            # ignorer les évènements futurs (basé sur la date d'évènement prévue)
-            if event["EventDate"].to_pydatetime() > datetime.now():
+            # 1️⃣ Identifier la date réelle de la course (session Race)
+            race_date = event.get("Session5DateUtc", None)
+            if pd.isna(race_date):
+                continue
+            race_date = pd.to_datetime(race_date).to_pydatetime().replace(tzinfo=timezone.utc)
+
+            # 2️⃣ Si la course n’a pas encore eu lieu → on saute
+            if race_date > datetime.now(timezone.utc):
                 continue
 
             round_no = int(event["RoundNumber"])
             col_name = self._col_name(event["Country"], event["Location"])
 
-            # Charger la session de course; si pas de résultats, on saute
             try:
                 race = fastf1.get_session(self.season, round_no, "Race")
                 race.load()
@@ -43,16 +53,13 @@ class RaceChartBuilderFastF1:
             except Exception:
                 continue
 
-            race_date = pd.to_datetime(race.date)  # date réelle de la session Race (horodatée)
-
-            # Sprint optionnel
+            # On garde la même logique ensuite
             sprint_points = {}
             try:
                 sprint = fastf1.get_session(self.season, round_no, "Sprint")
                 sprint.load()
                 if sprint.results is not None and len(sprint.results) > 0:
                     for _, row in sprint.results.iterrows():
-                        # HeadshotUrl, FullName, TeamName/Colour dispo via results/driver_info
                         sprint_points[row.FullName] = float(row.Points or 0.0)
             except Exception:
                 pass
@@ -60,6 +67,7 @@ class RaceChartBuilderFastF1:
             past_events_payload.append(
                 (race_date, round_no, col_name, race.results.copy(), sprint_points)
             )
+
 
         # 2) TRIER par date réelle de la course (ordre effectif des GP)
         past_events_payload.sort(key=lambda x: x[0])

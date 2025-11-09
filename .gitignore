@@ -13,6 +13,7 @@ hamilton_mildseason_tracker/*
 !hamilton_mildseason_tracker/__init__.py
 !hamilton_mildseason_tracker/__main__.py
 !hamilton_mildseason_tracker/ham_snapshot_2007_2025.py
+!hamilton_mildseason_tracker/hamilton_2007_2025_snapshot.csv
 !hamilton_mildseason_tracker/ham_quali_duels_builder.py
 !hamilton_mildseason_tracker/ham_teammate_comparison_builder.py
 !hamilton_mildseason_tracker/hamilton_teammate_comparison_2007_2025.csv

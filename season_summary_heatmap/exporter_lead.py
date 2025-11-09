@@ -125,6 +125,10 @@ class F1FlourishExporterLead:
                 return "3e"
             if r == 4:
                 return "4e"
+            if r == 5:
+                return "5e"
+            if r == 6:
+                return "6e"
             return f"{r}e"
 
         return s.apply(f)
@@ -147,7 +151,7 @@ class F1FlourishExporterLead:
         df = self.df.copy()
 
         # --- Filtre aux 3 premiers pilotes (sur le rang global calculé) ---
-        df = df[df["Rank"] <= 4].copy()
+        df = df[df["Rank"] <= 6].copy()
 
         # Ordre des pilotes
         pilot_order = (
