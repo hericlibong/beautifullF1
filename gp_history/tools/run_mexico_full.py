@@ -10,17 +10,19 @@ Lanceur UNIQUE qui:
 Prérequis:
   pip install fastf1 pandas requests sparqlwrapper
 """
+
 from __future__ import annotations
 
 import sys
 from pathlib import Path
+
 import pandas as pd
 
 # --- Corrige le path pour autoriser "import gp_history...." quand lancé en script ---
 THIS_FILE = Path(__file__).resolve()
-TOOLS_DIR = THIS_FILE.parent                   # gp_history/tools
-GP_HISTORY_DIR = TOOLS_DIR.parent              # gp_history
-REPO_ROOT = GP_HISTORY_DIR.parent              # racine du repo
+TOOLS_DIR = THIS_FILE.parent  # gp_history/tools
+GP_HISTORY_DIR = TOOLS_DIR.parent  # gp_history
+REPO_ROOT = GP_HISTORY_DIR.parent  # racine du repo
 
 # Assure que la racine du repo est sur sys.path (pour importer gp_history.*)
 if str(REPO_ROOT) not in sys.path:
@@ -29,11 +31,11 @@ if str(REPO_ROOT) not in sys.path:
 # (Optionnel mais conseillé) Si tu crées gp_history/__init__.py, ce hack n'est plus indispensable.
 
 # --- Répertoires projet ---------------------------------------------------
-BASE_DIR  = GP_HISTORY_DIR                     # -> gp_history/
-DATA_DIR  = BASE_DIR / "data"
-OUT_DIR   = DATA_DIR / "gp_history"
-REF_DIR   = DATA_DIR / "reference"
-GP_CSV    = OUT_DIR / "mexican_grand_prix.csv"
+BASE_DIR = GP_HISTORY_DIR  # -> gp_history/
+DATA_DIR = BASE_DIR / "data"
+OUT_DIR = DATA_DIR / "gp_history"
+REF_DIR = DATA_DIR / "reference"
+GP_CSV = OUT_DIR / "mexican_grand_prix.csv"
 PATCH_CSV = REF_DIR / "wikidata_query_results.csv"
 
 # --- 1) Build historique (Mexique) ---------------------------------------
@@ -42,6 +44,7 @@ try:
 except Exception as e:
     raise SystemExit(f"[fatal] Import builder échoué: {e}")
 
+
 def step1_build() -> pd.DataFrame:
     df = build_mexico_history()
     OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -49,11 +52,13 @@ def step1_build() -> pd.DataFrame:
     print(f"[1/4] Historique écrit: {GP_CSV} — {len(df)} lignes")
     return df
 
+
 # --- 2) Enrichir WinnerImageURL (OpenF1/Wikipedia) -----------------------
 try:
     from gp_history.tools.enrichments.images import enrich_winner_image
 except Exception as e:
     raise SystemExit(f"[fatal] Import images échoué: {e}")
+
 
 def step2_enrich_images(df: pd.DataFrame) -> pd.DataFrame:
     df2 = enrich_winner_image(df)
@@ -62,14 +67,19 @@ def step2_enrich_images(df: pd.DataFrame) -> pd.DataFrame:
     print(f"[2/4] WinnerImageURL (OpenF1/Wikipedia) appliqué — {n_filled} lignes avec URL")
     return df2
 
+
 # --- 3) SPARQL Wikidata pour les manquants -------------------------------
 try:
     from gp_history.tools.enrichments.wikidata_fetch import (
-        load_missing_winners, build_query, run_sparql,
+        build_query,
+        load_missing_winners,
+        run_sparql,
     )
+
     SPARQL_READY = True
 except Exception:
     SPARQL_READY = False
+
 
 def step3_fetch_wikidata() -> bool:
     if not SPARQL_READY:
@@ -86,12 +96,15 @@ def step3_fetch_wikidata() -> bool:
     print(f"[3/4] Patch Wikidata écrit: {PATCH_CSV} — {len(dfq)} lignes")
     return True
 
+
 # --- 4) Appliquer le patch ----------------------------------------------
 try:
     from gp_history.tools.enrichments.apply_wikidata_patch import apply_patch
+
     PATCH_READY = True
 except Exception:
     PATCH_READY = False
+
 
 def step4_apply_patch() -> int:
     if not PATCH_READY:
@@ -103,6 +116,7 @@ def step4_apply_patch() -> int:
     n = apply_patch(GP_CSV, PATCH_CSV, GP_CSV)
     print(f"[4/4] Patch appliqué: {n} lignes mises à jour → {GP_CSV}")
     return n
+
 
 if __name__ == "__main__":
     # Étape 1

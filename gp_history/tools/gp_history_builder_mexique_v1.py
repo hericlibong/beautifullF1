@@ -20,30 +20,30 @@ python -m gp_history.tools.gp_history_builder_mexique_v1 \
 
 💡 Adaptation à d’autres GP : changer la logique de détection (schedule -> rounds) ou généraliser.
 """
+
 from __future__ import annotations
 
 import argparse
 import os
+import time
 from dataclasses import dataclass
 from pathlib import Path
-import time
-from typing import List, Dict
+from typing import Dict, List
 
-import pandas as pd
 import fastf1
+import pandas as pd
 from fastf1.ergast import Ergast
-
 
 # ============================================================
 #  Répertoires (tout est contenu dans le dossier `gp_history/`)
 # ============================================================
 # Ce fichier est dans: gp_history/tools/gp_history_builder_mexique_v1.py
 # On remonte à gp_history/ (parents[1])
-BASE_DIR = Path(__file__).resolve().parents[1]            # -> gp_history/
+BASE_DIR = Path(__file__).resolve().parents[1]  # -> gp_history/
 DATA_DIR = BASE_DIR / "data"
 OUT_DIR = DATA_DIR / "gp_history"
 REF_DIR = DATA_DIR / "reference"
-CACHE_DIR = BASE_DIR / ".cache" / "fastf1"                # cache local au projet
+CACHE_DIR = BASE_DIR / ".cache" / "fastf1"  # cache local au projet
 # Dossier d'assets (pas utilisé ici car on ne télécharge pas d'images)
 ASSET_DIR = BASE_DIR / "asset"
 
@@ -100,6 +100,7 @@ def _get_champion_name(ergast: Ergast, season: int) -> str:
     Inclus un retry léger contre le 429.
     """
     import pandas as _pd
+
     backoffs = [0.6, 1.2, 2.4, 4.8]
     resp = None
     for delay in [0] + backoffs:
@@ -137,8 +138,14 @@ def _get_champion_name(ergast: Ergast, season: int) -> str:
     else:
         leader = df.iloc[0]
 
-    given = leader.get("givenName") or leader.get("Driver.givenName") or leader.get("driver.givenName")
-    family = leader.get("familyName") or leader.get("Driver.familyName") or leader.get("driver.familyName")
+    given = (
+        leader.get("givenName") or leader.get("Driver.givenName") or leader.get("driver.givenName")
+    )
+    family = (
+        leader.get("familyName")
+        or leader.get("Driver.familyName")
+        or leader.get("driver.familyName")
+    )
     if _pd.isna(given) and _pd.isna(family):
         # fallback sur un nom déjà combiné
         full = leader.get("driverName") or leader.get("Driver.code") or leader.get("Driver.surname")
@@ -167,7 +174,11 @@ def _find_mexico_rounds(ergast: Ergast, years: List[int]) -> List[tuple[int, int
         if sched is None:
             continue
 
-        df_sched = sched if isinstance(sched, pd.DataFrame) else getattr(sched, "content", [pd.DataFrame()])[0]
+        df_sched = (
+            sched
+            if isinstance(sched, pd.DataFrame)
+            else getattr(sched, "content", [pd.DataFrame()])[0]
+        )
         if df_sched is None or len(df_sched) == 0:
             continue
 
@@ -177,7 +188,7 @@ def _find_mexico_rounds(ergast: Ergast, years: List[int]) -> List[tuple[int, int
 
         # filtre Mexico
         if country_col:
-            mask = (df_sched[country_col].astype(str).str.lower() == "mexico")
+            mask = df_sched[country_col].astype(str).str.lower() == "mexico"
         else:
             mask = False
         if rn:
@@ -214,9 +225,10 @@ def _get_race_results_df(ergast: Ergast, season: int, round_: int) -> pd.DataFra
     return res if isinstance(res, pd.DataFrame) else pd.DataFrame()
 
 
-def _build_rows_for_gp(dfs_by_year: Dict[int, pd.DataFrame], gp_label: str, ergast: Ergast) -> List[GPRaceRow]:
-    """À partir d'un dict {year: DF résultats}, produit les lignes finales.
-    """
+def _build_rows_for_gp(
+    dfs_by_year: Dict[int, pd.DataFrame], gp_label: str, ergast: Ergast
+) -> List[GPRaceRow]:
+    """À partir d'un dict {year: DF résultats}, produit les lignes finales."""
     # concat pour calculer cumuls
     all_df = []
     for y, df in dfs_by_year.items():
@@ -240,8 +252,10 @@ def _build_rows_for_gp(dfs_by_year: Dict[int, pd.DataFrame], gp_label: str, erga
 
     df["DriverFullName"] = df.apply(full_name, axis=1)
 
-    team_col = "constructorName" if "constructorName" in df.columns else (
-        "Constructor.name" if "Constructor.name" in df.columns else "constructorId"
+    team_col = (
+        "constructorName"
+        if "constructorName" in df.columns
+        else ("Constructor.name" if "Constructor.name" in df.columns else "constructorId")
     )
 
     # cumuls par pilote & constructeur
@@ -265,8 +279,8 @@ def _build_rows_for_gp(dfs_by_year: Dict[int, pd.DataFrame], gp_label: str, erga
         winner_grid = p1.get("grid", "NA")
         constructor = p1.get(team_col, "NA")
         # Circuit : on essaie champs de résultat sinon placeholder
-        circuit_name = (
-            str(p1.get("circuitName") or p1.get("Circuit.circuitName") or p1.get("raceName") or "Mexico")
+        circuit_name = str(
+            p1.get("circuitName") or p1.get("Circuit.circuitName") or p1.get("raceName") or "Mexico"
         )
 
         rows.append(
@@ -338,6 +352,7 @@ def main():
         try:
             # Import depuis le package local gp_history
             from gp_history.tools.enrichments.images import enrich_winner_image
+
             df = enrich_winner_image(df)
         except Exception as e:
             print(f"[warn] enrich_winner_image a échoué: {e}")

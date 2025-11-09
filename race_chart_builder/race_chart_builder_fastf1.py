@@ -20,7 +20,6 @@ class RaceChartBuilderFastF1:
             return f"{country} - {locality}"
         return country
 
-
     def build_results_table(self):
         schedule = fastf1.get_event_schedule(self.season)
 
@@ -29,7 +28,7 @@ class RaceChartBuilderFastF1:
             []
         )  # liste de tuples (race_date, round, col_name, race_results_df, sprint_points_dict)
 
-        from datetime import datetime, timezone
+        from datetime import timezone
 
         for _, event in schedule.iterrows():
             # 1️⃣ Identifier la date réelle de la course (session Race)
@@ -67,7 +66,6 @@ class RaceChartBuilderFastF1:
             past_events_payload.append(
                 (race_date, round_no, col_name, race.results.copy(), sprint_points)
             )
-
 
         # 2) TRIER par date réelle de la course (ordre effectif des GP)
         past_events_payload.sort(key=lambda x: x[0])

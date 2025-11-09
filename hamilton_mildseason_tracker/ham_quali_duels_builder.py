@@ -73,7 +73,9 @@ def _cutoff_round_and_event(year: int, target_round: int) -> Tuple[int, str]:
     return r_eff, event_name
 
 
-def _two_positions_for_round(year: int, rnd: int, a_id: str, b_id: str) -> Tuple[Optional[int], Optional[int]]:
+def _two_positions_for_round(
+    year: int, rnd: int, a_id: str, b_id: str
+) -> Tuple[Optional[int], Optional[int]]:
     """Retourne (pos_a, pos_b) (1=pole) avec 1 seul appel réseau + relances anti-429."""
     for attempt in range(1, MAX_RETRIES + 1):
         try:
@@ -90,7 +92,11 @@ def _two_positions_for_round(year: int, rnd: int, a_id: str, b_id: str) -> Tuple
             if "driverId" not in df.columns:
                 return None, None
 
-            pos_col = "position" if "position" in df.columns else ("Position" if "Position" in df.columns else None)
+            pos_col = (
+                "position"
+                if "position" in df.columns
+                else ("Position" if "Position" in df.columns else None)
+            )
             if pos_col is None and "positionText" in df.columns:
                 df = df.copy()
                 df["position"] = pd.to_numeric(df["positionText"], errors="coerce")
@@ -161,11 +167,11 @@ def build_quali_duels():
                 "ham_quali_wins": ham_wins,
                 "teammate_quali_wins": tm_wins,
                 "ties": ties,
-                "ham_quali_diff": ham_diff,      # (après ties)
+                "ham_quali_diff": ham_diff,  # (après ties)
                 "teammate_driverId": tm_id,
                 "team": team,
                 "teammate_name": teammate_name,
-                "teammate_img": tm_img,          # --- Nouvelle colonne
+                "teammate_img": tm_img,  # --- Nouvelle colonne
             }
         )
 

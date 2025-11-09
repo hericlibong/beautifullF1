@@ -12,18 +12,21 @@ Aucune écriture disque par défaut (on ne télécharge pas l'image).
 
 Dépendances: requests
 """
+
 from __future__ import annotations
 
 import re
 from typing import Optional
-import requests
+
 import pandas as pd
+import requests
 
 OPENF1_BASE = "https://api.openf1.org/v1"
 WIKI_SUMMARY = "https://en.wikipedia.org/api/rest_v1/page/summary/"  # accepte titre encodé
 
 
 # --- Utils ---------------------------------------------------------------
+
 
 def _normalize_name(name: str) -> str:
     """Nettoie un nom (accents retirés côté Wikipédia auto; on garde simple ici)."""
@@ -43,6 +46,7 @@ def _normalize_name(name: str) -> str:
 
 # --- OpenF1 -------------------------------------------------------------
 
+
 def _openf1_headshot_by_name(name: str) -> Optional[str]:
     """Essaie de trouver un headshot OpenF1 par nom approximatif.
     OpenF1 n'est pas exhaustif historiquement; marche bien pour l'ère récente.
@@ -59,10 +63,9 @@ def _openf1_headshot_by_name(name: str) -> Optional[str]:
     target = _normalize_name(name).lower()
     for d in drivers:
         # Le payload peut contenir 'full_name' ou 'first_name'/'last_name'
-        full = (
-            (d.get("full_name") or "").strip()
-            or (f"{d.get('first_name','')} {d.get('last_name','')}").strip()
-        )
+        full = (d.get("full_name") or "").strip() or (
+            f"{d.get('first_name','')} {d.get('last_name','')}"
+        ).strip()
         if not full:
             continue
         if full.lower() == target or target in full.lower():
@@ -73,6 +76,7 @@ def _openf1_headshot_by_name(name: str) -> Optional[str]:
 
 
 # --- Wikipedia ----------------------------------------------------------
+
 
 def _wikipedia_image_by_name(name: str) -> Optional[str]:
     """Récupère l'image principale via l'API REST 'summary' (PageImages)."""
@@ -93,6 +97,7 @@ def _wikipedia_image_by_name(name: str) -> Optional[str]:
 
 
 # --- Public API ---------------------------------------------------------
+
 
 def enrich_winner_image(df: pd.DataFrame) -> pd.DataFrame:
     """Retourne un nouveau DataFrame avec une colonne `WinnerImageURL`.
