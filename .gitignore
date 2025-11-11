@@ -28,3 +28,4 @@ projects/gp_history/outputs/**
 !projects/gp_history/outputs/*.csv
 !projects/gp_history/outputs/*.json
 EOFprojects/race_chart_builder/drafts/
+projects/quali_duels/
