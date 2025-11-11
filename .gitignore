@@ -20,3 +20,11 @@ hamilton_mildseason_tracker/*
 
 hamilton_overstats/*
 qualify_duals/*
+
+
+# gp_history: caches & artefacts
+projects/gp_history/**/__pycache__/
+projects/gp_history/outputs/**
+!projects/gp_history/outputs/*.csv
+!projects/gp_history/outputs/*.json
+EOF
