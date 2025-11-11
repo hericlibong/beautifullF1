@@ -1,5 +1,6 @@
 import fastf1 as ff1
 import pandas as pd
+import os
 
 
 class F1FlourishExporterLead:
@@ -11,7 +12,7 @@ class F1FlourishExporterLead:
       - colonnes d'analyse pour popups (régularité/forme) SANS impacter la heatmap
     """
 
-    def __init__(self, season, output_csv="f1_2025_flourish_leadership.csv"):
+    def __init__(self, season, output_csv="f1_2025_leaders_heatmap.csv"):
         self.season = season
         self.output_csv = output_csv
         self.schedule = self._get_schedule()
@@ -268,5 +269,12 @@ class F1FlourishExporterLead:
         ].sort_values(["Driver", "EventName"])
 
     def export(self):
-        self.df_heatmap.to_csv(self.output_csv, index=False)
-        print(f"Exported to {self.output_csv}")
+        # Créer le dossier outputs s'il n'existe pas
+        outputs_dir = os.path.join(os.path.dirname(__file__), "outputs")
+        os.makedirs(outputs_dir, exist_ok=True)
+        
+        # Chemin complet du fichier de sortie
+        output_path = os.path.join(outputs_dir, self.output_csv)
+        
+        self.df_heatmap.to_csv(output_path, index=False)
+        print(f"Exported to {output_path}")

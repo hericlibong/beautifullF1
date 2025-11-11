@@ -1,11 +1,15 @@
 import fastf1 as ff1
 import pandas as pd
+import os
 
 
 class F1FlourishExporter:
-    def __init__(self, season, output_csv="f1_flourish.csv"):
+    def __init__(self, season, output_csv="f1_2025_full_heatmap.csv"):
         self.season = season
-        self.output_csv = output_csv
+        # Créer le chemin vers le dossier outputs
+        self.output_dir = os.path.join(os.path.dirname(__file__), "outputs")
+        os.makedirs(self.output_dir, exist_ok=True)
+        self.output_csv = os.path.join(self.output_dir, output_csv)
         self.schedule = self._get_schedule()
         self.standings = []
         self.df = None
