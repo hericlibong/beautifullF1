@@ -1,4 +1,5 @@
 from datetime import datetime
+import os
 
 import fastf1
 import pandas as pd
@@ -9,7 +10,10 @@ import pandas as pd
 class RaceChartBuilderFastF1:
     def __init__(self, season: int, output_file: str = "f1_race_chart_fastf1.csv"):
         self.season = season
-        self.output_file = output_file
+        # Créer le chemin vers le dossier outputs
+        outputs_dir = os.path.join(os.path.dirname(__file__), "outputs")
+        os.makedirs(outputs_dir, exist_ok=True)
+        self.output_file = os.path.join(outputs_dir, output_file)
         self.drivers_data = {}
         self.race_keys = []
 

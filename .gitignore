@@ -27,4 +27,4 @@ projects/gp_history/**/__pycache__/
 projects/gp_history/outputs/**
 !projects/gp_history/outputs/*.csv
 !projects/gp_history/outputs/*.json
-EOF
+EOFprojects/race_chart_builder/drafts/
