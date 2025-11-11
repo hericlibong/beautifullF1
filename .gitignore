@@ -29,3 +29,7 @@ projects/gp_history/outputs/**
 !projects/gp_history/outputs/*.json
 EOFprojects/race_chart_builder/drafts/
 projects/quali_duels/
+projects/season_summary_heatmap/__pycache__/
+projects/season_summary_heatmap/outputs/**
+!projects/season_summary_heatmap/outputs/*.csv
+!projects/season_summary_heatmap/outputs/*.json
