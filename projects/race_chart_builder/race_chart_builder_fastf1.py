@@ -1,5 +1,5 @@
-from datetime import datetime
 import os
+from datetime import datetime
 
 import fastf1
 import pandas as pd

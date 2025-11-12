@@ -1,6 +1,7 @@
+import os
+
 import fastf1 as ff1
 import pandas as pd
-import os
 
 
 class F1FlourishExporter:

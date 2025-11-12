@@ -10,10 +10,8 @@ requires-python = ">=3.9"
 minversion = "7.0"
 addopts = "-ra -q --cov=. --cov-report=term-missing --cov-config=pyproject.toml"
 # ⚠️ Permettre la découverte dans les projets et un éventuel dossier tests/ à la racine
-testpaths = [
-    "projects",
-    "tests",
-]
+testpaths = ["projects","tests"]
+pythonpath = ["projects"] 
 
 # --- Configuration coverage ---
 [tool.coverage.run]

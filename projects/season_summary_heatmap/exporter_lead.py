@@ -1,6 +1,7 @@
+import os
+
 import fastf1 as ff1
 import pandas as pd
-import os
 
 
 class F1FlourishExporterLead:
@@ -272,9 +273,9 @@ class F1FlourishExporterLead:
         # Créer le dossier outputs s'il n'existe pas
         outputs_dir = os.path.join(os.path.dirname(__file__), "outputs")
         os.makedirs(outputs_dir, exist_ok=True)
-        
+
         # Chemin complet du fichier de sortie
         output_path = os.path.join(outputs_dir, self.output_csv)
-        
+
         self.df_heatmap.to_csv(output_path, index=False)
         print(f"Exported to {output_path}")
