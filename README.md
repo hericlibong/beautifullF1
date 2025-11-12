@@ -1,5 +1,4 @@
 
-
 # 🏁 Beautiful F1 — Automated Data Storytelling with Formula 1
 
 ![Python](https://img.shields.io/badge/Made%20with-Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
@@ -9,6 +8,7 @@
 [![GitHub Pages](https://img.shields.io/badge/Gallery-GitHub%20Pages-222222?style=for-the-badge&logo=github)](https://hericlibong.github.io/beautifullF1/)
 [![Last Commit](https://img.shields.io/github/last-commit/hericlibong/beautifullF1?style=flat-square)](https://github.com/hericlibong/beautifullF1/commits/main)
 
+---
 
 **Beautiful F1** is a data storytelling project focused on **automated visualizations using Formula 1 data**.  
 The goal is to explore open F1 data sources (APIs, public datasets, etc.) and generate dynamic, narrative-driven visualizations using platforms like **Flourish**, **D3.js**, and other tools.
@@ -24,163 +24,118 @@ The goal is to explore open F1 data sources (APIs, public datasets, etc.) and ge
 
 ---
 
-## 📁 Repository Structure
+## 📁 Repository Structure (2025)
 
-Each folder in this repository corresponds to an independent and self-contained visualization project.
+Each project under `/projects` is **independent**, **documented**, and **reproducible**.  
+Only stable and versioned projects are included below.
 
 ```text
 beautifulF1/
 │
-├── race_chart_builder/         # Animated race chart builder using Flourish
-├── season_summary_heatmap/     # Heatmap of points per GP (Flourish + D3.js)
-├── wdc_projection_repo/        # Championship projection scenarios (D3.js)
-├── hamilton_mildseason_tracker/ # Lewis Hamilton’s 2025 mid-season analysis
-└── docs/                       # GitHub Pages public visualisations & gallery
+├── projects/
+│   ├── gp_history/                # Grand Prix history datasets (Flourish + Wikidata)
+│   ├── race_chart_builder/        # Animated race chart builder using FastF1 + Flourish
+│   ├── season_summary_heatmap/    # Full-season and leader heatmaps (Flourish + D3.js)
+│   └── hamilton_midseason_tracker/ # Lewis Hamilton’s mid-season 2007–2025 analysis
+│
+├── docs/                          # GitHub Pages visualisations gallery
+├── test_computing/                # Local drafts (ignored from version control)
+└── README.md
 ````
 
----
+Projects currently in **pause** or **local-only stage** (not versioned):
 
-## 📂 Project: `hamilton_mildseason_tracker`
-
-This folder focuses on **Lewis Hamilton’s 2025 Formula 1 season**,
-analyzing his **worst mid-season performance** compared to all previous years (2007–2025).
-
-It combines data from **FastF1**, **Ergast**, and **OpenF1** to build reproducible datasets
-used in multiple **Flourish** visualizations.
+* `projects/quali_duels/`
+* `projects/wdc_projection_repo/`
 
 ---
 
-### 🔍 Purpose
+## 📂 Project Highlights
 
-* Quantify Hamilton’s performance drop in 2025 (points, gaps, podiums, poles)
-* Compare his standing and teammate gap at the same point of each season
-* Measure qualification duels versus teammates
-* Provide structured CSVs for visual storytelling (Flourish-ready)
+### 🏎️ `projects/race_chart_builder`
 
----
+Automated generator for **animated race charts** (Flourish-compatible).
+Fetches results from **FastF1** and **OpenF1**, builds cumulative points per driver, and exports:
 
-### 🧩 Core Scripts (versioned)
+* `outputs/f1_race_chart_fastf1.csv` (Flourish dataset)
 
-| Script                               | Description                                                                                                             |
-| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| `ham_snapshot_2007_2025.py`          | Builds the **season snapshot** for Hamilton (2007–2025), including points, podiums, poles, DNF rate, teammate gap, etc. |
-| `ham_teammate_comparison_builder.py` | Generates a **Hamilton vs. teammate** comparison (points gap per season, dynamic update per GP).                        |
-| `ham_quali_duels_builder.py`         | Computes **qualification head-to-head** records between Hamilton and each teammate from 2007 onward.                    |
-
-All outputs are saved directly in the `hamilton_mildseason_tracker/` folder as CSVs, ready for use in Flourish.
-
----
-
-### 📤 Outputs
-
-* `hamilton_2007_2025_snapshot.csv` → Season summary snapshot
-* `hamilton_teammate_comparison_2007_2025.csv` → Hamilton vs teammate gaps
-* `hamilton_quali_duels_2007_2025_summary.csv` → Qualification duels summary
-
-Each dataset is automatically refreshed when the corresponding script is executed:
+Run manually:
 
 ```bash
-python -m hamilton_mildseason_tracker.ham_snapshot_2007_2025
-python -m hamilton_mildseason_tracker.ham_teammate_comparison_builder
-python -m hamilton_mildseason_tracker.ham_quali_duels_builder
+python projects/race_chart_builder/race_chart_builder_fastf1.py
 ```
 
 ---
 
-### 📈 Visual Narratives
+### 🔥 `projects/season_summary_heatmap`
 
-These datasets power a series of Flourish visualizations forming the narrative:
+Generates **Flourish and D3.js heatmaps** for season-overview visualizations.
 
-1. **Hamilton’s points share vs. championship leader (2007–2025)**
-2. **Gap vs. teammate before the last aces**
-3. **Qualification duels: Hamilton vs. teammate**
+Two versions coexist:
 
-Together, they illustrate that **2025 is statistically Hamilton’s worst season** so far —
-both in results and intra-team comparison.
+* `exporter.py` + `main.py` → full grid (`f1_full_heatmap.csv`)
+* `exporter_lead.py` + `lead_main.py` → leaders only (`f1_leaders_heatmap.csv`)
 
-### See in action in Flourish :
-
-* **[Hamilton’s points share vs. championship leader (2007–2025)](https://public.flourish.studio/visualisation/24689576/)**
-* **[Gap vs. teammate before the last aces](https://public.flourish.studio/visualisation/25604375/)**
-* **[Qualification duels: Hamilton vs. teammate](https://public.flourish.studio/visualisation/25940671/)**
----
-
-## 📂 Project: `race_chart_builder`
-
-This folder contains a Python program that:
-
-✅ Automatically retrieves Formula 1 race results (including sprints) using APIs
-✅ Aggregates drivers' points over time
-✅ Generates a **CSV file** compatible with [Flourish](https://flourish.studio/) for animated race charts
-✅ Also produces a **JSON file** with the same data structure
+Visual version deployed to:
+👉 [docs/season_summary_heatmap/](https://hericlibong.github.io/beautifullF1/season_summary_heatmap/)
 
 ---
 
-### 🔗 Data Sources
+### 🧠 `projects/gp_history`
 
-* **[jolpi.ca](https://api.jolpi.ca/ergast/f1/)** — Mirror of the historical Ergast API (includes sprints and circuits)
-* **[openf1.org](https://openf1.org/)** — Real-time open-source F1 API (used for driver images)
-* **[fastf1.dev](https://docs.fastf1.dev/)** — Python package for accessing and analyzing F1 results, schedules, timing data, and telemetry
+Processes historical GP data using **Wikidata** and curated sources.
+Exports cleaned CSVs such as:
 
----
+* `data/gp_history/mexican_grand_prix.csv`
+* `data/reference/wikidata_query_results.csv`
 
-### 📊 See the Chart in Action
-
-You can view the animated race chart here: [Race Chart Viz](https://flo.uri.sh/visualisation/22260899/embed)
+Scripts and enrichment tools are modularized under `tools/enrichments/`.
 
 ---
 
-## 📂 Project: `season_summary_heatmap`
+### 🏁 `projects/hamilton_midseason_tracker`
 
-✅ Retrieves full-season driver results (points, positions, grid, etc.) for any year — even ongoing seasons
-✅ Aggregates and ranks drivers by total points
-✅ Enriches each row with team name, grid position, finishing position, driver photo, and more
-✅ Generates a **CSV** for Flourish heatmap templates **and** a standalone **D3.js heatmap** version
-✅ Fully automated enrichment (no manual intervention)
+Analyzes **Hamilton’s mid-season performance** across 2007–2025.
+Three scripts build the datasets used for visual storytelling:
 
----
+| Script                               | Output                                         | Description                |
+| ------------------------------------ | ---------------------------------------------- | -------------------------- |
+| `ham_snapshot_2007_2025.py`          | `hamilton_2007_2025_snapshot.csv`              | Season snapshot            |
+| `ham_teammate_comparison_builder.py` | `hamilton_teammate_comparison_2007_2025.csv`   | Hamilton vs teammate gap   |
+| `ham_quali_duels_builder.py`         | `hamilton_quali_duels_2007_2025_until_R21.csv` | Qualification head-to-head |
 
-### 📈 Visualization Example
+These feed Flourish visualizations such as:
 
-* Flourish version: [Season Summary Heatmap (Flourish)](https://flo.uri.sh/visualisation/XXXXX/embed)
-* D3.js standalone version: [Live Demo](https://hericlibong.github.io/beautifullF1/season_summary_heatmap/index.html)
-
----
-
-## 📂 Project: `wdc_projection_repo`
-
-Interactive D3.js projection of the championship title race.
-
-* Scenario sliders (leader performance %, driver performance %)
-* Dynamic filtering by risk zone
-* Built with Observable Plot and D3.js
-
-Live version: [WDC Projection 2025](https://hericlibong.github.io/beautifullF1/wdc_projection_repo/index.html)
+* [Hamilton’s points share vs leader](https://public.flourish.studio/visualisation/24689576/)
+* [Teammate gap evolution](https://public.flourish.studio/visualisation/25604375/)
+* [Qualification duels](https://public.flourish.studio/visualisation/25940671/)
 
 ---
 
 ## 🖼️ D3.js Visualisations & Public Gallery
 
-From August 2025, all public-facing visualisations are **directly accessible** via the `/docs` folder and **GitHub Pages**.
+All public-facing visualisations are accessible through GitHub Pages at:
+👉 **[https://hericlibong.github.io/beautifullF1/](https://hericlibong.github.io/beautifullF1/)**
 
-* **Public Gallery**: [https://hericlibong.github.io/beautifullF1/](https://hericlibong.github.io/beautifullF1/)
-* Each visualisation has:
+Each visualization resides in its own subfolder under `/docs/{viz_name}/`, e.g.:
 
-  * Its own folder in `/docs/{viz_name}/`
-  * `index.html`, `style.css`, `script.js`, and associated CSV
-  * A live link for embedding anywhere (iframe-ready)
+```
+docs/
+├── index.html
+├── season_summary_heatmap/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+└── hamilton_midseason_tracker/
+```
 
-**Benefits:**
-
-* No duplication between development and public deployment
-* All visualisations share a unified dark-themed gallery homepage
-* Any update pushed to `/docs` is instantly reflected on GitHub Pages
+Any update to `/docs` is instantly reflected on GitHub Pages.
 
 ---
 
 ## ⚙️ Installation
 
-Clone the repository and install the required dependencies:
+Clone the repository and install dependencies:
 
 ```bash
 git clone https://github.com/hericlibong/beautifullF1.git
@@ -188,42 +143,57 @@ cd beautifullF1
 pip install -r requirements.txt
 ```
 
-Run any module:
+Run any stable module (example):
 
 ```bash
-cd hamilton_mildseason_tracker
-python -m hamilton_mildseason_tracker.ham_snapshot_2007_2025
+python projects/hamilton_midseason_tracker/ham_snapshot_2007_2025.py
 ```
 
 ---
 
 ## 📤 Outputs
 
-* **CSV files** for Flourish or direct integration in D3.js
-* **JSON files** for programmatic reuse
-* **Live GitHub Pages** versions for embedding
+All outputs are stored in each module’s `/outputs` directory.
+
+* **CSV files** for Flourish or D3.js
+* **JSON files** for programmatic integration
+* **Published D3 visualisations** under `/docs`
 
 ---
 
 ## 🧪 Tests & Quality
 
-* **Pytest** for unit testing
+* **Pytest** for unit testing (`projects/**/tests/`)
 * **pytest-cov** for coverage
 * **Ruff** for linting
 * **Black** for formatting
-* Automated CI on each push (tests + lint + formatting checks)
+* Continuous integration on each push (tests + lint + formatting)
 
 ---
 
 ## 📜 License
 
 Open-source under MIT License.
-Data from third-party APIs remains the property of their providers.
+Data from third-party APIs remains property of their providers.
 
 ---
 
 ## 👤 Author
 
 Made by **[Heric Libong](https://github.com/hericlibong)** — developer and journalist passionate about visual storytelling and Formula 1.
+
+```
+
+---
+
+### 🔍 Résumé des ajustements
+
+✅ Arborescence revue selon la structure réelle :  
+`projects/{gp_history,race_chart_builder,season_summary_heatmap,hamilton_midseason_tracker}`  
+✅ Suppression des anciens projets non suivis (`quali_duels`, `wdc_projection_repo`) — mentionnés comme *paused*.  
+✅ Cohérence entre les chemins, noms de fichiers et scripts.  
+✅ Maintien du ton et du style de ton README original (aucun branding altéré).  
+
+---
 
 
