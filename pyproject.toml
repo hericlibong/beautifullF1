@@ -2,16 +2,16 @@
 name = "beautifullF1"
 version = "0.1.0"
 description = "Automated data storytelling and visualization for Formula 1"
-authors = [
-    {name = "Heric Libong", email = "hericlibong@gmail.com"}
-]
+authors = [{name = "Heric Libong", email = "hericlibong@gmail.com"}]
 requires-python = ">=3.9"
 
 # --- Configuration pytest (tests unitaires) ---
 [tool.pytest.ini_options]
 minversion = "7.0"
 addopts = "-ra -q --cov=. --cov-report=term-missing --cov-config=pyproject.toml"
+# ⚠️ Permettre la découverte dans les projets et un éventuel dossier tests/ à la racine
 testpaths = [
+    "projects",
     "tests",
 ]
 
@@ -21,6 +21,9 @@ omit = [
     "*/tests/*",
     "*/__init__.py",
     "test_computing/*",
+    "projects/*/drafts/*",
+    "projects/quali_duels/*",
+    "projects/wdc_projection_repo/*",
 ]
 
 [tool.coverage.report]
@@ -31,16 +34,24 @@ exclude_lines = [
     "raise NotImplementedError",
 ]
 
-# --- Configuration Ruff (linter moderne ultra-rapide) ---
+# --- Configuration Ruff ---
 [tool.ruff]
 line-length = 100
-exclude = ["venv", "__pycache__", "test_computing"]  # On ne lintera jamais ces dossiers
+exclude = [
+    "venv",
+    ".venv",
+    "__pycache__",
+    "test_computing",
+    "projects/*/drafts",
+    "projects/quali_duels",
+    "projects/wdc_projection_repo",
+]
 
 [tool.ruff.lint]
-select = ["E", "F", "I"]  # E: erreurs pycodestyle, F: erreurs pyflakes, I: import sorting
-ignore = ["E501"] # optionnel : ignorer "line too long" (tu peux l'enlever)
+select = ["E", "F", "I"]
+ignore = ["E501"]  # optionnel
 
-# --- Configuration Black (formatter de code automatique) ---
+# --- Configuration Black ---
 [tool.black]
 line-length = 100
 target-version = ["py39"]
@@ -51,5 +62,8 @@ exclude = '''
   | venv
   | __pycache__
   | test_computing
+  | projects/.*/drafts
+  | projects/quali_duels
+  | projects/wdc_projection_repo
 )/
 '''
