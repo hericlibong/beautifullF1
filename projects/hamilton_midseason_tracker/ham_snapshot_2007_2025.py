@@ -386,7 +386,9 @@ def main():
     erg = Ergast(result_type="pandas", auto_cast=True)
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    args.out = os.path.join(script_dir, os.path.basename(args.out))
+    outputs_dir = os.path.join(script_dir, "outputs")
+    os.makedirs(outputs_dir, exist_ok=True)
+    args.out = os.path.join(outputs_dir, os.path.basename(args.out))
 
     k_global = get_cutoff_k_for_2025(erg)
 

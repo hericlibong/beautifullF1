@@ -24,7 +24,9 @@ LOCAL_HEADSHOTS_DIR = None  # ex: "assets/headshots"
 
 # --- config ---
 CUTOFF_ROUND = 20
-OUTPUT_FILE = "hamilton_teammate_comparison_2007_2025.csv"
+CSV_NAME = "hamilton_teammate_comparison_2007_2025.csv"
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+OUTPUT_FILE = os.path.join(SCRIPT_DIR, "outputs", CSV_NAME)
 
 # Images: OpenF1 en priorité, fallback FastF1 session results
 USE_OPENF1_IMAGES = True
