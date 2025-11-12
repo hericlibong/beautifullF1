@@ -23,7 +23,7 @@ HEADSHOT_OVERRIDES = {
 LOCAL_HEADSHOTS_DIR = None  # ex: "assets/headshots"
 
 # --- config ---
-CUTOFF_ROUND = 19
+CUTOFF_ROUND = 20
 OUTPUT_FILE = "hamilton_teammate_comparison_2007_2025.csv"
 
 # Images: OpenF1 en priorité, fallback FastF1 session results

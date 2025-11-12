@@ -10,8 +10,8 @@ import pandas as pd
 from fastf1.ergast import Ergast
 from fastf1.ergast.interface import ErgastInvalidRequestError
 
-CURRENT_GPS_COMPLETED = 20  # dernier GP compté = Mexico (R20)
-CSV_NAME = "hamilton_quali_duels_2007_2025_until_R20.csv"
+CURRENT_GPS_COMPLETED = 21  # dernier GP compté = Mexico (R20)
+CSV_NAME = "hamilton_quali_duels_2007_2025_until_R21.csv"
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 OUTPUT_CSV = os.path.join(SCRIPT_DIR, CSV_NAME)
 
