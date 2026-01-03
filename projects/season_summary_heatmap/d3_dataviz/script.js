@@ -1,7 +1,7 @@
 // v2 — Heatmap D3 (D3 v7) - Version Leaders
 // Hypothèse de structure : d3_dataviz/ à côté du CSV à la racine du projet
 // Utilise le CSV leaders avec métriques avancées
-const DATA_URL = "./f1_2025_leaders_heatmap.csv";
+const DATA_URL = "f1_2025_leaders_heatmap.csv";
 
 const container = d3.select("#chart");
 const tooltip = d3.select("#tooltip");
