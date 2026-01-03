@@ -30,7 +30,10 @@ function render(data, driverAvgPoints) {
   const maxWidth = Math.min(1200, container.node().getBoundingClientRect().width - 24);
   const cellW = Math.max(12, Math.floor((maxWidth - 180) / events.length));
   const cellH = Math.max(12, 24); // Augmenté pour un format plus carré
-  const margin = { top: 80, right: 20, bottom: 200, left: 180 }; // Marges verticales augmentées
+
+  // ⬇️ (MODIF) plus d'espace en haut pour bloc titre + trait + jauge
+  const margin = { top: 150, right: 20, bottom: 200, left: 180 };
+
   const width =  margin.left + margin.right + cellW * events.length;
   const height = margin.top  + margin.bottom + cellH * drivers.length;
 
@@ -49,24 +52,58 @@ function render(data, driverAvgPoints) {
     .attr("width", "100%")
     .attr("height", Math.min(height, 900));
 
-  // Titre principal
-  svg.append("text")
-    .attr("x", width / 2)
-    .attr("y", margin.top / 2)
-    .attr("text-anchor", "middle")
-    .attr("fill", "#cfd6e4")
-    .attr("font-size", 18)
-    .attr("font-weight", "bold")
-    .text("F1 2025 — Points par Grand Prix");
+  // =========================
+  // (MODIF) TITRE + SOUS-TITRE (alignés gauche + meilleure mise en page)
+  // =========================
+  const headX = margin.left;   // alignement sur le contenu chart
+  const titleY = 40;
+  const subtitleY = 68;
 
-  // Sous-titre
   svg.append("text")
-    .attr("x", width / 2)
-    .attr("y", margin.top / 2 + 24)
-    .attr("text-anchor", "middle")
+    .attr("x", headX)
+    .attr("y", titleY)
+    .attr("text-anchor", "start")
+    .attr("fill", "#cfd6e4")
+    .attr("font-size", 20)
+    .attr("font-weight", "700")
+    .text("Une saison de Formule 1, course après course");
+
+  // Sous-titre sur 2 lignes via tspan (longueur maîtrisée, pas de wrap auto)
+  const subtitle = svg.append("text")
+    .attr("x", headX)
+    .attr("y", subtitleY)
+    .attr("text-anchor", "start")
     .attr("fill", "#9aa3b2")
-    .attr("font-size", 14)
-    .text("Chaque cellule représente les points marqués par un pilote lors d’un Grand Prix");
+    .attr("font-size", 14)     // un peu plus grand
+    .attr("font-weight", "600"); // plus présent (semi-bold)
+
+  subtitle.append("tspan")
+    .attr("x", headX)
+    .attr("dy", 0)
+    .text("Cette heatmap retrace la construction du championnat 2025 : les points marqués par chaque pilote");
+
+  subtitle.append("tspan")
+    .attr("x", headX)
+    .attr("dy", 18)
+    .text("à chaque Grand Prix, enrichis au survol par les détails clés de la course et de la saison.");
+
+  // =========================
+  // (MODIF) TRAIT POINTILLÉ + JAUGE SOUS LE TRAIT
+  // =========================
+  const sepY = 110;
+
+  svg.append("line")
+    .attr("x1", margin.left)
+    .attr("x2", width - margin.right)
+    .attr("y1", sepY)
+    .attr("y2", sepY)
+    .attr("stroke", "#2a2f3a")
+    .attr("stroke-width", 1)
+    .attr("stroke-dasharray", "3,4")
+    .attr("opacity", 0.9);
+
+  // Jauge sous le trait
+  drawLegend(svg, { x: margin.left, y: sepY + 14, w: 200, h: 10, max: maxPoints });
 
   // Axes
   const xAxis = g => g
@@ -110,16 +147,14 @@ function render(data, driverAvgPoints) {
       .attr("height", y.bandwidth())
       .attr("fill", d => color(d.Points ?? 0))
       .attr("stroke", d => {
-        // Appliquer un contour discret aux cellules surprises
-        const avgPoints = driverAvgPoints.get(d.Driver) || 0;
-        const isSurprise = d.Points >= 2 * avgPoints && avgPoints > 0;
-        return isSurprise ? "#e8eaf0" : "none";
+        const avg = driverAvgPoints.get(d.Driver) || 0;
+        return d.Points >= 2 * avg && avg > 0 ? "#f0f3ff" : "none";
       })
       .attr("stroke-width", d => {
-        const avgPoints = driverAvgPoints.get(d.Driver) || 0;
-        const isSurprise = d.Points >= 2 * avgPoints && avgPoints > 0;
-        return isSurprise ? "1.5px" : "0";
+        const avg = driverAvgPoints.get(d.Driver) || 0;
+        return d.Points >= 2 * avg && avg > 0 ? 2.5 : 0;
       })
+      .attr("vector-effect", "non-scaling-stroke")
       .on("mousemove", (event, d) => showTooltip(event, d))
       .on("mouseleave", hideTooltip);
 
@@ -134,9 +169,6 @@ function render(data, driverAvgPoints) {
     .on("mouseleave.focus", () => {
       cells.attr("opacity", 1);
     });
-
-  // Légende simple (graduations 0 → max)
-  drawLegend(svg, { x: margin.left, y: 8, w: 200, h: 10, max: maxPoints });
 
   // Titres axes
   svg.append("text")
