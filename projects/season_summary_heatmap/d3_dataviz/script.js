@@ -30,7 +30,7 @@ function render(data) {
   const maxWidth = Math.min(1200, container.node().getBoundingClientRect().width - 24);
   const cellW = Math.max(12, Math.floor((maxWidth - 180) / events.length));
   const cellH = Math.max(12, 24); // Augmenté pour un format plus carré
-  const margin = { top: 80, right: 20, bottom: 100, left: 180 }; // Marges verticales augmentées
+  const margin = { top: 80, right: 20, bottom: 200, left: 180 }; // Marges verticales augmentées
   const width =  margin.left + margin.right + cellW * events.length;
   const height = margin.top  + margin.bottom + cellH * drivers.length;
 
@@ -107,6 +107,18 @@ function render(data) {
       .on("mousemove", (event, d) => showTooltip(event, d))
       .on("mouseleave", hideTooltip);
 
+  // STORY STEP 1 — Focus visuel au survol, sans toucher au tooltip
+  const cells = svg.selectAll("rect.cell");
+  cells
+    .on("mouseenter.focus", (event, d) => {
+      cells.attr("opacity", c =>
+        (c.Driver === d.Driver && c.EventName === d.EventName) ? 1 : 0.25
+      );
+    })
+    .on("mouseleave.focus", () => {
+      cells.attr("opacity", 1);
+    });
+
   // Légende simple (graduations 0 → max)
   drawLegend(svg, { x: margin.left, y: 8, w: 200, h: 10, max: maxPoints });
 
@@ -154,30 +166,24 @@ function showTooltip(event, d){
   tooltip.style("opacity", 1);
 
   // 3) Calculer une position qui ne sort pas de l'écran (clamp)
-  const OFFSET = 16;                          // marge autour du curseur
+  const OFFSET = 16;
   const vw = window.innerWidth;
   const vh = window.innerHeight;
 
-  // position par défaut: à droite et en dessous du curseur
   let x = event.clientX + OFFSET;
   let y = event.clientY + OFFSET;
 
-  // mesurer la taille réelle du tooltip
   const rect = tooltip.node().getBoundingClientRect();
 
-  // s'il dépasse à droite, le basculer à gauche du curseur
   if (x + rect.width > vw - 8) {
     x = event.clientX - rect.width - OFFSET;
   }
-  // s'il dépasse en bas, le remonter
   if (y + rect.height > vh - 8) {
     y = vh - rect.height - 8;
   }
-  // garder une marge minimale en haut/gauche
   if (x < 8) x = 8;
   if (y < 8) y = 8;
 
-  // 4) appliquer
   tooltip.style("left", `${x}px`).style("top", `${y}px`);
 }
 function hideTooltip(){
