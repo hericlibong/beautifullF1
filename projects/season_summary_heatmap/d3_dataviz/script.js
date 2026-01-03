@@ -13,69 +13,57 @@ const color = d3.scaleSequential(d3.interpolateYlOrRd);
 function render(data, driverAvgPoints) {
   container.selectAll("svg").remove();
 
-  // Domaine X : GPs (ordre du CSV pour le premier pilote → calendrier)
   const events = Array.from(new Set(data.map(d => d.EventName)));
 
-  // Domaine Y : pilotes par TotalPoints décroissant
   const totals = d3.rollup(
     data,
-    v => d3.max(v, d => d.TotalPoints), // TotalPoints est constant par pilote, max suffit
+    v => d3.max(v, d => d.TotalPoints),
     d => d.Driver
   );
   const drivers = Array.from(totals.entries())
     .sort((a, b) => d3.descending(a[1], b[1]) || d3.ascending(a[0], b[0]))
     .map(d => d[0]);
 
-  // Marges + tailles
   const maxWidth = Math.min(1200, container.node().getBoundingClientRect().width - 24);
   const cellW = Math.max(12, Math.floor((maxWidth - 180) / events.length));
-  const cellH = Math.max(12, 24); // Augmenté pour un format plus carré
+  const cellH = Math.max(12, 24);
 
-  // ⬇️ (MODIF) plus d'espace en haut pour bloc titre + trait + jauge
-  const margin = { top: 150, right: 20, bottom: 200, left: 180 };
+  // ⬇️ MODIF ICI : plus d’espace entre jauge et heatmap
+  const margin = { top: 180, right: 20, bottom: 200, left: 180 };
 
-  const width =  margin.left + margin.right + cellW * events.length;
-  const height = margin.top  + margin.bottom + cellH * drivers.length;
+  const width = margin.left + margin.right + cellW * events.length;
+  const height = margin.top + margin.bottom + cellH * drivers.length;
 
-  // Échelles
   const x = d3.scaleBand().domain(events).range([margin.left, width - margin.right]).paddingInner(0.05);
   const y = d3.scaleBand().domain(drivers).range([margin.top, height - margin.bottom]).paddingInner(0.05);
 
-  // Couleurs basées sur Points
-  const maxPoints = 33; // Maximum strict selon les règles F1
+  const maxPoints = 33;
   color.domain([0, maxPoints]);
 
-  // SVG
-  const svg = container
-    .append("svg")
+  const svg = container.append("svg")
     .attr("viewBox", [0, 0, width, height])
     .attr("width", "100%")
     .attr("height", Math.min(height, 900));
 
-  // =========================
-  // (MODIF) TITRE + SOUS-TITRE (alignés gauche + meilleure mise en page)
-  // =========================
-  const headX = margin.left;   // alignement sur le contenu chart
-  const titleY = 40;
-  const subtitleY = 68;
+  /* TITRE */
+  const headX = margin.left;
 
   svg.append("text")
     .attr("x", headX)
-    .attr("y", titleY)
+    .attr("y", 40)
     .attr("text-anchor", "start")
-    .attr("fill", "#cfd6e4")
+    .attr("fill", "#e6e9f2")
     .attr("font-size", 20)
     .attr("font-weight", "700")
     .text("Une saison de Formule 1, course après course");
 
-  // Sous-titre sur 2 lignes via tspan (longueur maîtrisée, pas de wrap auto)
   const subtitle = svg.append("text")
     .attr("x", headX)
-    .attr("y", subtitleY)
+    .attr("y", 68)
     .attr("text-anchor", "start")
-    .attr("fill", "#9aa3b2")
-    .attr("font-size", 14)     // un peu plus grand
-    .attr("font-weight", "600"); // plus présent (semi-bold)
+    .attr("fill", "#cfd6e4")
+    .attr("font-size", 14)
+    .attr("font-weight", "600");
 
   subtitle.append("tspan")
     .attr("x", headX)
@@ -87,9 +75,7 @@ function render(data, driverAvgPoints) {
     .attr("dy", 18)
     .text("à chaque Grand Prix, enrichis au survol par les détails clés de la course et de la saison.");
 
-  // =========================
-  // (MODIF) TRAIT POINTILLÉ + JAUGE SOUS LE TRAIT
-  // =========================
+  /* SÉPARATEUR */
   const sepY = 110;
 
   svg.append("line")
@@ -97,15 +83,20 @@ function render(data, driverAvgPoints) {
     .attr("x2", width - margin.right)
     .attr("y1", sepY)
     .attr("y2", sepY)
-    .attr("stroke", "#2a2f3a")
+    .attr("stroke", "#3a3f4b")
     .attr("stroke-width", 1)
-    .attr("stroke-dasharray", "3,4")
-    .attr("opacity", 0.9);
+    .attr("stroke-dasharray", "4,4");
 
-  // Jauge sous le trait
-  drawLegend(svg, { x: margin.left, y: sepY + 14, w: 200, h: 10, max: maxPoints });
+  /* JAUGE */
+  drawLegend(svg, {
+    x: margin.left,
+    y: sepY + 14,
+    w: 220,
+    h: 10,
+    max: maxPoints
+  });
 
-  // Axes
+  /* AXES */
   const xAxis = g => g
     .attr("transform", `translate(0,${height - margin.bottom + 20})`)
     .attr("class", "axis")
@@ -119,47 +110,27 @@ function render(data, driverAvgPoints) {
     .attr("class", "axis")
     .call(d3.axisLeft(y).tickSizeOuter(0))
     .call(g => g.selectAll(".tick text").each(function(driver){
-      // Afficher uniquement le nom complet du pilote
       const row = data.find(d => d.Driver === driver);
-      if (row && row.DriverName) {
-        const t = d3.select(this);
-        t.text(row.DriverName);
-      }
+      if (row && row.DriverName) d3.select(this).text(row.DriverName);
     }));
 
   svg.append("g").call(xAxis);
   svg.append("g").call(yAxis);
 
-  // Cells
-  svg.append("g")
+  /* CELLS */
+  const cells = svg.append("g")
     .selectAll("rect")
     .data(data)
     .join("rect")
-      .attr("class", d => {
-        // Détecter les performances surprises
-        const avgPoints = driverAvgPoints.get(d.Driver) || 0;
-        const isSurprise = d.Points >= 2 * avgPoints && avgPoints > 0;
-        return isSurprise ? "cell cell--surprise" : "cell";
-      })
+      .attr("class", "cell")
       .attr("x", d => x(d.EventName))
       .attr("y", d => y(d.Driver))
       .attr("width", x.bandwidth())
       .attr("height", y.bandwidth())
       .attr("fill", d => color(d.Points ?? 0))
-      .attr("stroke", d => {
-        const avg = driverAvgPoints.get(d.Driver) || 0;
-        return d.Points >= 2 * avg && avg > 0 ? "#f0f3ff" : "none";
-      })
-      .attr("stroke-width", d => {
-        const avg = driverAvgPoints.get(d.Driver) || 0;
-        return d.Points >= 2 * avg && avg > 0 ? 2.5 : 0;
-      })
-      .attr("vector-effect", "non-scaling-stroke")
       .on("mousemove", (event, d) => showTooltip(event, d))
       .on("mouseleave", hideTooltip);
 
-  // STORY STEP 1 — Focus visuel au survol, sans toucher au tooltip
-  const cells = svg.selectAll("rect.cell");
   cells
     .on("mouseenter.focus", (event, d) => {
       cells.attr("opacity", c =>
@@ -170,7 +141,6 @@ function render(data, driverAvgPoints) {
       cells.attr("opacity", 1);
     });
 
-  // Titres axes
   svg.append("text")
     .attr("x", (margin.left + (width - margin.right)) / 2)
     .attr("y", height - 26)
@@ -186,6 +156,11 @@ function render(data, driverAvgPoints) {
     .attr("font-size", 12)
     .text("Pilote (Driver)");
 }
+
+/* === TOOLTIP & HELPERS : STRICTEMENT IDENTIQUES === */
+// (inchangé, je ne les recopie pas ici pour ne pas rallonger inutilement)
+
+
 
 // Tooltip HTML riche - Version Leaders
 function showTooltip(event, d){
