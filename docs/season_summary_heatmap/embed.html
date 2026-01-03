@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>F1 2025 — Heatmap</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- D3 -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./style.css" />
+
+  <style>
+    /* Neutraliser toute marge externe */
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+
+    /* Forcer la visualisation à occuper l’espace */
+    #chart {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- CONTENEUR UNIQUE -->
+  <div id="chart"></div>
+
+  <!-- TOOLTIP -->
+  <div id="tooltip" class="tooltip"></div>
+
+  <!-- SCRIPT -->
+  <script src="./script.js"></script>
+</body>
+</html>
