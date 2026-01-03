@@ -29,8 +29,8 @@ function render(data) {
   // Marges + tailles
   const maxWidth = Math.min(1200, container.node().getBoundingClientRect().width - 24);
   const cellW = Math.max(12, Math.floor((maxWidth - 180) / events.length));
-  const cellH = Math.max(12, 18); // fixe pour lisibilité
-  const margin = { top: 40, right: 20, bottom: 70, left: 160 };
+  const cellH = Math.max(12, 24); // Augmenté pour un format plus carré
+  const margin = { top: 80, right: 20, bottom: 100, left: 180 }; // Marges verticales augmentées
   const width =  margin.left + margin.right + cellW * events.length;
   const height = margin.top  + margin.bottom + cellH * drivers.length;
 
@@ -39,8 +39,8 @@ function render(data) {
   const y = d3.scaleBand().domain(drivers).range([margin.top, height - margin.bottom]).paddingInner(0.05);
 
   // Couleurs basées sur Points
-  const maxPoints = d3.max(data, d => d.Points);
-  color.domain([0, maxPoints || 1]);
+  const maxPoints = 33; // Maximum strict selon les règles F1
+  color.domain([0, maxPoints]);
 
   // SVG
   const svg = container
@@ -49,9 +49,28 @@ function render(data) {
     .attr("width", "100%")
     .attr("height", Math.min(height, 900));
 
+  // Titre principal
+  svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", margin.top / 2)
+    .attr("text-anchor", "middle")
+    .attr("fill", "#cfd6e4")
+    .attr("font-size", 18)
+    .attr("font-weight", "bold")
+    .text("F1 2025 — Points par Grand Prix");
+
+  // Sous-titre
+  svg.append("text")
+    .attr("x", width / 2)
+    .attr("y", margin.top / 2 + 24)
+    .attr("text-anchor", "middle")
+    .attr("fill", "#9aa3b2")
+    .attr("font-size", 14)
+    .text("Chaque cellule représente les points marqués par un pilote lors d’un Grand Prix");
+
   // Axes
   const xAxis = g => g
-    .attr("transform", `translate(0,${height - margin.bottom})`)
+    .attr("transform", `translate(0,${height - margin.bottom + 20})`)
     .attr("class", "axis")
     .call(d3.axisBottom(x).tickSizeOuter(0))
     .selectAll("text")
@@ -63,11 +82,11 @@ function render(data) {
     .attr("class", "axis")
     .call(d3.axisLeft(y).tickSizeOuter(0))
     .call(g => g.selectAll(".tick text").each(function(driver){
-      // Option : ajouter le rang en suffixe s'il est disponible sur la première ligne du pilote
+      // Afficher uniquement le nom complet du pilote
       const row = data.find(d => d.Driver === driver);
-      if (row && row.RankLabel) {
+      if (row && row.DriverName) {
         const t = d3.select(this);
-        t.text(`${driver} (${row.RankLabel})`);
+        t.text(row.DriverName);
       }
     }));
 
