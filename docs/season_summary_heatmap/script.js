@@ -10,7 +10,7 @@ const tooltip = d3.select("#tooltip");
 const color = d3.scaleSequential(d3.interpolateYlOrRd);
 
 // Dimensions responsives (hauteur basée sur #drivers, largeur sur viewport)
-function render(data) {
+function render(data, driverAvgPoints) {
   container.selectAll("svg").remove();
 
   // Domaine X : GPs (ordre du CSV pour le premier pilote → calendrier)
@@ -98,12 +98,28 @@ function render(data) {
     .selectAll("rect")
     .data(data)
     .join("rect")
-      .attr("class", "cell")
+      .attr("class", d => {
+        // Détecter les performances surprises
+        const avgPoints = driverAvgPoints.get(d.Driver) || 0;
+        const isSurprise = d.Points >= 2 * avgPoints && avgPoints > 0;
+        return isSurprise ? "cell cell--surprise" : "cell";
+      })
       .attr("x", d => x(d.EventName))
       .attr("y", d => y(d.Driver))
       .attr("width", x.bandwidth())
       .attr("height", y.bandwidth())
       .attr("fill", d => color(d.Points ?? 0))
+      .attr("stroke", d => {
+        // Appliquer un contour discret aux cellules surprises
+        const avgPoints = driverAvgPoints.get(d.Driver) || 0;
+        const isSurprise = d.Points >= 2 * avgPoints && avgPoints > 0;
+        return isSurprise ? "#e8eaf0" : "none";
+      })
+      .attr("stroke-width", d => {
+        const avgPoints = driverAvgPoints.get(d.Driver) || 0;
+        const isSurprise = d.Points >= 2 * avgPoints && avgPoints > 0;
+        return isSurprise ? "1.5px" : "0";
+      })
       .on("mousemove", (event, d) => showTooltip(event, d))
       .on("mouseleave", hideTooltip);
 
@@ -231,7 +247,7 @@ function safeUrl(u){
   return u;
 }
 
-// Chargement CSV + cast des types requis
+  // Chargement CSV + cast des types requis
 d3.csv(DATA_URL, d3.autoType).then(rows => {
   // Garantir les colonnes numériques
   rows.forEach(r => {
@@ -247,10 +263,16 @@ d3.csv(DATA_URL, d3.autoType).then(rows => {
     r.PodiumRate = +r.PodiumRate || 0;
     r.GridGain = +r.GridGain || 0;
   });
-  render(rows);
 
-  // Re-render à resize
-  window.addEventListener("resize", () => render(rows));
+  // Calculer les moyennes de points par pilote pour détecter les surprises
+  const driverAvgPoints = d3.rollup(
+    rows,
+    v => d3.mean(v, d => d.Points),
+    d => d.Driver
+  );
+
+  render(rows, driverAvgPoints);  // Re-render à resize
+  window.addEventListener("resize", () => render(rows, driverAvgPoints));
 }).catch(err => {
   console.error("Erreur chargement CSV :", err);
   container.append("p").text("Impossible de charger le CSV leaders. Vérifie le chemin DATA_URL.");
