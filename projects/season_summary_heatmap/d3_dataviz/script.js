@@ -1,7 +1,7 @@
-// v1 — Heatmap D3 (D3 v7)
+// v2 — Heatmap D3 (D3 v7) - Version Leaders
 // Hypothèse de structure : d3_dataviz/ à côté du CSV à la racine du projet
-// Si besoin, dépose le CSV à côté de ces fichiers et remplace DATA_URL par "./f1_2025_flourish_enriched.csv"
-const DATA_URL = "../f1_2025_full_heatmap.csv";
+// Utilise le CSV leaders avec métriques avancées
+const DATA_URL = "./f1_2025_leaders_heatmap.csv";
 
 const container = d3.select("#chart");
 const tooltip = d3.select("#tooltip");
@@ -86,12 +86,7 @@ function render(data) {
       .attr("height", y.bandwidth())
       .attr("fill", d => color(d.Points ?? 0))
       .on("mousemove", (event, d) => showTooltip(event, d))
-      .on("mouseleave", hideTooltip)
-      
-        .text(d => `${d.DriverName} • ${d.Team}
-${d.EventNameFull}
-Grid: ${fmtPos(d.GridPosition)} • Finish: ${fmtPos(d.FinishPosition)}
-Points: ${d.Points} • Total: ${d.TotalPoints}`);
+      .on("mouseleave", hideTooltip);
 
   // Légende simple (graduations 0 → max)
   drawLegend(svg, { x: margin.left, y: 8, w: 200, h: 10, max: maxPoints });
@@ -113,19 +108,25 @@ Points: ${d.Points} • Total: ${d.TotalPoints}`);
     .text("Pilote (Driver)");
 }
 
-// Tooltip HTML riche
+// Tooltip HTML riche - Version Leaders
 function showTooltip(event, d){
   // 1) Remplir le contenu
+  const sprintInfo = d.SprintPoints > 0 ? ` (+${d.SprintPoints} sprint)` : "";
+  const finishIcon = d.FinishIcon || "";
+  
   tooltip.html(`
-    <h3>${d.DriverName} <span style="color:#9aa3b2">(${d.Driver})</span></h3>
+    <h3>${d.DriverName} <span style="color:#9aa3b2">(${d.Driver})</span> ${finishIcon}</h3>
     <div class="meta">
       <img src="${safeUrl(d.HeadshotUrl)}" alt="${d.DriverName}">
       <div class="kv">
         <div><b>Équipe :</b> ${d.Team}</div>
         <div><b>Grand Prix :</b> ${d.EventNameFull}</div>
         <div><b>Grille / Arrivée :</b> ${fmtPos(d.GridPosition)} / ${fmtPos(d.FinishPosition)}</div>
-        <div><b>Points (course) :</b> ${d.Points}</div>
+        <div><b>Points (course) :</b> ${d.Points}${sprintInfo}</div>
         <div><b>Total saison :</b> ${d.TotalPoints} • <b>Rang :</b> ${d.RankLabel ?? ""}</div>
+        <div><b>Cumul :</b> ${d.CumulativePoints} pts • Moyenne : ${d.AvgPointsToDate?.toFixed(1)} pts/GP</div>
+        <div><b>Moyenne 5 GP :</b> ${d.Last5Avg?.toFixed(1)} pts • Podiums : ${(d.PodiumRate*100)?.toFixed(0)}%</div>
+        <div><b>Gain grille :</b> ${d.GridGain >= 0 ? "+" : ""}${d.GridGain?.toFixed(1)} positions</div>
       </div>
     </div>
   `);
@@ -210,10 +211,16 @@ d3.csv(DATA_URL, d3.autoType).then(rows => {
   // Garantir les colonnes numériques
   rows.forEach(r => {
     r.Points = +r.Points || 0;
+    r.SprintPoints = +r.SprintPoints || 0;
     r.TotalPoints = +r.TotalPoints || 0;
     r.GridPosition = r.GridPosition != null ? +r.GridPosition : null;
     r.FinishPosition = r.FinishPosition != null ? +r.FinishPosition : null;
     r.Rank = r.Rank != null ? +r.Rank : null;
+    r.CumulativePoints = +r.CumulativePoints || 0;
+    r.AvgPointsToDate = +r.AvgPointsToDate || 0;
+    r.Last5Avg = +r.Last5Avg || 0;
+    r.PodiumRate = +r.PodiumRate || 0;
+    r.GridGain = +r.GridGain || 0;
   });
   render(rows);
 
@@ -221,5 +228,5 @@ d3.csv(DATA_URL, d3.autoType).then(rows => {
   window.addEventListener("resize", () => render(rows));
 }).catch(err => {
   console.error("Erreur chargement CSV :", err);
-  container.append("p").text("Impossible de charger le CSV. Vérifie le chemin DATA_URL.");
+  container.append("p").text("Impossible de charger le CSV leaders. Vérifie le chemin DATA_URL.");
 });
