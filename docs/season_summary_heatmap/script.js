@@ -24,7 +24,7 @@ function render(data, driverAvgPoints) {
     .sort((a, b) => d3.descending(a[1], b[1]) || d3.ascending(a[0], b[0]))
     .map(d => d[0]);
 
-  const maxWidth = Math.min(1200, container.node().getBoundingClientRect().width - 24);
+  const maxWidth = container.node().getBoundingClientRect().width;
   const cellW = Math.max(12, Math.floor((maxWidth - 180) / events.length));
   const cellH = Math.max(12, 24);
 
