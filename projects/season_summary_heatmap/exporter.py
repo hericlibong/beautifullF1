@@ -3,24 +3,35 @@ import os
 import fastf1 as ff1
 import pandas as pd
 
+SPRINT_EVENT_FORMATS = {"sprint", "sprint_shootout", "sprint_qualifying"}
+
 
 class F1FlourishExporter:
-    def __init__(self, season, output_csv="f1_2025_full_heatmap.csv"):
+    def __init__(self, season, output_csv=None):
         self.season = season
-        # Créer le chemin vers le dossier outputs
+        self.output_csv = output_csv or f"f1_{season}_full_heatmap.csv"
         self.output_dir = os.path.join(os.path.dirname(__file__), "outputs")
         os.makedirs(self.output_dir, exist_ok=True)
-        self.output_csv = os.path.join(self.output_dir, output_csv)
+        self.output_path = self._resolve_output_path(self.output_csv)
         self.schedule = self._get_schedule()
         self.standings = []
         self.df = None
         self.df_heatmap = None
+
+    def _resolve_output_path(self, output_csv):
+        output_csv = os.fspath(output_csv)
+        if os.path.isabs(output_csv):
+            return output_csv
+        return os.path.join(self.output_dir, output_csv)
 
     def _get_schedule(self):
         schedule = ff1.get_event_schedule(self.season, include_testing=False)
         schedule = schedule.copy()  # pour éviter le warning pandas
         schedule["ShortEventName"] = schedule["EventName"].str.replace("Grand Prix", "").str.strip()
         return schedule
+
+    def _has_sprint(self, event):
+        return event.get("EventFormat") in SPRINT_EVENT_FORMATS
 
     def fetch_results(self):
         # Boucle sur tous les GPs, extrait résultats et infos pilotes
@@ -32,7 +43,7 @@ class F1FlourishExporter:
                 race = ff1.get_session(self.season, event_name, "R")
                 race.load(laps=False, telemetry=False, weather=False, messages=False)
                 sprint_points = {}
-                if event.get("EventFormat") == "sprint_qualifying":
+                if self._has_sprint(event):
                     sprint = ff1.get_session(self.season, event_name, "S")
                     sprint.load(laps=False, telemetry=False, weather=False, messages=False)
                     for _, srow in sprint.results.iterrows():
@@ -148,5 +159,5 @@ class F1FlourishExporter:
 
     def export(self):
         # Export CSV final
-        self.df_heatmap.to_csv(self.output_csv, index=False)
-        print(f"Exported to {self.output_csv}")
+        self.df_heatmap.to_csv(self.output_path, index=False)
+        print(f"Exported to {self.output_path}")

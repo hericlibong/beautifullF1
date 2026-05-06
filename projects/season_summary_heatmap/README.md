@@ -7,8 +7,8 @@ Deux versions cohabitent :
 
 | Version           | Fichiers principaux                 | Sortie                           | Description                                                            |
 | ----------------- | ----------------------------------- | -------------------------------- | ---------------------------------------------------------------------- |
-| **V1 (complète)** | `exporter.py` + `main.py`           | `outputs/f1_full_heatmap.csv`    | Classement complet de tous les pilotes de la saison.                   |
-| **V2 (leaders)**  | `exporter_lead.py` + `lead_main.py` | `outputs/f1_leaders_heatmap.csv` | Variante axée sur les leaders avec colonnes d’analyse supplémentaires. |
+| **V1 (complète)** | `exporter.py` + `main.py`           | `outputs/f1_<season>_full_heatmap.csv`    | Classement complet de tous les pilotes de la saison.                   |
+| **V2 (leaders)**  | `exporter_lead.py` + `lead_main.py` | `outputs/f1_<season>_leaders_heatmap.csv` | Variante axée sur les leaders avec colonnes d’analyse supplémentaires. |
 
 Les deux versions produisent des datasets compatibles avec le même gabarit de visualisation.
 
@@ -23,8 +23,10 @@ projects/season_summary_heatmap/
 ├── exporter_lead.py               # V2 : heatmap leaders
 ├── lead_main.py                   # V2 : entrypoint leader
 ├── outputs/                       # Contient les CSV générés
-│   ├── f1_full_heatmap.csv
-│   └── f1_leaders_heatmap.csv
+│   ├── f1_2025_full_heatmap.csv
+│   ├── f1_2025_leaders_heatmap.csv
+│   ├── f1_2026_full_heatmap.csv
+│   └── f1_2026_leaders_heatmap.csv
 ├── d3_dataviz/                    # Version D3.js (visu publique)
 │   ├── index.html
 │   ├── script.js
@@ -44,7 +46,7 @@ projects/season_summary_heatmap/
 PYTHONPATH=. python projects/season_summary_heatmap/main.py
 ```
 
-**Sortie :** `projects/season_summary_heatmap/outputs/f1_full_heatmap.csv`
+**Sortie par défaut :** `projects/season_summary_heatmap/outputs/f1_2025_full_heatmap.csv`
 
 ### Version leaders (V2)
 
@@ -52,7 +54,27 @@ PYTHONPATH=. python projects/season_summary_heatmap/main.py
 PYTHONPATH=. python projects/season_summary_heatmap/lead_main.py
 ```
 
-**Sortie :** `projects/season_summary_heatmap/outputs/f1_leaders_heatmap.csv`
+**Sortie par défaut :** `projects/season_summary_heatmap/outputs/f1_2025_leaders_heatmap.csv`
+
+### Générer une autre saison
+
+Les deux entrypoints acceptent `--season` et `--output`. Si `--output` est un nom relatif,
+le fichier est écrit dans `projects/season_summary_heatmap/outputs/`. Les sorties 2025 ne
+sont donc pas écrasées tant que le nom de fichier reste saisonné.
+
+```bash
+PYTHONPATH=. python projects/season_summary_heatmap/main.py --season 2026 --output f1_2026_full_heatmap.csv
+PYTHONPATH=. python projects/season_summary_heatmap/lead_main.py --season 2026 --output f1_2026_leaders_heatmap.csv
+```
+
+FastF1 fournit la grille depuis `race.results` : le pipeline ne fixe pas le nombre de pilotes
+et accepte la grille 2026 à 22 pilotes / 11 équipes. Pour les week-ends sprint, les formats
+FastF1 `sprint`, `sprint_shootout` et `sprint_qualifying` déclenchent le chargement de la
+session `S` et l'ajout des points sprint.
+
+Comme la saison 2026 est en cours, seules les courses avec résultats disponibles dans FastF1
+produisent des lignes. Les courses futures peuvent apparaître dans le calendrier FastF1, mais
+elles sont ignorées si leurs résultats ne sont pas encore chargés.
 
 ---
 
@@ -69,9 +91,11 @@ PYTHONPATH=. python projects/season_summary_heatmap/lead_main.py
 
 Identique à V1 mais enrichi avec :
 
-* `leader_gap` : écart avec le leader
-* `consistency_index` : métrique de régularité
-* `top5_rate` : % de top 5 cumulés
+* `SprintPoints` : points marqués en Sprint
+* `FinishIcon` : icône podium basée sur la position finale
+* `GridGain` : gain ou perte entre grille et arrivée
+* `CumulativePoints`, `AvgPointsToDate`, `Last5Avg` : métriques de forme cumulées
+* `PodiumRate`, `PointsRate`, `AvgGridGain` : métriques de régularité
 
 ---
 
@@ -109,6 +133,7 @@ Le résultat sera accessible sur :
 Les tests valident la cohérence des colonnes générées et la présence de valeurs pour chaque GP.
 
 ```bash
+ruff check projects/season_summary_heatmap
 pytest projects/season_summary_heatmap/tests -q
 ```
 
@@ -123,5 +148,5 @@ pytest projects/season_summary_heatmap/tests -q
 ---
 
 **Auteur :** Heric Libong
-**Dernière mise à jour :** 2025-11-11
+**Dernière mise à jour :** 2026-05-06
 **Statut :** ✅ V1 et V2 opérationnelles, outputs et structure validés.

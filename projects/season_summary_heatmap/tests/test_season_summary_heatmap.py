@@ -130,6 +130,78 @@ def test_fetch_results_sprint_points(
     assert ham["Points"] == 18 + 7
 
 
+@pytest.mark.parametrize("event_format", ["sprint", "sprint_shootout", "sprint_qualifying"])
+@patch("season_summary_heatmap.exporter.ff1.get_event_schedule")
+@patch("season_summary_heatmap.exporter.ff1.get_session")
+def test_fetch_results_sprint_points_supported_formats(
+    mock_get_session, mock_get_event_schedule, fake_results, fake_event_schedule, event_format
+):
+    event_schedule = fake_event_schedule.copy()
+    event_schedule.at[0, "EventFormat"] = event_format
+    mock_get_event_schedule.return_value = event_schedule
+
+    fake_sprint = MagicMock()
+    fake_sprint.results = pd.DataFrame(
+        [{"Abbreviation": "VER", "Points": 8}, {"Abbreviation": "HAM", "Points": 7}]
+    )
+    fake_sprint.load = MagicMock()
+
+    fake_race = MagicMock()
+    fake_race.results = fake_results
+    fake_race.load = MagicMock()
+
+    def session_side_effect(season, event_name, session_type):
+        if session_type == "S":
+            return fake_sprint
+        return fake_race
+
+    mock_get_session.side_effect = session_side_effect
+
+    exporter = F1FlourishExporter(season=2023)
+    exporter.fetch_results()
+
+    assert [s["Points"] for s in exporter.standings] == [25 + 8, 18 + 7]
+
+
+@patch("season_summary_heatmap.exporter.ff1.get_event_schedule")
+def test_pipeline_accepts_22_drivers(mock_get_event_schedule):
+    mock_get_event_schedule.return_value = pd.DataFrame(
+        [
+            {
+                "EventName": "Bahrain Grand Prix",
+                "ShortEventName": "Bahrain",
+                "RoundNumber": 1,
+                "EventFormat": "conventional",
+            }
+        ]
+    )
+
+    exporter = F1FlourishExporter(season=2026)
+    exporter.standings = [
+        {
+            "Driver": f"D{i:02d}",
+            "DriverName": f"Driver {i:02d}",
+            "Team": f"Team {(i - 1) // 2 + 1:02d}",
+            "EventName": "Bahrain",
+            "EventNameFull": "Bahrain Grand Prix",
+            "RoundNumber": 1,
+            "Points": 23 - i,
+            "GridPosition": i,
+            "FinishPosition": i,
+            "HeadshotUrl": None,
+        }
+        for i in range(1, 23)
+    ]
+
+    exporter.build_dataframe()
+    exporter.patch_headshots()
+    exporter.finalize_dataframe()
+
+    assert exporter.df_heatmap["Driver"].nunique() == 22
+    assert exporter.df_heatmap["Team"].nunique() == 11
+    assert exporter.df_heatmap["Rank"].max() == 22
+
+
 def test_build_dataframe_basic(fake_results):
     # Simule un exporter déjà alimenté
     exporter = F1FlourishExporter(season=2023)

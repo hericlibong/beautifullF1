@@ -3,29 +3,43 @@ import os
 import fastf1 as ff1
 import pandas as pd
 
+SPRINT_EVENT_FORMATS = {"sprint", "sprint_shootout", "sprint_qualifying"}
+
 
 class F1FlourishExporterLead:
     """
     Duplication minimale de F1FlourishExporter avec :
       - ajout d'un indicateur Sprint : EventName "*" si Sprint
       - ajout d'un champ FinishIcon (🥇🥈🥉) basé sur FinishPosition
-      - filtrage aux 3 premiers pilotes au classement total
+      - conservation de tous les pilotes au classement total
       - colonnes d'analyse pour popups (régularité/forme) SANS impacter la heatmap
     """
 
-    def __init__(self, season, output_csv="f1_2025_leaders_heatmap.csv"):
+    def __init__(self, season, output_csv=None):
         self.season = season
-        self.output_csv = output_csv
+        self.output_csv = output_csv or f"f1_{season}_leaders_heatmap.csv"
+        self.output_dir = os.path.join(os.path.dirname(__file__), "outputs")
+        os.makedirs(self.output_dir, exist_ok=True)
+        self.output_path = self._resolve_output_path(self.output_csv)
         self.schedule = self._get_schedule()
         self.standings = []
         self.df = None
         self.df_heatmap = None
+
+    def _resolve_output_path(self, output_csv):
+        output_csv = os.fspath(output_csv)
+        if os.path.isabs(output_csv):
+            return output_csv
+        return os.path.join(self.output_dir, output_csv)
 
     def _get_schedule(self):
         schedule = ff1.get_event_schedule(self.season, include_testing=False)
         schedule = schedule.copy()
         schedule["ShortEventName"] = schedule["EventName"].str.replace("Grand Prix", "").str.strip()
         return schedule
+
+    def _has_sprint(self, event):
+        return event.get("EventFormat") in SPRINT_EVENT_FORMATS
 
     def _finish_icon(self, pos):
         if pd.isna(pos):
@@ -45,7 +59,7 @@ class F1FlourishExporterLead:
     def fetch_results(self):
         for _, event in self.schedule.iterrows():
             event_name = event["EventName"]
-            has_sprint = event.get("EventFormat") == "sprint_qualifying"
+            has_sprint = self._has_sprint(event)
             round_label = event["ShortEventName"] + ("*" if has_sprint else "")
             round_number = event["RoundNumber"]
 
@@ -149,7 +163,7 @@ class F1FlourishExporterLead:
         df = self.df.copy()
 
         # --- Tous les pilotes (pas de filtre) ---
-        # Pas de filtre sur le rang, tous les 21 pilotes sont inclus
+        # FastF1 fournit la grille via race.results, sans hypothèse sur le nombre de pilotes.
 
         # Ordre des pilotes
         pilot_order = (
@@ -160,9 +174,7 @@ class F1FlourishExporterLead:
         # Ordre des GP (avec "*" si Sprint)
         gp_order = []
         for _, ev in self.schedule.sort_values("RoundNumber").iterrows():
-            label = ev["ShortEventName"] + (
-                "*" if ev.get("EventFormat") == "sprint_qualifying" else ""
-            )
+            label = ev["ShortEventName"] + ("*" if self._has_sprint(ev) else "")
             gp_order.append(label)
         df["EventName"] = pd.Categorical(df["EventName"], categories=gp_order, ordered=True)
 
@@ -266,12 +278,5 @@ class F1FlourishExporterLead:
         ].sort_values(["Driver", "EventName"])
 
     def export(self):
-        # Créer le dossier outputs s'il n'existe pas
-        outputs_dir = os.path.join(os.path.dirname(__file__), "outputs")
-        os.makedirs(outputs_dir, exist_ok=True)
-
-        # Chemin complet du fichier de sortie
-        output_path = os.path.join(outputs_dir, self.output_csv)
-
-        self.df_heatmap.to_csv(output_path, index=False)
-        print(f"Exported to {output_path}")
+        self.df_heatmap.to_csv(self.output_path, index=False)
+        print(f"Exported to {self.output_path}")
