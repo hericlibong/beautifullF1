@@ -1,3 +1,4 @@
+import argparse
 import os
 from datetime import datetime
 
@@ -8,11 +9,18 @@ import pandas as pd
 
 
 class RaceChartBuilderFastF1:
-    def __init__(self, season: int, output_file: str = "f1_race_chart_fastf1.csv"):
+    def __init__(
+        self,
+        season: int,
+        output_file: str | None = None,
+        top_n: int | None = None,
+    ):
         self.season = season
-        # Créer le chemin vers le dossier outputs
+        self.top_n = top_n
         outputs_dir = os.path.join(os.path.dirname(__file__), "outputs")
         os.makedirs(outputs_dir, exist_ok=True)
+        if output_file is None:
+            output_file = f"f1_race_chart_fastf1_{season}.csv"
         self.output_file = os.path.join(outputs_dir, output_file)
         self.drivers_data = {}
         self.race_keys = []
@@ -118,16 +126,40 @@ class RaceChartBuilderFastF1:
     def export_csv(self):
         df = pd.DataFrame.from_dict(self.drivers_data, orient="index")
 
-        # Top 4 au dernier GP couru
+        if not self.race_keys:
+            print("[!] Aucun GP couru detecte - rien a exporter.")
+            return
+
         last_gp = self.race_keys[-1]
-        df = df.sort_values(by=last_gp, ascending=False).head(4)
+        df = df.sort_values(by=last_gp, ascending=False)
+        if self.top_n is not None:
+            df = df.head(self.top_n)
 
         df.to_csv(self.output_file, index=False, encoding="utf-8-sig")
-        print(f"\n✅ Fichier exporté : {self.output_file}")
+        print(f"\n[OK] Fichier exporte : {self.output_file}")
         print(df)
 
 
+def _parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="F1 race chart dataset builder (FastF1).")
+    parser.add_argument("--season", type=int, default=2025, help="Saison F1 (ex: 2025, 2026)")
+    parser.add_argument(
+        "--top",
+        type=int,
+        default=None,
+        help="Garder uniquement les N premiers du classement (par défaut: tous les pilotes)",
+    )
+    parser.add_argument(
+        "--output",
+        type=str,
+        default=None,
+        help="Nom du fichier CSV (défaut: f1_race_chart_fastf1_<season>.csv)",
+    )
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
-    builder = RaceChartBuilderFastF1(season=2025)
+    args = _parse_args()
+    builder = RaceChartBuilderFastF1(season=args.season, output_file=args.output, top_n=args.top)
     builder.build_results_table()
     builder.export_csv()

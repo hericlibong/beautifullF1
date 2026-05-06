@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>F1 2026 — Race Chart Line</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+  <header class="page-head">
+    <h1>F1 2026 — Évolution du championnat pilotes</h1>
+    <p class="sub">
+      Points cumulés par Grand Prix (course + sprint) — pilotes ayant marqué au moins un point.
+    </p>
+  </header>
+
+  <main class="viz-wrap">
+    <div class="controls">
+      <button id="play-btn" type="button">▶ Lancer l'animation</button>
+      <button id="reset-btn" type="button">↺ Reset</button>
+      <span class="hint">Survolez les lignes pour le détail • Cliquez sur la légende pour isoler un pilote</span>
+    </div>
+    <div id="chart"></div>
+    <div id="legend"></div>
+  </main>
+
+  <footer class="page-foot">
+    <small>Données : Fast-F1 (calendrier 2026, courses et sprints inclus) • Visualisation : D3.js v7</small>
+  </footer>
+
+  <script src="./script.js"></script>
+</body>
+</html>
