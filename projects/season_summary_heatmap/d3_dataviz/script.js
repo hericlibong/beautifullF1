@@ -1,7 +1,8 @@
 // v2 — Heatmap D3 (D3 v7) - Version Leaders
 // Hypothèse de structure : d3_dataviz/ à côté du CSV à la racine du projet
 // Utilise le CSV leaders avec métriques avancées
-const DATA_URL = "f1_2025_leaders_heatmap.csv";
+const SEASON = 2026;
+const DATA_URL = "f1_2026_leaders_heatmap.csv";
 
 const container = d3.select("#chart");
 const tooltip = d3.select("#tooltip");
@@ -55,7 +56,7 @@ function render(data, driverAvgPoints) {
     .attr("fill", "#e6e9f2")
     .attr("font-size", 20)
     .attr("font-weight", "700")
-    .text("Une saison de Formule 1, course après course");
+    .text(`Formule 1 ${SEASON}, course après course`);
 
   const subtitle = svg.append("text")
     .attr("x", headX)
@@ -68,7 +69,7 @@ function render(data, driverAvgPoints) {
   subtitle.append("tspan")
     .attr("x", headX)
     .attr("dy", 0)
-    .text("Cette heatmap retrace la construction du championnat 2025 : les points marqués par chaque pilote");
+    .text(`Cette heatmap suit le championnat ${SEASON} en cours : les points marqués par chaque pilote`);
 
   subtitle.append("tspan")
     .attr("x", headX)
@@ -176,7 +177,7 @@ function showTooltip(event, d){
         <div><b>Équipe :</b> ${d.Team}</div>
         <div><b>Grand Prix :</b> ${d.EventNameFull}</div>
         <div><b>Grille / Arrivée :</b> ${fmtPos(d.GridPosition)} / ${fmtPos(d.FinishPosition)}</div>
-        <div><b>Points (course) :</b> ${d.Points}${sprintInfo}</div>
+        <div><b>Points (GP) :</b> ${d.Points}${sprintInfo}</div>
         <div><b>Total saison :</b> ${d.TotalPoints} • <b>Rang :</b> ${d.RankLabel ?? ""}</div>
         <div><b>Cumul :</b> ${d.CumulativePoints} pts • Moyenne : ${d.AvgPointsToDate?.toFixed(1)} pts/GP</div>
         <div><b>Moyenne 5 GP :</b> ${d.Last5Avg?.toFixed(1)} pts • Podiums : ${(d.PodiumRate*100)?.toFixed(0)}%</div>
