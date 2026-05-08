@@ -3,9 +3,10 @@
  */
 
 (async function () {
-  const [dashRes, teamsRes] = await Promise.all([
+  const [dashRes, teamsRes, manifestRes] = await Promise.all([
     fetch("data/dashboard_2026.json").then(r => r.json()),
     fetch("assets/teams.json").then(r => r.json()),
+    fetch("assets/manifest.json").then(r => r.json()),
   ]);
 
   const teams = teamsRes.teams || {};
@@ -51,6 +52,28 @@
       <div class="dash-kpi-sub">${kpi.sub}</div>
     </div>
   `).join("");
+
+  // ---------- Visualisations (depuis manifest) ----------
+  const vizContainer = document.getElementById("dash-viz");
+  if (vizContainer && manifestRes.items) {
+    const vizItems = manifestRes.items.filter(it => it.category === "viz");
+    vizContainer.innerHTML = vizItems.map(it => {
+      const disabled = !it.available;
+      const linkLabel = disabled ? "Bientôt" : "Ouvrir →";
+      const tag = disabled ? "div" : "a";
+      const hrefAttr = disabled ? "" : `href="${it.route}"`;
+      const ariaAttr = disabled ? `aria-disabled="true" style="opacity:0.55;"` : "";
+      return `
+        <${tag} class="dash-card" ${hrefAttr} ${ariaAttr}>
+          <div class="dash-card-header">
+            <h3 class="dash-card-title">${it.title}</h3>
+            <span class="dash-card-link">${linkLabel}</span>
+          </div>
+          <p class="dash-kpi-sub">${it.description}</p>
+        </${tag}>
+      `;
+    }).join("");
+  }
 })().catch(err => {
   console.error("Erreur de chargement du dashboard :", err);
   const sub = document.getElementById("dash-subtitle");

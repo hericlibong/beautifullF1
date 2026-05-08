@@ -32,9 +32,10 @@ Tableau de bord statique consolidant les visualisations existantes (race chart, 
 - [x] Créer `projects/dashboard/sync_to_docs.py` (copie additive web/ → docs/)
 
 ### 1.4 Manifest & navigation
-- [ ] `docs/assets/manifest.json` : liste des viz disponibles avec titre, vignette, route
-- [ ] Composant JS de navigation latérale (ou top nav) chargeant le manifest
-- [ ] Lien dashboard ↔ viz détaillées (race chart, heatmap) avec retour
+- [x] `docs/assets/manifest.json` : liste des viz disponibles avec titre, route, statut available
+- [x] Composant JS top-nav (`assets/navbar.js`) chargeant le manifest, sticky en haut, brand cliquable, liens actifs
+- [x] Cartes de viz du dashboard rendues dynamiquement depuis le manifest
+- [x] Navbar incluse sur race_chart_builder + season_summary_heatmap (retour dashboard)
 
 ---
 

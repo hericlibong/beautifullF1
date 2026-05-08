@@ -20,44 +20,10 @@
       <div id="dash-kpis" class="dash-grid dash-grid--kpi" role="list"></div>
     </section>
 
-    <!-- Visualisations existantes -->
+    <!-- Visualisations (rendues depuis assets/manifest.json) -->
     <section class="dash-section" aria-labelledby="viz-title">
       <h2 id="viz-title" class="dash-section-title">Visualisations</h2>
-      <div class="dash-grid dash-grid--widgets">
-
-        <a class="dash-card" href="race_chart_builder/index.html">
-          <div class="dash-card-header">
-            <h3 class="dash-card-title">Évolution du championnat</h3>
-            <span class="dash-card-link">Ouvrir →</span>
-          </div>
-          <p class="dash-kpi-sub">Points cumulés par GP, course + sprint, animation et comparaison multi-pilotes.</p>
-        </a>
-
-        <a class="dash-card" href="season_summary_heatmap/index.html">
-          <div class="dash-card-header">
-            <h3 class="dash-card-title">Heatmap de la saison</h3>
-            <span class="dash-card-link">Ouvrir →</span>
-          </div>
-          <p class="dash-kpi-sub">Vue d'ensemble points-pilote × GP, identification des temps forts.</p>
-        </a>
-
-        <div class="dash-card" aria-disabled="true" style="opacity:0.55;">
-          <div class="dash-card-header">
-            <h3 class="dash-card-title">Standings live</h3>
-            <span class="dash-card-link">Bientôt</span>
-          </div>
-          <p class="dash-kpi-sub">Tableau classement pilotes et constructeurs avec delta vs GP précédent.</p>
-        </div>
-
-        <div class="dash-card" aria-disabled="true" style="opacity:0.55;">
-          <div class="dash-card-header">
-            <h3 class="dash-card-title">Calendrier 2026</h3>
-            <span class="dash-card-link">Bientôt</span>
-          </div>
-          <p class="dash-kpi-sub">Liste des 24 GP, statut joué/à venir, marquage week-end sprint.</p>
-        </div>
-
-      </div>
+      <div id="dash-viz" class="dash-grid dash-grid--widgets"></div>
     </section>
 
   </main>
@@ -66,6 +32,7 @@
     <small>Beautiful F1 — Dashboard saison 2026 • Données : FastF1 • <a href="https://github.com/hericlibong/beautifullF1">GitHub</a></small>
   </footer>
 
+  <script src="assets/navbar.js" data-base="./" defer></script>
   <script src="assets/dashboard.js" defer></script>
 </body>
 </html>
