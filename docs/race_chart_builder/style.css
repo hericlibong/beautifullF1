@@ -64,6 +64,57 @@ body {
   font-size: 0.85rem;
 }
 
+.progress-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.progress-row input[type="range"] {
+  flex: 1;
+  accent-color: #ff8000;
+  cursor: pointer;
+}
+.progress-label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  min-width: 120px;
+  font-variant-numeric: tabular-nums;
+}
+
+.quick-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+.quick-filters .qf-btn {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--grid);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: background 0.15s, border-color 0.15s;
+}
+.quick-filters .qf-btn:hover {
+  background: #20232f;
+  border-color: #3a4150;
+}
+.quick-filters .qf-btn .qf-swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.quick-filters .qf-btn.active {
+  background: #2a2f3f;
+  border-color: #5a6275;
+}
+
 #chart {
   background: var(--panel);
   border-radius: 12px;
@@ -73,7 +124,8 @@ body {
 
 #chart svg {
   width: 100%;
-  height: auto;
+  height: 75vh;
+  min-height: 720px;
   display: block;
   font-family: inherit;
 }
@@ -93,6 +145,25 @@ body {
   stroke-opacity: 0.6;
 }
 
+.sprint-line {
+  stroke: #ffc000;
+  stroke-dasharray: 4 4;
+  stroke-opacity: 0.35;
+  stroke-width: 1;
+}
+.axis text.sprint-tick {
+  fill: #ffc000;
+  font-weight: 600;
+}
+.sprint-badge {
+  fill: #ffc000;
+  font-size: 10px;
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 3;
+}
+
 .driver-line {
   fill: none;
   stroke-width: 2.5;
@@ -110,7 +181,15 @@ body {
 }
 .driver-dot.dimmed { opacity: 0.15; }
 
-.driver-label {
+.driver-endcap { transition: opacity 0.2s; }
+.driver-endcap.dimmed { opacity: 0.2; }
+
+.label-connector {
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.driver-label-text {
   font-size: 11px;
   font-weight: 600;
   paint-order: stroke;
@@ -118,7 +197,13 @@ body {
   stroke-width: 3;
   stroke-linejoin: round;
 }
-.driver-label.dimmed { opacity: 0.2; }
+
+.driver-photo {
+  pointer-events: none;
+}
+.driver-ring {
+  pointer-events: none;
+}
 
 #legend {
   margin-top: 1.25rem;
@@ -139,6 +224,7 @@ body {
 }
 .legend-item:hover { background: #20232f; }
 .legend-item.muted { opacity: 0.35; }
+.legend-item.active { background: #2a2f3f; box-shadow: inset 0 0 0 1px #3a4150; }
 .legend-swatch {
   width: 12px;
   height: 12px;
@@ -164,6 +250,13 @@ body {
 }
 .tooltip strong { color: var(--accent); }
 .tooltip .tt-team { color: var(--muted); font-size: 0.78rem; }
+.tooltip .tt-sprint {
+  color: #ffc000;
+  font-size: 0.75rem;
+  margin-top: 0.35rem;
+  padding-top: 0.35rem;
+  border-top: 1px solid var(--grid);
+}
 
 .page-foot {
   text-align: center;

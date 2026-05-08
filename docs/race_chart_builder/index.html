@@ -19,8 +19,16 @@
     <div class="controls">
       <button id="play-btn" type="button">▶ Lancer l'animation</button>
       <button id="reset-btn" type="button">↺ Reset</button>
-      <span class="hint">Survolez les lignes pour le détail • Cliquez sur la légende pour isoler un pilote</span>
+      <button id="clear-selection-btn" type="button">✕ Tout afficher</button>
+      <button id="scale-toggle-btn" type="button" data-scale="linear">📏 Échelle : linéaire</button>
+      <button id="mode-toggle-btn" type="button" data-mode="cumul">📊 Mode : cumul</button>
+      <span class="hint">Survolez les lignes pour le détail • Cliquez plusieurs pilotes dans la légende pour les comparer</span>
     </div>
+    <div class="progress-row">
+      <input id="progress-slider" type="range" min="0" max="1000" value="0" step="1" />
+      <span id="progress-label" class="progress-label">—</span>
+    </div>
+    <div id="quick-filters" class="quick-filters"></div>
     <div id="chart"></div>
     <div id="legend"></div>
   </main>
