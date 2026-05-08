@@ -1,0 +1,17 @@
+{
+  "season": 2026,
+  "fallbackColor": "#888888",
+  "teams": {
+    "McLaren":         { "color": "#FF8000", "short": "MCL" },
+    "Ferrari":         { "color": "#DC0000", "short": "FER" },
+    "Mercedes":        { "color": "#27F4D2", "short": "MER" },
+    "Red Bull Racing": { "color": "#3671C6", "short": "RBR" },
+    "Racing Bulls":    { "color": "#6692FF", "short": "RB"  },
+    "Williams":        { "color": "#64C4FF", "short": "WIL" },
+    "Aston Martin":    { "color": "#229971", "short": "AMR" },
+    "Alpine":          { "color": "#FF87BC", "short": "ALP" },
+    "Haas F1 Team":    { "color": "#B6BABD", "short": "HAA" },
+    "Audi":            { "color": "#52E252", "short": "AUD" },
+    "Cadillac":        { "color": "#FFC000", "short": "CAD" }
+  }
+}

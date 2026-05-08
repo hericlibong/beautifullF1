@@ -1,0 +1,40 @@
+{
+  "season": 2026,
+  "generatedAt": "2026-05-08",
+  "lastGp": {
+    "name": "United States - Miami Gardens",
+    "shortName": "Miami",
+    "date": "2026-05-03",
+    "isSprint": true,
+    "winner": {
+      "name": "Kimi Antonelli",
+      "team": "Mercedes"
+    }
+  },
+  "nextGp": {
+    "name": "Canada",
+    "shortName": "Canada",
+    "date": "2026-05-24",
+    "isSprint": true
+  },
+  "kpis": {
+    "leader": {
+      "name": "Kimi Antonelli",
+      "team": "Mercedes",
+      "points": 100
+    },
+    "second": {
+      "name": "George Russell",
+      "team": "Mercedes",
+      "points": 80
+    },
+    "leaderGap": 20,
+    "lastWinner": {
+      "name": "Kimi Antonelli",
+      "team": "Mercedes",
+      "gp": "United States - Miami Gardens"
+    },
+    "raceCount": 4,
+    "totalRaces": 22
+  }
+}

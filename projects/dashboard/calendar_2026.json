@@ -1,0 +1,160 @@
+{
+  "season": 2026,
+  "totalRaces": 22,
+  "rounds": [
+    {
+      "round": 1,
+      "name": "Australia",
+      "shortName": "Australia",
+      "date": "2026-03-08",
+      "isSprint": false
+    },
+    {
+      "round": 2,
+      "name": "China",
+      "shortName": "China",
+      "date": "2026-03-15",
+      "isSprint": true
+    },
+    {
+      "round": 3,
+      "name": "Japan",
+      "shortName": "Japan",
+      "date": "2026-03-29",
+      "isSprint": false
+    },
+    {
+      "round": 4,
+      "name": "United States - Miami Gardens",
+      "shortName": "Miami",
+      "date": "2026-05-03",
+      "isSprint": true
+    },
+    {
+      "round": 5,
+      "name": "Canada",
+      "shortName": "Canada",
+      "date": "2026-05-24",
+      "isSprint": true
+    },
+    {
+      "round": 6,
+      "name": "Monaco",
+      "shortName": "Monaco",
+      "date": "2026-06-07",
+      "isSprint": false
+    },
+    {
+      "round": 7,
+      "name": "Spain",
+      "shortName": "Madrid",
+      "date": "2026-06-14",
+      "isSprint": false
+    },
+    {
+      "round": 8,
+      "name": "Austria",
+      "shortName": "Austria",
+      "date": "2026-06-28",
+      "isSprint": false
+    },
+    {
+      "round": 9,
+      "name": "United Kingdom",
+      "shortName": "Silverstone",
+      "date": "2026-07-05",
+      "isSprint": true
+    },
+    {
+      "round": 10,
+      "name": "Belgium",
+      "shortName": "Spa",
+      "date": "2026-07-19",
+      "isSprint": false
+    },
+    {
+      "round": 11,
+      "name": "Hungary",
+      "shortName": "Hungaroring",
+      "date": "2026-07-26",
+      "isSprint": false
+    },
+    {
+      "round": 12,
+      "name": "Netherlands",
+      "shortName": "Zandvoort",
+      "date": "2026-08-23",
+      "isSprint": true
+    },
+    {
+      "round": 13,
+      "name": "Italy - Monza",
+      "shortName": "Monza",
+      "date": "2026-09-06",
+      "isSprint": false
+    },
+    {
+      "round": 14,
+      "name": "Spain",
+      "shortName": "Madrid",
+      "date": "2026-09-13",
+      "isSprint": false
+    },
+    {
+      "round": 15,
+      "name": "Azerbaijan",
+      "shortName": "Baku",
+      "date": "2026-09-26",
+      "isSprint": false
+    },
+    {
+      "round": 16,
+      "name": "Singapore",
+      "shortName": "Singapore",
+      "date": "2026-10-11",
+      "isSprint": true
+    },
+    {
+      "round": 17,
+      "name": "United States - Austin",
+      "shortName": "Austin",
+      "date": "2026-10-25",
+      "isSprint": false
+    },
+    {
+      "round": 18,
+      "name": "Mexico",
+      "shortName": "Mexico",
+      "date": "2026-11-01",
+      "isSprint": false
+    },
+    {
+      "round": 19,
+      "name": "Brazil",
+      "shortName": "Interlagos",
+      "date": "2026-11-08",
+      "isSprint": false
+    },
+    {
+      "round": 20,
+      "name": "United States - Las Vegas",
+      "shortName": "Las Vegas",
+      "date": "2026-11-21",
+      "isSprint": false
+    },
+    {
+      "round": 21,
+      "name": "Qatar",
+      "shortName": "Lusail",
+      "date": "2026-11-29",
+      "isSprint": false
+    },
+    {
+      "round": 22,
+      "name": "United Arab Emirates",
+      "shortName": "Yas Marina",
+      "date": "2026-12-06",
+      "isSprint": false
+    }
+  ]
+}

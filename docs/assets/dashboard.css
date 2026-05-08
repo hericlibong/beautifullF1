@@ -1,0 +1,219 @@
+/* ------------------------------------------------------------------
+ * Beautiful F1 — Design system commun
+ *
+ * Tokens (variables CSS), reset léger, primitives de layout et
+ * composants réutilisables (.dash-card, .dash-kpi, .dash-grid…).
+ *
+ * Ce fichier est chargé par toutes les pages du dashboard et par
+ * les visualisations qui souhaitent s'aligner sur le même langage.
+ * ------------------------------------------------------------------ */
+
+:root {
+  /* Palette neutre */
+  --bg:        #0f1116;
+  --panel:    #171923;
+  --panel-2:  #1f2230;
+  --text:     #e8eaf0;
+  --muted:    #9aa3b2;
+  --grid:     #2a2f3a;
+  --accent:   #ffffff;
+  --highlight:#ffc000;
+
+  /* Sémantique */
+  --positive: #52e252;
+  --negative: #e25252;
+
+  /* Typographie */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Consolas, monospace;
+  --fs-xs:    0.75rem;
+  --fs-sm:    0.85rem;
+  --fs-md:    1rem;
+  --fs-lg:    1.25rem;
+  --fs-xl:    1.6rem;
+  --fs-2xl:   2rem;
+
+  /* Espacements */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+
+  /* Rayons */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+
+  /* Ombres */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
+
+  /* Largeur de conteneur */
+  --container-max: 1280px;
+
+  /* Breakpoints (référence — à utiliser dans @media) */
+  /* mobile  : <= 600px  */
+  /* tablet  : 601-900px */
+  /* desktop : > 900px   */
+}
+
+/* ---------- Reset ---------- */
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-md);
+  line-height: 1.5;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ---------- Layout primitives ---------- */
+.dash-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: var(--sp-4) var(--sp-5);
+}
+
+.dash-section {
+  margin-bottom: var(--sp-6);
+}
+
+.dash-section-title {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  margin: 0 0 var(--sp-3);
+  color: var(--accent);
+}
+
+.dash-grid {
+  display: grid;
+  gap: var(--sp-4);
+}
+
+.dash-grid--kpi {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.dash-grid--widgets {
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+}
+
+/* ---------- Composants ---------- */
+
+/* Carte générique */
+.dash-card {
+  background: var(--panel);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-4);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.dash-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--sp-3);
+}
+
+.dash-card-title {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  margin: 0;
+  color: var(--accent);
+}
+
+.dash-card-link {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  transition: color 0.15s;
+}
+.dash-card-link:hover { color: var(--highlight); }
+
+/* KPI : grand chiffre + libellé */
+.dash-kpi {
+  background: var(--panel);
+  border-radius: var(--radius-md);
+  padding: var(--sp-4);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.dash-kpi-label {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.dash-kpi-value {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.dash-kpi-sub {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+
+.dash-kpi--positive .dash-kpi-value { color: var(--positive); }
+.dash-kpi--negative .dash-kpi-value { color: var(--negative); }
+
+/* En-tête de page */
+.dash-header {
+  padding: var(--sp-6) var(--sp-5) var(--sp-4);
+  text-align: center;
+}
+
+.dash-header h1 {
+  margin: 0;
+  font-size: var(--fs-2xl);
+  color: var(--accent);
+}
+
+.dash-header .dash-subtitle {
+  margin-top: var(--sp-2);
+  color: var(--muted);
+  font-size: var(--fs-sm);
+}
+
+/* Pied de page */
+.dash-footer {
+  text-align: center;
+  padding: var(--sp-5);
+  color: #777;
+  font-size: var(--fs-xs);
+}
+
+/* Focus accessible commun */
+:focus-visible {
+  outline: 2px solid var(--highlight);
+  outline-offset: 2px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .dash-container { padding: var(--sp-3); }
+  .dash-header { padding: var(--sp-5) var(--sp-3) var(--sp-3); }
+  .dash-header h1 { font-size: var(--fs-xl); }
+}
+
+@media (max-width: 600px) {
+  .dash-grid--kpi { grid-template-columns: repeat(2, 1fr); }
+  .dash-kpi-value { font-size: var(--fs-xl); }
+}
