@@ -41,20 +41,26 @@ Tableau de bord statique consolidant les visualisations existantes (race chart, 
 
 ## Phase 2 — Intégration des viz existantes (2-3 jours)
 
-### 2.1 Race chart builder
-- [ ] Ajouter un mode "embed" à `race_chart_builder` (sans header propre, hauteur réduite)
-- [ ] Intégrer dans le dashboard via `<iframe>` ou inclusion JS directe
-- [ ] Lien "voir en détail" → page complète
+### 2.1 Race chart builder — ~~intégration embed~~
+- [~] ~~Mode "embed", iframe sur le dashboard, lien "voir en détail"~~ — **abandonné** : rendu grossier et doublon visuel avec les pages dédiées. Le race chart reste accessible via la navbar.
 
 ### 2.2 Heatmap saison
-- [ ] Mettre à jour la heatmap D3 existante avec les données 2026 (`projects/season_summary_heatmap`)
-- [ ] Adapter au design system commun
-- [ ] Intégrer comme widget dashboard
-- [ ] Lien "voir en détail"
+- [x] La heatmap D3 a été mise à jour en 2026 (canonique : `projects/season_summary_heatmap/d3_dataviz/`)
+- [x] `sync_to_docs.py` créé pour propager la heatmap dans `docs/season_summary_heatmap/`
+- [x] Navbar + dashboard.css ajoutés au canonique pour cohérence visuelle entre pages
+- [~] ~~Adapter au design system commun (refonte profonde)~~ — reporté
+- [~] ~~Intégrer comme widget iframe sur le dashboard~~ — **abandonné** (cf. 2.1)
 
 ### 2.3 Synchronisation des données
-- [ ] Faire en sorte que `build_dashboard_data.py` déclenche aussi les builders race_chart et heatmap (pipeline unifié)
-- [ ] Vérifier que toutes les viz pointent vers les CSV consolidés (`docs/data/`)
+- [x] Pipeline unifié : `projects/dashboard/build_all.py` orchestre tout en une commande
+  - 1) `race_chart_builder_fastf1.py --season 2026` → outputs/CSV
+  - 2) copie CSV → `web/data/`
+  - 3) `lead_main.py --season 2026` → outputs/CSV (heatmap)
+  - 4) copie CSV → `d3_dataviz/`
+  - 5) `build_dashboard_data.py` → JSON
+  - 6) sync_to_docs × 3 (race_chart, heatmap, dashboard)
+  - Flag `--skip-fetch` pour rejouer la propagation sans toucher FastF1
+- [~] ~~Consolider tous les CSV dans `docs/data/`~~ — **non fait** : chaque viz garde son CSV à côté de son HTML (pattern actuel suffisant). Le pipeline fait quand même la cohérence.
 
 ---
 
