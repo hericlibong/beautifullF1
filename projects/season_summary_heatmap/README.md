@@ -31,8 +31,7 @@ projects/season_summary_heatmap/
 │   ├── index.html
 │   ├── script.js
 │   └── style.css
-├── tests/                         # Tests unitaires
-│   └── test_season_summary_heatmap.py
+├── sync_to_docs.py                # Recopie d3_dataviz/ vers docs/season_summary_heatmap/
 └── __init__.py
 ```
 
