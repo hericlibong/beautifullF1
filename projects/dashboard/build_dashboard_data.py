@@ -94,6 +94,75 @@ def compute_kpis(rows: list[dict], gp_columns: list[str]) -> tuple[dict, str]:
     )
 
 
+def short_name(full: str) -> str:
+    parts = (full or "").strip().split()
+    if len(parts) < 2:
+        return full
+    return f"{parts[0][0]}. {' '.join(parts[1:])}"
+
+
+def compute_standings(rows: list[dict], gp_columns: list[str], short_names: dict[str, str] | None = None) -> dict:
+    """Standings pilotes et constructeurs avec rang, points, delta dernier GP, écart leader."""
+    if not gp_columns:
+        return {"drivers": [], "constructors": []}
+
+    last_gp = gp_columns[-1]
+    prev_gp = gp_columns[-2] if len(gp_columns) >= 2 else None
+    short_names = short_names or {}
+
+    def progress_for(r: dict) -> list[dict]:
+        """Retourne pour chaque GP joué : nom, gain au GP, cumul à la fin du GP."""
+        out = []
+        prev = 0.0
+        for gp in gp_columns:
+            cum = to_float(r[gp])
+            out.append({
+                "gp": gp,
+                "shortName": short_names.get(gp, gp),
+                "gain": int(cum - prev),
+                "cumulative": int(cum),
+            })
+            prev = cum
+        return out
+
+    # Pilotes
+    drivers = [
+        {
+            "name": r["Pilote"],
+            "shortName": short_name(r["Pilote"]),
+            "team": r.get("team", ""),
+            "image": r.get("image", ""),
+            "points": int(to_float(r[last_gp])),
+            "deltaLastGp": int(to_float(r[last_gp]) - (to_float(r[prev_gp]) if prev_gp else 0.0)),
+            "progress": progress_for(r),
+        }
+        for r in rows
+    ]
+    drivers.sort(key=lambda d: d["points"], reverse=True)
+    leader_pts = drivers[0]["points"] if drivers else 0
+    for i, d in enumerate(drivers):
+        d["rank"] = i + 1
+        d["leaderGap"] = d["points"] - leader_pts  # 0 ou négatif
+
+    # Constructeurs : agrégation par écurie
+    teams: dict[str, dict] = {}
+    for d in drivers:
+        t = d["team"]
+        if not t:
+            continue
+        bucket = teams.setdefault(t, {"team": t, "points": 0, "deltaLastGp": 0})
+        bucket["points"] += d["points"]
+        bucket["deltaLastGp"] += d["deltaLastGp"]
+
+    constructors = sorted(teams.values(), key=lambda x: x["points"], reverse=True)
+    leader_team_pts = constructors[0]["points"] if constructors else 0
+    for i, c in enumerate(constructors):
+        c["rank"] = i + 1
+        c["leaderGap"] = c["points"] - leader_team_pts
+
+    return {"drivers": drivers, "constructors": constructors}
+
+
 def find_round(rounds: Iterable[dict], gp_name: str) -> dict | None:
     for r in rounds:
         if r["name"] == gp_name:
@@ -113,6 +182,41 @@ def build(today: date | None = None) -> dict:
     next_round = rounds[last_round_idx + 1] if 0 <= last_round_idx < len(rounds) - 1 else None
 
     kpis["totalRaces"] = total_races
+    short_names_by_gp = {r["name"]: r.get("shortName", r["name"]) for r in rounds}
+    standings = compute_standings(rows, gp_columns, short_names_by_gp)
+
+    # Calendrier enrichi : status (played / next / upcoming) + winner si dispo
+    played_set = set(gp_columns)
+    winners_by_gp = {}
+    if rows and gp_columns:
+        for gpi, gp in enumerate(gp_columns):
+            prev = gp_columns[gpi - 1] if gpi > 0 else None
+            best = None
+            best_gain = -1
+            for r in rows:
+                gain = to_float(r[gp]) - (to_float(r[prev]) if prev else 0.0)
+                if gain > best_gain:
+                    best_gain = gain
+                    best = r
+            if best is not None:
+                winners_by_gp[gp] = {
+                    "name": best["Pilote"],
+                    "team": best.get("team", ""),
+                    "shortName": short_name(best["Pilote"]),
+                }
+    calendar_out = []
+    for r in rounds:
+        is_played = r["name"] in played_set
+        is_next = (next_round is not None and r["name"] == next_round["name"])
+        calendar_out.append({
+            "round":     r["round"],
+            "name":      r["name"],
+            "shortName": r.get("shortName", r["name"]),
+            "date":      r["date"],
+            "isSprint":  bool(r.get("isSprint", False)),
+            "status":    "played" if is_played else ("next" if is_next else "upcoming"),
+            "winner":    winners_by_gp.get(r["name"]) if is_played else None,
+        })
 
     return {
         "season": calendar["season"],
@@ -134,6 +238,8 @@ def build(today: date | None = None) -> dict:
             if next_round else None
         ),
         "kpis": kpis,
+        "standings": standings,
+        "calendar": calendar_out,
     }
 
 

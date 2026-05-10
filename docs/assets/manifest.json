@@ -12,7 +12,7 @@
     },
     {
       "id": "race-chart",
-      "title": "Évolution du championnat",
+      "title": "Race Line",
       "description": "Points cumulés par GP, course + sprint, animation et comparaison multi-pilotes.",
       "route": "race_chart_builder/",
       "thumbnail": null,
@@ -21,29 +21,11 @@
     },
     {
       "id": "heatmap",
-      "title": "Heatmap de la saison",
+      "title": "Heatmap",
       "description": "Vue d'ensemble points-pilote × GP, identification des temps forts.",
       "route": "season_summary_heatmap/",
       "thumbnail": "assets/heatmap_preview.png",
       "available": true,
-      "category": "viz"
-    },
-    {
-      "id": "standings",
-      "title": "Standings live",
-      "description": "Tableau classement pilotes et constructeurs avec delta vs GP précédent.",
-      "route": null,
-      "thumbnail": null,
-      "available": false,
-      "category": "viz"
-    },
-    {
-      "id": "calendar",
-      "title": "Calendrier 2026",
-      "description": "Liste des 22 GP, statut joué/à venir, marquage week-end sprint.",
-      "route": null,
-      "thumbnail": null,
-      "available": false,
       "category": "viz"
     }
   ]

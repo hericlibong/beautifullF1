@@ -14,16 +14,40 @@
 
   <main class="dash-container">
 
-    <!-- Bandeau KPI -->
-    <section class="dash-section" aria-labelledby="kpi-title">
-      <h2 id="kpi-title" class="dash-section-title">État de la saison</h2>
+    <!-- Bandeau KPI (4 tuiles, dont countdown) -->
+    <section class="dash-section" aria-label="Indicateurs clés">
       <div id="dash-kpis" class="dash-grid dash-grid--kpi" role="list"></div>
     </section>
 
-    <!-- Visualisations (rendues depuis assets/manifest.json) -->
-    <section class="dash-section" aria-labelledby="viz-title">
-      <h2 id="viz-title" class="dash-section-title">Visualisations</h2>
-      <div id="dash-viz" class="dash-grid dash-grid--widgets"></div>
+    <!-- Zone principale 2 colonnes : Classements + Visualisations -->
+    <section class="dash-section dash-main-grid">
+      <!-- Colonne 1 : Classements + Calendrier en onglets -->
+      <div class="dash-card dash-card--standings">
+        <div class="dash-card-header">
+          <div class="dash-tabs" role="tablist" aria-label="Vue principale">
+            <button class="dash-tab active" data-tab="drivers" role="tab" aria-selected="true">Pilotes</button>
+            <button class="dash-tab" data-tab="constructors" role="tab" aria-selected="false">Constructeurs</button>
+            <button class="dash-tab" data-tab="calendar" role="tab" aria-selected="false">Calendrier <span id="dash-calendar-progress" class="dash-tab-badge"></span></button>
+          </div>
+        </div>
+        <div id="standings-pane-drivers" class="dash-tab-pane active">
+          <table id="standings-drivers" class="dash-table"></table>
+        </div>
+        <div id="standings-pane-constructors" class="dash-tab-pane">
+          <table id="standings-constructors" class="dash-table"></table>
+        </div>
+        <div id="standings-pane-calendar" class="dash-tab-pane">
+          <ol id="dash-calendar" class="dash-calendar"></ol>
+        </div>
+      </div>
+
+      <!-- Colonne 2 : Visualisations -->
+      <div class="dash-card dash-card--shortcuts">
+        <div class="dash-card-header">
+          <h3 class="dash-card-title">Visualisations</h3>
+        </div>
+        <div id="dash-viz" class="dash-shortcuts"></div>
+      </div>
     </section>
 
   </main>
