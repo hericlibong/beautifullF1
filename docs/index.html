@@ -28,6 +28,8 @@
             <button class="dash-tab active" data-tab="drivers" role="tab" aria-selected="true">Pilotes</button>
             <button class="dash-tab" data-tab="constructors" role="tab" aria-selected="false">Constructeurs</button>
             <button class="dash-tab" data-tab="calendar" role="tab" aria-selected="false">Calendrier <span id="dash-calendar-progress" class="dash-tab-badge"></span></button>
+            <button class="dash-tab" data-tab="duel" role="tab" aria-selected="false">Duel</button>
+            <button class="dash-tab" data-tab="teammates" role="tab" aria-selected="false">Coéquipiers · Qualifs</button>
           </div>
         </div>
         <div id="standings-pane-drivers" class="dash-tab-pane active">
@@ -38,6 +40,28 @@
         </div>
         <div id="standings-pane-calendar" class="dash-tab-pane">
           <ol id="dash-calendar" class="dash-calendar"></ol>
+        </div>
+        <div id="standings-pane-duel" class="dash-tab-pane">
+          <div class="dash-duel-pickers">
+            <select id="duel-a" class="dash-duel-select" aria-label="Pilote A"></select>
+            <span class="dash-duel-vs">VS</span>
+            <select id="duel-b" class="dash-duel-select" aria-label="Pilote B"></select>
+          </div>
+          <div id="dash-duel-content" class="dash-duel-content"></div>
+        </div>
+        <div id="standings-pane-teammates" class="dash-tab-pane">
+          <div class="dash-teammates-controls">
+            <label class="dash-teammates-label">
+              Écurie
+              <select id="dash-teammates-team" class="dash-duel-select"></select>
+            </label>
+            <div class="dash-teammates-filters" role="tablist" aria-label="Type de session">
+              <button class="dash-pill active" data-session="ALL" role="tab" aria-selected="true">Tous</button>
+              <button class="dash-pill" data-session="Q" role="tab" aria-selected="false">Qualifs</button>
+              <button class="dash-pill" data-session="SQ" role="tab" aria-selected="false">Sprint Qualifs</button>
+            </div>
+          </div>
+          <div id="dash-teammates-content"></div>
         </div>
       </div>
 

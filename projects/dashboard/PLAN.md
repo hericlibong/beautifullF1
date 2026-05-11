@@ -96,10 +96,20 @@ Tâches issues du feedback en cours de route.
 - [x] Calendrier ajouté au JSON par `build_dashboard_data.py`
 - [~] ~~Lien direct vers détails du GP joué~~ — pas de page de détails GP encore (à voir si besoin plus tard)
 
-### 3.5 Comparateur head-to-head
-- [ ] Sélection 2 pilotes
-- [ ] Tableau comparatif : qualifs gagnées, courses devant, écart points cumulé
-- [ ] Visualisation timeline des batailles
+### 3.5 Comparateur head-to-head — version (a) light
+- [x] 4e onglet "Duel" dans la carte Classements
+- [x] Deux dropdowns natifs alimentés par la liste des pilotes
+- [x] Cartes pilotes côte à côte (couleur écurie, points totaux, moyenne, rang) + écart au centre
+- [x] Score H2H par GP (qui a marqué + de pts à chaque course) avec barre proportionnelle
+- [x] Mini line chart SVG : écart cumulé GP par GP
+- [x] Tableau détaillé GP par GP : gain de chacun + Δ
+- [~] ~~Qualifs gagnées, position d'arrivée par GP~~ — non disponible avec le CSV actuel ; nécessiterait extension du builder (cf. 3.6)
+
+### 3.5.bis Onglet "Coéquipiers" — H2H qualif
+- [x] Nouveau builder `build_qualifying_data.py` (FastF1 → temps de référence par pilote, gap au millième, compteur Q3)
+- [x] Output `docs/data/qualifying_2026.json` + ajout au pipeline `build_all.py`
+- [x] Nouvel onglet "Coéquipiers" dans la carte Classements
+- [x] Une carte par écurie avec : score H2H + barre proportionnelle aux couleurs, compteur Q3, tableau GP par GP avec gap exact
 
 ### 3.6 Calendrier interactif — drill-down circuit
 Rendre chaque ligne du calendrier cliquable, comme pour les pilotes, et ouvrir un panneau détaillé sur le circuit. **Toutes les données ci-dessous sont récupérables via FastF1 (vérifié).**
@@ -141,6 +151,37 @@ Rendre chaque ligne du calendrier cliquable, comme pour les pilotes, et ouvrir u
 - [ ] Inclure les vainqueurs historiques (3 dernières saisons ?) ou seulement 2026 ?
 - [ ] Tracé SVG depuis telemetry (lent, ~30-60 s pour les 22 GP au build) ou tracé simplifié depuis seulement les coordonnées des virages ?
 - [ ] Longueur calculée auto, ou laissée vide en attendant une source plus fiable ?
+
+---
+
+#### 3.6.bis — Enrichissement historique multi-décennies (gp_history)
+
+En complément de FastF1 (qui couvre l'ère récente avec précision technique), `projects/gp_history/` contient déjà des CSV historiques curatés via LLM, qui remontent jusqu'aux années 1960. Ces données apportent une **profondeur narrative** inaccessible à FastF1 seul.
+
+**État existant**
+- ✅ `projects/gp_history/data/gp_history/mexican_grand_prix.csv` — 25 lignes, schéma anglais : `Year, GP, Circuit, Winner, WinnerWinsOnThisGP, WinnerGridPos, Constructor, EngineManufacturer, ConstructorWinsOnThisGP, P2, P3, SeasonChampion, Trophies, WinnerImageURL`
+- ✅ Pipeline Python : `gp_history_builder_mexique_v1.py` + `run_mexico_full.py`, enrichissement Wikidata
+- ⚠️ CSV Australie (chez l'utilisateur) avec **schéma français divergent** : `Year, Circuit, Vainqueur, flag_winner, Nb victoires (vainqueur), Start_position_winner, Constructeur, nb_victoires_team, Motoriste, second, third, world champio, icones, image_winner`
+- ⚠️ Visualisation Flourish "scatter year × cumulative wins, color = team" comme proof-of-concept
+
+**Intégration au drill-down circuit (3.6 principal)**
+Dans le panneau drill-down d'un GP, prévoir 2 zones :
+- **Zone "Saison en cours" (FastF1)** : tracé SVG, longueur, record du tour, vainqueur 2026
+- **Zone "Histoire" (gp_history)** : timeline année × vainqueur, comptage des victoires par écurie, photo du vainqueur historique au survol — équivalent inline du Flourish actuel
+
+**Sous-tâches**
+- [ ] **Harmoniser le schéma** : choisir une convention unique (anglais recommandé pour s'aligner sur le Mexique existant et FastF1) ; convertir le CSV Australie au format Mexique
+- [ ] **Importer le CSV Australie** dans `projects/gp_history/data/gp_history/australian_grand_prix.csv` après conversion de schéma
+- [ ] **Étendre le pipeline `gp_history`** pour générer un fichier de sortie consommable par le dashboard : `docs/data/gp_history.json` indexé par GP, avec pour chaque GP la liste `[{year, winner, team, grid, p2, p3, champion, photo}, ...]`
+- [ ] **Couverture progressive** : ajouter les CSV au fur et à mesure (Mexique ✅, Australie en cours, puis circuits historiques majeurs : Monaco, Italy, Britain, Belgium…). Le drill-down affiche "Données historiques indisponibles" pour les circuits non encore couverts
+- [ ] **Composant front "timeline historique"** dans le drill-down : graphe scatter inline en SVG (Year × victoires cumulées, couleur écurie), avec tooltip au survol affichant photo + détails — réplique simplifiée du Flourish
+- [ ] **À terme** : remplacer la curation LLM par un builder semi-automatique (Wikidata + scraping ponctuel des résultats officiels), en gardant une étape de relecture manuelle
+
+**Décisions à arbitrer**
+- [ ] Schéma cible définitif (recommandation : anglais, format Mexique) — qui implique de convertir le CSV Australie
+- [ ] Profondeur historique par GP : tout disponible, ou plafond (ex. depuis 1985) ?
+- [ ] La viz Flourish standalone existante : la remplacer par la version embarquée du dashboard, ou la garder comme produit dérivé indépendant ?
+- [ ] Sortie : un seul gros JSON `gp_history.json` ou un fichier par circuit (`docs/data/gp_history/{circuit_slug}.json`) ?
 
 ---
 

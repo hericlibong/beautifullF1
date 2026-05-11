@@ -107,6 +107,17 @@ def main() -> int:
     if not ok:
         return 1
 
+    # 5b) Qualifying JSON (duels coéquipiers)
+    if not args.skip_fetch:
+        ok = run_step(
+            "5b/6 build_qualifying_data",
+            [PYTHON, str(db_root / "build_qualifying_data.py")],
+        )
+        if not ok:
+            return 1
+    else:
+        print("\n>>> 5b/6 build_qualifying_data (sauté via --skip-fetch)")
+
     # 6) Sync vers docs/ (les 3 projets)
     for label, script in [
         ("race_chart sync",   rc_root / "sync_to_docs.py"),
