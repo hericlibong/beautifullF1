@@ -1,10 +1,10 @@
 {
   "season": 2026,
-  "generatedAt": "2026-05-10",
+  "generatedAt": "2026-05-25",
   "lastGp": {
-    "name": "United States - Miami Gardens",
-    "shortName": "Miami",
-    "date": "2026-05-03",
+    "name": "Canada",
+    "shortName": "Canada",
+    "date": "2026-05-24",
     "isSprint": true,
     "winner": {
       "name": "Kimi Antonelli",
@@ -12,29 +12,29 @@
     }
   },
   "nextGp": {
-    "name": "Canada",
-    "shortName": "Canada",
-    "date": "2026-05-24",
-    "isSprint": true
+    "name": "Monaco",
+    "shortName": "Monaco",
+    "date": "2026-06-07",
+    "isSprint": false
   },
   "kpis": {
     "leader": {
       "name": "Kimi Antonelli",
       "team": "Mercedes",
-      "points": 100
+      "points": 131
     },
     "second": {
       "name": "George Russell",
       "team": "Mercedes",
-      "points": 80
+      "points": 88
     },
-    "leaderGap": 20,
+    "leaderGap": 43,
     "lastWinner": {
       "name": "Kimi Antonelli",
       "team": "Mercedes",
-      "gp": "United States - Miami Gardens"
+      "gp": "Canada"
     },
-    "raceCount": 4,
+    "raceCount": 5,
     "totalRaces": 22
   },
   "standings": {
@@ -44,8 +44,8 @@
         "shortName": "K. Antonelli",
         "team": "Mercedes",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/K/ANDANT01_Kimi_Antonelli/andant01.png.transform/1col/image.png",
-        "points": 100,
-        "deltaLastGp": 28,
+        "points": 131,
+        "deltaLastGp": 31,
         "progress": [
           {
             "gp": "Australia",
@@ -70,6 +70,12 @@
             "shortName": "Miami",
             "gain": 28,
             "cumulative": 100
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 31,
+            "cumulative": 131
           }
         ],
         "rank": 1,
@@ -80,8 +86,8 @@
         "shortName": "G. Russell",
         "team": "Mercedes",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/G/GEORUS01_George_Russell/georus01.png.transform/1col/image.png",
-        "points": 80,
-        "deltaLastGp": 17,
+        "points": 88,
+        "deltaLastGp": 8,
         "progress": [
           {
             "gp": "Australia",
@@ -106,18 +112,24 @@
             "shortName": "Miami",
             "gain": 17,
             "cumulative": 80
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 8,
+            "cumulative": 88
           }
         ],
         "rank": 2,
-        "leaderGap": -20
+        "leaderGap": -43
       },
       {
         "name": "Charles Leclerc",
         "shortName": "C. Leclerc",
         "team": "Ferrari",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/C/CHALEC01_Charles_Leclerc/chalec01.png.transform/1col/image.png",
-        "points": 59,
-        "deltaLastGp": 10,
+        "points": 75,
+        "deltaLastGp": 16,
         "progress": [
           {
             "gp": "Australia",
@@ -142,18 +154,24 @@
             "shortName": "Miami",
             "gain": 10,
             "cumulative": 59
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 16,
+            "cumulative": 75
           }
         ],
         "rank": 3,
-        "leaderGap": -41
+        "leaderGap": -56
       },
       {
         "name": "Lewis Hamilton",
         "shortName": "L. Hamilton",
         "team": "Ferrari",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LEWHAM01_Lewis_Hamilton/lewham01.png.transform/1col/image.png",
-        "points": 51,
-        "deltaLastGp": 10,
+        "points": 72,
+        "deltaLastGp": 21,
         "progress": [
           {
             "gp": "Australia",
@@ -178,18 +196,24 @@
             "shortName": "Miami",
             "gain": 10,
             "cumulative": 51
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 21,
+            "cumulative": 72
           }
         ],
         "rank": 4,
-        "leaderGap": -49
+        "leaderGap": -59
       },
       {
         "name": "Lando Norris",
         "shortName": "L. Norris",
         "team": "McLaren",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LANNOR01_Lando_Norris/lannor01.png.transform/1col/image.png",
-        "points": 51,
-        "deltaLastGp": 26,
+        "points": 58,
+        "deltaLastGp": 7,
         "progress": [
           {
             "gp": "Australia",
@@ -214,18 +238,24 @@
             "shortName": "Miami",
             "gain": 26,
             "cumulative": 51
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 7,
+            "cumulative": 58
           }
         ],
         "rank": 5,
-        "leaderGap": -49
+        "leaderGap": -73
       },
       {
         "name": "Oscar Piastri",
         "shortName": "O. Piastri",
         "team": "McLaren",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/O/OSCPIA01_Oscar_Piastri/oscpia01.png.transform/1col/image.png",
-        "points": 43,
-        "deltaLastGp": 22,
+        "points": 48,
+        "deltaLastGp": 5,
         "progress": [
           {
             "gp": "Australia",
@@ -250,18 +280,24 @@
             "shortName": "Miami",
             "gain": 22,
             "cumulative": 43
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 5,
+            "cumulative": 48
           }
         ],
         "rank": 6,
-        "leaderGap": -57
+        "leaderGap": -83
       },
       {
         "name": "Max Verstappen",
         "shortName": "M. Verstappen",
         "team": "Red Bull Racing",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png.transform/1col/image.png",
-        "points": 26,
-        "deltaLastGp": 14,
+        "points": 43,
+        "deltaLastGp": 17,
         "progress": [
           {
             "gp": "Australia",
@@ -286,54 +322,24 @@
             "shortName": "Miami",
             "gain": 14,
             "cumulative": 26
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 17,
+            "cumulative": 43
           }
         ],
         "rank": 7,
-        "leaderGap": -74
-      },
-      {
-        "name": "Oliver Bearman",
-        "shortName": "O. Bearman",
-        "team": "Haas F1 Team",
-        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/O/OLIBEA01_Oliver_Bearman/olibea01.png.transform/1col/image.png",
-        "points": 17,
-        "deltaLastGp": 0,
-        "progress": [
-          {
-            "gp": "Australia",
-            "shortName": "Australia",
-            "gain": 6,
-            "cumulative": 6
-          },
-          {
-            "gp": "China",
-            "shortName": "China",
-            "gain": 11,
-            "cumulative": 17
-          },
-          {
-            "gp": "Japan",
-            "shortName": "Japan",
-            "gain": 0,
-            "cumulative": 17
-          },
-          {
-            "gp": "United States - Miami Gardens",
-            "shortName": "Miami",
-            "gain": 0,
-            "cumulative": 17
-          }
-        ],
-        "rank": 8,
-        "leaderGap": -83
+        "leaderGap": -88
       },
       {
         "name": "Pierre Gasly",
         "shortName": "P. Gasly",
         "team": "Alpine",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/P/PIEGAS01_Pierre_Gasly/piegas01.png.transform/1col/image.png",
-        "points": 16,
-        "deltaLastGp": 1,
+        "points": 20,
+        "deltaLastGp": 4,
         "progress": [
           {
             "gp": "Australia",
@@ -358,18 +364,66 @@
             "shortName": "Miami",
             "gain": 1,
             "cumulative": 16
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 4,
+            "cumulative": 20
+          }
+        ],
+        "rank": 8,
+        "leaderGap": -111
+      },
+      {
+        "name": "Oliver Bearman",
+        "shortName": "O. Bearman",
+        "team": "Haas F1 Team",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/O/OLIBEA01_Oliver_Bearman/olibea01.png.transform/1col/image.png",
+        "points": 18,
+        "deltaLastGp": 1,
+        "progress": [
+          {
+            "gp": "Australia",
+            "shortName": "Australia",
+            "gain": 6,
+            "cumulative": 6
+          },
+          {
+            "gp": "China",
+            "shortName": "China",
+            "gain": 11,
+            "cumulative": 17
+          },
+          {
+            "gp": "Japan",
+            "shortName": "Japan",
+            "gain": 0,
+            "cumulative": 17
+          },
+          {
+            "gp": "United States - Miami Gardens",
+            "shortName": "Miami",
+            "gain": 0,
+            "cumulative": 17
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 1,
+            "cumulative": 18
           }
         ],
         "rank": 9,
-        "leaderGap": -84
+        "leaderGap": -113
       },
       {
         "name": "Liam Lawson",
         "shortName": "L. Lawson",
         "team": "Racing Bulls",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LIALAW01_Liam_Lawson/lialaw01.png.transform/1col/image.png",
-        "points": 10,
-        "deltaLastGp": 0,
+        "points": 16,
+        "deltaLastGp": 6,
         "progress": [
           {
             "gp": "Australia",
@@ -394,18 +448,24 @@
             "shortName": "Miami",
             "gain": 0,
             "cumulative": 10
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 6,
+            "cumulative": 16
           }
         ],
         "rank": 10,
-        "leaderGap": -90
+        "leaderGap": -115
       },
       {
         "name": "Franco Colapinto",
         "shortName": "F. Colapinto",
         "team": "Alpine",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/F/FRACOL01_Franco_Colapinto/fracol01.png.transform/1col/image.png",
-        "points": 7,
-        "deltaLastGp": 6,
+        "points": 15,
+        "deltaLastGp": 8,
         "progress": [
           {
             "gp": "Australia",
@@ -430,29 +490,35 @@
             "shortName": "Miami",
             "gain": 6,
             "cumulative": 7
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 8,
+            "cumulative": 15
           }
         ],
         "rank": 11,
-        "leaderGap": -93
+        "leaderGap": -116
       },
       {
-        "name": "Arvid Lindblad",
-        "shortName": "A. Lindblad",
-        "team": "Racing Bulls",
-        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/A/ARVLIN01_Arvid_Lindblad/arvlin01.png.transform/1col/image.png",
-        "points": 4,
-        "deltaLastGp": 0,
+        "name": "Isack Hadjar",
+        "shortName": "I. Hadjar",
+        "team": "Red Bull Racing",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/I/ISAHAD01_Isack_Hadjar/isahad01.png.transform/1col/image.png",
+        "points": 14,
+        "deltaLastGp": 10,
         "progress": [
           {
             "gp": "Australia",
             "shortName": "Australia",
-            "gain": 4,
-            "cumulative": 4
+            "gain": 0,
+            "cumulative": 0
           },
           {
             "gp": "China",
             "shortName": "China",
-            "gain": 0,
+            "gain": 4,
             "cumulative": 4
           },
           {
@@ -466,17 +532,23 @@
             "shortName": "Miami",
             "gain": 0,
             "cumulative": 4
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 10,
+            "cumulative": 14
           }
         ],
         "rank": 12,
-        "leaderGap": -96
+        "leaderGap": -117
       },
       {
         "name": "Carlos Sainz",
         "shortName": "C. Sainz",
         "team": "Williams",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/C/CARSAI01_Carlos_Sainz/carsai01.png.transform/1col/image.png",
-        "points": 4,
+        "points": 6,
         "deltaLastGp": 2,
         "progress": [
           {
@@ -502,29 +574,35 @@
             "shortName": "Miami",
             "gain": 2,
             "cumulative": 4
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 2,
+            "cumulative": 6
           }
         ],
         "rank": 13,
-        "leaderGap": -96
+        "leaderGap": -125
       },
       {
-        "name": "Isack Hadjar",
-        "shortName": "I. Hadjar",
-        "team": "Red Bull Racing",
-        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/I/ISAHAD01_Isack_Hadjar/isahad01.png.transform/1col/image.png",
-        "points": 4,
-        "deltaLastGp": 0,
+        "name": "Arvid Lindblad",
+        "shortName": "A. Lindblad",
+        "team": "Racing Bulls",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/A/ARVLIN01_Arvid_Lindblad/arvlin01.png.transform/1col/image.png",
+        "points": 5,
+        "deltaLastGp": 1,
         "progress": [
           {
             "gp": "Australia",
             "shortName": "Australia",
-            "gain": 0,
-            "cumulative": 0
+            "gain": 4,
+            "cumulative": 4
           },
           {
             "gp": "China",
             "shortName": "China",
-            "gain": 4,
+            "gain": 0,
             "cumulative": 4
           },
           {
@@ -538,10 +616,16 @@
             "shortName": "Miami",
             "gain": 0,
             "cumulative": 4
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 1,
+            "cumulative": 5
           }
         ],
         "rank": 14,
-        "leaderGap": -96
+        "leaderGap": -126
       },
       {
         "name": "Gabriel Bortoleto",
@@ -574,10 +658,16 @@
             "shortName": "Miami",
             "gain": 0,
             "cumulative": 2
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 0,
+            "cumulative": 2
           }
         ],
         "rank": 15,
-        "leaderGap": -98
+        "leaderGap": -129
       },
       {
         "name": "Alexander Albon",
@@ -585,7 +675,7 @@
         "team": "Williams",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/A/ALEALB01_Alexander_Albon/alealb01.png.transform/1col/image.png",
         "points": 1,
-        "deltaLastGp": 1,
+        "deltaLastGp": 0,
         "progress": [
           {
             "gp": "Australia",
@@ -610,10 +700,16 @@
             "shortName": "Miami",
             "gain": 1,
             "cumulative": 1
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 0,
+            "cumulative": 1
           }
         ],
         "rank": 16,
-        "leaderGap": -99
+        "leaderGap": -130
       },
       {
         "name": "Esteban Ocon",
@@ -646,10 +742,16 @@
             "shortName": "Miami",
             "gain": 0,
             "cumulative": 1
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 0,
+            "cumulative": 1
           }
         ],
         "rank": 17,
-        "leaderGap": -99
+        "leaderGap": -130
       },
       {
         "name": "Sergio Perez",
@@ -682,10 +784,16 @@
             "shortName": "Miami",
             "gain": 0,
             "cumulative": 0
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 0,
+            "cumulative": 0
           }
         ],
         "rank": 18,
-        "leaderGap": -100
+        "leaderGap": -131
       },
       {
         "name": "Fernando Alonso",
@@ -718,10 +826,16 @@
             "shortName": "Miami",
             "gain": 0,
             "cumulative": 0
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 0,
+            "cumulative": 0
           }
         ],
         "rank": 19,
-        "leaderGap": -100
+        "leaderGap": -131
       },
       {
         "name": "Lance Stroll",
@@ -754,10 +868,16 @@
             "shortName": "Miami",
             "gain": 0,
             "cumulative": 0
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 0,
+            "cumulative": 0
           }
         ],
         "rank": 20,
-        "leaderGap": -100
+        "leaderGap": -131
       },
       {
         "name": "Valtteri Bottas",
@@ -790,10 +910,16 @@
             "shortName": "Miami",
             "gain": 0,
             "cumulative": 0
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 0,
+            "cumulative": 0
           }
         ],
         "rank": 21,
-        "leaderGap": -100
+        "leaderGap": -131
       },
       {
         "name": "Nico Hulkenberg",
@@ -826,89 +952,95 @@
             "shortName": "Miami",
             "gain": 0,
             "cumulative": 0
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 0,
+            "cumulative": 0
           }
         ],
         "rank": 22,
-        "leaderGap": -100
+        "leaderGap": -131
       }
     ],
     "constructors": [
       {
         "team": "Mercedes",
-        "points": 180,
-        "deltaLastGp": 45,
+        "points": 219,
+        "deltaLastGp": 39,
         "rank": 1,
         "leaderGap": 0
       },
       {
         "team": "Ferrari",
-        "points": 110,
-        "deltaLastGp": 20,
+        "points": 147,
+        "deltaLastGp": 37,
         "rank": 2,
-        "leaderGap": -70
+        "leaderGap": -72
       },
       {
         "team": "McLaren",
-        "points": 94,
-        "deltaLastGp": 48,
+        "points": 106,
+        "deltaLastGp": 12,
         "rank": 3,
-        "leaderGap": -86
+        "leaderGap": -113
       },
       {
         "team": "Red Bull Racing",
-        "points": 30,
-        "deltaLastGp": 14,
+        "points": 57,
+        "deltaLastGp": 27,
         "rank": 4,
-        "leaderGap": -150
-      },
-      {
-        "team": "Alpine",
-        "points": 23,
-        "deltaLastGp": 7,
-        "rank": 5,
-        "leaderGap": -157
-      },
-      {
-        "team": "Haas F1 Team",
-        "points": 18,
-        "deltaLastGp": 0,
-        "rank": 6,
         "leaderGap": -162
       },
       {
+        "team": "Alpine",
+        "points": 35,
+        "deltaLastGp": 12,
+        "rank": 5,
+        "leaderGap": -184
+      },
+      {
         "team": "Racing Bulls",
-        "points": 14,
-        "deltaLastGp": 0,
+        "points": 21,
+        "deltaLastGp": 7,
+        "rank": 6,
+        "leaderGap": -198
+      },
+      {
+        "team": "Haas F1 Team",
+        "points": 19,
+        "deltaLastGp": 1,
         "rank": 7,
-        "leaderGap": -166
+        "leaderGap": -200
       },
       {
         "team": "Williams",
-        "points": 5,
-        "deltaLastGp": 3,
+        "points": 7,
+        "deltaLastGp": 2,
         "rank": 8,
-        "leaderGap": -175
+        "leaderGap": -212
       },
       {
         "team": "Audi",
         "points": 2,
         "deltaLastGp": 0,
         "rank": 9,
-        "leaderGap": -178
+        "leaderGap": -217
       },
       {
         "team": "Cadillac",
         "points": 0,
         "deltaLastGp": 0,
         "rank": 10,
-        "leaderGap": -180
+        "leaderGap": -219
       },
       {
         "team": "Aston Martin",
         "points": 0,
         "deltaLastGp": 0,
         "rank": 11,
-        "leaderGap": -180
+        "leaderGap": -219
       }
     ]
   },
@@ -971,8 +1103,12 @@
       "shortName": "Canada",
       "date": "2026-05-24",
       "isSprint": true,
-      "status": "next",
-      "winner": null
+      "status": "played",
+      "winner": {
+        "name": "Kimi Antonelli",
+        "team": "Mercedes",
+        "shortName": "K. Antonelli"
+      }
     },
     {
       "round": 6,
@@ -980,7 +1116,7 @@
       "shortName": "Monaco",
       "date": "2026-06-07",
       "isSprint": false,
-      "status": "upcoming",
+      "status": "next",
       "winner": null
     },
     {
