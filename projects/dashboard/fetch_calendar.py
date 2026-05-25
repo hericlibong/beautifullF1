@@ -24,27 +24,27 @@ SEASON = 2026
 DUAL_LOCATION_COUNTRIES = {"United States", "USA", "Italy"}
 
 SHORT_NAMES = {
-    "Australia":                       "Australia",
-    "China":                           "China",
-    "Japan":                           "Japan",
-    "United States - Miami Gardens":   "Miami",
-    "Canada":                          "Canada",
-    "Monaco":                          "Monaco",
-    "Spain":                           "Madrid",
-    "Austria":                         "Austria",
-    "United Kingdom":                  "Silverstone",
-    "Belgium":                         "Spa",
-    "Hungary":                         "Hungaroring",
-    "Netherlands":                     "Zandvoort",
-    "Italy - Monza":                   "Monza",
-    "Azerbaijan":                      "Baku",
-    "Singapore":                       "Singapore",
-    "United States - Austin":          "Austin",
-    "Mexico":                          "Mexico",
-    "Brazil":                          "Interlagos",
-    "United States - Las Vegas":       "Las Vegas",
-    "Qatar":                           "Lusail",
-    "United Arab Emirates":            "Yas Marina",
+    "Australia": "Australia",
+    "China": "China",
+    "Japan": "Japan",
+    "United States - Miami Gardens": "Miami",
+    "Canada": "Canada",
+    "Monaco": "Monaco",
+    "Spain": "Madrid",
+    "Austria": "Austria",
+    "United Kingdom": "Silverstone",
+    "Belgium": "Spa",
+    "Hungary": "Hungaroring",
+    "Netherlands": "Zandvoort",
+    "Italy - Monza": "Monza",
+    "Azerbaijan": "Baku",
+    "Singapore": "Singapore",
+    "United States - Austin": "Austin",
+    "Mexico": "Mexico",
+    "Brazil": "Interlagos",
+    "United States - Las Vegas": "Las Vegas",
+    "Qatar": "Lusail",
+    "United Arab Emirates": "Yas Marina",
 }
 
 
@@ -65,18 +65,20 @@ def main() -> int:
         country = str(row.get("Country", ""))
         location = str(row.get("Location", ""))
         name = col_name(country, location)
-        rounds.append({
-            "round":     int(row["RoundNumber"]),
-            "name":      name,
-            "shortName": short_name(name, location),
-            "date":      str(row["EventDate"])[:10],
-            "isSprint":  str(row.get("EventFormat", "")).startswith("sprint"),
-        })
+        rounds.append(
+            {
+                "round": int(row["RoundNumber"]),
+                "name": name,
+                "shortName": short_name(name, location),
+                "date": str(row["EventDate"])[:10],
+                "isSprint": str(row.get("EventFormat", "")).startswith("sprint"),
+            }
+        )
 
     payload = {
-        "season":     SEASON,
+        "season": SEASON,
         "totalRaces": len(rounds),
-        "rounds":     rounds,
+        "rounds": rounds,
     }
     OUT.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"[OK] {OUT.relative_to(HERE.parents[1])} ({len(rounds)} GP)")

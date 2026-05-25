@@ -22,7 +22,9 @@ from typing import Iterable
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-CSV_SRC = ROOT / "projects" / "race_chart_builder" / "web" / "data" / "f1_race_chart_fastf1_2026.csv"
+CSV_SRC = (
+    ROOT / "projects" / "race_chart_builder" / "web" / "data" / "f1_race_chart_fastf1_2026.csv"
+)
 CALENDAR_PATH = HERE / "calendar_2026.json"
 OUT_WEB = HERE / "web" / "data" / "dashboard_2026.json"
 OUT_DOCS = ROOT / "docs" / "data" / "dashboard_2026.json"
@@ -61,7 +63,10 @@ def compute_kpis(rows: list[dict], gp_columns: list[str]) -> tuple[dict, str]:
     prev_gp = gp_columns[-2] if len(gp_columns) >= 2 else None
 
     standings = sorted(
-        ({"name": r["Pilote"], "team": r.get("team", ""), "points": to_float(r[last_gp])} for r in rows),
+        (
+            {"name": r["Pilote"], "team": r.get("team", ""), "points": to_float(r[last_gp])}
+            for r in rows
+        ),
         key=lambda d: d["points"],
         reverse=True,
     )
@@ -84,11 +89,19 @@ def compute_kpis(rows: list[dict], gp_columns: list[str]) -> tuple[dict, str]:
 
     return (
         {
-            "leader":     {"name": leader["name"], "team": leader["team"], "points": int(leader["points"])},
-            "second":     {"name": second["name"], "team": second["team"], "points": int(second["points"])},
-            "leaderGap":  leader_gap,
+            "leader": {
+                "name": leader["name"],
+                "team": leader["team"],
+                "points": int(leader["points"]),
+            },
+            "second": {
+                "name": second["name"],
+                "team": second["team"],
+                "points": int(second["points"]),
+            },
+            "leaderGap": leader_gap,
             "lastWinner": {"name": winner["name"], "team": winner["team"], "gp": last_gp},
-            "raceCount":  len(gp_columns),
+            "raceCount": len(gp_columns),
         },
         last_gp,
     )
@@ -101,7 +114,9 @@ def short_name(full: str) -> str:
     return f"{parts[0][0]}. {' '.join(parts[1:])}"
 
 
-def compute_standings(rows: list[dict], gp_columns: list[str], short_names: dict[str, str] | None = None) -> dict:
+def compute_standings(
+    rows: list[dict], gp_columns: list[str], short_names: dict[str, str] | None = None
+) -> dict:
     """Standings pilotes et constructeurs avec rang, points, delta dernier GP, écart leader."""
     if not gp_columns:
         return {"drivers": [], "constructors": []}
@@ -116,12 +131,14 @@ def compute_standings(rows: list[dict], gp_columns: list[str], short_names: dict
         prev = 0.0
         for gp in gp_columns:
             cum = to_float(r[gp])
-            out.append({
-                "gp": gp,
-                "shortName": short_names.get(gp, gp),
-                "gain": int(cum - prev),
-                "cumulative": int(cum),
-            })
+            out.append(
+                {
+                    "gp": gp,
+                    "shortName": short_names.get(gp, gp),
+                    "gain": int(cum - prev),
+                    "cumulative": int(cum),
+                }
+            )
             prev = cum
         return out
 
@@ -207,35 +224,38 @@ def build(today: date | None = None) -> dict:
     calendar_out = []
     for r in rounds:
         is_played = r["name"] in played_set
-        is_next = (next_round is not None and r["name"] == next_round["name"])
-        calendar_out.append({
-            "round":     r["round"],
-            "name":      r["name"],
-            "shortName": r.get("shortName", r["name"]),
-            "date":      r["date"],
-            "isSprint":  bool(r.get("isSprint", False)),
-            "status":    "played" if is_played else ("next" if is_next else "upcoming"),
-            "winner":    winners_by_gp.get(r["name"]) if is_played else None,
-        })
+        is_next = next_round is not None and r["name"] == next_round["name"]
+        calendar_out.append(
+            {
+                "round": r["round"],
+                "name": r["name"],
+                "shortName": r.get("shortName", r["name"]),
+                "date": r["date"],
+                "isSprint": bool(r.get("isSprint", False)),
+                "status": "played" if is_played else ("next" if is_next else "upcoming"),
+                "winner": winners_by_gp.get(r["name"]) if is_played else None,
+            }
+        )
 
     return {
         "season": calendar["season"],
         "generatedAt": (today or date.today()).isoformat(),
         "lastGp": {
-            "name":       last_gp_name,
-            "shortName":  last_round.get("shortName", last_gp_name),
-            "date":       last_round.get("date"),
-            "isSprint":   bool(last_round.get("isSprint", False)),
-            "winner":     {"name": kpis["lastWinner"]["name"], "team": kpis["lastWinner"]["team"]},
+            "name": last_gp_name,
+            "shortName": last_round.get("shortName", last_gp_name),
+            "date": last_round.get("date"),
+            "isSprint": bool(last_round.get("isSprint", False)),
+            "winner": {"name": kpis["lastWinner"]["name"], "team": kpis["lastWinner"]["team"]},
         },
         "nextGp": (
             {
-                "name":      next_round["name"],
+                "name": next_round["name"],
                 "shortName": next_round["shortName"],
-                "date":      next_round["date"],
-                "isSprint":  bool(next_round.get("isSprint", False)),
+                "date": next_round["date"],
+                "isSprint": bool(next_round.get("isSprint", False)),
             }
-            if next_round else None
+            if next_round
+            else None
         ),
         "kpis": kpis,
         "standings": standings,

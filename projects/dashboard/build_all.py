@@ -52,8 +52,11 @@ def copy_file(src: Path, dst: Path) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--season", type=int, default=2026)
-    parser.add_argument("--skip-fetch", action="store_true",
-                        help="Saute les builders qui interrogent FastF1 (étapes 1 et 3)")
+    parser.add_argument(
+        "--skip-fetch",
+        action="store_true",
+        help="Saute les builders qui interrogent FastF1 (étapes 1 et 3)",
+    )
     args = parser.parse_args()
     season = args.season
 
@@ -120,9 +123,9 @@ def main() -> int:
 
     # 6) Sync vers docs/ (les 3 projets)
     for label, script in [
-        ("race_chart sync",   rc_root / "sync_to_docs.py"),
-        ("heatmap sync",      hm_root / "sync_to_docs.py"),
-        ("dashboard sync",    db_root / "sync_to_docs.py"),
+        ("race_chart sync", rc_root / "sync_to_docs.py"),
+        ("heatmap sync", hm_root / "sync_to_docs.py"),
+        ("dashboard sync", db_root / "sync_to_docs.py"),
     ]:
         ok = run_step(f"6/6 {label}", [PYTHON, str(script)])
         if not ok:

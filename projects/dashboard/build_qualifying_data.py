@@ -31,7 +31,9 @@ import pandas as pd
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 CALENDAR_PATH = HERE / "calendar_2026.json"
-RACE_CHART_CSV = ROOT / "projects" / "race_chart_builder" / "web" / "data" / "f1_race_chart_fastf1_2026.csv"
+RACE_CHART_CSV = (
+    ROOT / "projects" / "race_chart_builder" / "web" / "data" / "f1_race_chart_fastf1_2026.csv"
+)
 OUT_WEB = HERE / "web" / "data" / "qualifying_2026.json"
 OUT_DOCS = ROOT / "docs" / "data" / "qualifying_2026.json"
 
@@ -100,15 +102,17 @@ def load_round_session(year: int, gp_name: str, session_code: str) -> list[dict]
             abbr = str(row.get("Abbreviation", ""))
             best = best_lap_by_driver.get(abbr)
             did_q3 = False  # Q3 ne s'applique qu'aux Q régulières
-        out.append({
-            "fullName": f"{row.get('FirstName','').strip()} {row.get('LastName','').strip()}".strip(),
-            "abbr": str(row.get("Abbreviation", "")),
-            "team": str(row.get("TeamName", "")),
-            "position": int(row["Position"]) if not pd.isna(row.get("Position")) else None,
-            "bestTimeSec": best,
-            "bestTimeStr": format_lap(best),
-            "q3": did_q3,
-        })
+        out.append(
+            {
+                "fullName": f"{row.get('FirstName','').strip()} {row.get('LastName','').strip()}".strip(),
+                "abbr": str(row.get("Abbreviation", "")),
+                "team": str(row.get("TeamName", "")),
+                "position": int(row["Position"]) if not pd.isna(row.get("Position")) else None,
+                "bestTimeSec": best,
+                "bestTimeStr": format_lap(best),
+                "q3": did_q3,
+            }
+        )
     return out
 
 
@@ -160,7 +164,11 @@ def build_teammate_pairs(sessions_data: list[dict]) -> list[dict]:
                         q3_count[d["fullName"]] += 1
 
             # Duel : exactement 2 pilotes du team, deux temps présents
-            if len(drvs) == 2 and drvs[0]["bestTimeSec"] is not None and drvs[1]["bestTimeSec"] is not None:
+            if (
+                len(drvs) == 2
+                and drvs[0]["bestTimeSec"] is not None
+                and drvs[1]["bestTimeSec"] is not None
+            ):
                 d0, d1 = drvs[0], drvs[1]
                 # On normalise par ordre alpha pour stabiliser timeA / timeB
                 if d0["fullName"] not in names or d1["fullName"] not in names:
@@ -175,26 +183,30 @@ def build_teammate_pairs(sessions_data: list[dict]) -> list[dict]:
                 fastest = d0["fullName"] if tA < tB else d1["fullName"]
                 gap = abs(tA - tB)
                 h2h[stype][fastest] += 1
-                sessions_out.append({
-                    "round":     meta["round"],
-                    "gp":        meta["gp"],
-                    "shortName": meta["shortName"],
-                    "type":      stype,
-                    "fastest":   fastest,
-                    "gapSec":    round(gap, 3),
-                    "timeA":     d0["bestTimeStr"],
-                    "timeB":     d1["bestTimeStr"],
-                    "posA":      d0["position"],
-                    "posB":      d1["position"],
-                })
+                sessions_out.append(
+                    {
+                        "round": meta["round"],
+                        "gp": meta["gp"],
+                        "shortName": meta["shortName"],
+                        "type": stype,
+                        "fastest": fastest,
+                        "gapSec": round(gap, 3),
+                        "timeA": d0["bestTimeStr"],
+                        "timeB": d1["bestTimeStr"],
+                        "posA": d0["position"],
+                        "posB": d1["position"],
+                    }
+                )
 
-        teams_out.append({
-            "team":     team,
-            "drivers":  names,
-            "h2h":      {k: dict(v) for k, v in h2h.items()},
-            "q3Count":  dict(q3_count),
-            "sessions": sessions_out,
-        })
+        teams_out.append(
+            {
+                "team": team,
+                "drivers": names,
+                "h2h": {k: dict(v) for k, v in h2h.items()},
+                "q3Count": dict(q3_count),
+                "sessions": sessions_out,
+            }
+        )
     return teams_out
 
 
@@ -211,33 +223,37 @@ def main() -> int:
         print(f"  - {r['shortName']} (Q)")
         drivers_q = load_round_session(SEASON, r["name"], "Q")
         if drivers_q is not None:
-            sessions_data.append({
-                "round":     r["round"],
-                "gp":        r["name"],
-                "shortName": r["shortName"],
-                "type":      "Q",
-                "drivers":   drivers_q,
-            })
+            sessions_data.append(
+                {
+                    "round": r["round"],
+                    "gp": r["name"],
+                    "shortName": r["shortName"],
+                    "type": "Q",
+                    "drivers": drivers_q,
+                }
+            )
         # Sprint Qualifying (uniquement week-ends sprint)
         if is_sprint:
             print(f"  - {r['shortName']} (SQ)")
             drivers_sq = load_round_session(SEASON, r["name"], "SQ")
             if drivers_sq is not None:
-                sessions_data.append({
-                    "round":     r["round"],
-                    "gp":        r["name"],
-                    "shortName": r["shortName"],
-                    "type":      "SQ",
-                    "drivers":   drivers_sq,
-                })
+                sessions_data.append(
+                    {
+                        "round": r["round"],
+                        "gp": r["name"],
+                        "shortName": r["shortName"],
+                        "type": "SQ",
+                        "drivers": drivers_sq,
+                    }
+                )
 
     teammates = build_teammate_pairs(sessions_data)
 
     payload = {
-        "season":      SEASON,
+        "season": SEASON,
         "generatedAt": date.today().isoformat(),
-        "sessions":    sessions_data,
-        "teammates":   teammates,
+        "sessions": sessions_data,
+        "teammates": teammates,
     }
     text = json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
     for target in (OUT_WEB, OUT_DOCS):
