@@ -3,7 +3,7 @@
 Tableau de bord statique consolidant les visualisations existantes (race chart, heatmap) + nouveaux widgets, alimenté par FastF1 et publié sur GitHub Pages.
 
 **Périmètre** : saison 2026 uniquement.
-**Refresh** : manuel, ~24h après chaque GP, via scripts Python locaux + `sync_to_docs.py`.
+**Refresh** : automatique via GitHub Actions (`.github/workflows/refresh-after-gp.yml`), lundi + mardi 14h UTC après chaque GP. Trigger manuel possible depuis l'onglet Actions du repo.
 
 ---
 
