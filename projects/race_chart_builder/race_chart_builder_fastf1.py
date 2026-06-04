@@ -1,4 +1,5 @@
 import argparse
+import json
 import os
 from datetime import datetime
 
@@ -6,6 +7,21 @@ import fastf1
 import pandas as pd
 
 # fastf1.Cache.enable_cache("cache")  # cache local
+
+# Mapping fallback des photos pilotes (utilisé quand FastF1 ne fournit pas
+# HeadshotUrl, ce qui arrive notamment sur runners Linux / cache vide).
+_HERE = os.path.dirname(__file__)
+DRIVER_IMAGES_PATH = os.path.join(_HERE, "..", "dashboard", "driver_images.json")
+
+
+def load_driver_images_fallback() -> dict[str, str]:
+    """Retourne un dict { abbreviation 3 lettres : URL photo }."""
+    try:
+        with open(DRIVER_IMAGES_PATH, encoding="utf-8") as f:
+            data = json.load(f)
+        return {abbr: info.get("image", "") for abbr, info in data.get("drivers", {}).items()}
+    except (FileNotFoundError, json.JSONDecodeError):
+        return {}
 
 
 class RaceChartBuilderFastF1:
@@ -24,6 +40,7 @@ class RaceChartBuilderFastF1:
         self.output_file = os.path.join(outputs_dir, output_file)
         self.drivers_data = {}
         self.race_keys = []
+        self.driver_images_fallback = load_driver_images_fallback()
 
     @staticmethod
     def _col_name(country: str, locality: str) -> str:
@@ -92,9 +109,13 @@ class RaceChartBuilderFastF1:
             for _, row in race_results.iterrows():
                 full_name = row.FullName
                 team = row.TeamName
-                image = (
-                    getattr(row, "HeadshotUrl", "") or ""
-                )  # présent via driver_info/Session.results
+                # 1) HeadshotUrl FastF1 si fourni (cas idéal)
+                # 2) sinon fallback via driver_images.json (par abréviation FIA)
+                # 3) sinon chaîne vide (comportement historique)
+                image = getattr(row, "HeadshotUrl", "") or ""
+                if not image:
+                    abbr = getattr(row, "Abbreviation", "") or ""
+                    image = self.driver_images_fallback.get(abbr, "")
                 race_pts = float(row.Points or 0.0)
                 total_pts = race_pts + float(sprint_points.get(full_name, 0.0))
 

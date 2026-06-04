@@ -146,11 +146,30 @@ class F1FlourishExporterLead:
         return s.apply(f)
 
     def patch_headshots(self):
-        patch_urls = {
-            "COL": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/F/FRACOL01_Franco_Colapinto/fracol01.png.transform/1col/image.png"
-        }
+        """Comble les HeadshotUrl manquantes via projects/dashboard/driver_images.json.
+
+        Cas typique : sur runner Linux ou cache vide, FastF1 ne fournit pas l'URL.
+        Le mapping partagé (par abréviation FIA) sert de source de vérité.
+        """
+        import json
+        import os
+
+        here = os.path.dirname(__file__)
+        mapping_path = os.path.join(here, "..", "dashboard", "driver_images.json")
+        patch_urls = {}
+        try:
+            with open(mapping_path, encoding="utf-8") as f:
+                data = json.load(f)
+            patch_urls = {
+                abbr: info.get("image", "") for abbr, info in data.get("drivers", {}).items()
+            }
+        except (FileNotFoundError, json.JSONDecodeError):
+            pass
+
         self.df["HeadshotUrl"] = self.df["HeadshotUrl"].astype(str)
         for drv, url in patch_urls.items():
+            if not url:
+                continue
             mask = (self.df["Driver"] == drv) & (
                 self.df["HeadshotUrl"].isnull()
                 | (self.df["HeadshotUrl"] == "")
