@@ -1,13 +1,13 @@
 {
   "season": 2026,
-  "generatedAt": "2026-05-26",
+  "generatedAt": "2026-06-04",
   "lastGp": {
     "name": "Canada",
     "shortName": "Canada",
     "date": "2026-05-24",
     "isSprint": true,
     "winner": {
-      "name": "Andrea Kimi Antonelli",
+      "name": "Kimi Antonelli",
       "team": "Mercedes"
     }
   },
@@ -19,7 +19,7 @@
   },
   "kpis": {
     "leader": {
-      "name": "Andrea Kimi Antonelli",
+      "name": "Kimi Antonelli",
       "team": "Mercedes",
       "points": 131
     },
@@ -30,7 +30,7 @@
     },
     "leaderGap": 43,
     "lastWinner": {
-      "name": "Andrea Kimi Antonelli",
+      "name": "Kimi Antonelli",
       "team": "Mercedes",
       "gp": "Canada"
     },
@@ -40,10 +40,10 @@
   "standings": {
     "drivers": [
       {
-        "name": "Andrea Kimi Antonelli",
-        "shortName": "A. Kimi Antonelli",
+        "name": "Kimi Antonelli",
+        "shortName": "K. Antonelli",
         "team": "Mercedes",
-        "image": "",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/K/ANDANT01_Kimi_Antonelli/andant01.png.transform/1col/image.png",
         "points": 131,
         "deltaLastGp": 31,
         "progress": [
@@ -85,7 +85,7 @@
         "name": "George Russell",
         "shortName": "G. Russell",
         "team": "Mercedes",
-        "image": "",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/G/GEORUS01_George_Russell/georus01.png.transform/1col/image.png",
         "points": 88,
         "deltaLastGp": 8,
         "progress": [
@@ -127,7 +127,7 @@
         "name": "Charles Leclerc",
         "shortName": "C. Leclerc",
         "team": "Ferrari",
-        "image": "",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/C/CHALEC01_Charles_Leclerc/chalec01.png.transform/1col/image.png",
         "points": 75,
         "deltaLastGp": 16,
         "progress": [
@@ -169,7 +169,7 @@
         "name": "Lewis Hamilton",
         "shortName": "L. Hamilton",
         "team": "Ferrari",
-        "image": "",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LEWHAM01_Lewis_Hamilton/lewham01.png.transform/1col/image.png",
         "points": 72,
         "deltaLastGp": 21,
         "progress": [
@@ -211,7 +211,7 @@
         "name": "Lando Norris",
         "shortName": "L. Norris",
         "team": "McLaren",
-        "image": "",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LANNOR01_Lando_Norris/lannor01.png.transform/1col/image.png",
         "points": 58,
         "deltaLastGp": 7,
         "progress": [
@@ -253,7 +253,7 @@
         "name": "Oscar Piastri",
         "shortName": "O. Piastri",
         "team": "McLaren",
-        "image": "",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/O/OSCPIA01_Oscar_Piastri/oscpia01.png.transform/1col/image.png",
         "points": 48,
         "deltaLastGp": 5,
         "progress": [
@@ -294,8 +294,8 @@
       {
         "name": "Max Verstappen",
         "shortName": "M. Verstappen",
-        "team": "Red Bull",
-        "image": "",
+        "team": "Red Bull Racing",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png.transform/1col/image.png",
         "points": 43,
         "deltaLastGp": 17,
         "progress": [
@@ -336,8 +336,8 @@
       {
         "name": "Pierre Gasly",
         "shortName": "P. Gasly",
-        "team": "Alpine F1 Team",
-        "image": "",
+        "team": "Alpine",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/P/PIEGAS01_Pierre_Gasly/piegas01.png.transform/1col/image.png",
         "points": 20,
         "deltaLastGp": 4,
         "progress": [
@@ -379,7 +379,7 @@
         "name": "Oliver Bearman",
         "shortName": "O. Bearman",
         "team": "Haas F1 Team",
-        "image": "",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/O/OLIBEA01_Oliver_Bearman/olibea01.png.transform/1col/image.png",
         "points": 18,
         "deltaLastGp": 1,
         "progress": [
@@ -420,8 +420,8 @@
       {
         "name": "Liam Lawson",
         "shortName": "L. Lawson",
-        "team": "RB F1 Team",
-        "image": "",
+        "team": "Racing Bulls",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LIALAW01_Liam_Lawson/lialaw01.png.transform/1col/image.png",
         "points": 16,
         "deltaLastGp": 6,
         "progress": [
@@ -462,8 +462,8 @@
       {
         "name": "Franco Colapinto",
         "shortName": "F. Colapinto",
-        "team": "Alpine F1 Team",
-        "image": "",
+        "team": "Alpine",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/F/FRACOL01_Franco_Colapinto/fracol01.png.transform/1col/image.png",
         "points": 15,
         "deltaLastGp": 8,
         "progress": [
@@ -504,8 +504,8 @@
       {
         "name": "Isack Hadjar",
         "shortName": "I. Hadjar",
-        "team": "Red Bull",
-        "image": "",
+        "team": "Red Bull Racing",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/I/ISAHAD01_Isack_Hadjar/isahad01.png.transform/1col/image.png",
         "points": 14,
         "deltaLastGp": 10,
         "progress": [
@@ -547,7 +547,7 @@
         "name": "Carlos Sainz",
         "shortName": "C. Sainz",
         "team": "Williams",
-        "image": "",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/C/CARSAI01_Carlos_Sainz/carsai01.png.transform/1col/image.png",
         "points": 6,
         "deltaLastGp": 2,
         "progress": [
@@ -588,8 +588,8 @@
       {
         "name": "Arvid Lindblad",
         "shortName": "A. Lindblad",
-        "team": "RB F1 Team",
-        "image": "",
+        "team": "Racing Bulls",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/A/ARVLIN01_Arvid_Lindblad/arvlin01.png.transform/1col/image.png",
         "points": 5,
         "deltaLastGp": 1,
         "progress": [
@@ -631,7 +631,7 @@
         "name": "Gabriel Bortoleto",
         "shortName": "G. Bortoleto",
         "team": "Audi",
-        "image": "",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/G/GABBOR01_Gabriel_Bortoleto/gabbor01.png.transform/1col/image.png",
         "points": 2,
         "deltaLastGp": 0,
         "progress": [
@@ -673,7 +673,7 @@
         "name": "Alexander Albon",
         "shortName": "A. Albon",
         "team": "Williams",
-        "image": "",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/A/ALEALB01_Alexander_Albon/alealb01.png.transform/1col/image.png",
         "points": 1,
         "deltaLastGp": 0,
         "progress": [
@@ -715,7 +715,7 @@
         "name": "Esteban Ocon",
         "shortName": "E. Ocon",
         "team": "Haas F1 Team",
-        "image": "",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/E/ESTOCO01_Esteban_Ocon/estoco01.png.transform/1col/image.png",
         "points": 1,
         "deltaLastGp": 0,
         "progress": [
@@ -754,10 +754,10 @@
         "leaderGap": -130
       },
       {
-        "name": "Sergio Pérez",
-        "shortName": "S. Pérez",
-        "team": "Cadillac F1 Team",
-        "image": "",
+        "name": "Sergio Perez",
+        "shortName": "S. Perez",
+        "team": "Cadillac",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/S/SERPER01_Sergio_Perez/serper01.png.transform/1col/image.png",
         "points": 0,
         "deltaLastGp": 0,
         "progress": [
@@ -799,7 +799,7 @@
         "name": "Fernando Alonso",
         "shortName": "F. Alonso",
         "team": "Aston Martin",
-        "image": "",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/F/FERALO01_Fernando_Alonso/feralo01.png.transform/1col/image.png",
         "points": 0,
         "deltaLastGp": 0,
         "progress": [
@@ -841,7 +841,7 @@
         "name": "Lance Stroll",
         "shortName": "L. Stroll",
         "team": "Aston Martin",
-        "image": "",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LANSTR01_Lance_Stroll/lanstr01.png.transform/1col/image.png",
         "points": 0,
         "deltaLastGp": 0,
         "progress": [
@@ -882,8 +882,8 @@
       {
         "name": "Valtteri Bottas",
         "shortName": "V. Bottas",
-        "team": "Cadillac F1 Team",
-        "image": "",
+        "team": "Cadillac",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/V/VALBOT01_Valtteri_Bottas/valbot01.png.transform/1col/image.png",
         "points": 0,
         "deltaLastGp": 0,
         "progress": [
@@ -922,10 +922,10 @@
         "leaderGap": -131
       },
       {
-        "name": "Nico Hülkenberg",
-        "shortName": "N. Hülkenberg",
+        "name": "Nico Hulkenberg",
+        "shortName": "N. Hulkenberg",
         "team": "Audi",
-        "image": "",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/N/NICHUL01_Nico_Hulkenberg/nichul01.png.transform/1col/image.png",
         "points": 0,
         "deltaLastGp": 0,
         "progress": [
@@ -987,21 +987,21 @@
         "leaderGap": -113
       },
       {
-        "team": "Red Bull",
+        "team": "Red Bull Racing",
         "points": 57,
         "deltaLastGp": 27,
         "rank": 4,
         "leaderGap": -162
       },
       {
-        "team": "Alpine F1 Team",
+        "team": "Alpine",
         "points": 35,
         "deltaLastGp": 12,
         "rank": 5,
         "leaderGap": -184
       },
       {
-        "team": "RB F1 Team",
+        "team": "Racing Bulls",
         "points": 21,
         "deltaLastGp": 7,
         "rank": 6,
@@ -1029,7 +1029,7 @@
         "leaderGap": -217
       },
       {
-        "team": "Cadillac F1 Team",
+        "team": "Cadillac",
         "points": 0,
         "deltaLastGp": 0,
         "rank": 10,
@@ -1066,9 +1066,9 @@
       "isSprint": true,
       "status": "played",
       "winner": {
-        "name": "Andrea Kimi Antonelli",
+        "name": "Kimi Antonelli",
         "team": "Mercedes",
-        "shortName": "A. Kimi Antonelli"
+        "shortName": "K. Antonelli"
       }
     },
     {
@@ -1079,9 +1079,9 @@
       "isSprint": false,
       "status": "played",
       "winner": {
-        "name": "Andrea Kimi Antonelli",
+        "name": "Kimi Antonelli",
         "team": "Mercedes",
-        "shortName": "A. Kimi Antonelli"
+        "shortName": "K. Antonelli"
       }
     },
     {
@@ -1092,9 +1092,9 @@
       "isSprint": true,
       "status": "played",
       "winner": {
-        "name": "Andrea Kimi Antonelli",
+        "name": "Kimi Antonelli",
         "team": "Mercedes",
-        "shortName": "A. Kimi Antonelli"
+        "shortName": "K. Antonelli"
       }
     },
     {
@@ -1105,9 +1105,9 @@
       "isSprint": true,
       "status": "played",
       "winner": {
-        "name": "Andrea Kimi Antonelli",
+        "name": "Kimi Antonelli",
         "team": "Mercedes",
-        "shortName": "A. Kimi Antonelli"
+        "shortName": "K. Antonelli"
       }
     },
     {
