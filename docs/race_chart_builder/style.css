@@ -299,3 +299,19 @@ body {
   #legend { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
   .progress-label { min-width: 80px; font-size: 0.75rem; }
 }
+
+/* Mode embed : intégration dans un iframe du dashboard */
+.embed-mode .page-head,
+.embed-mode .page-foot,
+.embed-mode .dash-navbar { display: none !important; }
+.embed-mode body { background: transparent; }
+.embed-mode .viz-wrap { padding: 0.25rem; max-width: 100%; }
+/* Le SVG prend sa hauteur naturelle (ratio du viewBox) → pas de scroll interne */
+.embed-mode #chart svg { height: auto; min-height: 0; }
+/* Pas de double cadre : le graphique se fond dans la carte du dashboard */
+.embed-mode #chart {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+}

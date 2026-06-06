@@ -47,7 +47,7 @@
     {
       "round": 7,
       "name": "Spain",
-      "shortName": "Madrid",
+      "shortName": "Barcelona",
       "date": "2026-06-14",
       "isSprint": false
     },
@@ -95,10 +95,11 @@
     },
     {
       "round": 14,
-      "name": "Spain",
+      "name": "Spain - Madrid",
       "shortName": "Madrid",
       "date": "2026-09-13",
-      "isSprint": false
+      "isSprint": false,
+      "fastf1Name": null
     },
     {
       "round": 15,

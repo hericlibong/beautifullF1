@@ -1,6 +1,12 @@
 // v2 — Heatmap D3 (D3 v7) - Version Leaders
 // Hypothèse de structure : d3_dataviz/ à côté du CSV à la racine du projet
 // Utilise le CSV leaders avec métriques avancées
+
+// Mode embed (?embed=1) : intégration dans un iframe du dashboard.
+if (new URLSearchParams(window.location.search).get("embed") === "1") {
+  document.documentElement.classList.add("embed-mode");
+}
+
 const SEASON = 2026;
 const DATA_URL = "f1_2026_leaders_heatmap.csv";
 

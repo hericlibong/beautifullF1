@@ -3,11 +3,12 @@
  */
 
 (async function () {
-  const [dashRes, teamsRes, manifestRes, qualiRes] = await Promise.all([
+  const [dashRes, teamsRes, manifestRes, qualiRes, circuitsRes] = await Promise.all([
     fetch("data/dashboard_2026.json").then(r => r.json()),
     fetch("assets/teams.json").then(r => r.json()),
     fetch("assets/manifest.json").then(r => r.json()),
     fetch("data/qualifying_2026.json").then(r => r.ok ? r.json() : null).catch(() => null),
+    fetch("data/circuits_2026.json").then(r => r.ok ? r.json() : null).catch(() => null),
   ]);
 
   const teams = teamsRes.teams || {};
@@ -106,14 +107,15 @@
         </thead>
         <tbody>${renderDriverRows(visible)}</tbody>
       `;
-      const card = driversTable.closest(".dash-card");
-      let toggle = card.querySelector(".dash-table-toggle");
+      // Le bouton "Voir les N" vit DANS le pane Pilotes, juste après le tableau
+      const pane = driversTable.closest(".dash-tab-pane");
+      let toggle = pane.querySelector(".dash-table-toggle");
       if (allDrivers.length > TOP_N) {
         if (!toggle) {
           toggle = document.createElement("button");
           toggle.type = "button";
           toggle.className = "dash-table-toggle";
-          card.appendChild(toggle);
+          pane.appendChild(toggle);
           toggle.addEventListener("click", () => renderTable(!toggle.dataset.expanded));
         }
         toggle.dataset.expanded = expanded ? "1" : "";
@@ -283,6 +285,7 @@
     const played = cal.filter(c => c.status === "played").length;
     if (calProgress) calProgress.textContent = `${played} / ${cal.length} GP`;
 
+    const circuits = (circuitsRes && circuitsRes.circuits) || {};
     calContainer.innerHTML = cal.map(c => {
       const statusIcon =
         c.status === "played" ? "✓" :
@@ -292,8 +295,9 @@
         ? `<span class="dash-cal-winner" style="color:${teamColor(c.winner.team)}">${c.winner.shortName}</span>`
         : (c.status === "next" ? `<span class="dash-cal-next-tag">Prochain</span>` : "");
       const sprintBadge = c.isSprint ? `<span class="dash-cal-sprint" title="Week-end sprint">S</span>` : "";
+      const hasInfo = !!circuits[c.name];
       return `
-        <li class="dash-cal-item dash-cal-${c.status}">
+        <li class="dash-cal-item dash-cal-${c.status} ${hasInfo ? 'dash-cal-clickable' : ''}" data-gp="${c.name}">
           <span class="dash-cal-round">${c.round}</span>
           <span class="dash-cal-status">${statusIcon}</span>
           <span class="dash-cal-name">${c.shortName}${sprintBadge}</span>
@@ -303,25 +307,118 @@
       `;
     }).join("");
 
+    // Drill-down circuit : clic sur une ligne → panneau détaillé déplié dessous
+    calContainer.addEventListener("click", (e) => {
+      const li = e.target.closest("li.dash-cal-clickable");
+      if (!li) return;
+      // Ferme tout panneau déjà ouvert
+      calContainer.querySelectorAll(".dash-circuit-detail").forEach(n => n.remove());
+      calContainer.querySelectorAll(".dash-cal-active").forEach(n => n.classList.remove("dash-cal-active"));
+      const wasOpen = li.dataset.open === "1";
+      calContainer.querySelectorAll("li.dash-cal-clickable").forEach(n => n.dataset.open = "");
+      if (wasOpen) return;
+      li.dataset.open = "1";
+      li.classList.add("dash-cal-active");
+      const circuit = circuits[li.dataset.gp];
+      const calItem = cal.find(x => x.name === li.dataset.gp);
+      if (!circuit) return;
+      const detail = document.createElement("li");
+      detail.className = "dash-circuit-detail";
+      detail.innerHTML = renderCircuitDetail(circuit, calItem, teamColor);
+      li.after(detail);
+    });
   }
 
-  // ---------- Raccourcis viz (cartes compactes) ----------
+  // ---------- Raccourcis viz : affichent la viz DANS le cadre du dashboard ----------
   const vizContainer = document.getElementById("dash-viz");
+  const embedHost = document.getElementById("dash-embed-host");
+  const embedFrame = document.getElementById("dash-embed-frame");
+  const embedTitle = document.getElementById("dash-embed-title");
+  const embedOpen = document.getElementById("dash-embed-open");
+  const embedBack = document.getElementById("dash-embed-back");
+  const standingsCard = document.querySelector(".dash-card--standings");
+
+  let embedResizeObserver = null;
+
+  function fitEmbed() {
+    if (!embedFrame || embedHost.hidden) return;
+    try {
+      const doc = embedFrame.contentDocument;
+      if (!doc || !doc.body) return;
+      const h = Math.max(
+        doc.body.scrollHeight,
+        doc.documentElement.scrollHeight
+      );
+      if (h > 0) embedFrame.style.height = h + "px";
+    } catch (e) { /* cross-origin — ne devrait pas arriver (même domaine) */ }
+  }
+
+  function showEmbed(item) {
+    if (!embedHost || !embedFrame) return;
+    // Masque la barre d'onglets + tous les panes
+    standingsCard.querySelectorAll(".dash-card-header, .dash-tab-pane").forEach(el => {
+      el.dataset.hiddenByEmbed = "1";
+      el.style.display = "none";
+    });
+    embedTitle.textContent = item.title;
+    embedOpen.href = item.route;
+    embedHost.hidden = false;
+
+    embedFrame.onload = () => {
+      fitEmbed();
+      // La viz se rend / s'anime après le load : on remesure quelques fois
+      [200, 700, 1500, 3000].forEach(t => setTimeout(fitEmbed, t));
+      // Suit les changements de taille du contenu (responsive, animations)
+      try {
+        const win = embedFrame.contentWindow;
+        if (embedResizeObserver) embedResizeObserver.disconnect();
+        embedResizeObserver = new win.ResizeObserver(() => fitEmbed());
+        embedResizeObserver.observe(embedFrame.contentDocument.body);
+      } catch (e) { /* ignore */ }
+    };
+    embedFrame.src = item.route + "?embed=1";
+  }
+
+  function hideEmbed() {
+    if (!embedHost) return;
+    if (embedResizeObserver) { embedResizeObserver.disconnect(); embedResizeObserver = null; }
+    embedHost.hidden = true;
+    embedFrame.onload = null;
+    embedFrame.src = "about:blank";
+    embedFrame.style.height = "";
+    standingsCard.querySelectorAll('[data-hidden-by-embed="1"]').forEach(el => {
+      el.style.display = "";
+      delete el.dataset.hiddenByEmbed;
+    });
+  }
+
+  // Re-mesure quand la fenêtre du dashboard change de taille
+  window.addEventListener("resize", () => fitEmbed());
+
+  if (embedBack) embedBack.addEventListener("click", hideEmbed);
+
   if (vizContainer && manifestRes.items) {
     const vizItems = manifestRes.items.filter(it => it.category === "viz");
     vizContainer.innerHTML = vizItems.map(it => {
       const disabled = !it.available;
-      const tag = disabled ? "div" : "a";
-      const hrefAttr = disabled ? "" : `href="${it.route}"`;
       const cls = `dash-shortcut ${disabled ? 'is-disabled' : ''}`;
-      const ariaAttr = disabled ? `aria-disabled="true"` : "";
+      const ariaAttr = disabled ? `aria-disabled="true"` : `role="button" tabindex="0"`;
       return `
-        <${tag} class="${cls}" ${hrefAttr} ${ariaAttr}>
+        <div class="${cls}" data-viz-id="${it.id}" ${ariaAttr}>
           <span class="dash-shortcut-title">${it.title}</span>
           <span class="dash-shortcut-arrow">${disabled ? '·' : '→'}</span>
-        </${tag}>
+        </div>
       `;
     }).join("");
+
+    vizContainer.querySelectorAll(".dash-shortcut:not(.is-disabled)").forEach(el => {
+      const item = vizItems.find(it => it.id === el.dataset.vizId);
+      if (!item) return;
+      el.addEventListener("click", () => showEmbed(item));
+      el.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showEmbed(item); }
+      });
+    });
   }
 })().catch(err => {
   console.error("Erreur de chargement du dashboard :", err);
@@ -656,6 +753,73 @@ function renderDuelPanel(a, b, teamColor) {
         `).join("")}
       </tbody>
     </table>
+  `;
+}
+
+function renderCircuitDetail(circuit, calItem, teamColor) {
+  // Tracé SVG
+  let trackSvg = "";
+  if (circuit.trackPath && circuit.trackPath.length > 1) {
+    // Les coords sont normalisées 0..1000 ; on inverse Y (SVG a l'origine en haut)
+    const pts = circuit.trackPath.map(([x, y]) => `${x},${1000 - y}`).join(" ");
+    trackSvg = `
+      <svg viewBox="-40 -40 1080 1080" class="dash-circuit-track" aria-label="Tracé du circuit">
+        <polyline points="${pts}" fill="none" stroke="#e8eaf0" stroke-width="14"
+                  stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+      </svg>
+    `;
+  } else {
+    trackSvg = `<div class="dash-circuit-notrack">Tracé indisponible</div>`;
+  }
+
+  // Caractéristiques
+  const specs = [];
+  if (circuit.lengthKm) specs.push(["Longueur", `${circuit.lengthKm.toFixed(3)} km`]);
+  if (circuit.laps) specs.push(["Tours", circuit.laps]);
+  if (circuit.corners) specs.push(["Virages", circuit.corners]);
+  if (circuit.isSprint) specs.push(["Format", "Sprint"]);
+
+  const specsHtml = specs.map(([k, v]) =>
+    `<div class="dash-circuit-spec"><span class="dash-circuit-spec-k">${k}</span><span class="dash-circuit-spec-v">${v}</span></div>`
+  ).join("");
+
+  // Record du tour (saison source du tracé)
+  const recordHtml = circuit.lapRecord
+    ? `<div class="dash-circuit-record">Meilleur tour ${circuit.lapRecord.year} : <strong>${circuit.lapRecord.driver}</strong> ${circuit.lapRecord.time}</div>`
+    : "";
+
+  // Vainqueur 2026 (si GP joué) — vient du calendrier dashboard
+  const winner2026 = calItem && calItem.winner
+    ? `<div class="dash-circuit-winner-2026">
+         Vainqueur 2026 : <strong style="color:${teamColor(calItem.winner.team)}">${calItem.winner.shortName}</strong> · ${calItem.winner.team}
+       </div>`
+    : "";
+
+  // Vainqueurs historiques
+  const pastHtml = (circuit.pastWinners || []).map(w => `
+    <div class="dash-circuit-past-row">
+      <span class="dash-circuit-past-year">${w.year}</span>
+      <span class="dash-circuit-past-driver" style="color:${teamColor(w.team)}">${w.driver}</span>
+      <span class="dash-circuit-past-team">${w.team}</span>
+    </div>
+  `).join("");
+
+  return `
+    <div class="dash-circuit-detail-inner">
+      <div class="dash-circuit-left">
+        ${trackSvg}
+      </div>
+      <div class="dash-circuit-right">
+        <div class="dash-circuit-specs">${specsHtml}</div>
+        ${recordHtml}
+        ${winner2026}
+        ${pastHtml ? `
+          <div class="dash-circuit-past">
+            <div class="dash-circuit-past-title">Derniers vainqueurs</div>
+            ${pastHtml}
+          </div>` : ""}
+      </div>
+    </div>
   `;
 }
 

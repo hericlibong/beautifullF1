@@ -302,6 +302,149 @@ a { color: inherit; text-decoration: none; }
   font-weight: 800;
 }
 
+/* Viz embarquée dans le cadre principal */
+.dash-embed-host {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.dash-embed-host[hidden] { display: none; }  /* respecte l'attribut hidden */
+.dash-embed-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-2);
+}
+.dash-embed-back {
+  background: var(--panel-2);
+  color: var(--text);
+  border: 1px solid var(--grid);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-1) var(--sp-3);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.dash-embed-back:hover { background: var(--grid); border-color: #3a4150; }
+.dash-embed-title {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--accent);
+}
+.dash-embed-open {
+  margin-left: auto;
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  transition: color 0.15s;
+}
+.dash-embed-open:hover { color: var(--highlight); }
+.dash-embed-frame {
+  width: 100%;
+  height: 600px;        /* valeur de départ ; ajustée en JS à la hauteur du contenu */
+  border: 0;
+  background: transparent;  /* pas de double cadre : la viz se fond dans la carte */
+  display: block;
+}
+
+/* Drill-down circuit */
+.dash-cal-clickable { cursor: pointer; }
+.dash-cal-clickable:hover { background: var(--panel-2); }
+.dash-cal-active { background: var(--panel-2); }
+
+.dash-circuit-detail {
+  display: block;
+  background: var(--bg);
+  border-bottom: 1px solid var(--grid);
+  padding: 0;
+}
+.dash-circuit-detail-inner {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-3);
+}
+@media (max-width: 600px) {
+  .dash-circuit-detail-inner { grid-template-columns: 1fr; }
+}
+
+.dash-circuit-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dash-circuit-track {
+  width: 100%;
+  height: auto;
+  max-height: 180px;
+}
+.dash-circuit-notrack {
+  color: var(--muted);
+  font-size: var(--fs-xs);
+  font-style: italic;
+  text-align: center;
+  padding: var(--sp-4);
+}
+
+.dash-circuit-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  min-width: 0;
+}
+.dash-circuit-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-1);
+}
+.dash-circuit-spec { display: flex; flex-direction: column; }
+.dash-circuit-spec-k {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+.dash-circuit-spec-v {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.dash-circuit-record,
+.dash-circuit-winner-2026 {
+  font-size: var(--fs-sm);
+  color: var(--text);
+}
+.dash-circuit-record { color: var(--muted); }
+
+.dash-circuit-past {
+  margin-top: var(--sp-2);
+  border-top: 1px solid var(--grid);
+  padding-top: var(--sp-2);
+}
+.dash-circuit-past-title {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: var(--sp-1);
+}
+.dash-circuit-past-row {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: var(--sp-2);
+  align-items: baseline;
+  font-size: var(--fs-sm);
+  padding: 2px 0;
+}
+.dash-circuit-past-year {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.dash-circuit-past-driver { font-weight: 600; }
+.dash-circuit-past-team { color: var(--muted); font-size: var(--fs-xs); }
+
 /* Duel head-to-head */
 .dash-duel-pickers {
   display: flex;

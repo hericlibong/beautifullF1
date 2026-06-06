@@ -1,6 +1,12 @@
 // F1 2026 — Race Chart Line (D3 v7)
 // Source: data/f1_race_chart_fastf1_2026.csv (généré par race_chart_builder_fastf1.py)
 
+// Mode embed (?embed=1) : la page est affichée dans un iframe du dashboard.
+// On masque header/footer/navbar et on resserre les marges via une classe.
+if (new URLSearchParams(window.location.search).get("embed") === "1") {
+  document.documentElement.classList.add("embed-mode");
+}
+
 const TEAM_COLORS = {
   "McLaren":         "#FF8000",
   "Ferrari":         "#DC0000",
