@@ -105,11 +105,23 @@ Tâches issues du feedback en cours de route.
 - [x] Tableau détaillé GP par GP : gain de chacun + Δ
 - [~] ~~Qualifs gagnées, position d'arrivée par GP~~ — non disponible avec le CSV actuel ; nécessiterait extension du builder (cf. 3.6)
 
-### 3.5.bis Onglet "Coéquipiers" — H2H qualif
+### 3.5.bis Onglet "Coéquipiers · Qualifs" — H2H qualif
 - [x] Nouveau builder `build_qualifying_data.py` (FastF1 → temps de référence par pilote, gap au millième, compteur Q3)
+- [x] Sprint Qualifs incluses (fallback meilleur tour via `laps` car Ergast ne sert pas la SQ)
 - [x] Output `docs/data/qualifying_2026.json` + ajout au pipeline `build_all.py`
-- [x] Nouvel onglet "Coéquipiers" dans la carte Classements
-- [x] Une carte par écurie avec : score H2H + barre proportionnelle aux couleurs, compteur Q3, tableau GP par GP avec gap exact
+- [x] Onglet "Coéquipiers · Qualifs" : dropdown écurie (défaut = leader constructeurs), filtres Tous / Qualifs / Sprint Qualifs
+- [x] Timeline SVG centrée sur 0 : cercle = Quali, losange = Sprint Quali, position = gap signé, tooltip au survol
+
+### 3.7 Viz embarquées dans le cadre du dashboard
+- [x] Mode embed (`?embed=1`) sur Race Line + Heatmap (header/footer/navbar masqués, fond transparent, SVG hauteur naturelle, pas de double cadre)
+- [x] Carte "Visualisations" → ouvre la viz DANS le cadre principal (iframe), navbar header → page indépendante (double accès)
+- [x] Iframe auto-redimensionnée à la hauteur du contenu (lecture same-origin + re-mesure + ResizeObserver) → aucun scroll interne
+- [x] Bouton "← Retour" pour revenir aux onglets
+
+## Hors plan — livré en cours de route
+- [x] **Cleanup repo** : 17 fichiers obsolètes supprimés (~4000 lignes mortes)
+- [x] **Refresh auto GitHub Actions** : `.github/workflows/refresh-after-gp.yml` (lundi + mardi 14h UTC) + `check_should_refresh.py` ; tests pytest avant commit
+- [x] **driver_images.json** : fallback photos pilotes
 
 ### 3.6 Calendrier interactif — drill-down circuit
 Rendre chaque ligne du calendrier cliquable, comme pour les pilotes, et ouvrir un panneau détaillé sur le circuit. **Toutes les données ci-dessous sont récupérables via FastF1 (vérifié).**
@@ -136,21 +148,20 @@ Rendre chaque ligne du calendrier cliquable, comme pour les pilotes, et ouvrir u
 - Drapeau du pays → emoji depuis le pays, ou icône statique
 - Lien Wikipedia → URL templatée depuis nom de circuit, ou Wikidata si on veut être propre
 
-**Implémentation**
-- [ ] Créer `projects/dashboard/build_circuits_data.py` séparé (le builder fera plusieurs requêtes FastF1, on évite d'alourdir `build_dashboard_data.py`)
-- [ ] Output : `projects/dashboard/web/data/circuits_2026.json` indexé par nom de GP, contenant pour chaque circuit :
-  - en-tête (nom, ville, pays, format),
-  - caractéristiques (laps, longueur estimée, nb de virages),
-  - records (meilleur tour 2026 + saisons précédentes si dispo),
-  - top 3-5 vainqueurs récents,
-  - tracé : tableau de points `[(x, y), ...]` + rotation pour rendu SVG inline
-- [ ] Ajouter une étape au pipeline `build_all.py`
-- [ ] Côté front : clic sur une ligne du calendrier → panneau drill-down inline (même pattern UX que la fiche pilote, avec mini SVG du circuit)
+**Implémentation — FAIT ✅**
+- [x] `projects/dashboard/build_circuits_data.py` séparé (manuel, lent ; PAS dans le workflow auto car ~22 circuits × télémétrie)
+- [x] Output `circuits_2026.json` (web/ + docs/) indexé par nom de GP : caractéristiques (longueur calculée, virages, tours), record du meilleur tour, 3 derniers vainqueurs, tracé `[(x,y)]` normalisé 0-1000 + rotation appliquée, sous-échantillonné à 120 points
+- [x] Côté front : clic sur une ligne du calendrier → panneau inline (tracé SVG à gauche, specs + record + vainqueur 2026 + 3 derniers vainqueurs à droite)
+- [x] Vainqueur 2026 lu côté front depuis le dashboard JSON (`calendar[].winner`), pas dans le builder circuits
 
-**Décisions à prendre avant de commencer**
-- [ ] Inclure les vainqueurs historiques (3 dernières saisons ?) ou seulement 2026 ?
-- [ ] Tracé SVG depuis telemetry (lent, ~30-60 s pour les 22 GP au build) ou tracé simplifié depuis seulement les coordonnées des virages ?
-- [ ] Longueur calculée auto, ou laissée vide en attendant une source plus fiable ?
+**Décisions prises**
+- [x] Vainqueurs historiques : **3 dernières saisons** (2023-2025)
+- [x] Tracé SVG depuis **télémétrie complète** d'une saison réelle (fallback 2025→2024→2023 ; 2026 simulée n'a pas la position GPS)
+- [x] Longueur **calculée auto** depuis la distance cumulée de la télémétrie
+
+**Limites connues (acceptées)**
+- Madrid (round 14, nouveau circuit) : fiche volontairement vide, pas de tracé historique
+- Barcelona (round 7) : tracé issu de la saison "Spain" récente (Barcelona)
 
 ---
 
@@ -197,7 +208,8 @@ Dans le panneau drill-down d'un GP, prévoir 2 zones :
 
 ## Bugs / dettes connus
 
-- [ ] Collision de nommage "Spain" : FastF1 nomme à la fois Madrid (round 7) et Barcelona (round 14) "Spanish Grand Prix" → notre `_col_name` de `race_chart_builder` génère le même libellé pour les deux. À fixer avant le round 7 (mi-juin 2026) en ajoutant "Spain" aux pays multi-GP.
+- [x] **Collision "Spain"** — partiellement réglé côté calendrier/dashboard/circuits : round 7 = Barcelona (name "Spain"), round 14 = Madrid (name "Spain - Madrid", fiche vide). ⚠️ Reste à traiter dans `race_chart_builder._col_name` ET `season_summary_heatmap` avant que Madrid soit couru (round 14, sept. 2026), sinon les deux GP partageront la même colonne CSV.
+- [x] **Photos pilotes vides sur le site déployé** — réglé via `projects/dashboard/driver_images.json` (mapping abréviation FIA → URL), utilisé en fallback quand FastF1 ne fournit pas `HeadshotUrl` (runner Linux).
 
 ## Décisions à reprendre plus tard
 
