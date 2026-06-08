@@ -2,51 +2,94 @@
  * Charge data/dashboard_2026.json + assets/teams.json et peuple la page.
  */
 
+// ---------- i18n (FR / EN) ----------
+let I18N = {};
+let LANG = localStorage.getItem("bf1-lang") || "fr";
+
+function t(key, vars) {
+  const dict = I18N[LANG] || I18N.fr || {};
+  let s = dict[key] != null ? dict[key] : key;
+  if (vars) for (const k in vars) s = s.split("{" + k + "}").join(vars[k]);
+  return s;
+}
+
+function applyStaticI18n() {
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    el.innerHTML = t(el.dataset.i18n);
+  });
+  document.querySelectorAll("[data-i18n-title]").forEach(el => {
+    el.title = t(el.dataset.i18nTitle);
+  });
+}
+
+function setupLangSwitcher() {
+  const sw = document.getElementById("lang-switch");
+  if (!sw) return;
+  sw.querySelectorAll("button[data-lang]").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.lang === LANG);
+    btn.addEventListener("click", () => {
+      if (btn.dataset.lang === LANG) return;
+      localStorage.setItem("bf1-lang", btn.dataset.lang);
+      location.reload();
+    });
+  });
+}
+
 (async function () {
-  const [dashRes, teamsRes, manifestRes, qualiRes, circuitsRes] = await Promise.all([
+  const [dashRes, teamsRes, manifestRes, qualiRes, circuitsRes, i18nRes] = await Promise.all([
     fetch("data/dashboard_2026.json").then(r => r.json()),
     fetch("assets/teams.json").then(r => r.json()),
     fetch("assets/manifest.json").then(r => r.json()),
     fetch("data/qualifying_2026.json").then(r => r.ok ? r.json() : null).catch(() => null),
     fetch("data/circuits_2026.json").then(r => r.ok ? r.json() : null).catch(() => null),
+    fetch("assets/i18n.json").then(r => r.json()).catch(() => ({})),
   ]);
+
+  I18N = i18nRes || {};
+  document.documentElement.lang = LANG;
+  applyStaticI18n();
+  setupLangSwitcher();
 
   const teams = teamsRes.teams || {};
   const teamColor = name => (teams[name] && teams[name].color) || teamsRes.fallbackColor;
 
   // ---------- Header ----------
   const lastGpDate = formatDate(dashRes.lastGp.date);
-  document.getElementById("dash-subtitle").textContent =
-    `Dernier GP joué : ${dashRes.lastGp.shortName} (${lastGpDate}) • ${dashRes.kpis.raceCount} / ${dashRes.kpis.totalRaces} GP`;
+  document.getElementById("dash-subtitle").textContent = t("header.lastRace", {
+    gp: dashRes.lastGp.shortName,
+    date: lastGpDate,
+    n: dashRes.kpis.raceCount,
+    total: dashRes.kpis.totalRaces,
+  });
 
   // ---------- KPI ----------
   const kpiContainer = document.getElementById("dash-kpis");
   const k = dashRes.kpis;
   const kpis = [
     {
-      label: "Leader actuel",
+      label: t("kpi.leader"),
       value: shortName(k.leader.name),
-      sub: `${k.leader.points} pts • ${k.leader.team}`,
+      sub: t("kpi.points", { n: k.leader.points, team: k.leader.team }),
       color: teamColor(k.leader.team),
     },
     {
-      label: "Écart leader / 2e",
+      label: t("kpi.gap"),
       value: `+${k.leaderGap}`,
-      sub: `vs ${shortName(k.second.name)} (${k.second.points} pts)`,
+      sub: t("kpi.gapSub", { name: shortName(k.second.name), pts: k.second.points }),
     },
     {
-      label: "Dernier vainqueur",
+      label: t("kpi.lastWinner"),
       value: shortName(k.lastWinner.name),
       sub: `${k.lastWinner.gp} • ${k.lastWinner.team}`,
       color: teamColor(k.lastWinner.team),
     },
     {
-      label: "Prochain GP",
+      label: t("kpi.nextRace"),
       countdown: dashRes.nextGp ? dashRes.nextGp.date : null,
       gpName: dashRes.nextGp ? dashRes.nextGp.shortName : "—",
       sub: dashRes.nextGp
         ? `${dashRes.nextGp.shortName} • ${formatDate(dashRes.nextGp.date)}${dashRes.nextGp.isSprint ? " • Sprint" : ""}`
-        : "Saison terminée",
+        : t("kpi.seasonEnded"),
     },
   ];
 
@@ -97,12 +140,12 @@
       driversTable.innerHTML = `
         <thead>
           <tr>
-            <th class="t-rank">#</th>
-            <th class="t-name">Pilote</th>
-            <th class="t-team">Écurie</th>
-            <th class="t-num">Pts</th>
-            <th class="t-num">Δ</th>
-            <th class="t-num t-gap">Écart</th>
+            <th class="t-rank">${t("col.rank")}</th>
+            <th class="t-name">${t("col.driver")}</th>
+            <th class="t-team">${t("col.team")}</th>
+            <th class="t-num">${t("col.points")}</th>
+            <th class="t-num">${t("col.delta")}</th>
+            <th class="t-num t-gap">${t("col.gap")}</th>
           </tr>
         </thead>
         <tbody>${renderDriverRows(visible)}</tbody>
@@ -120,8 +163,8 @@
         }
         toggle.dataset.expanded = expanded ? "1" : "";
         toggle.textContent = expanded
-          ? `▲ Voir le top ${TOP_N}`
-          : `▼ Voir les ${allDrivers.length} pilotes`;
+          ? t("table.showTop", { n: TOP_N })
+          : t("table.showAll", { n: allDrivers.length });
       }
     };
     renderTable(false);
@@ -153,11 +196,11 @@
     teamsTable.innerHTML = `
       <thead>
         <tr>
-          <th class="t-rank">#</th>
-          <th class="t-name">Écurie</th>
-          <th class="t-num">Pts</th>
-          <th class="t-num">Δ</th>
-          <th class="t-num t-gap">Écart</th>
+          <th class="t-rank">${t("col.rank")}</th>
+          <th class="t-name">${t("col.team")}</th>
+          <th class="t-num">${t("col.points")}</th>
+          <th class="t-num">${t("col.delta")}</th>
+          <th class="t-num t-gap">${t("col.gap")}</th>
         </tr>
       </thead>
       <tbody>
@@ -223,7 +266,7 @@
       const b = allDriversList.find(d => d.name === selB.value);
       const target = document.getElementById("dash-duel-content");
       if (!a || !b || a.name === b.name) {
-        target.innerHTML = `<p class="dash-duel-empty">Choisis deux pilotes différents.</p>`;
+        target.innerHTML = `<p class="dash-duel-empty">${t("duel.pickTwo")}</p>`;
         return;
       }
       target.innerHTML = renderDuelPanel(a, b, teamColor);
@@ -239,7 +282,7 @@
   const pillButtons = document.querySelectorAll(".dash-pill");
 
   if (teammatesContent && (!qualiRes || !qualiRes.teammates)) {
-    teammatesContent.innerHTML = `<p class="dash-duel-empty">Données qualif non disponibles. Lance <code>python projects/dashboard/build_qualifying_data.py</code>.</p>`;
+    teammatesContent.innerHTML = `<p class="dash-duel-empty">${t("tm.dataUnavailable")}</p>`;
   } else if (teammatesContent && teamSelect && qualiRes && qualiRes.teammates) {
     // Trie les équipes selon le classement constructeurs (en tête en premier)
     const teamRank = new Map();
@@ -293,8 +336,8 @@
         "·";
       const winnerHtml = c.winner
         ? `<span class="dash-cal-winner" style="color:${teamColor(c.winner.team)}">${c.winner.shortName}</span>`
-        : (c.status === "next" ? `<span class="dash-cal-next-tag">Prochain</span>` : "");
-      const sprintBadge = c.isSprint ? `<span class="dash-cal-sprint" title="Week-end sprint">S</span>` : "";
+        : (c.status === "next" ? `<span class="dash-cal-next-tag">${t("cal.nextTag")}</span>` : "");
+      const sprintBadge = c.isSprint ? `<span class="dash-cal-sprint" title="${t("cal.sprintWeekend")}">S</span>` : "";
       const hasInfo = !!circuits[c.name];
       return `
         <li class="dash-cal-item dash-cal-${c.status} ${hasInfo ? 'dash-cal-clickable' : ''}" data-gp="${c.name}">
@@ -423,13 +466,13 @@
 })().catch(err => {
   console.error("Erreur de chargement du dashboard :", err);
   const sub = document.getElementById("dash-subtitle");
-  if (sub) sub.textContent = "Erreur de chargement des données.";
+  if (sub) sub.textContent = t("header.loadError");
 });
 
 function renderTeammateView(team, filter, teamColor) {
   const color = teamColor(team.team);
   const drivers = team.drivers || [];
-  if (drivers.length < 2) return `<p class="dash-duel-empty">Équipe avec un seul pilote.</p>`;
+  if (drivers.length < 2) return `<p class="dash-duel-empty">${t("tm.singleDriver")}</p>`;
   const [dA, dB] = drivers; // ordre alpha (fixé par le builder)
   const shortA = shortName(dA);
   const shortB = shortName(dB);
@@ -493,13 +536,13 @@ function renderTeammateView(team, filter, teamColor) {
   // Score H2H : on choisit la "barre" en fonction du filtre
   const flexA = Math.max(0.01, winsA);
   const flexB = Math.max(0.01, winsB);
-  const filterLabel = filter === "Q" ? "Qualifs uniquement" : filter === "SQ" ? "Sprint Qualifs uniquement" : "Toutes sessions";
+  const filterLabel = filter === "Q" ? t("tm.scopeQ") : filter === "SQ" ? t("tm.scopeSQ") : t("tm.scopeAll");
 
   return `
     <div class="dash-teammate-card" style="border-left-color:${color}">
       <div class="dash-teammate-head">
         <span class="dash-teammate-team" style="color:${color}">${team.team}</span>
-        <span class="dash-teammate-filter">${filterLabel} • ${sessions.length} session${sessions.length>1?'s':''}</span>
+        <span class="dash-teammate-filter">${filterLabel} • ${t("tm.sessions", { n: sessions.length })}</span>
       </div>
 
       <div class="dash-tl-scoreline">
@@ -522,21 +565,21 @@ function renderTeammateView(team, filter, teamColor) {
       </div>
 
       <div class="dash-teammate-q3">
-        Q3 atteint sur la saison : <strong>${shortA} ${q3A}</strong> / <strong>${shortB} ${q3B}</strong>
+        ${t("tm.q3Reached", { a: shortA, qa: q3A, b: shortB, qb: q3B })}
       </div>
 
       <div class="dash-tl-axis-labels">
-        <span>← ${shortA} plus rapide</span>
-        <span>${shortB} plus rapide →</span>
+        <span>${t("tm.fasterLeft", { name: shortA })}</span>
+        <span>${t("tm.fasterRight", { name: shortB })}</span>
       </div>
-      <svg viewBox="0 0 ${W} ${H}" class="dash-tl-svg" aria-label="Timeline des gaps qualif">
+      <svg viewBox="0 0 ${W} ${H}" class="dash-tl-svg" aria-label="${t("tm.timelineAria")}">
         <line x1="${PAD_X}" x2="${W-PAD_X}" y1="${yMid}" y2="${yMid}" stroke="#3a4150" stroke-width="1"/>
         ${ticksSvg}
         ${dotsSvg}
       </svg>
       <div class="dash-tl-legend">
-        <span><span class="dash-tl-legend-dot" style="background:${color}"></span> Qualif</span>
-        <span><span class="dash-tl-legend-diamond" style="border-color:${color}"></span> Sprint Qualif</span>
+        <span><span class="dash-tl-legend-dot" style="background:${color}"></span> ${t("tm.quali")}</span>
+        <span><span class="dash-tl-legend-diamond" style="border-color:${color}"></span> ${t("tm.sprintQuali")}</span>
       </div>
 
       <div id="dash-tl-tooltip" class="dash-tl-tooltip"></div>
@@ -548,7 +591,7 @@ function buildTooltipPayload(p, dA, dB, color) {
   // Encodé pour stockage dans data-info ; format JSON minimal
   return JSON.stringify({
     gp: p.shortName,
-    type: p.type === "Q" ? "Qualif" : "Sprint Qualif",
+    type: p.type === "Q" ? t("tm.quali") : t("tm.sprintQuali"),
     timeA: p.timeA,
     timeB: p.timeB,
     fastest: p.fastest === dA ? "A" : "B",
@@ -682,32 +725,32 @@ function renderDuelPanel(a, b, teamColor) {
         <div class="dash-duel-id">
           <div class="dash-duel-name">${a.shortName}</div>
           <div class="dash-duel-team" style="color:${cA}">${a.team}</div>
-          <div class="dash-duel-meta">rang ${a.rank} • ${totalA} pts</div>
+          <div class="dash-duel-meta">${t("duel.metaRank", { rank: a.rank, pts: totalA })}</div>
         </div>
       </div>
-      <div class="dash-duel-vs-big" title="Écart de points">
+      <div class="dash-duel-vs-big" title="${t("duel.pointsGap")}">
         ${gap === 0 ? "=" : (gap > 0 ? `+${gap}` : `${gap}`)}
       </div>
       <div class="dash-duel-head dash-duel-head--right" style="border-right-color:${cB}">
         <div class="dash-duel-id" style="text-align:right">
           <div class="dash-duel-name">${b.shortName}</div>
           <div class="dash-duel-team" style="color:${cB}">${b.team}</div>
-          <div class="dash-duel-meta">rang ${b.rank} • ${totalB} pts</div>
+          <div class="dash-duel-meta">${t("duel.metaRank", { rank: b.rank, pts: totalB })}</div>
         </div>
         <div class="dash-duel-photo-wrap" style="border-color:${cB}">${photoB}</div>
       </div>
     </div>
 
     <div class="dash-duel-metrics">
-      ${metricBar("Points totaux", totalA, totalB)}
-      ${metricBar("Meilleur GP (pts)", bestA, bestB)}
-      ${metricBar("Avantage GP par GP", winsA, winsB,
+      ${metricBar(t("duel.totalPoints"), totalA, totalB)}
+      ${metricBar(t("duel.bestRace"), bestA, bestB)}
+      ${metricBar(t("duel.edge"), winsA, winsB,
         undefined,
-        `Nombre de GP où ${a.shortName} a marqué plus que ${b.shortName} (et inversement). Les GP à égalité de points ne comptent ni d'un côté ni de l'autre.`)}
+        t("duel.edgeNote", { a: a.shortName, b: b.shortName }))}
     </div>
 
     <div class="dash-duel-chart">
-      <div class="dash-duel-chart-title">Évolution de l'écart cumulé (${a.shortName} − ${b.shortName})</div>
+      <div class="dash-duel-chart-title">${t("duel.cumChart", { a: a.shortName, b: b.shortName })}</div>
       <svg viewBox="0 0 ${W} ${H}" class="dash-duel-svg" aria-hidden="true">
         <!-- axes Y : labels max et min -->
         <text x="${PAD_L - 4}" y="${PAD_T + 4}" fill="#9aa3b2" font-size="10" text-anchor="end">+${maxAbs}</text>
@@ -736,10 +779,10 @@ function renderDuelPanel(a, b, teamColor) {
     <table class="dash-table dash-duel-table">
       <thead>
         <tr>
-          <th>GP</th>
+          <th>${t("duel.colGp")}</th>
           <th class="t-num" style="color:${cA}">${a.shortName}</th>
           <th class="t-num" style="color:${cB}">${b.shortName}</th>
-          <th class="t-num">Δ</th>
+          <th class="t-num">${t("col.delta")}</th>
         </tr>
       </thead>
       <tbody>
@@ -763,21 +806,21 @@ function renderCircuitDetail(circuit, calItem, teamColor) {
     // Les coords sont normalisées 0..1000 ; on inverse Y (SVG a l'origine en haut)
     const pts = circuit.trackPath.map(([x, y]) => `${x},${1000 - y}`).join(" ");
     trackSvg = `
-      <svg viewBox="-40 -40 1080 1080" class="dash-circuit-track" aria-label="Tracé du circuit">
+      <svg viewBox="-40 -40 1080 1080" class="dash-circuit-track" aria-label="${t("circuit.trackAria")}">
         <polyline points="${pts}" fill="none" stroke="#e8eaf0" stroke-width="14"
                   stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
       </svg>
     `;
   } else {
-    trackSvg = `<div class="dash-circuit-notrack">Tracé indisponible</div>`;
+    trackSvg = `<div class="dash-circuit-notrack">${t("circuit.trackUnavailable")}</div>`;
   }
 
   // Caractéristiques
   const specs = [];
-  if (circuit.lengthKm) specs.push(["Longueur", `${circuit.lengthKm.toFixed(3)} km`]);
-  if (circuit.laps) specs.push(["Tours", circuit.laps]);
-  if (circuit.corners) specs.push(["Virages", circuit.corners]);
-  if (circuit.isSprint) specs.push(["Format", "Sprint"]);
+  if (circuit.lengthKm) specs.push([t("circuit.length"), `${circuit.lengthKm.toFixed(3)} km`]);
+  if (circuit.laps) specs.push([t("circuit.laps"), circuit.laps]);
+  if (circuit.corners) specs.push([t("circuit.corners"), circuit.corners]);
+  if (circuit.isSprint) specs.push([t("circuit.format"), t("circuit.sprint")]);
 
   const specsHtml = specs.map(([k, v]) =>
     `<div class="dash-circuit-spec"><span class="dash-circuit-spec-k">${k}</span><span class="dash-circuit-spec-v">${v}</span></div>`
@@ -785,14 +828,12 @@ function renderCircuitDetail(circuit, calItem, teamColor) {
 
   // Record du tour (saison source du tracé)
   const recordHtml = circuit.lapRecord
-    ? `<div class="dash-circuit-record">Meilleur tour ${circuit.lapRecord.year} : <strong>${circuit.lapRecord.driver}</strong> ${circuit.lapRecord.time}</div>`
+    ? `<div class="dash-circuit-record">${t("circuit.fastestLap", { year: circuit.lapRecord.year, driver: circuit.lapRecord.driver, time: circuit.lapRecord.time })}</div>`
     : "";
 
-  // Vainqueur 2026 (si GP joué) — vient du calendrier dashboard
+  // Vainqueur de la saison en cours (si GP joué) — vient du calendrier dashboard
   const winner2026 = calItem && calItem.winner
-    ? `<div class="dash-circuit-winner-2026">
-         Vainqueur 2026 : <strong style="color:${teamColor(calItem.winner.team)}">${calItem.winner.shortName}</strong> · ${calItem.winner.team}
-       </div>`
+    ? `<div class="dash-circuit-winner-2026">${t("circuit.winner", { season: 2026, color: teamColor(calItem.winner.team), name: calItem.winner.shortName, team: calItem.winner.team })}</div>`
     : "";
 
   // Vainqueurs historiques
@@ -815,7 +856,7 @@ function renderCircuitDetail(circuit, calItem, teamColor) {
         ${winner2026}
         ${pastHtml ? `
           <div class="dash-circuit-past">
-            <div class="dash-circuit-past-title">Derniers vainqueurs</div>
+            <div class="dash-circuit-past-title">${t("circuit.recentWinners")}</div>
             ${pastHtml}
           </div>` : ""}
       </div>
@@ -870,10 +911,10 @@ function renderDriverDetail(driver, teamColor) {
           <div class="dash-driver-team" style="color:${color}">${driver.team}</div>
         </div>
         <div class="dash-driver-mini">
-          <div><span class="dash-mini-label">Rang</span><span class="dash-mini-val">${driver.rank}</span></div>
-          <div><span class="dash-mini-label">Points</span><span class="dash-mini-val">${driver.points}</span></div>
-          <div><span class="dash-mini-label">Δ dernier GP</span><span class="dash-mini-val ${driver.deltaLastGp > 0 ? 'positive' : 'muted'}">${driver.deltaLastGp > 0 ? '+' + driver.deltaLastGp : driver.deltaLastGp}</span></div>
-          <div><span class="dash-mini-label">Écart leader</span><span class="dash-mini-val muted">${driver.leaderGap === 0 ? '—' : driver.leaderGap}</span></div>
+          <div><span class="dash-mini-label">${t("driver.rank")}</span><span class="dash-mini-val">${driver.rank}</span></div>
+          <div><span class="dash-mini-label">${t("driver.points")}</span><span class="dash-mini-val">${driver.points}</span></div>
+          <div><span class="dash-mini-label">${t("driver.deltaLast")}</span><span class="dash-mini-val ${driver.deltaLastGp > 0 ? 'positive' : 'muted'}">${driver.deltaLastGp > 0 ? '+' + driver.deltaLastGp : driver.deltaLastGp}</span></div>
+          <div><span class="dash-mini-label">${t("driver.leaderGap")}</span><span class="dash-mini-val muted">${driver.leaderGap === 0 ? '—' : driver.leaderGap}</span></div>
         </div>
         ${sparkSvg}
       </div>
@@ -881,9 +922,9 @@ function renderDriverDetail(driver, teamColor) {
         <thead>
           <tr>
             <th class="t-rank">#</th>
-            <th>Grand Prix</th>
-            <th class="t-num">Gain</th>
-            <th class="t-num">Cumul</th>
+            <th>${t("driver.gp")}</th>
+            <th class="t-num">${t("driver.gain")}</th>
+            <th class="t-num">${t("driver.cumulative")}</th>
           </tr>
         </thead>
         <tbody>${gpRows}</tbody>
@@ -893,14 +934,14 @@ function renderDriverDetail(driver, teamColor) {
 }
 
 function formatCountdown(diffMs) {
-  if (diffMs <= 0) return "🏁 En cours";
+  if (diffMs <= 0) return t("countdown.ongoing");
   const totalMin = Math.floor(diffMs / 60_000);
   const days = Math.floor(totalMin / (24 * 60));
   const hours = Math.floor((totalMin - days * 24 * 60) / 60);
-  if (days >= 7) return `${days} jours`;
-  if (days >= 1) return `${days}j ${String(hours).padStart(2, "0")}h`;
+  if (days >= 7) return t("countdown.days", { days });
+  if (days >= 1) return t("countdown.dayHour", { days, hours: String(hours).padStart(2, "0") });
   const minutes = totalMin - days * 24 * 60 - hours * 60;
-  return `${String(hours).padStart(2, "0")}h ${String(minutes).padStart(2, "0")}m`;
+  return t("countdown.hourMin", { hours: String(hours).padStart(2, "0"), min: String(minutes).padStart(2, "0") });
 }
 
 function shortName(full) {
@@ -909,11 +950,13 @@ function shortName(full) {
   return parts[0][0] + ". " + parts.slice(1).join(" ");
 }
 
+function dateLocale() { return LANG === "en" ? "en-GB" : "fr-FR"; }
+
 function formatDate(iso) {
   if (!iso) return "—";
   const d = new Date(iso);
   if (isNaN(d)) return iso;
-  return d.toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+  return d.toLocaleDateString(dateLocale(), { day: "numeric", month: "short" });
 }
 
 function formatDateShort(iso) {
@@ -921,5 +964,5 @@ function formatDateShort(iso) {
   const d = new Date(iso);
   if (isNaN(d)) return iso;
   // ex. "08/03"
-  return d.toLocaleDateString("fr-FR", { day: "2-digit", month: "2-digit" });
+  return d.toLocaleDateString(dateLocale(), { day: "2-digit", month: "2-digit" });
 }

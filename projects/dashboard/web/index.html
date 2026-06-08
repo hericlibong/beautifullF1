@@ -8,8 +8,12 @@
 </head>
 <body>
   <header class="dash-header">
-    <h1>F1 2026 — Dashboard</h1>
-    <p id="dash-subtitle" class="dash-subtitle">Chargement…</p>
+    <div id="lang-switch" class="dash-lang" role="group" aria-label="Language">
+      <button type="button" data-lang="fr">FR</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+    <h1 data-i18n="header.title">F1 2026 — Dashboard</h1>
+    <p id="dash-subtitle" class="dash-subtitle" data-i18n="header.loading">Chargement…</p>
   </header>
 
   <main class="dash-container">
@@ -25,11 +29,11 @@
       <div class="dash-card dash-card--standings">
         <div class="dash-card-header">
           <div class="dash-tabs" role="tablist" aria-label="Vue principale">
-            <button class="dash-tab active" data-tab="drivers" role="tab" aria-selected="true">Pilotes</button>
-            <button class="dash-tab" data-tab="constructors" role="tab" aria-selected="false">Constructeurs</button>
-            <button class="dash-tab" data-tab="calendar" role="tab" aria-selected="false">Calendrier <span id="dash-calendar-progress" class="dash-tab-badge"></span></button>
-            <button class="dash-tab" data-tab="duel" role="tab" aria-selected="false">Duel</button>
-            <button class="dash-tab" data-tab="teammates" role="tab" aria-selected="false">Coéquipiers · Qualifs</button>
+            <button class="dash-tab active" data-tab="drivers" role="tab" aria-selected="true" data-i18n="tab.drivers">Pilotes</button>
+            <button class="dash-tab" data-tab="constructors" role="tab" aria-selected="false" data-i18n="tab.constructors">Constructeurs</button>
+            <button class="dash-tab" data-tab="calendar" role="tab" aria-selected="false"><span data-i18n="tab.calendar">Calendrier</span> <span id="dash-calendar-progress" class="dash-tab-badge"></span></button>
+            <button class="dash-tab" data-tab="duel" role="tab" aria-selected="false" data-i18n="tab.duel">Duel</button>
+            <button class="dash-tab" data-tab="teammates" role="tab" aria-selected="false" data-i18n="tab.teammates">Coéquipiers · Qualifs</button>
           </div>
         </div>
         <div id="standings-pane-drivers" class="dash-tab-pane active">
@@ -52,13 +56,13 @@
         <div id="standings-pane-teammates" class="dash-tab-pane">
           <div class="dash-teammates-controls">
             <label class="dash-teammates-label">
-              Écurie
+              <span data-i18n="tm.teamLabel">Écurie</span>
               <select id="dash-teammates-team" class="dash-duel-select"></select>
             </label>
             <div class="dash-teammates-filters" role="tablist" aria-label="Type de session">
-              <button class="dash-pill active" data-session="ALL" role="tab" aria-selected="true">Tous</button>
-              <button class="dash-pill" data-session="Q" role="tab" aria-selected="false">Qualifs</button>
-              <button class="dash-pill" data-session="SQ" role="tab" aria-selected="false">Sprint Qualifs</button>
+              <button class="dash-pill active" data-session="ALL" role="tab" aria-selected="true" data-i18n="tm.filterAll">Tous</button>
+              <button class="dash-pill" data-session="Q" role="tab" aria-selected="false" data-i18n="tm.filterQ">Qualifs</button>
+              <button class="dash-pill" data-session="SQ" role="tab" aria-selected="false" data-i18n="tm.filterSQ">Sprint Qualifs</button>
             </div>
           </div>
           <div id="dash-teammates-content"></div>
@@ -67,9 +71,9 @@
         <!-- Hôte d'affichage d'une viz embarquée (activé depuis la carte Visualisations) -->
         <div id="dash-embed-host" class="dash-embed-host" hidden>
           <div class="dash-embed-bar">
-            <button id="dash-embed-back" type="button" class="dash-embed-back">← Retour</button>
+            <button id="dash-embed-back" type="button" class="dash-embed-back" data-i18n="embed.back">← Retour</button>
             <span id="dash-embed-title" class="dash-embed-title"></span>
-            <a id="dash-embed-open" class="dash-embed-open" href="#" target="_blank" rel="noopener">Ouvrir en pleine page ↗</a>
+            <a id="dash-embed-open" class="dash-embed-open" href="#" target="_blank" rel="noopener" data-i18n="embed.openFull">Ouvrir en pleine page ↗</a>
           </div>
           <iframe id="dash-embed-frame" class="dash-embed-frame" title="Visualisation"></iframe>
         </div>
@@ -78,7 +82,7 @@
       <!-- Colonne 2 : Visualisations -->
       <div class="dash-card dash-card--shortcuts">
         <div class="dash-card-header">
-          <h3 class="dash-card-title">Visualisations</h3>
+          <h3 class="dash-card-title" data-i18n="viz.title">Visualisations</h3>
         </div>
         <div id="dash-viz" class="dash-shortcuts"></div>
       </div>
@@ -87,7 +91,7 @@
   </main>
 
   <footer class="dash-footer">
-    <small>Beautiful F1 — Dashboard saison 2026 • Données : FastF1 • <a href="https://github.com/hericlibong/beautifullF1">GitHub</a></small>
+    <small data-i18n="footer.text">Beautiful F1 — Dashboard saison 2026 • Données : FastF1 • <a href="https://github.com/hericlibong/beautifullF1">GitHub</a></small>
   </footer>
 
   <script src="assets/navbar.js" data-base="./" defer></script>
