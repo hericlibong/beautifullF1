@@ -32,3 +32,6 @@ projects/*/outputs/**
 # --- (Nettoyage des anciennes règles spécifiques)
 # (ex-typo) hamilton_mildseason_tracker — supprimé, remplacé par règles génériques
 # EOF ghost line supprimée
+
+# Config locale du preview (Claude Code)
+.claude/launch.json
