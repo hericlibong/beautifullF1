@@ -3,9 +3,78 @@
 
 // Mode embed (?embed=1) : la page est affichée dans un iframe du dashboard.
 // On masque header/footer/navbar et on resserre les marges via une classe.
-if (new URLSearchParams(window.location.search).get("embed") === "1") {
+const RC_PARAMS = new URLSearchParams(window.location.search);
+if (RC_PARAMS.get("embed") === "1") {
   document.documentElement.classList.add("embed-mode");
 }
+
+// ---------- i18n (langue partagée avec le dashboard) ----------
+const RC_LANG = RC_PARAMS.get("lang") || localStorage.getItem("bf1-lang") || "fr";
+const RC_STR = {
+  fr: {
+    "rc.title": "F1 2026 — Évolution du championnat pilotes",
+    "rc.sub": "Points cumulés par Grand Prix (course + sprint) — pilotes ayant marqué au moins un point.",
+    "rc.play": "▶ Lancer l'animation",
+    "rc.reset": "↺ Reset",
+    "rc.showAll": "✕ Tout afficher",
+    "rc.hint": "Survolez les lignes pour le détail • Cliquez plusieurs pilotes dans la légende pour les comparer",
+    "rc.footer": "Données : Fast-F1 (calendrier 2026, courses et sprints inclus) • Visualisation : D3.js v7",
+    "rc.scaleLinear": "📏 Échelle : linéaire",
+    "rc.scaleLog": "📐 Échelle : log",
+    "rc.modeCumul": "📊 Mode : cumul",
+    "rc.modeDelta": "📊 Mode : écart leader",
+    "rc.noData": "Aucune donnée disponible.",
+    "rc.start": "Départ",
+    "rc.tied": " ex æquo",
+    "rc.position": "Position",
+    "rc.gapLeader": "Écart au leader",
+    "rc.gainGp": "Gain ce GP",
+    "rc.sprintWeekend": "Week-end sprint",
+    "rc.pts": "pts",
+  },
+  en: {
+    "rc.title": "F1 2026 — Drivers' Championship Progression",
+    "rc.sub": "Cumulative points per Grand Prix (race + sprint) — drivers who scored at least one point.",
+    "rc.play": "▶ Play animation",
+    "rc.reset": "↺ Reset",
+    "rc.showAll": "✕ Show all",
+    "rc.hint": "Hover the lines for details • Click several drivers in the legend to compare",
+    "rc.footer": "Data: Fast-F1 (2026 calendar, races and sprints) • Visualization: D3.js v7",
+    "rc.scaleLinear": "📏 Scale: linear",
+    "rc.scaleLog": "📐 Scale: log",
+    "rc.modeCumul": "📊 Mode: cumulative",
+    "rc.modeDelta": "📊 Mode: gap to leader",
+    "rc.noData": "No data available.",
+    "rc.start": "Start",
+    "rc.tied": " (tied)",
+    "rc.position": "Position",
+    "rc.gapLeader": "Gap to leader",
+    "rc.gainGp": "Gain this race",
+    "rc.sprintWeekend": "Sprint weekend",
+    "rc.pts": "pts",
+  },
+}[RC_LANG] || {};
+
+function rtr(key) {
+  return RC_STR[key] != null ? RC_STR[key] : key;
+}
+
+// Suffixe ordinal de position selon la langue (1er/2e… ou 1st/2nd/3rd…)
+function ordinalSuffix(n) {
+  if (RC_LANG === "en") {
+    const u = n % 10, t = n % 100;
+    if (u === 1 && t !== 11) return "st";
+    if (u === 2 && t !== 12) return "nd";
+    if (u === 3 && t !== 13) return "rd";
+    return "th";
+  }
+  return n === 1 ? "er" : "e";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.documentElement.lang = RC_LANG;
+  document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = rtr(el.dataset.i18n); });
+});
 
 const TEAM_COLORS = {
   "McLaren":         "#FF8000",
@@ -32,7 +101,7 @@ const tooltip = d3.select("body").append("div").attr("class", "tooltip");
 
 d3.csv("./data/f1_race_chart_fastf1_2026.csv").then(rows => {
   if (!rows.length) {
-    document.getElementById("chart").innerHTML = "<p>Aucune donnée disponible.</p>";
+    document.getElementById("chart").innerHTML = `<p>${rtr("rc.noData")}</p>`;
     return;
   }
 
@@ -117,17 +186,23 @@ d3.csv("./data/f1_race_chart_fastf1_2026.csv").then(rows => {
 
   fullRebuild();
 
-  document.getElementById("scale-toggle-btn").addEventListener("click", function() {
+  // Initialise le libellé des boutons toggle dans la langue courante
+  const scaleBtn = document.getElementById("scale-toggle-btn");
+  const modeBtn = document.getElementById("mode-toggle-btn");
+  scaleBtn.textContent = rtr(currentScale === "linear" ? "rc.scaleLinear" : "rc.scaleLog");
+  modeBtn.textContent = rtr(currentMode === "cumul" ? "rc.modeCumul" : "rc.modeDelta");
+
+  scaleBtn.addEventListener("click", function() {
     currentScale = currentScale === "linear" ? "log" : "linear";
     this.dataset.scale = currentScale;
-    this.textContent = currentScale === "linear" ? "📏 Échelle : linéaire" : "📐 Échelle : log";
+    this.textContent = rtr(currentScale === "linear" ? "rc.scaleLinear" : "rc.scaleLog");
     fullRebuild();
   });
 
-  document.getElementById("mode-toggle-btn").addEventListener("click", function() {
+  modeBtn.addEventListener("click", function() {
     currentMode = currentMode === "cumul" ? "delta" : "cumul";
     this.dataset.mode = currentMode;
-    this.textContent = currentMode === "cumul" ? "📊 Mode : cumul" : "📊 Mode : écart leader";
+    this.textContent = rtr(currentMode === "cumul" ? "rc.modeCumul" : "rc.modeDelta");
     fullRebuild();
   });
 });
@@ -446,7 +521,7 @@ function render(drivers, gpColumns, scaleType = "linear", mode = "cumul") {
     if (sliderLabel) {
       const nGp = gpColumns.length;
       const idx = Math.min(nGp - 1, Math.max(0, Math.floor(t * nGp - 0.0001)));
-      const label = t <= 0 ? "Départ" : gpColumns[idx];
+      const label = t <= 0 ? rtr("rc.start") : gpColumns[idx];
       sliderLabel.textContent = label;
       slider.setAttribute("aria-valuetext", label);
     }
@@ -768,21 +843,22 @@ function showTooltip(event, driver, point) {
   const meta = ctx.metaByGp && ctx.metaByGp[point.gp] && ctx.metaByGp[point.gp][driver.name];
   const isDeltaMode = ctx.mode === "delta";
 
-  let lines = `<div>${point.gp} : <strong>${point.value} pts</strong></div>`;
+  const P = rtr("rc.pts");
+  let lines = `<div>${point.gp} : <strong>${point.value} ${P}</strong></div>`;
   if (meta) {
-    const rankSuffix = meta.rank === 1 ? "er" : "e";
-    const tied = meta.rankTied ? " ex æquo" : "";
-    lines += `<div class="tt-row">Position : <strong>${meta.rank}${rankSuffix}${tied}</strong></div>`;
+    const rankSuffix = ordinalSuffix(meta.rank);
+    const tied = meta.rankTied ? rtr("rc.tied") : "";
+    lines += `<div class="tt-row">${rtr("rc.position")} : <strong>${meta.rank}${rankSuffix}${tied}</strong></div>`;
     if (!isDeltaMode && meta.leaderGap < 0) {
-      lines += `<div class="tt-row">Écart au leader : <strong>${meta.leaderGap} pts</strong></div>`;
+      lines += `<div class="tt-row">${rtr("rc.gapLeader")} : <strong>${meta.leaderGap} ${P}</strong></div>`;
     }
     if (meta.gainAtGp !== 0) {
       const sign = meta.gainAtGp > 0 ? "+" : "";
-      lines += `<div class="tt-row">Gain ce GP : <strong>${sign}${meta.gainAtGp} pts</strong></div>`;
+      lines += `<div class="tt-row">${rtr("rc.gainGp")} : <strong>${sign}${meta.gainAtGp} ${P}</strong></div>`;
     }
   }
   const sprintLine = isSprintGp(point.gp)
-    ? '<div class="tt-sprint">Week-end sprint</div>'
+    ? `<div class="tt-sprint">${rtr("rc.sprintWeekend")}</div>`
     : '';
   tooltip
     .style("opacity", 1)

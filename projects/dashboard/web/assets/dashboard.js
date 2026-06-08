@@ -404,7 +404,7 @@ function setupLangSwitcher() {
       el.style.display = "none";
     });
     embedTitle.textContent = item.title;
-    embedOpen.href = item.route;
+    embedOpen.href = item.route + `?lang=${LANG}`;
     embedHost.hidden = false;
 
     embedFrame.onload = () => {
@@ -419,7 +419,7 @@ function setupLangSwitcher() {
         embedResizeObserver.observe(embedFrame.contentDocument.body);
       } catch (e) { /* ignore */ }
     };
-    embedFrame.src = item.route + "?embed=1";
+    embedFrame.src = item.route + `?embed=1&lang=${LANG}`;
   }
 
   function hideEmbed() {

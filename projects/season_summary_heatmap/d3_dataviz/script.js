@@ -3,9 +3,78 @@
 // Utilise le CSV leaders avec métriques avancées
 
 // Mode embed (?embed=1) : intégration dans un iframe du dashboard.
-if (new URLSearchParams(window.location.search).get("embed") === "1") {
+const HM_PARAMS = new URLSearchParams(window.location.search);
+if (HM_PARAMS.get("embed") === "1") {
   document.documentElement.classList.add("embed-mode");
 }
+
+// ---------- i18n (langue partagée avec le dashboard) ----------
+const HM_LANG = HM_PARAMS.get("lang") || localStorage.getItem("bf1-lang") || "fr";
+const HM_STR = {
+  fr: {
+    "hm.title": "F1 {season} — Heatmap des points par Grand Prix",
+    "hm.sub": "X : <em>EventName</em> • Y : <em>Driver</em> (tri par TotalPoints) • Couleur : <em>Points</em>",
+    "hm.footer": "Données : CSV enrichi {season} exporté depuis Fast-F1 • Version D3 v1 (baseline)",
+    "hm.bigTitle": "Formule 1 {season}, course après course",
+    "hm.intro1": "Cette heatmap suit le championnat {season} en cours : les points marqués par chaque pilote",
+    "hm.intro2": "à chaque Grand Prix, enrichis au survol par les détails clés de la course et de la saison.",
+    "hm.axisX": "Grand Prix",
+    "hm.axisY": "Pilote",
+    "hm.team": "Équipe",
+    "hm.pointsGp": "Points (GP)",
+    "hm.seasonTotal": "Total saison",
+    "hm.rank": "Rang",
+    "hm.cumulative": "Cumul",
+    "hm.average": "Moyenne",
+    "hm.avg5": "Moyenne 5 GP",
+    "hm.podiums": "Podiums",
+    "hm.gridGain": "Gain grille",
+    "hm.ptsPerGp": "pts/GP",
+    "hm.positions": "positions",
+    "hm.sprintSuffix": "sprint",
+    "hm.gp": "Grand Prix",
+    "hm.gridFinish": "Grille / Arrivée",
+    "hm.pts": "pts",
+    "hm.loadError": "Impossible de charger le CSV leaders.",
+  },
+  en: {
+    "hm.title": "F1 {season} — Points Heatmap by Grand Prix",
+    "hm.sub": "X: <em>EventName</em> • Y: <em>Driver</em> (sorted by TotalPoints) • Color: <em>Points</em>",
+    "hm.footer": "Data: enriched {season} CSV exported from Fast-F1 • D3 v1 (baseline)",
+    "hm.bigTitle": "Formula 1 {season}, race after race",
+    "hm.intro1": "This heatmap tracks the ongoing {season} season: points scored by each driver",
+    "hm.intro2": "at each Grand Prix, enriched on hover with key race and season details.",
+    "hm.axisX": "Grand Prix",
+    "hm.axisY": "Driver",
+    "hm.team": "Team",
+    "hm.pointsGp": "Points (race)",
+    "hm.seasonTotal": "Season total",
+    "hm.rank": "Rank",
+    "hm.cumulative": "Cumulative",
+    "hm.average": "Average",
+    "hm.avg5": "5-race average",
+    "hm.podiums": "Podiums",
+    "hm.gridGain": "Grid gain",
+    "hm.ptsPerGp": "pts/race",
+    "hm.positions": "positions",
+    "hm.sprintSuffix": "sprint",
+    "hm.gp": "Grand Prix",
+    "hm.gridFinish": "Grid / Finish",
+    "hm.pts": "pts",
+    "hm.loadError": "Failed to load the leaders CSV.",
+  },
+}[HM_LANG] || {};
+
+function htr(key, vars) {
+  let s = HM_STR[key] != null ? HM_STR[key] : key;
+  if (vars) for (const k in vars) s = s.split("{" + k + "}").join(vars[k]);
+  return s;
+}
+
+document.documentElement.lang = HM_LANG;
+document.querySelectorAll("[data-i18n]").forEach(el => {
+  el.innerHTML = htr(el.dataset.i18n, { season: 2026 });
+});
 
 const SEASON = 2026;
 const DATA_URL = "f1_2026_leaders_heatmap.csv";
@@ -62,7 +131,7 @@ function render(data, driverAvgPoints) {
     .attr("fill", "#e6e9f2")
     .attr("font-size", 20)
     .attr("font-weight", "700")
-    .text(`Formule 1 ${SEASON}, course après course`);
+    .text(htr("hm.bigTitle", { season: SEASON }));
 
   const subtitle = svg.append("text")
     .attr("x", headX)
@@ -75,12 +144,12 @@ function render(data, driverAvgPoints) {
   subtitle.append("tspan")
     .attr("x", headX)
     .attr("dy", 0)
-    .text(`Cette heatmap suit le championnat ${SEASON} en cours : les points marqués par chaque pilote`);
+    .text(htr("hm.intro1", { season: SEASON }));
 
   subtitle.append("tspan")
     .attr("x", headX)
     .attr("dy", 18)
-    .text("à chaque Grand Prix, enrichis au survol par les détails clés de la course et de la saison.");
+    .text(htr("hm.intro2"));
 
   /* SÉPARATEUR */
   const sepY = 110;
@@ -154,14 +223,14 @@ function render(data, driverAvgPoints) {
     .attr("text-anchor", "middle")
     .attr("fill", "#cfd6e4")
     .attr("font-size", 12)
-    .text("Grand Prix (EventName)");
+    .text(htr("hm.axisX"));
 
   svg.append("text")
     .attr("transform", `translate(16, ${(margin.top + (height - margin.bottom)) / 2}) rotate(-90)`)
     .attr("text-anchor", "middle")
     .attr("fill", "#cfd6e4")
     .attr("font-size", 12)
-    .text("Pilote (Driver)");
+    .text(htr("hm.axisY"));
 }
 
 /* === TOOLTIP & HELPERS : STRICTEMENT IDENTIQUES === */
@@ -172,22 +241,23 @@ function render(data, driverAvgPoints) {
 // Tooltip HTML riche - Version Leaders
 function showTooltip(event, d){
   // 1) Remplir le contenu
-  const sprintInfo = d.SprintPoints > 0 ? ` (+${d.SprintPoints} sprint)` : "";
+  const sprintInfo = d.SprintPoints > 0 ? ` (+${d.SprintPoints} ${htr("hm.sprintSuffix")})` : "";
   const finishIcon = d.FinishIcon || "";
-  
+  const P = htr("hm.pts");
+
   tooltip.html(`
     <h3>${d.DriverName} <span style="color:#9aa3b2">(${d.Driver})</span> ${finishIcon}</h3>
     <div class="meta">
       <img src="${safeUrl(d.HeadshotUrl)}" alt="${d.DriverName}">
       <div class="kv">
-        <div><b>Équipe :</b> ${d.Team}</div>
-        <div><b>Grand Prix :</b> ${d.EventNameFull}</div>
-        <div><b>Grille / Arrivée :</b> ${fmtPos(d.GridPosition)} / ${fmtPos(d.FinishPosition)}</div>
-        <div><b>Points (GP) :</b> ${d.Points}${sprintInfo}</div>
-        <div><b>Total saison :</b> ${d.TotalPoints} • <b>Rang :</b> ${d.RankLabel ?? ""}</div>
-        <div><b>Cumul :</b> ${d.CumulativePoints} pts • Moyenne : ${d.AvgPointsToDate?.toFixed(1)} pts/GP</div>
-        <div><b>Moyenne 5 GP :</b> ${d.Last5Avg?.toFixed(1)} pts • Podiums : ${(d.PodiumRate*100)?.toFixed(0)}%</div>
-        <div><b>Gain grille :</b> ${d.GridGain >= 0 ? "+" : ""}${d.GridGain?.toFixed(1)} positions</div>
+        <div><b>${htr("hm.team")} :</b> ${d.Team}</div>
+        <div><b>${htr("hm.gp")} :</b> ${d.EventNameFull}</div>
+        <div><b>${htr("hm.gridFinish")} :</b> ${fmtPos(d.GridPosition)} / ${fmtPos(d.FinishPosition)}</div>
+        <div><b>${htr("hm.pointsGp")} :</b> ${d.Points}${sprintInfo}</div>
+        <div><b>${htr("hm.seasonTotal")} :</b> ${d.TotalPoints} • <b>${htr("hm.rank")} :</b> ${d.RankLabel ?? ""}</div>
+        <div><b>${htr("hm.cumulative")} :</b> ${d.CumulativePoints} ${P} • ${htr("hm.average")} : ${d.AvgPointsToDate?.toFixed(1)} ${htr("hm.ptsPerGp")}</div>
+        <div><b>${htr("hm.avg5")} :</b> ${d.Last5Avg?.toFixed(1)} ${P} • ${htr("hm.podiums")} : ${(d.PodiumRate*100)?.toFixed(0)}%</div>
+        <div><b>${htr("hm.gridGain")} :</b> ${d.GridGain >= 0 ? "+" : ""}${d.GridGain?.toFixed(1)} ${htr("hm.positions")}</div>
       </div>
     </div>
   `);
@@ -289,5 +359,5 @@ d3.csv(DATA_URL, d3.autoType).then(rows => {
   window.addEventListener("resize", () => render(rows, driverAvgPoints));
 }).catch(err => {
   console.error("Erreur chargement CSV :", err);
-  container.append("p").text("Impossible de charger le CSV leaders. Vérifie le chemin DATA_URL.");
+  container.append("p").text(htr("hm.loadError"));
 });

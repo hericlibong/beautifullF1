@@ -11,20 +11,20 @@
 <body>
   <script src="../assets/navbar.js" data-base="../" data-manifest="../assets/manifest.json"></script>
   <header class="page-head">
-    <h1>F1 2026 — Évolution du championnat pilotes</h1>
-    <p class="sub">
+    <h1 data-i18n="rc.title">F1 2026 — Évolution du championnat pilotes</h1>
+    <p class="sub" data-i18n="rc.sub">
       Points cumulés par Grand Prix (course + sprint) — pilotes ayant marqué au moins un point.
     </p>
   </header>
 
   <main class="viz-wrap">
     <div class="controls">
-      <button id="play-btn" type="button">▶ Lancer l'animation</button>
-      <button id="reset-btn" type="button">↺ Reset</button>
-      <button id="clear-selection-btn" type="button">✕ Tout afficher</button>
+      <button id="play-btn" type="button" data-i18n="rc.play">▶ Lancer l'animation</button>
+      <button id="reset-btn" type="button" data-i18n="rc.reset">↺ Reset</button>
+      <button id="clear-selection-btn" type="button" data-i18n="rc.showAll">✕ Tout afficher</button>
       <button id="scale-toggle-btn" type="button" data-scale="linear">📏 Échelle : linéaire</button>
       <button id="mode-toggle-btn" type="button" data-mode="cumul">📊 Mode : cumul</button>
-      <span class="hint">Survolez les lignes pour le détail • Cliquez plusieurs pilotes dans la légende pour les comparer</span>
+      <span class="hint" data-i18n="rc.hint">Survolez les lignes pour le détail • Cliquez plusieurs pilotes dans la légende pour les comparer</span>
     </div>
     <div class="progress-row">
       <label for="progress-slider" class="visually-hidden">Progression de l'animation</label>
@@ -38,7 +38,7 @@
   </main>
 
   <footer class="page-foot">
-    <small>Données : Fast-F1 (calendrier 2026, courses et sprints inclus) • Visualisation : D3.js v7</small>
+    <small data-i18n="rc.footer">Données : Fast-F1 (calendrier 2026, courses et sprints inclus) • Visualisation : D3.js v7</small>
   </footer>
 
   <script src="./script.js"></script>
