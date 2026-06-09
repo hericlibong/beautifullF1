@@ -165,34 +165,64 @@ Rendre chaque ligne du calendrier cliquable, comme pour les pilotes, et ouvrir u
 
 ---
 
-#### 3.6.bis — Enrichissement historique multi-décennies (gp_history)
+#### 3.6.bis — Historique par circuit (scatter chronologie)
 
-En complément de FastF1 (qui couvre l'ère récente avec précision technique), `projects/gp_history/` contient déjà des CSV historiques curatés via LLM, qui remontent jusqu'aux années 1960. Ces données apportent une **profondeur narrative** inaccessible à FastF1 seul.
+Ajoute, dans le drill-down circuit, une zone **"Histoire"** = scatter inline (réplique du Flourish "Chronologie") : X = année, Y = nombre de victoires (pilote par défaut, écurie en option), carré coloré par écurie, tooltip riche au survol.
 
-**État existant**
-- ✅ `projects/gp_history/data/gp_history/mexican_grand_prix.csv` — 25 lignes, schéma anglais : `Year, GP, Circuit, Winner, WinnerWinsOnThisGP, WinnerGridPos, Constructor, EngineManufacturer, ConstructorWinsOnThisGP, P2, P3, SeasonChampion, Trophies, WinnerImageURL`
-- ✅ Pipeline Python : `gp_history_builder_mexique_v1.py` + `run_mexico_full.py`, enrichissement Wikidata
-- ⚠️ CSV Australie (chez l'utilisateur) avec **schéma français divergent** : `Year, Circuit, Vainqueur, flag_winner, Nb victoires (vainqueur), Start_position_winner, Constructeur, nb_victoires_team, Motoriste, second, third, world champio, icones, image_winner`
-- ⚠️ Visualisation Flourish "scatter year × cumulative wins, color = team" comme proof-of-concept
+**Décisions actées (juin 2026)**
+- **Périmètre = le circuit concerné uniquement**, pas l'historique du "nom de GP". Techniquement : filtre Ergast par `circuitId` (PAS `raceName`) → gère seul les renommages (Spanish GP / São Paulo / Madrid 2026). Règle adaptable par circuit = `circuitId` + année de début. **Barcelone = `catalunya`, 1991→2025.**
+- **Zéro saisie manuelle** : tout via pipeline, sources diverses autorisées. Le récit éditorial (`histoire`) est **hors périmètre** de la viz.
+- **Sortie = un seul `docs/data/gp_history.json`** indexé par `circuitId`. Le builder tourne circuit par circuit (read-merge-write de sa clé). Justif : sans les récits, ~300 o/ligne → ~11 Ko/circuit, ~300-400 Ko les 22 circuits (~80 Ko gzip). Le front fait déjà un `Promise.all` de JSON ; un de plus est trivial, et zéro gestion de 404 par circuit.
+- **Axe Y** : défaut = victoires **pilote** (nb de fois où le pilote a gagné sur ce circuit, valeur fixe par pilote = rangée). Menu déroulant pour basculer Y sur victoires **écurie**. Couleur = écurie dans les deux cas.
 
-**Intégration au drill-down circuit (3.6 principal)**
-Dans le panneau drill-down d'un GP, prévoir 2 zones :
-- **Zone "Saison en cours" (FastF1)** : tracé SVG, longueur, record du tour, vainqueur 2026
-- **Zone "Histoire" (gp_history)** : timeline année × vainqueur, comptage des victoires par écurie, photo du vainqueur historique au survol — équivalent inline du Flourish actuel
+**Sources de données (spike validé)**
+| Donnée | Source | Note |
+|---|---|---|
+| vainqueur, podium (P1-P3), grille, temps course, écurie, nationalité | **Jolpica/Ergast** (`/circuits/{id}/results`) | depuis 1950 ; ⚠️ rate-limit 429 → batcher via endpoints circuit + sleep/retry |
+| poleman | **Ergast** : qualifs (`/qualifying`) **1994+**, sinon dérivé de `grid==1` | |
+| pole_time | **Ergast** qualifs | absent <1994 → tooltip masque la ligne (dégradation, pas de manuel) |
+| champion de la saison | **Ergast** `/{year}/driverStandings/1` | |
+| victoires pilote / écurie (Y + tooltip) | **calculé** (comptage sur le dataset du circuit) | |
+| drapeau | **dérivé** nationalité Ergast → emoji | |
+| **motoriste** | **f1db** (`f1db-seasons-entrants-engines.json`, release GitHub) | mapping `(année, constructorId)→moteur` ; jointure auto, normalisation `_`→`-`. **Spike : 0 trou sur 1991-2020** |
+| photo pilote | 2026 : `driver_images.json`/FastF1 ; historique : **Wikidata/Wikipedia** (par pilote unique) | |
 
-**Sous-tâches**
-- [ ] **Harmoniser le schéma** : choisir une convention unique (anglais recommandé pour s'aligner sur le Mexique existant et FastF1) ; convertir le CSV Australie au format Mexique
-- [ ] **Importer le CSV Australie** dans `projects/gp_history/data/gp_history/australian_grand_prix.csv` après conversion de schéma
-- [ ] **Étendre le pipeline `gp_history`** pour générer un fichier de sortie consommable par le dashboard : `docs/data/gp_history.json` indexé par GP, avec pour chaque GP la liste `[{year, winner, team, grid, p2, p3, champion, photo}, ...]`
-- [ ] **Couverture progressive** : ajouter les CSV au fur et à mesure (Mexique ✅, Australie en cours, puis circuits historiques majeurs : Monaco, Italy, Britain, Belgium…). Le drill-down affiche "Données historiques indisponibles" pour les circuits non encore couverts
-- [ ] **Composant front "timeline historique"** dans le drill-down : graphe scatter inline en SVG (Year × victoires cumulées, couleur écurie), avec tooltip au survol affichant photo + détails — réplique simplifiée du Flourish
-- [ ] **À terme** : remplacer la curation LLM par un builder semi-automatique (Wikidata + scraping ponctuel des résultats officiels), en gardant une étape de relecture manuelle
+**Builder**
+- `projects/dashboard/build_gp_history.py` — générique, paramétré `(circuitId, year_from, year_to, gpLabel)`.
+  1. Jolpica : vainqueurs + podium + grille + temps + nationalité + champion (appels batchés, polis : sleep + retry sur 429).
+  2. Jointure f1db pour le motoriste (table téléchargée/cachée une fois).
+  3. Photos pilotes (Wikidata/Wikipedia, 1 appel par pilote unique, cache).
+  4. Calculs : `driverWins`, `teamWins` (comptage sur le circuit).
+  5. **Read-merge-write** de la clé `circuitId` dans `docs/data/gp_history.json` (+ copie `web/data/`).
+- Lent (API multiples) → **hors workflow auto**, lancé manuellement par circuit (comme `build_circuits_data.py`).
 
-**Décisions à arbitrer**
-- [ ] Schéma cible définitif (recommandation : anglais, format Mexique) — qui implique de convertir le CSV Australie
-- [ ] Profondeur historique par GP : tout disponible, ou plafond (ex. depuis 1985) ?
-- [ ] La viz Flourish standalone existante : la remplacer par la version embarquée du dashboard, ou la garder comme produit dérivé indépendant ?
-- [ ] Sortie : un seul gros JSON `gp_history.json` ou un fichier par circuit (`docs/data/gp_history/{circuit_slug}.json`) ?
+**Front (drill-down)**
+- Zone "Histoire" sous la zone "Saison en cours" ; si pas de clé → "Données historiques indisponibles".
+- Scatter SVG inline : X=année, Y=victoires (toggle pilote/écurie), carré couleur écurie, tooltip (photo, drapeau, total 🏆, équipe, victoires team, motoriste, position départ, podium, champion).
+
+**Avancement**
+- [x] Spike Jolpica + f1db validé (Barcelone 1991-2025)
+- [x] Plan documenté
+- [ ] `build_gp_history.py` + génération `gp_history.json` (clé `catalunya`)
+- [ ] Composant front scatter + tooltip + toggle Y
+- [ ] Couverture progressive des autres circuits au fil du calendrier
+
+**Schéma de sortie `gp_history.json`**
+```json
+{
+  "catalunya": {
+    "circuitId": "catalunya", "circuitName": "Circuit de Barcelona-Catalunya",
+    "gpLabel": "Espagne", "yearFrom": 1991, "yearTo": 2025,
+    "editions": [
+      { "year": 1991, "winner": "Nigel Mansell", "flag": "🇬🇧",
+        "team": "Williams", "teamId": "williams", "engine": "Renault",
+        "grid": 2, "raceTime": "...", "poleman": "...", "poleTime": null,
+        "podium": ["...P1","...P2","...P3"], "champion": "...",
+        "photo": "https://...", "driverWins": 2, "teamWins": 11 }
+    ]
+  }
+}
+```
 
 ---
 

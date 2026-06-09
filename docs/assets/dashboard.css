@@ -445,6 +445,88 @@ a { color: inherit; text-decoration: none; }
 .dash-circuit-past-driver { font-weight: 600; }
 .dash-circuit-past-team { color: var(--muted); font-size: var(--fs-xs); }
 
+/* Historique par circuit — scatter chronologie */
+.dash-history {
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border, rgba(255,255,255,0.1));
+}
+.dash-history-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-2);
+}
+.dash-history-title {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.dash-history-sub { font-size: var(--fs-xs); color: var(--muted); }
+.dash-history-ymode {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-xs);
+  color: var(--muted);
+}
+.dash-history-ymode .dash-duel-select { font-size: var(--fs-xs); padding: 4px 6px; }
+.dash-history-plot { width: 100%; }
+.dash-history-svg { width: 100%; height: auto; display: block; }
+.dash-history-grid { stroke: rgba(255,255,255,0.08); stroke-width: 1; }
+.dash-history-axis { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.dash-history-sq {
+  cursor: pointer;
+  stroke: rgba(0,0,0,0.35);
+  stroke-width: 1;
+  transition: transform 0.08s ease;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.dash-history-sq:hover,
+.dash-history-sq:focus {
+  transform: scale(1.35);
+  stroke: #fff;
+  outline: none;
+}
+.dash-history-empty,
+.dash-history-notrack { color: var(--muted); font-size: var(--fs-sm); padding: var(--sp-3) 0; }
+.dash-history-tip {
+  margin-top: var(--sp-3);
+  padding: var(--sp-3);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border, rgba(255,255,255,0.1));
+  border-radius: var(--radius, 8px);
+  font-size: var(--fs-sm);
+}
+.dash-history-tip-head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding-bottom: var(--sp-2);
+  margin-bottom: var(--sp-2);
+  border-bottom: 2px solid;
+}
+.dash-history-tip-photo {
+  width: 44px; height: 44px;
+  object-fit: cover;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+}
+.dash-history-tip-name { font-weight: 700; }
+.dash-history-tip-year { font-size: var(--fs-xs); color: var(--muted); font-variant-numeric: tabular-nums; }
+.dash-history-tip-row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: 2px 0;
+}
+.dash-history-tip-row > span { color: var(--muted); }
+.dash-history-tip-row > strong { text-align: right; }
+
 /* Duel head-to-head */
 .dash-duel-pickers {
   display: flex;

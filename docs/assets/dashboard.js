@@ -2,6 +2,22 @@
  * Charge data/dashboard_2026.json + assets/teams.json et peuple la page.
  */
 
+// ---------- Historique par circuit ----------
+// Mapping nom de GP (calendrier) -> circuitId Ergast (clé de gp_history.json).
+// À étendre au fur et à mesure que des circuits sont couverts par le builder.
+const GP_TO_CIRCUIT = {
+  "Spain": "catalunya",
+};
+
+// Couleurs d'écuries historiques (par teamId Ergast), pour le scatter chronologie.
+// Utilisé en priorité car certains noms diffèrent de teams.json (ex. "Red Bull" vs "Red Bull Racing").
+const HISTORY_TEAM_COLORS = {
+  williams: "#1868DB", ferrari: "#DC0000", mclaren: "#FF8000", mercedes: "#00D2BE",
+  red_bull: "#1E2A78", benetton: "#00913A", brawn: "#B6FF1B", renault: "#FFD800",
+  lotus_f1: "#000000", jordan: "#F5D800", brabham: "#0a3d91", ligier: "#1d6fb8",
+  tyrrell: "#1d6fb8", honda: "#e10600", bmw_sauber: "#0066b3",
+};
+
 // ---------- i18n (FR / EN) ----------
 let I18N = {};
 let LANG = localStorage.getItem("bf1-lang") || "fr";
@@ -44,13 +60,14 @@ function setupLangSwitcher() {
 }
 
 (async function () {
-  const [dashRes, teamsRes, manifestRes, qualiRes, circuitsRes, i18nRes] = await Promise.all([
+  const [dashRes, teamsRes, manifestRes, qualiRes, circuitsRes, i18nRes, historyRes] = await Promise.all([
     fetch("data/dashboard_2026.json").then(r => r.json()),
     fetch("assets/teams.json").then(r => r.json()),
     fetch("assets/manifest.json").then(r => r.json()),
     fetch("data/qualifying_2026.json").then(r => r.ok ? r.json() : null).catch(() => null),
     fetch("data/circuits_2026.json").then(r => r.ok ? r.json() : null).catch(() => null),
     fetch("assets/i18n.json").then(r => r.json()).catch(() => ({})),
+    fetch("data/gp_history.json").then(r => r.ok ? r.json() : null).catch(() => null),
   ]);
 
   I18N = i18nRes || {};
@@ -373,10 +390,14 @@ function setupLangSwitcher() {
       const circuit = circuits[li.dataset.gp];
       const calItem = cal.find(x => x.name === li.dataset.gp);
       if (!circuit) return;
+      // Historique du circuit (clé = circuitId Ergast, mappé depuis le nom GP)
+      const histKey = GP_TO_CIRCUIT[li.dataset.gp];
+      const history = (historyRes && histKey) ? historyRes[histKey] : null;
       const detail = document.createElement("li");
       detail.className = "dash-circuit-detail";
-      detail.innerHTML = renderCircuitDetail(circuit, calItem, teamColor);
+      detail.innerHTML = renderCircuitDetail(circuit, calItem, teamColor, history);
       li.after(detail);
+      if (history) wireCircuitHistory(detail, history, teamColor);
     });
   }
 
@@ -829,7 +850,7 @@ function renderDuelPanel(a, b, teamColor) {
   `;
 }
 
-function renderCircuitDetail(circuit, calItem, teamColor) {
+function renderCircuitDetail(circuit, calItem, teamColor, history) {
   // Tracé SVG
   let trackSvg = "";
   if (circuit.trackPath && circuit.trackPath.length > 1) {
@@ -875,6 +896,27 @@ function renderCircuitDetail(circuit, calItem, teamColor) {
     </div>
   `).join("");
 
+  // Zone "Histoire" : scatter chronologie (rendu initial en mode "driver")
+  const historyHtml = history ? `
+    <div class="dash-history" data-circuit="${history.circuitId}">
+      <div class="dash-history-head">
+        <div>
+          <div class="dash-history-title">${t("history.title")}</div>
+          <div class="dash-history-sub">${t("history.subtitle", { from: history.yearFrom, to: history.yearTo, n: history.editions.length })}</div>
+        </div>
+        <label class="dash-history-ymode">
+          <span>${t("history.yLabel")}</span>
+          <select class="dash-history-yselect dash-duel-select">
+            <option value="driver">${t("history.yDriver")}</option>
+            <option value="team">${t("history.yTeam")}</option>
+          </select>
+        </label>
+      </div>
+      <div class="dash-history-plot">${renderHistoryScatter(history, "driver", teamColor)}</div>
+      <div class="dash-history-tip" hidden></div>
+    </div>
+  ` : "";
+
   return `
     <div class="dash-circuit-detail-inner">
       <div class="dash-circuit-left">
@@ -891,7 +933,109 @@ function renderCircuitDetail(circuit, calItem, teamColor) {
           </div>` : ""}
       </div>
     </div>
+    ${historyHtml}
   `;
+}
+
+// Couleur d'une écurie pour le scatter (teamId historique prioritaire, puis teams.json, puis fallback)
+function histTeamColor(edition, teamColor) {
+  return HISTORY_TEAM_COLORS[edition.teamId] || teamColor(edition.team);
+}
+
+// Scatter chronologie : X = année, Y = victoires (pilote ou écurie), carré coloré par écurie.
+function renderHistoryScatter(history, mode, teamColor) {
+  const ed = history.editions;
+  if (!ed.length) return `<div class="dash-history-empty">${t("history.empty")}</div>`;
+
+  const winsKey = mode === "team" ? "teamWins" : "driverWins";
+  const years = ed.map(e => e.year);
+  const xMin = Math.min(...years), xMax = Math.max(...years);
+  const yMax = Math.max(...ed.map(e => e[winsKey]), 1);
+
+  // Géométrie SVG (coordonnées internes ; mise à l'échelle via viewBox)
+  const W = 920, H = 300;
+  const padL = 34, padR = 14, padT = 14, padB = 30;
+  const plotW = W - padL - padR, plotH = H - padT - padB;
+  const sq = 13; // côté du carré
+  const xOf = y => padL + (xMax === xMin ? plotW / 2 : ((y - xMin) / (xMax - xMin)) * plotW);
+  const yOf = v => padT + plotH - (yMax <= 1 ? plotH / 2 : ((v - 1) / (yMax - 1)) * plotH);
+
+  // Lignes de victoires (Y) + libellés
+  let gridSvg = "";
+  for (let v = 1; v <= yMax; v++) {
+    const y = yOf(v);
+    gridSvg += `<line x1="${padL}" y1="${y}" x2="${W - padR}" y2="${y}" class="dash-history-grid"/>`;
+    gridSvg += `<text x="${padL - 8}" y="${y + 4}" class="dash-history-axis" text-anchor="end">${v}</text>`;
+  }
+
+  // Repères d'années (tous les 5 ans + bornes)
+  let xticks = "";
+  for (let yr = Math.ceil(xMin / 5) * 5; yr <= xMax; yr += 5) {
+    xticks += `<text x="${xOf(yr)}" y="${H - 8}" class="dash-history-axis" text-anchor="middle">${yr}</text>`;
+  }
+
+  // Carrés (un par édition), data-i = index dans editions pour le tooltip
+  const squares = ed.map((e, i) => {
+    const cx = xOf(e.year), cy = yOf(e[winsKey]);
+    const color = histTeamColor(e, teamColor);
+    return `<rect x="${(cx - sq / 2).toFixed(1)}" y="${(cy - sq / 2).toFixed(1)}" width="${sq}" height="${sq}" rx="2"
+                  fill="${color}" class="dash-history-sq" data-i="${i}" tabindex="0"/>`;
+  }).join("");
+
+  return `
+    <svg viewBox="0 0 ${W} ${H}" class="dash-history-svg" role="img" aria-label="${t("history.title")}">
+      ${gridSvg}${xticks}${squares}
+    </svg>
+  `;
+}
+
+// Câblage des interactions de la zone Histoire : tooltip au survol + bascule de l'axe Y.
+function wireCircuitHistory(detail, history, teamColor) {
+  const root = detail.querySelector(".dash-history");
+  if (!root) return;
+  const plot = root.querySelector(".dash-history-plot");
+  const tip = root.querySelector(".dash-history-tip");
+  const yselect = root.querySelector(".dash-history-yselect");
+
+  const showTip = (i) => {
+    const e = history.editions[i];
+    if (!e) return;
+    const color = histTeamColor(e, teamColor);
+    const rows = [];
+    rows.push(`<div class="dash-history-tip-row"><span>${t("history.tipTeam")}</span><strong style="color:${color}">${e.team}</strong></div>`);
+    if (e.engine) rows.push(`<div class="dash-history-tip-row"><span>${t("history.tipEngine")}</span><strong>${e.engine}</strong></div>`);
+    if (e.grid) rows.push(`<div class="dash-history-tip-row"><span>${t("history.tipGrid")}</span><strong>${e.grid}</strong></div>`);
+    if (e.poleman) rows.push(`<div class="dash-history-tip-row"><span>${t("history.tipPole")}</span><strong>${e.poleman}${e.poleTime ? " · " + e.poleTime : ""}</strong></div>`);
+    if (e.podium && e.podium.length === 3) rows.push(`<div class="dash-history-tip-row"><span>${t("history.tipPodium")}</span><strong>2. ${e.podium[1]} · 3. ${e.podium[2]}</strong></div>`);
+    if (e.champion) rows.push(`<div class="dash-history-tip-row"><span>${t("history.tipChampion")}</span><strong>${e.champion}</strong></div>`);
+    rows.push(`<div class="dash-history-tip-row"><span>${t("history.tipDriverWins")}</span><strong>${"🏆".repeat(Math.min(e.driverWins, 8))} (${e.driverWins})</strong></div>`);
+    rows.push(`<div class="dash-history-tip-row"><span>${t("history.tipTeamWins")}</span><strong>${e.teamWins}</strong></div>`);
+    tip.innerHTML = `
+      <div class="dash-history-tip-head" style="border-color:${color}">
+        ${e.photo ? `<img src="${e.photo}" alt="" class="dash-history-tip-photo" loading="lazy"/>` : ""}
+        <div>
+          <div class="dash-history-tip-name">${e.flag} ${e.winner}</div>
+          <div class="dash-history-tip-year">${e.year}${e.raceTime ? " · " + e.raceTime : ""}</div>
+        </div>
+      </div>
+      ${rows.join("")}
+    `;
+    tip.hidden = false;
+  };
+
+  plot.addEventListener("mouseover", (ev) => {
+    const sq = ev.target.closest(".dash-history-sq");
+    if (sq) showTip(+sq.dataset.i);
+  });
+  plot.addEventListener("focusin", (ev) => {
+    const sq = ev.target.closest(".dash-history-sq");
+    if (sq) showTip(+sq.dataset.i);
+  });
+
+  yselect.addEventListener("change", () => {
+    plot.innerHTML = renderHistoryScatter(history, yselect.value, teamColor);
+    tip.hidden = true;
+  });
 }
 
 function renderDriverDetail(driver, teamColor) {
