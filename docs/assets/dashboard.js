@@ -29,6 +29,14 @@ function setupLangSwitcher() {
     btn.classList.toggle("active", btn.dataset.lang === LANG);
     btn.addEventListener("click", () => {
       if (btn.dataset.lang === LANG) return;
+      const embedHost = document.getElementById("dash-embed-host");
+      const activeShortcut = document.querySelector(".dash-shortcut[data-viz-active='1']");
+      if (embedHost && !embedHost.hidden && activeShortcut) {
+        sessionStorage.setItem("bf1-active-embed", activeShortcut.dataset.vizId);
+      } else {
+        const activeTab = document.querySelector(".dash-tab.active");
+        if (activeTab) sessionStorage.setItem("bf1-active-tab", activeTab.dataset.tab);
+      }
       localStorage.setItem("bf1-lang", btn.dataset.lang);
       location.reload();
     });
@@ -398,6 +406,10 @@ function setupLangSwitcher() {
 
   function showEmbed(item) {
     if (!embedHost || !embedFrame) return;
+    // Marque le raccourci actif (utilisé pour restaurer après changement de langue)
+    document.querySelectorAll(".dash-shortcut[data-viz-active]").forEach(el => delete el.dataset.vizActive);
+    const sc = document.querySelector(`.dash-shortcut[data-viz-id="${item.id}"]`);
+    if (sc) sc.dataset.vizActive = "1";
     // Masque la barre d'onglets + tous les panes
     standingsCard.querySelectorAll(".dash-card-header, .dash-tab-pane").forEach(el => {
       el.dataset.hiddenByEmbed = "1";
@@ -424,6 +436,7 @@ function setupLangSwitcher() {
 
   function hideEmbed() {
     if (!embedHost) return;
+    document.querySelectorAll(".dash-shortcut[data-viz-active]").forEach(el => delete el.dataset.vizActive);
     if (embedResizeObserver) { embedResizeObserver.disconnect(); embedResizeObserver = null; }
     embedHost.hidden = true;
     embedFrame.onload = null;
@@ -462,6 +475,23 @@ function setupLangSwitcher() {
         if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showEmbed(item); }
       });
     });
+  }
+
+  // Restaurer l'état (onglet ou viz embed) après un changement de langue
+  const savedEmbed = sessionStorage.getItem("bf1-active-embed");
+  const savedTab = sessionStorage.getItem("bf1-active-tab");
+  if (savedEmbed) {
+    sessionStorage.removeItem("bf1-active-embed");
+    setTimeout(() => {
+      const sc = document.querySelector(`.dash-shortcut[data-viz-id="${savedEmbed}"]:not(.is-disabled)`);
+      if (sc) sc.click();
+    }, 0);
+  } else if (savedTab) {
+    sessionStorage.removeItem("bf1-active-tab");
+    setTimeout(() => {
+      const tabBtn = document.querySelector(`.dash-tab[data-tab="${savedTab}"]`);
+      if (tabBtn) tabBtn.click();
+    }, 0);
   }
 })().catch(err => {
   console.error("Erreur de chargement du dashboard :", err);
