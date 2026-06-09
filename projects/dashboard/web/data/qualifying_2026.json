@@ -1,6 +1,6 @@
 {
   "season": 2026,
-  "generatedAt": "2026-06-08",
+  "generatedAt": "2026-06-09",
   "sessions": [
     {
       "round": 1,
@@ -18,7 +18,7 @@
           "q3": true
         },
         {
-          "fullName": "Kimi Antonelli",
+          "fullName": "Andrea Kimi Antonelli",
           "abbr": "ANT",
           "team": "Mercedes",
           "position": 2,
@@ -29,7 +29,7 @@
         {
           "fullName": "Isack Hadjar",
           "abbr": "HAD",
-          "team": "Red Bull Racing",
+          "team": "Red Bull",
           "position": 3,
           "bestTimeSec": 79.303,
           "bestTimeStr": "1:19.303",
@@ -74,7 +74,7 @@
         {
           "fullName": "Liam Lawson",
           "abbr": "LAW",
-          "team": "Racing Bulls",
+          "team": "RB F1 Team",
           "position": 8,
           "bestTimeSec": 79.994,
           "bestTimeStr": "1:19.994",
@@ -83,7 +83,7 @@
         {
           "fullName": "Arvid Lindblad",
           "abbr": "LIN",
-          "team": "Racing Bulls",
+          "team": "RB F1 Team",
           "position": 9,
           "bestTimeSec": 81.247,
           "bestTimeStr": "1:21.247",
@@ -99,7 +99,7 @@
           "q3": false
         },
         {
-          "fullName": "Nico Hulkenberg",
+          "fullName": "Nico Hülkenberg",
           "abbr": "HUL",
           "team": "Audi",
           "position": 11,
@@ -128,7 +128,7 @@
         {
           "fullName": "Pierre Gasly",
           "abbr": "GAS",
-          "team": "Alpine",
+          "team": "Alpine F1 Team",
           "position": 14,
           "bestTimeSec": 80.501,
           "bestTimeStr": "1:20.501",
@@ -146,7 +146,7 @@
         {
           "fullName": "Franco Colapinto",
           "abbr": "COL",
-          "team": "Alpine",
+          "team": "Alpine F1 Team",
           "position": 16,
           "bestTimeSec": 81.27,
           "bestTimeStr": "1:21.270",
@@ -162,9 +162,9 @@
           "q3": false
         },
         {
-          "fullName": "Sergio Perez",
+          "fullName": "Sergio Pérez",
           "abbr": "PER",
-          "team": "Cadillac",
+          "team": "Cadillac F1 Team",
           "position": 18,
           "bestTimeSec": 82.605,
           "bestTimeStr": "1:22.605",
@@ -173,37 +173,10 @@
         {
           "fullName": "Valtteri Bottas",
           "abbr": "BOT",
-          "team": "Cadillac",
+          "team": "Cadillac F1 Team",
           "position": 19,
           "bestTimeSec": 83.244,
           "bestTimeStr": "1:23.244",
-          "q3": false
-        },
-        {
-          "fullName": "Lance Stroll",
-          "abbr": "STR",
-          "team": "Aston Martin",
-          "position": null,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
-        },
-        {
-          "fullName": "Max Verstappen",
-          "abbr": "VER",
-          "team": "Red Bull Racing",
-          "position": null,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
-        },
-        {
-          "fullName": "Carlos Sainz",
-          "abbr": "SAI",
-          "team": "Williams",
-          "position": null,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
           "q3": false
         }
       ]
@@ -215,7 +188,7 @@
       "type": "Q",
       "drivers": [
         {
-          "fullName": "Kimi Antonelli",
+          "fullName": "Andrea Kimi Antonelli",
           "abbr": "ANT",
           "team": "Mercedes",
           "position": 1,
@@ -271,7 +244,7 @@
         {
           "fullName": "Pierre Gasly",
           "abbr": "GAS",
-          "team": "Alpine",
+          "team": "Alpine F1 Team",
           "position": 7,
           "bestTimeSec": 92.873,
           "bestTimeStr": "1:32.873",
@@ -280,7 +253,7 @@
         {
           "fullName": "Max Verstappen",
           "abbr": "VER",
-          "team": "Red Bull Racing",
+          "team": "Red Bull",
           "position": 8,
           "bestTimeSec": 93.002,
           "bestTimeStr": "1:33.002",
@@ -289,7 +262,7 @@
         {
           "fullName": "Isack Hadjar",
           "abbr": "HAD",
-          "team": "Red Bull Racing",
+          "team": "Red Bull",
           "position": 9,
           "bestTimeSec": 93.121,
           "bestTimeStr": "1:33.121",
@@ -305,7 +278,7 @@
           "q3": true
         },
         {
-          "fullName": "Nico Hulkenberg",
+          "fullName": "Nico Hülkenberg",
           "abbr": "HUL",
           "team": "Audi",
           "position": 11,
@@ -316,7 +289,7 @@
         {
           "fullName": "Franco Colapinto",
           "abbr": "COL",
-          "team": "Alpine",
+          "team": "Alpine F1 Team",
           "position": 12,
           "bestTimeSec": 93.357,
           "bestTimeStr": "1:33.357",
@@ -334,7 +307,7 @@
         {
           "fullName": "Liam Lawson",
           "abbr": "LAW",
-          "team": "Racing Bulls",
+          "team": "RB F1 Team",
           "position": 14,
           "bestTimeSec": 93.765,
           "bestTimeStr": "1:33.765",
@@ -343,7 +316,7 @@
         {
           "fullName": "Arvid Lindblad",
           "abbr": "LIN",
-          "team": "Racing Bulls",
+          "team": "RB F1 Team",
           "position": 15,
           "bestTimeSec": 93.784,
           "bestTimeStr": "1:33.784",
@@ -388,7 +361,7 @@
         {
           "fullName": "Valtteri Bottas",
           "abbr": "BOT",
-          "team": "Cadillac",
+          "team": "Cadillac F1 Team",
           "position": 20,
           "bestTimeSec": 95.436,
           "bestTimeStr": "1:35.436",
@@ -404,218 +377,12 @@
           "q3": false
         },
         {
-          "fullName": "Sergio Perez",
+          "fullName": "Sergio Pérez",
           "abbr": "PER",
-          "team": "Cadillac",
+          "team": "Cadillac F1 Team",
           "position": 22,
           "bestTimeSec": 96.906,
           "bestTimeStr": "1:36.906",
-          "q3": false
-        }
-      ]
-    },
-    {
-      "round": 2,
-      "gp": "China",
-      "shortName": "China",
-      "type": "SQ",
-      "drivers": [
-        {
-          "fullName": "George Russell",
-          "abbr": "RUS",
-          "team": "Mercedes",
-          "position": null,
-          "bestTimeSec": 91.52,
-          "bestTimeStr": "1:31.520",
-          "q3": false
-        },
-        {
-          "fullName": "Kimi Antonelli",
-          "abbr": "ANT",
-          "team": "Mercedes",
-          "position": null,
-          "bestTimeSec": 91.809,
-          "bestTimeStr": "1:31.809",
-          "q3": false
-        },
-        {
-          "fullName": "Lando Norris",
-          "abbr": "NOR",
-          "team": "McLaren",
-          "position": null,
-          "bestTimeSec": 92.141,
-          "bestTimeStr": "1:32.141",
-          "q3": false
-        },
-        {
-          "fullName": "Oscar Piastri",
-          "abbr": "PIA",
-          "team": "McLaren",
-          "position": null,
-          "bestTimeSec": 92.224,
-          "bestTimeStr": "1:32.224",
-          "q3": false
-        },
-        {
-          "fullName": "Charles Leclerc",
-          "abbr": "LEC",
-          "team": "Ferrari",
-          "position": null,
-          "bestTimeSec": 92.528,
-          "bestTimeStr": "1:32.528",
-          "q3": false
-        },
-        {
-          "fullName": "Lewis Hamilton",
-          "abbr": "HAM",
-          "team": "Ferrari",
-          "position": null,
-          "bestTimeSec": 92.161,
-          "bestTimeStr": "1:32.161",
-          "q3": false
-        },
-        {
-          "fullName": "Oliver Bearman",
-          "abbr": "BEA",
-          "team": "Haas F1 Team",
-          "position": null,
-          "bestTimeSec": 93.409,
-          "bestTimeStr": "1:33.409",
-          "q3": false
-        },
-        {
-          "fullName": "Max Verstappen",
-          "abbr": "VER",
-          "team": "Red Bull Racing",
-          "position": null,
-          "bestTimeSec": 93.254,
-          "bestTimeStr": "1:33.254",
-          "q3": false
-        },
-        {
-          "fullName": "Nico Hulkenberg",
-          "abbr": "HUL",
-          "team": "Audi",
-          "position": null,
-          "bestTimeSec": 93.635,
-          "bestTimeStr": "1:33.635",
-          "q3": false
-        },
-        {
-          "fullName": "Pierre Gasly",
-          "abbr": "GAS",
-          "team": "Alpine",
-          "position": null,
-          "bestTimeSec": 92.888,
-          "bestTimeStr": "1:32.888",
-          "q3": false
-        },
-        {
-          "fullName": "Liam Lawson",
-          "abbr": "LAW",
-          "team": "Racing Bulls",
-          "position": null,
-          "bestTimeSec": 93.714,
-          "bestTimeStr": "1:33.714",
-          "q3": false
-        },
-        {
-          "fullName": "Gabriel Bortoleto",
-          "abbr": "BOR",
-          "team": "Audi",
-          "position": null,
-          "bestTimeSec": 93.774,
-          "bestTimeStr": "1:33.774",
-          "q3": false
-        },
-        {
-          "fullName": "Isack Hadjar",
-          "abbr": "HAD",
-          "team": "Red Bull Racing",
-          "position": null,
-          "bestTimeSec": 93.62,
-          "bestTimeStr": "1:33.620",
-          "q3": false
-        },
-        {
-          "fullName": "Esteban Ocon",
-          "abbr": "OCO",
-          "team": "Haas F1 Team",
-          "position": null,
-          "bestTimeSec": 93.639,
-          "bestTimeStr": "1:33.639",
-          "q3": false
-        },
-        {
-          "fullName": "Franco Colapinto",
-          "abbr": "COL",
-          "team": "Alpine",
-          "position": null,
-          "bestTimeSec": 94.327,
-          "bestTimeStr": "1:34.327",
-          "q3": false
-        },
-        {
-          "fullName": "Alexander Albon",
-          "abbr": "ALB",
-          "team": "Williams",
-          "position": null,
-          "bestTimeSec": 95.305,
-          "bestTimeStr": "1:35.305",
-          "q3": false
-        },
-        {
-          "fullName": "Carlos Sainz",
-          "abbr": "SAI",
-          "team": "Williams",
-          "position": null,
-          "bestTimeSec": 94.761,
-          "bestTimeStr": "1:34.761",
-          "q3": false
-        },
-        {
-          "fullName": "Fernando Alonso",
-          "abbr": "ALO",
-          "team": "Aston Martin",
-          "position": null,
-          "bestTimeSec": 95.581,
-          "bestTimeStr": "1:35.581",
-          "q3": false
-        },
-        {
-          "fullName": "Valtteri Bottas",
-          "abbr": "BOT",
-          "team": "Cadillac",
-          "position": null,
-          "bestTimeSec": 97.378,
-          "bestTimeStr": "1:37.378",
-          "q3": false
-        },
-        {
-          "fullName": "Lance Stroll",
-          "abbr": "STR",
-          "team": "Aston Martin",
-          "position": null,
-          "bestTimeSec": 96.151,
-          "bestTimeStr": "1:36.151",
-          "q3": false
-        },
-        {
-          "fullName": "Arvid Lindblad",
-          "abbr": "LIN",
-          "team": "Racing Bulls",
-          "position": null,
-          "bestTimeSec": 94.048,
-          "bestTimeStr": "1:34.048",
-          "q3": false
-        },
-        {
-          "fullName": "Sergio Perez",
-          "abbr": "PER",
-          "team": "Cadillac",
-          "position": null,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
           "q3": false
         }
       ]
@@ -627,7 +394,7 @@
       "type": "Q",
       "drivers": [
         {
-          "fullName": "Kimi Antonelli",
+          "fullName": "Andrea Kimi Antonelli",
           "abbr": "ANT",
           "team": "Mercedes",
           "position": 1,
@@ -683,7 +450,7 @@
         {
           "fullName": "Pierre Gasly",
           "abbr": "GAS",
-          "team": "Alpine",
+          "team": "Alpine F1 Team",
           "position": 7,
           "bestTimeSec": 89.691,
           "bestTimeStr": "1:29.691",
@@ -692,7 +459,7 @@
         {
           "fullName": "Isack Hadjar",
           "abbr": "HAD",
-          "team": "Red Bull Racing",
+          "team": "Red Bull",
           "position": 8,
           "bestTimeSec": 89.978,
           "bestTimeStr": "1:29.978",
@@ -710,7 +477,7 @@
         {
           "fullName": "Arvid Lindblad",
           "abbr": "LIN",
-          "team": "Racing Bulls",
+          "team": "RB F1 Team",
           "position": 10,
           "bestTimeSec": 90.319,
           "bestTimeStr": "1:30.319",
@@ -719,7 +486,7 @@
         {
           "fullName": "Max Verstappen",
           "abbr": "VER",
-          "team": "Red Bull Racing",
+          "team": "Red Bull",
           "position": 11,
           "bestTimeSec": 90.262,
           "bestTimeStr": "1:30.262",
@@ -735,7 +502,7 @@
           "q3": false
         },
         {
-          "fullName": "Nico Hulkenberg",
+          "fullName": "Nico Hülkenberg",
           "abbr": "HUL",
           "team": "Audi",
           "position": 13,
@@ -746,7 +513,7 @@
         {
           "fullName": "Liam Lawson",
           "abbr": "LAW",
-          "team": "Racing Bulls",
+          "team": "RB F1 Team",
           "position": 14,
           "bestTimeSec": 90.495,
           "bestTimeStr": "1:30.495",
@@ -755,7 +522,7 @@
         {
           "fullName": "Franco Colapinto",
           "abbr": "COL",
-          "team": "Alpine",
+          "team": "Alpine F1 Team",
           "position": 15,
           "bestTimeSec": 90.627,
           "bestTimeStr": "1:30.627",
@@ -789,9 +556,9 @@
           "q3": false
         },
         {
-          "fullName": "Sergio Perez",
+          "fullName": "Sergio Pérez",
           "abbr": "PER",
-          "team": "Cadillac",
+          "team": "Cadillac F1 Team",
           "position": 19,
           "bestTimeSec": 92.206,
           "bestTimeStr": "1:32.206",
@@ -800,7 +567,7 @@
         {
           "fullName": "Valtteri Bottas",
           "abbr": "BOT",
-          "team": "Cadillac",
+          "team": "Cadillac F1 Team",
           "position": 20,
           "bestTimeSec": 92.33,
           "bestTimeStr": "1:32.330",
@@ -833,7 +600,7 @@
       "type": "Q",
       "drivers": [
         {
-          "fullName": "Kimi Antonelli",
+          "fullName": "Andrea Kimi Antonelli",
           "abbr": "ANT",
           "team": "Mercedes",
           "position": 1,
@@ -844,7 +611,7 @@
         {
           "fullName": "Max Verstappen",
           "abbr": "VER",
-          "team": "Red Bull Racing",
+          "team": "Red Bull",
           "position": 2,
           "bestTimeSec": 87.964,
           "bestTimeStr": "1:27.964",
@@ -898,7 +665,7 @@
         {
           "fullName": "Franco Colapinto",
           "abbr": "COL",
-          "team": "Alpine",
+          "team": "Alpine F1 Team",
           "position": 8,
           "bestTimeSec": 88.762,
           "bestTimeStr": "1:28.762",
@@ -907,14 +674,14 @@
         {
           "fullName": "Pierre Gasly",
           "abbr": "GAS",
-          "team": "Alpine",
+          "team": "Alpine F1 Team",
           "position": 9,
           "bestTimeSec": 88.81,
           "bestTimeStr": "1:28.810",
           "q3": true
         },
         {
-          "fullName": "Nico Hulkenberg",
+          "fullName": "Nico Hülkenberg",
           "abbr": "HUL",
           "team": "Audi",
           "position": 10,
@@ -925,7 +692,7 @@
         {
           "fullName": "Liam Lawson",
           "abbr": "LAW",
-          "team": "Racing Bulls",
+          "team": "RB F1 Team",
           "position": 11,
           "bestTimeSec": 89.499,
           "bestTimeStr": "1:29.499",
@@ -970,7 +737,7 @@
         {
           "fullName": "Arvid Lindblad",
           "abbr": "LIN",
-          "team": "Racing Bulls",
+          "team": "RB F1 Team",
           "position": 16,
           "bestTimeSec": 90.133,
           "bestTimeStr": "1:30.133",
@@ -997,16 +764,16 @@
         {
           "fullName": "Valtteri Bottas",
           "abbr": "BOT",
-          "team": "Cadillac",
+          "team": "Cadillac F1 Team",
           "position": 19,
           "bestTimeSec": 91.629,
           "bestTimeStr": "1:31.629",
           "q3": false
         },
         {
-          "fullName": "Sergio Perez",
+          "fullName": "Sergio Pérez",
           "abbr": "PER",
-          "team": "Cadillac",
+          "team": "Cadillac F1 Team",
           "position": 20,
           "bestTimeSec": 91.967,
           "bestTimeStr": "1:31.967",
@@ -1024,217 +791,11 @@
         {
           "fullName": "Isack Hadjar",
           "abbr": "HAD",
-          "team": "Red Bull Racing",
+          "team": "Red Bull",
           "position": 22,
           "bestTimeSec": 88.789,
           "bestTimeStr": "1:28.789",
           "q3": true
-        }
-      ]
-    },
-    {
-      "round": 4,
-      "gp": "United States - Miami Gardens",
-      "shortName": "Miami",
-      "type": "SQ",
-      "drivers": [
-        {
-          "fullName": "Charles Leclerc",
-          "abbr": "LEC",
-          "team": "Ferrari",
-          "position": null,
-          "bestTimeSec": 88.239,
-          "bestTimeStr": "1:28.239",
-          "q3": false
-        },
-        {
-          "fullName": "Max Verstappen",
-          "abbr": "VER",
-          "team": "Red Bull Racing",
-          "position": null,
-          "bestTimeSec": 88.461,
-          "bestTimeStr": "1:28.461",
-          "q3": false
-        },
-        {
-          "fullName": "Oscar Piastri",
-          "abbr": "PIA",
-          "team": "McLaren",
-          "position": null,
-          "bestTimeSec": 88.108,
-          "bestTimeStr": "1:28.108",
-          "q3": false
-        },
-        {
-          "fullName": "Lewis Hamilton",
-          "abbr": "HAM",
-          "team": "Ferrari",
-          "position": null,
-          "bestTimeSec": 88.618,
-          "bestTimeStr": "1:28.618",
-          "q3": false
-        },
-        {
-          "fullName": "Kimi Antonelli",
-          "abbr": "ANT",
-          "team": "Mercedes",
-          "position": null,
-          "bestTimeSec": 88.091,
-          "bestTimeStr": "1:28.091",
-          "q3": false
-        },
-        {
-          "fullName": "George Russell",
-          "abbr": "RUS",
-          "team": "Mercedes",
-          "position": null,
-          "bestTimeSec": 88.493,
-          "bestTimeStr": "1:28.493",
-          "q3": false
-        },
-        {
-          "fullName": "Lando Norris",
-          "abbr": "NOR",
-          "team": "McLaren",
-          "position": null,
-          "bestTimeSec": 87.869,
-          "bestTimeStr": "1:27.869",
-          "q3": false
-        },
-        {
-          "fullName": "Pierre Gasly",
-          "abbr": "GAS",
-          "team": "Alpine",
-          "position": null,
-          "bestTimeSec": 89.474,
-          "bestTimeStr": "1:29.474",
-          "q3": false
-        },
-        {
-          "fullName": "Isack Hadjar",
-          "abbr": "HAD",
-          "team": "Red Bull Racing",
-          "position": null,
-          "bestTimeSec": 89.422,
-          "bestTimeStr": "1:29.422",
-          "q3": false
-        },
-        {
-          "fullName": "Carlos Sainz",
-          "abbr": "SAI",
-          "team": "Williams",
-          "position": null,
-          "bestTimeSec": 90.224,
-          "bestTimeStr": "1:30.224",
-          "q3": false
-        },
-        {
-          "fullName": "Franco Colapinto",
-          "abbr": "COL",
-          "team": "Alpine",
-          "position": null,
-          "bestTimeSec": 89.32,
-          "bestTimeStr": "1:29.320",
-          "q3": false
-        },
-        {
-          "fullName": "Alexander Albon",
-          "abbr": "ALB",
-          "team": "Williams",
-          "position": null,
-          "bestTimeSec": 90.216,
-          "bestTimeStr": "1:30.216",
-          "q3": false
-        },
-        {
-          "fullName": "Oliver Bearman",
-          "abbr": "BEA",
-          "team": "Haas F1 Team",
-          "position": null,
-          "bestTimeSec": 90.116,
-          "bestTimeStr": "1:30.116",
-          "q3": false
-        },
-        {
-          "fullName": "Gabriel Bortoleto",
-          "abbr": "BOR",
-          "team": "Audi",
-          "position": null,
-          "bestTimeSec": 89.994,
-          "bestTimeStr": "1:29.994",
-          "q3": false
-        },
-        {
-          "fullName": "Nico Hulkenberg",
-          "abbr": "HUL",
-          "team": "Audi",
-          "position": null,
-          "bestTimeSec": 90.019,
-          "bestTimeStr": "1:30.019",
-          "q3": false
-        },
-        {
-          "fullName": "Esteban Ocon",
-          "abbr": "OCO",
-          "team": "Haas F1 Team",
-          "position": null,
-          "bestTimeSec": 91.245,
-          "bestTimeStr": "1:31.245",
-          "q3": false
-        },
-        {
-          "fullName": "Liam Lawson",
-          "abbr": "LAW",
-          "team": "Racing Bulls",
-          "position": null,
-          "bestTimeSec": 91.043,
-          "bestTimeStr": "1:31.043",
-          "q3": false
-        },
-        {
-          "fullName": "Sergio Perez",
-          "abbr": "PER",
-          "team": "Cadillac",
-          "position": null,
-          "bestTimeSec": 91.255,
-          "bestTimeStr": "1:31.255",
-          "q3": false
-        },
-        {
-          "fullName": "Fernando Alonso",
-          "abbr": "ALO",
-          "team": "Aston Martin",
-          "position": null,
-          "bestTimeSec": 101.311,
-          "bestTimeStr": "1:41.311",
-          "q3": false
-        },
-        {
-          "fullName": "Valtteri Bottas",
-          "abbr": "BOT",
-          "team": "Cadillac",
-          "position": null,
-          "bestTimeSec": 91.826,
-          "bestTimeStr": "1:31.826",
-          "q3": false
-        },
-        {
-          "fullName": "Arvid Lindblad",
-          "abbr": "LIN",
-          "team": "Racing Bulls",
-          "position": null,
-          "bestTimeSec": 90.573,
-          "bestTimeStr": "1:30.573",
-          "q3": false
-        },
-        {
-          "fullName": "Lance Stroll",
-          "abbr": "STR",
-          "team": "Aston Martin",
-          "position": null,
-          "bestTimeSec": 129.082,
-          "bestTimeStr": "2:09.082",
-          "q3": false
         }
       ]
     },
@@ -1254,7 +815,7 @@
           "q3": true
         },
         {
-          "fullName": "Kimi Antonelli",
+          "fullName": "Andrea Kimi Antonelli",
           "abbr": "ANT",
           "team": "Mercedes",
           "position": 2,
@@ -1292,7 +853,7 @@
         {
           "fullName": "Max Verstappen",
           "abbr": "VER",
-          "team": "Red Bull Racing",
+          "team": "Red Bull",
           "position": 6,
           "bestTimeSec": 72.907,
           "bestTimeStr": "1:12.907",
@@ -1301,7 +862,7 @@
         {
           "fullName": "Isack Hadjar",
           "abbr": "HAD",
-          "team": "Red Bull Racing",
+          "team": "Red Bull",
           "position": 7,
           "bestTimeSec": 72.935,
           "bestTimeStr": "1:12.935",
@@ -1319,7 +880,7 @@
         {
           "fullName": "Arvid Lindblad",
           "abbr": "LIN",
-          "team": "Racing Bulls",
+          "team": "RB F1 Team",
           "position": 9,
           "bestTimeSec": 73.28,
           "bestTimeStr": "1:13.280",
@@ -1328,14 +889,14 @@
         {
           "fullName": "Franco Colapinto",
           "abbr": "COL",
-          "team": "Alpine",
+          "team": "Alpine F1 Team",
           "position": 10,
           "bestTimeSec": 73.697,
           "bestTimeStr": "1:13.697",
           "q3": true
         },
         {
-          "fullName": "Nico Hulkenberg",
+          "fullName": "Nico Hülkenberg",
           "abbr": "HUL",
           "team": "Audi",
           "position": 11,
@@ -1346,7 +907,7 @@
         {
           "fullName": "Liam Lawson",
           "abbr": "LAW",
-          "team": "Racing Bulls",
+          "team": "RB F1 Team",
           "position": 12,
           "bestTimeSec": 73.897,
           "bestTimeStr": "1:13.897",
@@ -1364,7 +925,7 @@
         {
           "fullName": "Pierre Gasly",
           "abbr": "GAS",
-          "team": "Alpine",
+          "team": "Alpine F1 Team",
           "position": 14,
           "bestTimeSec": 74.187,
           "bestTimeStr": "1:14.187",
@@ -1416,9 +977,9 @@
           "q3": false
         },
         {
-          "fullName": "Sergio Perez",
+          "fullName": "Sergio Pérez",
           "abbr": "PER",
-          "team": "Cadillac",
+          "team": "Cadillac F1 Team",
           "position": 20,
           "bestTimeSec": 75.429,
           "bestTimeStr": "1:15.429",
@@ -1436,216 +997,10 @@
         {
           "fullName": "Valtteri Bottas",
           "abbr": "BOT",
-          "team": "Cadillac",
+          "team": "Cadillac F1 Team",
           "position": 22,
           "bestTimeSec": 76.272,
           "bestTimeStr": "1:16.272",
-          "q3": false
-        }
-      ]
-    },
-    {
-      "round": 5,
-      "gp": "Canada",
-      "shortName": "Canada",
-      "type": "SQ",
-      "drivers": [
-        {
-          "fullName": "Kimi Antonelli",
-          "abbr": "ANT",
-          "team": "Mercedes",
-          "position": null,
-          "bestTimeSec": 73.033,
-          "bestTimeStr": "1:13.033",
-          "q3": false
-        },
-        {
-          "fullName": "George Russell",
-          "abbr": "RUS",
-          "team": "Mercedes",
-          "position": null,
-          "bestTimeSec": 72.965,
-          "bestTimeStr": "1:12.965",
-          "q3": false
-        },
-        {
-          "fullName": "Lewis Hamilton",
-          "abbr": "HAM",
-          "team": "Ferrari",
-          "position": null,
-          "bestTimeSec": 73.326,
-          "bestTimeStr": "1:13.326",
-          "q3": false
-        },
-        {
-          "fullName": "Charles Leclerc",
-          "abbr": "LEC",
-          "team": "Ferrari",
-          "position": null,
-          "bestTimeSec": 73.41,
-          "bestTimeStr": "1:13.410",
-          "q3": false
-        },
-        {
-          "fullName": "Max Verstappen",
-          "abbr": "VER",
-          "team": "Red Bull Racing",
-          "position": null,
-          "bestTimeSec": 73.504,
-          "bestTimeStr": "1:13.504",
-          "q3": false
-        },
-        {
-          "fullName": "Lando Norris",
-          "abbr": "NOR",
-          "team": "McLaren",
-          "position": null,
-          "bestTimeSec": 73.28,
-          "bestTimeStr": "1:13.280",
-          "q3": false
-        },
-        {
-          "fullName": "Oscar Piastri",
-          "abbr": "PIA",
-          "team": "McLaren",
-          "position": null,
-          "bestTimeSec": 73.299,
-          "bestTimeStr": "1:13.299",
-          "q3": false
-        },
-        {
-          "fullName": "Arvid Lindblad",
-          "abbr": "LIN",
-          "team": "Racing Bulls",
-          "position": null,
-          "bestTimeSec": 73.737,
-          "bestTimeStr": "1:13.737",
-          "q3": false
-        },
-        {
-          "fullName": "Nico Hulkenberg",
-          "abbr": "HUL",
-          "team": "Audi",
-          "position": null,
-          "bestTimeSec": 74.595,
-          "bestTimeStr": "1:14.595",
-          "q3": false
-        },
-        {
-          "fullName": "Fernando Alonso",
-          "abbr": "ALO",
-          "team": "Aston Martin",
-          "position": null,
-          "bestTimeSec": 75.76,
-          "bestTimeStr": "1:15.760",
-          "q3": false
-        },
-        {
-          "fullName": "Gabriel Bortoleto",
-          "abbr": "BOR",
-          "team": "Audi",
-          "position": null,
-          "bestTimeSec": 74.627,
-          "bestTimeStr": "1:14.627",
-          "q3": false
-        },
-        {
-          "fullName": "Isack Hadjar",
-          "abbr": "HAD",
-          "team": "Red Bull Racing",
-          "position": null,
-          "bestTimeSec": 73.605,
-          "bestTimeStr": "1:13.605",
-          "q3": false
-        },
-        {
-          "fullName": "Esteban Ocon",
-          "abbr": "OCO",
-          "team": "Haas F1 Team",
-          "position": null,
-          "bestTimeSec": 74.928,
-          "bestTimeStr": "1:14.928",
-          "q3": false
-        },
-        {
-          "fullName": "Alexander Albon",
-          "abbr": "ALB",
-          "team": "Williams",
-          "position": null,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
-        },
-        {
-          "fullName": "Carlos Sainz",
-          "abbr": "SAI",
-          "team": "Williams",
-          "position": null,
-          "bestTimeSec": 74.536,
-          "bestTimeStr": "1:14.536",
-          "q3": false
-        },
-        {
-          "fullName": "Pierre Gasly",
-          "abbr": "GAS",
-          "team": "Alpine",
-          "position": null,
-          "bestTimeSec": 76.642,
-          "bestTimeStr": "1:16.642",
-          "q3": false
-        },
-        {
-          "fullName": "Lance Stroll",
-          "abbr": "STR",
-          "team": "Aston Martin",
-          "position": null,
-          "bestTimeSec": 76.354,
-          "bestTimeStr": "1:16.354",
-          "q3": false
-        },
-        {
-          "fullName": "Liam Lawson",
-          "abbr": "LAW",
-          "team": "Racing Bulls",
-          "position": null,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
-        },
-        {
-          "fullName": "Oliver Bearman",
-          "abbr": "BEA",
-          "team": "Haas F1 Team",
-          "position": null,
-          "bestTimeSec": 75.197,
-          "bestTimeStr": "1:15.197",
-          "q3": false
-        },
-        {
-          "fullName": "Valtteri Bottas",
-          "abbr": "BOT",
-          "team": "Cadillac",
-          "position": null,
-          "bestTimeSec": 76.866,
-          "bestTimeStr": "1:16.866",
-          "q3": false
-        },
-        {
-          "fullName": "Sergio Perez",
-          "abbr": "PER",
-          "team": "Cadillac",
-          "position": null,
-          "bestTimeSec": 76.002,
-          "bestTimeStr": "1:16.002",
-          "q3": false
-        },
-        {
-          "fullName": "Franco Colapinto",
-          "abbr": "COL",
-          "team": "Alpine",
-          "position": null,
-          "bestTimeSec": 74.702,
-          "bestTimeStr": "1:14.702",
           "q3": false
         }
       ]
@@ -1657,7 +1012,7 @@
       "type": "Q",
       "drivers": [
         {
-          "fullName": "Kimi Antonelli",
+          "fullName": "Andrea Kimi Antonelli",
           "abbr": "ANT",
           "team": "Mercedes",
           "position": 1,
@@ -1668,7 +1023,7 @@
         {
           "fullName": "Max Verstappen",
           "abbr": "VER",
-          "team": "Red Bull Racing",
+          "team": "Red Bull",
           "position": 2,
           "bestTimeSec": 72.094,
           "bestTimeStr": "1:12.094",
@@ -1695,7 +1050,7 @@
         {
           "fullName": "Isack Hadjar",
           "abbr": "HAD",
-          "team": "Red Bull Racing",
+          "team": "Red Bull",
           "position": 5,
           "bestTimeSec": 72.434,
           "bestTimeStr": "1:12.434",
@@ -1731,7 +1086,7 @@
         {
           "fullName": "Pierre Gasly",
           "abbr": "GAS",
-          "team": "Alpine",
+          "team": "Alpine F1 Team",
           "position": 9,
           "bestTimeSec": 73.226,
           "bestTimeStr": "1:13.226",
@@ -1740,7 +1095,7 @@
         {
           "fullName": "Liam Lawson",
           "abbr": "LAW",
-          "team": "Racing Bulls",
+          "team": "RB F1 Team",
           "position": 10,
           "bestTimeSec": 73.412,
           "bestTimeStr": "1:13.412",
@@ -1765,7 +1120,7 @@
           "q3": false
         },
         {
-          "fullName": "Nico Hulkenberg",
+          "fullName": "Nico Hülkenberg",
           "abbr": "HUL",
           "team": "Audi",
           "position": 13,
@@ -1776,7 +1131,7 @@
         {
           "fullName": "Franco Colapinto",
           "abbr": "COL",
-          "team": "Alpine",
+          "team": "Alpine F1 Team",
           "position": 14,
           "bestTimeSec": 73.995,
           "bestTimeStr": "1:13.995",
@@ -1785,7 +1140,7 @@
         {
           "fullName": "Arvid Lindblad",
           "abbr": "LIN",
-          "team": "Racing Bulls",
+          "team": "RB F1 Team",
           "position": 15,
           "bestTimeSec": 74.248,
           "bestTimeStr": "1:14.248",
@@ -1810,9 +1165,9 @@
           "q3": false
         },
         {
-          "fullName": "Sergio Perez",
+          "fullName": "Sergio Pérez",
           "abbr": "PER",
-          "team": "Cadillac",
+          "team": "Cadillac F1 Team",
           "position": 18,
           "bestTimeSec": 74.747,
           "bestTimeStr": "1:14.747",
@@ -1830,7 +1185,7 @@
         {
           "fullName": "Valtteri Bottas",
           "abbr": "BOT",
-          "team": "Cadillac",
+          "team": "Cadillac F1 Team",
           "position": 20,
           "bestTimeSec": 75.283,
           "bestTimeStr": "1:15.283",
@@ -1861,22 +1216,19 @@
     {
       "team": "Mercedes",
       "drivers": [
-        "George Russell",
-        "Kimi Antonelli"
+        "Andrea Kimi Antonelli",
+        "George Russell"
       ],
       "h2h": {
         "Q": {
           "George Russell": 2,
-          "Kimi Antonelli": 4
+          "Andrea Kimi Antonelli": 4
         },
-        "SQ": {
-          "George Russell": 2,
-          "Kimi Antonelli": 1
-        }
+        "SQ": {}
       },
       "q3Count": {
         "George Russell": 6,
-        "Kimi Antonelli": 6
+        "Andrea Kimi Antonelli": 6
       },
       "sessions": [
         {
@@ -1886,20 +1238,8 @@
           "type": "Q",
           "fastest": "George Russell",
           "gapSec": 0.293,
-          "timeA": "1:18.518",
-          "timeB": "1:18.811",
-          "posA": 1,
-          "posB": 2
-        },
-        {
-          "round": 2,
-          "gp": "China",
-          "shortName": "China",
-          "type": "Q",
-          "fastest": "Kimi Antonelli",
-          "gapSec": 0.222,
-          "timeA": "1:32.286",
-          "timeB": "1:32.064",
+          "timeA": "1:18.811",
+          "timeB": "1:18.518",
           "posA": 2,
           "posB": 1
         },
@@ -1907,90 +1247,66 @@
           "round": 2,
           "gp": "China",
           "shortName": "China",
-          "type": "SQ",
-          "fastest": "George Russell",
-          "gapSec": 0.289,
-          "timeA": "1:31.520",
-          "timeB": "1:31.809",
-          "posA": null,
-          "posB": null
+          "type": "Q",
+          "fastest": "Andrea Kimi Antonelli",
+          "gapSec": 0.222,
+          "timeA": "1:32.064",
+          "timeB": "1:32.286",
+          "posA": 1,
+          "posB": 2
         },
         {
           "round": 3,
           "gp": "Japan",
           "shortName": "Japan",
           "type": "Q",
-          "fastest": "Kimi Antonelli",
+          "fastest": "Andrea Kimi Antonelli",
           "gapSec": 0.298,
-          "timeA": "1:29.076",
-          "timeB": "1:28.778",
-          "posA": 2,
-          "posB": 1
-        },
-        {
-          "round": 4,
-          "gp": "United States - Miami Gardens",
-          "shortName": "Miami",
-          "type": "Q",
-          "fastest": "Kimi Antonelli",
-          "gapSec": 0.399,
-          "timeA": "1:28.197",
-          "timeB": "1:27.798",
-          "posA": 5,
-          "posB": 1
-        },
-        {
-          "round": 4,
-          "gp": "United States - Miami Gardens",
-          "shortName": "Miami",
-          "type": "SQ",
-          "fastest": "Kimi Antonelli",
-          "gapSec": 0.402,
-          "timeA": "1:28.493",
-          "timeB": "1:28.091",
-          "posA": null,
-          "posB": null
-        },
-        {
-          "round": 5,
-          "gp": "Canada",
-          "shortName": "Canada",
-          "type": "Q",
-          "fastest": "George Russell",
-          "gapSec": 0.068,
-          "timeA": "1:12.578",
-          "timeB": "1:12.646",
+          "timeA": "1:28.778",
+          "timeB": "1:29.076",
           "posA": 1,
           "posB": 2
         },
         {
+          "round": 4,
+          "gp": "United States - Miami Gardens",
+          "shortName": "Miami",
+          "type": "Q",
+          "fastest": "Andrea Kimi Antonelli",
+          "gapSec": 0.399,
+          "timeA": "1:27.798",
+          "timeB": "1:28.197",
+          "posA": 1,
+          "posB": 5
+        },
+        {
           "round": 5,
           "gp": "Canada",
           "shortName": "Canada",
-          "type": "SQ",
+          "type": "Q",
           "fastest": "George Russell",
           "gapSec": 0.068,
-          "timeA": "1:12.965",
-          "timeB": "1:13.033",
-          "posA": null,
-          "posB": null
+          "timeA": "1:12.646",
+          "timeB": "1:12.578",
+          "posA": 2,
+          "posB": 1
         },
         {
           "round": 6,
           "gp": "Monaco",
           "shortName": "Monaco",
           "type": "Q",
-          "fastest": "Kimi Antonelli",
+          "fastest": "Andrea Kimi Antonelli",
           "gapSec": 0.394,
-          "timeA": "1:12.445",
-          "timeB": "1:12.051",
-          "posA": 6,
-          "posB": 1
+          "timeA": "1:12.051",
+          "timeB": "1:12.445",
+          "posA": 1,
+          "posB": 6
         }
       ]
     },
     {
-      "team": "Red Bull Racing",
+      "team": "Red Bull",
       "drivers": [
         "Isack Hadjar",
         "Max Verstappen"
@@ -2000,9 +1316,7 @@
           "Max Verstappen": 4,
           "Isack Hadjar": 1
         },
-        "SQ": {
-          "Max Verstappen": 3
-        }
+        "SQ": {}
       },
       "q3Count": {
         "Isack Hadjar": 6,
@@ -2020,18 +1334,6 @@
           "timeB": "1:33.002",
           "posA": 9,
           "posB": 8
-        },
-        {
-          "round": 2,
-          "gp": "China",
-          "shortName": "China",
-          "type": "SQ",
-          "fastest": "Max Verstappen",
-          "gapSec": 0.366,
-          "timeA": "1:33.620",
-          "timeB": "1:33.254",
-          "posA": null,
-          "posB": null
         },
         {
           "round": 3,
@@ -2058,18 +1360,6 @@
           "posB": 2
         },
         {
-          "round": 4,
-          "gp": "United States - Miami Gardens",
-          "shortName": "Miami",
-          "type": "SQ",
-          "fastest": "Max Verstappen",
-          "gapSec": 0.961,
-          "timeA": "1:29.422",
-          "timeB": "1:28.461",
-          "posA": null,
-          "posB": null
-        },
-        {
           "round": 5,
           "gp": "Canada",
           "shortName": "Canada",
@@ -2080,18 +1370,6 @@
           "timeB": "1:12.907",
           "posA": 7,
           "posB": 6
-        },
-        {
-          "round": 5,
-          "gp": "Canada",
-          "shortName": "Canada",
-          "type": "SQ",
-          "fastest": "Max Verstappen",
-          "gapSec": 0.101,
-          "timeA": "1:13.605",
-          "timeB": "1:13.504",
-          "posA": null,
-          "posB": null
         },
         {
           "round": 6,
@@ -2118,10 +1396,7 @@
           "Charles Leclerc": 3,
           "Lewis Hamilton": 3
         },
-        "SQ": {
-          "Lewis Hamilton": 2,
-          "Charles Leclerc": 1
-        }
+        "SQ": {}
       },
       "q3Count": {
         "Charles Leclerc": 6,
@@ -2153,18 +1428,6 @@
           "posB": 3
         },
         {
-          "round": 2,
-          "gp": "China",
-          "shortName": "China",
-          "type": "SQ",
-          "fastest": "Lewis Hamilton",
-          "gapSec": 0.367,
-          "timeA": "1:32.528",
-          "timeB": "1:32.161",
-          "posA": null,
-          "posB": null
-        },
-        {
           "round": 3,
           "gp": "Japan",
           "shortName": "Japan",
@@ -2189,18 +1452,6 @@
           "posB": 6
         },
         {
-          "round": 4,
-          "gp": "United States - Miami Gardens",
-          "shortName": "Miami",
-          "type": "SQ",
-          "fastest": "Charles Leclerc",
-          "gapSec": 0.379,
-          "timeA": "1:28.239",
-          "timeB": "1:28.618",
-          "posA": null,
-          "posB": null
-        },
-        {
           "round": 5,
           "gp": "Canada",
           "shortName": "Canada",
@@ -2211,18 +1462,6 @@
           "timeB": "1:12.868",
           "posA": 8,
           "posB": 5
-        },
-        {
-          "round": 5,
-          "gp": "Canada",
-          "shortName": "Canada",
-          "type": "SQ",
-          "fastest": "Lewis Hamilton",
-          "gapSec": 0.084,
-          "timeA": "1:13.410",
-          "timeB": "1:13.326",
-          "posA": null,
-          "posB": null
         },
         {
           "round": 6,
@@ -2249,9 +1488,7 @@
           "Oscar Piastri": 4,
           "Lando Norris": 2
         },
-        "SQ": {
-          "Lando Norris": 3
-        }
+        "SQ": {}
       },
       "q3Count": {
         "Oscar Piastri": 6,
@@ -2283,18 +1520,6 @@
           "posB": 5
         },
         {
-          "round": 2,
-          "gp": "China",
-          "shortName": "China",
-          "type": "SQ",
-          "fastest": "Lando Norris",
-          "gapSec": 0.083,
-          "timeA": "1:32.141",
-          "timeB": "1:32.224",
-          "posA": null,
-          "posB": null
-        },
-        {
           "round": 3,
           "gp": "Japan",
           "shortName": "Japan",
@@ -2319,18 +1544,6 @@
           "posB": 7
         },
         {
-          "round": 4,
-          "gp": "United States - Miami Gardens",
-          "shortName": "Miami",
-          "type": "SQ",
-          "fastest": "Lando Norris",
-          "gapSec": 0.239,
-          "timeA": "1:27.869",
-          "timeB": "1:28.108",
-          "posA": null,
-          "posB": null
-        },
-        {
           "round": 5,
           "gp": "Canada",
           "shortName": "Canada",
@@ -2341,18 +1554,6 @@
           "timeB": "1:12.781",
           "posA": 3,
           "posB": 4
-        },
-        {
-          "round": 5,
-          "gp": "Canada",
-          "shortName": "Canada",
-          "type": "SQ",
-          "fastest": "Lando Norris",
-          "gapSec": 0.019,
-          "timeA": "1:13.280",
-          "timeB": "1:13.299",
-          "posA": null,
-          "posB": null
         },
         {
           "round": 6,
@@ -2369,7 +1570,7 @@
       ]
     },
     {
-      "team": "Racing Bulls",
+      "team": "RB F1 Team",
       "drivers": [
         "Arvid Lindblad",
         "Liam Lawson"
@@ -2379,10 +1580,7 @@
           "Liam Lawson": 4,
           "Arvid Lindblad": 2
         },
-        "SQ": {
-          "Liam Lawson": 1,
-          "Arvid Lindblad": 1
-        }
+        "SQ": {}
       },
       "q3Count": {
         "Liam Lawson": 2,
@@ -2414,18 +1612,6 @@
           "posB": 14
         },
         {
-          "round": 2,
-          "gp": "China",
-          "shortName": "China",
-          "type": "SQ",
-          "fastest": "Liam Lawson",
-          "gapSec": 0.334,
-          "timeA": "1:34.048",
-          "timeB": "1:33.714",
-          "posA": null,
-          "posB": null
-        },
-        {
           "round": 3,
           "gp": "Japan",
           "shortName": "Japan",
@@ -2448,18 +1634,6 @@
           "timeB": "1:29.499",
           "posA": 16,
           "posB": 11
-        },
-        {
-          "round": 4,
-          "gp": "United States - Miami Gardens",
-          "shortName": "Miami",
-          "type": "SQ",
-          "fastest": "Arvid Lindblad",
-          "gapSec": 0.47,
-          "timeA": "1:30.573",
-          "timeB": "1:31.043",
-          "posA": null,
-          "posB": null
         },
         {
           "round": 5,
@@ -2491,17 +1665,14 @@
       "team": "Audi",
       "drivers": [
         "Gabriel Bortoleto",
-        "Nico Hulkenberg"
+        "Nico Hülkenberg"
       ],
       "h2h": {
         "Q": {
           "Gabriel Bortoleto": 2,
-          "Nico Hulkenberg": 4
+          "Nico Hülkenberg": 4
         },
-        "SQ": {
-          "Nico Hulkenberg": 2,
-          "Gabriel Bortoleto": 1
-        }
+        "SQ": {}
       },
       "q3Count": {
         "Gabriel Bortoleto": 1
@@ -2524,24 +1695,12 @@
           "gp": "China",
           "shortName": "China",
           "type": "Q",
-          "fastest": "Nico Hulkenberg",
+          "fastest": "Nico Hülkenberg",
           "gapSec": 0.611,
           "timeA": "1:33.965",
           "timeB": "1:33.354",
           "posA": 16,
           "posB": 11
-        },
-        {
-          "round": 2,
-          "gp": "China",
-          "shortName": "China",
-          "type": "SQ",
-          "fastest": "Nico Hulkenberg",
-          "gapSec": 0.139,
-          "timeA": "1:33.774",
-          "timeB": "1:33.635",
-          "posA": null,
-          "posB": null
         },
         {
           "round": 3,
@@ -2560,7 +1719,7 @@
           "gp": "United States - Miami Gardens",
           "shortName": "Miami",
           "type": "Q",
-          "fastest": "Nico Hulkenberg",
+          "fastest": "Nico Hülkenberg",
           "gapSec": 4.298,
           "timeA": "1:33.737",
           "timeB": "1:29.439",
@@ -2568,23 +1727,11 @@
           "posB": 10
         },
         {
-          "round": 4,
-          "gp": "United States - Miami Gardens",
-          "shortName": "Miami",
-          "type": "SQ",
-          "fastest": "Gabriel Bortoleto",
-          "gapSec": 0.025,
-          "timeA": "1:29.994",
-          "timeB": "1:30.019",
-          "posA": null,
-          "posB": null
-        },
-        {
           "round": 5,
           "gp": "Canada",
           "shortName": "Canada",
           "type": "Q",
-          "fastest": "Nico Hulkenberg",
+          "fastest": "Nico Hülkenberg",
           "gapSec": 0.185,
           "timeA": "1:14.071",
           "timeB": "1:13.886",
@@ -2592,23 +1739,11 @@
           "posB": 11
         },
         {
-          "round": 5,
-          "gp": "Canada",
-          "shortName": "Canada",
-          "type": "SQ",
-          "fastest": "Nico Hulkenberg",
-          "gapSec": 0.032,
-          "timeA": "1:14.627",
-          "timeB": "1:14.595",
-          "posA": null,
-          "posB": null
-        },
-        {
           "round": 6,
           "gp": "Monaco",
           "shortName": "Monaco",
           "type": "Q",
-          "fastest": "Nico Hulkenberg",
+          "fastest": "Nico Hülkenberg",
           "gapSec": 0.781,
           "timeA": "1:14.683",
           "timeB": "1:13.902",
@@ -2628,10 +1763,7 @@
           "Oliver Bearman": 4,
           "Esteban Ocon": 2
         },
-        "SQ": {
-          "Oliver Bearman": 2,
-          "Esteban Ocon": 1
-        }
+        "SQ": {}
       },
       "q3Count": {
         "Oliver Bearman": 1
@@ -2662,18 +1794,6 @@
           "posB": 10
         },
         {
-          "round": 2,
-          "gp": "China",
-          "shortName": "China",
-          "type": "SQ",
-          "fastest": "Oliver Bearman",
-          "gapSec": 0.23,
-          "timeA": "1:33.639",
-          "timeB": "1:33.409",
-          "posA": null,
-          "posB": null
-        },
-        {
           "round": 3,
           "gp": "Japan",
           "shortName": "Japan",
@@ -2698,18 +1818,6 @@
           "posB": 12
         },
         {
-          "round": 4,
-          "gp": "United States - Miami Gardens",
-          "shortName": "Miami",
-          "type": "SQ",
-          "fastest": "Oliver Bearman",
-          "gapSec": 1.129,
-          "timeA": "1:31.245",
-          "timeB": "1:30.116",
-          "posA": null,
-          "posB": null
-        },
-        {
           "round": 5,
           "gp": "Canada",
           "shortName": "Canada",
@@ -2720,18 +1828,6 @@
           "timeB": "1:14.416",
           "posA": 17,
           "posB": 16
-        },
-        {
-          "round": 5,
-          "gp": "Canada",
-          "shortName": "Canada",
-          "type": "SQ",
-          "fastest": "Esteban Ocon",
-          "gapSec": 0.269,
-          "timeA": "1:14.928",
-          "timeB": "1:15.197",
-          "posA": null,
-          "posB": null
         },
         {
           "round": 6,
@@ -2748,7 +1844,7 @@
       ]
     },
     {
-      "team": "Alpine",
+      "team": "Alpine F1 Team",
       "drivers": [
         "Franco Colapinto",
         "Pierre Gasly"
@@ -2758,10 +1854,7 @@
           "Pierre Gasly": 4,
           "Franco Colapinto": 2
         },
-        "SQ": {
-          "Pierre Gasly": 1,
-          "Franco Colapinto": 2
-        }
+        "SQ": {}
       },
       "q3Count": {
         "Pierre Gasly": 4,
@@ -2793,18 +1886,6 @@
           "posB": 7
         },
         {
-          "round": 2,
-          "gp": "China",
-          "shortName": "China",
-          "type": "SQ",
-          "fastest": "Pierre Gasly",
-          "gapSec": 1.439,
-          "timeA": "1:34.327",
-          "timeB": "1:32.888",
-          "posA": null,
-          "posB": null
-        },
-        {
           "round": 3,
           "gp": "Japan",
           "shortName": "Japan",
@@ -2829,18 +1910,6 @@
           "posB": 9
         },
         {
-          "round": 4,
-          "gp": "United States - Miami Gardens",
-          "shortName": "Miami",
-          "type": "SQ",
-          "fastest": "Franco Colapinto",
-          "gapSec": 0.154,
-          "timeA": "1:29.320",
-          "timeB": "1:29.474",
-          "posA": null,
-          "posB": null
-        },
-        {
           "round": 5,
           "gp": "Canada",
           "shortName": "Canada",
@@ -2851,18 +1920,6 @@
           "timeB": "1:14.187",
           "posA": 10,
           "posB": 14
-        },
-        {
-          "round": 5,
-          "gp": "Canada",
-          "shortName": "Canada",
-          "type": "SQ",
-          "fastest": "Franco Colapinto",
-          "gapSec": 1.94,
-          "timeA": "1:14.702",
-          "timeB": "1:16.642",
-          "posA": null,
-          "posB": null
         },
         {
           "round": 6,
@@ -2889,10 +1946,7 @@
           "Carlos Sainz": 4,
           "Alexander Albon": 1
         },
-        "SQ": {
-          "Carlos Sainz": 1,
-          "Alexander Albon": 1
-        }
+        "SQ": {}
       },
       "q3Count": {},
       "sessions": [
@@ -2907,18 +1961,6 @@
           "timeB": "1:34.317",
           "posA": 18,
           "posB": 17
-        },
-        {
-          "round": 2,
-          "gp": "China",
-          "shortName": "China",
-          "type": "SQ",
-          "fastest": "Carlos Sainz",
-          "gapSec": 0.544,
-          "timeA": "1:35.305",
-          "timeB": "1:34.761",
-          "posA": null,
-          "posB": null
         },
         {
           "round": 3,
@@ -2943,18 +1985,6 @@
           "timeB": "1:29.568",
           "posA": 15,
           "posB": 13
-        },
-        {
-          "round": 4,
-          "gp": "United States - Miami Gardens",
-          "shortName": "Miami",
-          "type": "SQ",
-          "fastest": "Alexander Albon",
-          "gapSec": 0.008,
-          "timeA": "1:30.216",
-          "timeB": "1:30.224",
-          "posA": null,
-          "posB": null
         },
         {
           "round": 5,
@@ -2992,9 +2022,7 @@
         "Q": {
           "Fernando Alonso": 5
         },
-        "SQ": {
-          "Fernando Alonso": 3
-        }
+        "SQ": {}
       },
       "q3Count": {},
       "sessions": [
@@ -3009,18 +2037,6 @@
           "timeB": "1:35.995",
           "posA": 19,
           "posB": 21
-        },
-        {
-          "round": 2,
-          "gp": "China",
-          "shortName": "China",
-          "type": "SQ",
-          "fastest": "Fernando Alonso",
-          "gapSec": 0.57,
-          "timeA": "1:35.581",
-          "timeB": "1:36.151",
-          "posA": null,
-          "posB": null
         },
         {
           "round": 3,
@@ -3047,18 +2063,6 @@
           "posB": 18
         },
         {
-          "round": 4,
-          "gp": "United States - Miami Gardens",
-          "shortName": "Miami",
-          "type": "SQ",
-          "fastest": "Fernando Alonso",
-          "gapSec": 27.771,
-          "timeA": "1:41.311",
-          "timeB": "2:09.082",
-          "posA": null,
-          "posB": null
-        },
-        {
           "round": 5,
           "gp": "Canada",
           "shortName": "Canada",
@@ -3069,18 +2073,6 @@
           "timeB": "1:16.195",
           "posA": 19,
           "posB": 21
-        },
-        {
-          "round": 5,
-          "gp": "Canada",
-          "shortName": "Canada",
-          "type": "SQ",
-          "fastest": "Fernando Alonso",
-          "gapSec": 0.594,
-          "timeA": "1:15.760",
-          "timeB": "1:16.354",
-          "posA": null,
-          "posB": null
         },
         {
           "round": 6,
@@ -3097,19 +2089,17 @@
       ]
     },
     {
-      "team": "Cadillac",
+      "team": "Cadillac F1 Team",
       "drivers": [
-        "Sergio Perez",
+        "Sergio Pérez",
         "Valtteri Bottas"
       ],
       "h2h": {
         "Q": {
-          "Sergio Perez": 4,
+          "Sergio Pérez": 4,
           "Valtteri Bottas": 2
         },
-        "SQ": {
-          "Sergio Perez": 2
-        }
+        "SQ": {}
       },
       "q3Count": {},
       "sessions": [
@@ -3118,7 +2108,7 @@
           "gp": "Australia",
           "shortName": "Australia",
           "type": "Q",
-          "fastest": "Sergio Perez",
+          "fastest": "Sergio Pérez",
           "gapSec": 0.639,
           "timeA": "1:22.605",
           "timeB": "1:23.244",
@@ -3142,7 +2132,7 @@
           "gp": "Japan",
           "shortName": "Japan",
           "type": "Q",
-          "fastest": "Sergio Perez",
+          "fastest": "Sergio Pérez",
           "gapSec": 0.124,
           "timeA": "1:32.206",
           "timeB": "1:32.330",
@@ -3162,23 +2152,11 @@
           "posB": 19
         },
         {
-          "round": 4,
-          "gp": "United States - Miami Gardens",
-          "shortName": "Miami",
-          "type": "SQ",
-          "fastest": "Sergio Perez",
-          "gapSec": 0.571,
-          "timeA": "1:31.255",
-          "timeB": "1:31.826",
-          "posA": null,
-          "posB": null
-        },
-        {
           "round": 5,
           "gp": "Canada",
           "shortName": "Canada",
           "type": "Q",
-          "fastest": "Sergio Perez",
+          "fastest": "Sergio Pérez",
           "gapSec": 0.843,
           "timeA": "1:15.429",
           "timeB": "1:16.272",
@@ -3186,23 +2164,11 @@
           "posB": 22
         },
         {
-          "round": 5,
-          "gp": "Canada",
-          "shortName": "Canada",
-          "type": "SQ",
-          "fastest": "Sergio Perez",
-          "gapSec": 0.864,
-          "timeA": "1:16.002",
-          "timeB": "1:16.866",
-          "posA": null,
-          "posB": null
-        },
-        {
           "round": 6,
           "gp": "Monaco",
           "shortName": "Monaco",
           "type": "Q",
-          "fastest": "Sergio Perez",
+          "fastest": "Sergio Pérez",
           "gapSec": 0.536,
           "timeA": "1:14.747",
           "timeB": "1:15.283",
