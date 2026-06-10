@@ -93,6 +93,8 @@
     "history.tipChampion": "Champion du monde",
     "history.tipDriverWins": "Victoires pilote ici",
     "history.tipTeamWins": "Victoires écurie ici",
+    "history.barsTitle": "Palmarès des vainqueurs",
+    "history.barsSub": "Classement des pilotes par nombre de victoires sur ce circuit",
 
     "driver.rank": "Rang",
     "driver.points": "Points",
@@ -200,6 +202,8 @@
     "history.tipChampion": "World champion",
     "history.tipDriverWins": "Driver wins here",
     "history.tipTeamWins": "Constructor wins here",
+    "history.barsTitle": "All-time winners",
+    "history.barsSub": "Drivers ranked by win count on this circuit",
 
     "driver.rank": "Rank",
     "driver.points": "Points",
