@@ -1,7 +1,7 @@
 /* Beautiful F1 — Dashboard : onglet Coéquipiers (duels qualif). */
 
 import { t } from "../i18n.js";
-import { shortName, escapeAttr } from "../utils.js";
+import { shortName, escapeAttr, fetchJson } from "../utils.js";
 
 export function renderTeammateView(team, filter, teamColor) {
   const color = teamColor(team.team);
@@ -181,8 +181,22 @@ function attachTimelineHover() {
   });
 }
 
-// Câble le sélecteur d'écurie + les filtres de session de l'onglet Coéquipiers.
-export function initTeammates(dashRes, qualiRes, teamColor) {
+// Câble l'onglet Coéquipiers. Les données qualif (~80 Ko) sont chargées à la
+// demande au premier affichage de l'onglet → allège le chargement initial.
+export function initTeammates(dashRes, teamColor) {
+  let loaded = false;
+  const load = async () => {
+    if (loaded) return;
+    loaded = true;
+    const qualiRes = await fetchJson("data/qualifying_2026.json");
+    renderTeammatesPane(dashRes, qualiRes, teamColor);
+  };
+  const tab = document.querySelector('.dash-tab[data-tab="teammates"]');
+  if (tab) tab.addEventListener("click", load);
+  if (tab && tab.classList.contains("active")) load();
+}
+
+function renderTeammatesPane(dashRes, qualiRes, teamColor) {
   const teamSelect = document.getElementById("dash-teammates-team");
   const teammatesContent = document.getElementById("dash-teammates-content");
   const pillButtons = document.querySelectorAll(".dash-pill");

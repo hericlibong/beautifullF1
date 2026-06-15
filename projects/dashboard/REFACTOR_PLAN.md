@@ -68,12 +68,12 @@ Découpage sous `web/assets/` : `dashboard.js` (orchestrateur, 1294 → ~190 lig
 - [x] Dégradation propre par widget (teammates "indisponible" déjà géré, circuits/duel non bloquants)
 - [x] Tests E2E : ressource requise manquante → bannière ; ressource optionnelle → dégradation sans bannière
 
-### Étape 6 — Performance
-- [ ] Baseline Lighthouse (desktop + mobile), consignée ici
-- [ ] `circuits_2026.json` + `gp_history.json` en chargement à la demande (au 1er clic circuit)
-- [ ] Vérifier `loading="lazy"` partout
-- [ ] Trancher la minification selon la baseline (optionnelle, hors chemin de refresh)
-- [ ] Lighthouse post-optim vs baseline
+### Étape 6 — Performance ✅
+- [x] Baseline mesurée (poids du chargement initial via Playwright — choisi plutôt que Lighthouse CLI pour éviter d'introduire du Node ; mesure directement le problème identifié)
+- [x] `circuits_2026.json` (152 Ko) + `gp_history.json` (27 Ko) en chargement à la demande (1er affichage onglet Calendrier)
+- [x] `qualifying_2026.json` (80 Ko) en chargement à la demande (1er affichage onglet Coéquipiers)
+- [x] `loading="lazy"` déjà présent sur toutes les images (vérifié)
+- [x] Minification : **écartée** — gain marginal vs réintroduction d'un build step (contraire à la contrainte no-build / refresh auto)
 
 ### Étape 7 — Documentation
 - [ ] `projects/dashboard/README.md` (refresh après GP, ajout circuit, archi web/↔docs/, lancer les tests)
@@ -87,12 +87,16 @@ Découpage sous `web/assets/` : `dashboard.js` (orchestrateur, 1294 → ~190 lig
 
 ---
 
-## Mesures Lighthouse (à remplir étape 6)
+## Mesures de performance (étape 6)
+
+Poids des ressources chargées au **premier rendu** (onglet Pilotes), mesuré via Playwright sur `docs/` servi localement :
 
 | | Avant | Après |
 |---|---|---|
-| Performance (desktop) | — | — |
-| Performance (mobile) | — | — |
+| Poids initial total | 399,9 Ko | **148,3 Ko** (−63 %) |
+| `circuits_2026.json` (152 Ko) | chargé d'emblée | différé (onglet Calendrier) |
+| `qualifying_2026.json` (80 Ko) | chargé d'emblée | différé (onglet Coéquipiers) |
+| `gp_history.json` (27 Ko) | chargé d'emblée | différé (onglet Calendrier) |
 
 ## Risques & garde-fous
 

@@ -48,8 +48,9 @@ def test_driver_drilldown_opens_detail(page, base_url):
 def test_circuit_drilldown_with_history(page, base_url):
     page.goto(base_url)
     page.click('.dash-tab[data-tab="calendar"]')
-    # Barcelone (Spain) a un historique câblé (GP_TO_CIRCUIT)
-    spain = page.locator('#dash-calendar li[data-gp="Spain"]')
+    # Les données circuit sont chargées à la demande : attendre que la ligne
+    # devienne cliquable (classe ajoutée après le fetch paresseux).
+    spain = page.locator('#dash-calendar li[data-gp="Spain"].dash-cal-clickable')
     spain.wait_for()
     spain.click()
     page.wait_for_selector(".dash-circuit-detail .dash-history")

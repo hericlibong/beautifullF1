@@ -14,18 +14,15 @@ import { initCalendar, scrollCalendarToNext } from "./modules/render/calendar.js
 import { initEmbed } from "./modules/render/embed.js";
 
 (async function () {
-  // Ressources requises : leur échec affiche une bannière et interrompt le rendu.
-  // Ressources optionnelles : dégradation propre (widget marqué indisponible).
-  const [dashRes, teamsRes, manifestRes, qualiRes, circuitsRes, i18nRes, historyRes] =
-    await Promise.all([
-      fetchJson("data/dashboard_2026.json", { required: true }),
-      fetchJson("assets/teams.json", { required: true }),
-      fetchJson("assets/manifest.json", { required: true }),
-      fetchJson("data/qualifying_2026.json"),
-      fetchJson("data/circuits_2026.json"),
-      fetchJson("assets/i18n.json", { fallback: {} }),
-      fetchJson("data/gp_history.json"),
-    ]);
+  // Chargement initial : uniquement le strict nécessaire à la première vue (onglet Pilotes).
+  // Les données lourdes (circuits, historique, qualifs) sont chargées à la demande par
+  // leurs modules respectifs au premier affichage de l'onglet concerné.
+  const [dashRes, teamsRes, manifestRes, i18nRes] = await Promise.all([
+    fetchJson("data/dashboard_2026.json", { required: true }),
+    fetchJson("assets/teams.json", { required: true }),
+    fetchJson("assets/manifest.json", { required: true }),
+    fetchJson("assets/i18n.json", { fallback: {} }),
+  ]);
 
   setI18n(i18nRes);
   document.documentElement.lang = LANG;
@@ -103,8 +100,8 @@ import { initEmbed } from "./modules/render/embed.js";
   // ---------- Widgets (délégués aux modules) ----------
   initStandings(dashRes, teamColor);
   initDuel(dashRes, teamColor);
-  initTeammates(dashRes, qualiRes, teamColor);
-  initCalendar(dashRes, circuitsRes, historyRes, teamColor);
+  initTeammates(dashRes, teamColor);
+  initCalendar(dashRes, teamColor);
   initEmbed(manifestRes);
 
   // ---------- Onglets Pilotes / Constructeurs / Calendrier / Duel / Coéquipiers ----------
