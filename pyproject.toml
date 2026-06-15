@@ -11,7 +11,10 @@ minversion = "7.0"
 addopts = "-ra -q --cov=. --cov-report=term-missing --cov-config=pyproject.toml"
 # ⚠️ Permettre la découverte dans les projets et un éventuel dossier tests/ à la racine
 testpaths = ["projects","tests"]
-pythonpath = ["projects"] 
+pythonpath = ["projects"]
+markers = [
+    "e2e: tests end-to-end navigateur (Playwright) — nécessitent 'playwright install chromium'",
+]
 
 # --- Configuration coverage ---
 [tool.coverage.run]

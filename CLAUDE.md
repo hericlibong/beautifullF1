@@ -63,14 +63,16 @@ docs/   (GitHub Pages: dashboard home + viz subfolders)
 
 ## Dashboard front-end (projects/dashboard/web/)
 
-Single page, vanilla JS (`assets/dashboard.js`, one async IIFE that fetches all JSON via `Promise.all`). Key conventions:
+Single page, vanilla JS in **native ES6 modules** (no bundler). `index.html` loads `assets/dashboard.js` via `<script type="module">`; `dashboard.js` is a thin orchestrator (fetch + KPI + wiring) that imports from `assets/modules/` (`i18n.js`, `utils.js`, `constants.js`) and `assets/modules/render/` (`standings`, `driver`, `duel`, `teammates`, `calendar`, `circuit`, `history`, `embed`). Adding `.js` modules needs no pipeline change — `sync_to_docs.py` copies all of `web/` recursively. Key conventions:
 
-- **i18n**: FR/EN via `assets/i18n.json` + `t(key, vars)`; language persisted in `localStorage("bf1-lang")`; switching reloads the page and restores the active tab/embedded viz through `sessionStorage` (restore block runs at the END of the IIFE — order matters).
+- **i18n**: FR/EN via `assets/i18n.json` + `t(key, vars)` (in `modules/i18n.js`); language persisted in `localStorage("bf1-lang")`; switching reloads the page and restores the active tab/embedded viz through `sessionStorage` (restore block runs at the END of the orchestrator IIFE — order matters).
+- **Data loading**: `modules/utils.js` exposes `fetchJson(url, {required, fallback})` — required resources (dashboard/teams/manifest) show an error banner on failure, optional ones degrade. Heavy JSON is **lazy-loaded** on first tab activation: `circuits_2026.json` + `gp_history.json` (Calendar tab), `qualifying_2026.json` (Teammates tab).
 - **Tabs** (Pilotes / Constructeurs / Calendrier / Duel / Coéquipiers) are panes in one card; drill-downs (driver, circuit) are inline `<li>`/`<tr>` panels injected after the clicked row.
 - **Embedded viz**: Race Line and Heatmap load in an iframe with `?embed=1&lang=xx`; both viz pages support an embed mode that hides their chrome.
-- **Team colors**: current teams from `assets/teams.json` (keyed by display name); historic teams from `HISTORY_TEAM_COLORS` in dashboard.js (keyed by Ergast `teamId`, because display names differ, e.g. "Red Bull" vs "Red Bull Racing").
-- **GP_TO_CIRCUIT** map in dashboard.js links calendar GP names to `gp_history.json` keys (Ergast circuitId) — extend it when adding a circuit's history.
+- **Team colors**: current teams from `assets/teams.json` (keyed by display name); historic teams from `HISTORY_TEAM_COLORS` in `modules/constants.js` (keyed by Ergast `teamId`, because display names differ, e.g. "Red Bull" vs "Red Bull Racing").
+- **GP_TO_CIRCUIT** map in `modules/constants.js` links calendar GP names to `gp_history.json` keys (Ergast circuitId) — extend it when adding a circuit's history.
 - All charts are inline SVG built by string templates — no D3 on the dashboard (D3 only in `season_summary_heatmap/d3_dataviz/`).
+- **Tests**: `projects/dashboard/tests/` (pytest unit) + `tests/e2e/` (pytest-playwright, marker `e2e`). Run `pytest -m "not e2e"` for unit, `pytest -m e2e --no-cov` for browser. See `projects/dashboard/README.md`.
 
 ## Known traps
 
