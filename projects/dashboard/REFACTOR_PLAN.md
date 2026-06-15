@@ -75,9 +75,9 @@ Découpage sous `web/assets/` : `dashboard.js` (orchestrateur, 1294 → ~190 lig
 - [x] `loading="lazy"` déjà présent sur toutes les images (vérifié)
 - [x] Minification : **écartée** — gain marginal vs réintroduction d'un build step (contraire à la contrainte no-build / refresh auto)
 
-### Étape 7 — Documentation
-- [ ] `projects/dashboard/README.md` (refresh après GP, ajout circuit, archi web/↔docs/, lancer les tests)
-- [ ] Mettre à jour `PLAN.md` (tâches transverses) et `CLAUDE.md` (structure modules ES6)
+### Étape 7 — Documentation ✅
+- [x] `projects/dashboard/README.md` (refresh après GP, ajout circuit, archi web/↔docs/, lancer les tests)
+- [x] `PLAN.md` (tâches transverses cochées) et `CLAUDE.md` (structure modules ES6, fetchJson, lazy-load, tests) mis à jour
 
 ### Étape 8 — Clôture
 - [ ] `pytest` complet vert + `ruff check .` + `black --check .`

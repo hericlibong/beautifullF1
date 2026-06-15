@@ -229,10 +229,14 @@ Ajoute, dans le drill-down circuit, une zone **"Histoire"** = scatter inline (r�
 ## Tâches transverses (à faire au fur et à mesure)
 
 - [ ] Tests d'accessibilité sur la page dashboard (clavier, ARIA, contrastes)
-- [ ] Responsive mobile (breakpoints 600px et 900px)
-- [ ] Performance : lazy-load des widgets sous le pli
-- [ ] README dashboard expliquant comment refresh la donnée après un GP
-- [ ] Commit régulier après chaque sous-tâche cochée
+- [x] Responsive mobile (breakpoints 600px et 900px) — voir REFACTOR_PLAN.md étape 4
+- [x] Performance : chargement à la demande des données lourdes (−63 % au load initial) — REFACTOR_PLAN.md étape 6
+- [x] README dashboard (refresh après GP, ajout circuit, archi, tests) — voir README.md
+- [x] Refacto front en modules ES6 + tests unitaires & E2E — voir REFACTOR_PLAN.md
+
+> Chantier de fond (juin 2026) : nettoyage + refactorisation tracés dans
+> [`REFACTOR_PLAN.md`](REFACTOR_PLAN.md) (tests, modules ES6, responsive,
+> gestion d'erreur, performance, doc).
 
 ---
 
