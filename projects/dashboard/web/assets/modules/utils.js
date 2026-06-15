@@ -1,6 +1,49 @@
-/* Beautiful F1 — Dashboard : utilitaires de formatage. */
+/* Beautiful F1 — Dashboard : utilitaires de formatage + chargement de données. */
 
 import { t, LANG } from "./i18n.js";
+
+// Messages d'erreur bilingues codés en dur : la bannière peut s'afficher AVANT
+// que i18n.json soit chargé (échec d'une ressource requise), donc on n'utilise pas t().
+const ERROR_TEXT = {
+  fr: "Certaines données n'ont pas pu être chargées. Réessayez plus tard.",
+  en: "Some data could not be loaded. Please try again later.",
+};
+
+// Affiche une bannière d'erreur persistante en haut de page (idempotente).
+export function showErrorBanner(message) {
+  const text = message || ERROR_TEXT[LANG] || ERROR_TEXT.fr;
+  let banner = document.getElementById("dash-error-banner");
+  if (!banner) {
+    banner = document.createElement("div");
+    banner.id = "dash-error-banner";
+    banner.className = "dash-error-banner";
+    banner.setAttribute("role", "alert");
+    document.body.insertBefore(banner, document.body.firstChild);
+  }
+  banner.textContent = text;
+}
+
+/**
+ * Charge un JSON avec gestion d'erreur explicite.
+ * @param {string} url
+ * @param {{required?: boolean, fallback?: any}} opts
+ *   - required: si le chargement échoue, affiche la bannière et propage l'erreur.
+ *   - fallback: valeur retournée si l'échec est toléré (ressource optionnelle).
+ */
+export async function fetchJson(url, { required = false, fallback = null } = {}) {
+  try {
+    const r = await fetch(url);
+    if (!r.ok) throw new Error(`HTTP ${r.status}`);
+    return await r.json();
+  } catch (e) {
+    console.error(`[dashboard] échec de chargement de ${url} :`, e);
+    if (required) {
+      showErrorBanner();
+      throw e;
+    }
+    return fallback;
+  }
+}
 
 export function shortName(full) {
   const parts = (full || "").trim().split(/\s+/);

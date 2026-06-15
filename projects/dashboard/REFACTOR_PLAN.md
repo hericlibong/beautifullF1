@@ -62,11 +62,11 @@ Découpage sous `web/assets/` : `dashboard.js` (orchestrateur, 1294 → ~190 lig
 - [x] Breakpoints 600/900px complétés
 - [x] `test_responsive.py` vert (6/6) — suite E2E complète 14/14
 
-### Étape 5 — Gestion d'erreur visible
-- [ ] `fetchJson(url, {required})` dans `utils.js` (bannière UI si ressource requise manquante)
-- [ ] Remplacer les `.catch(() => null)` épars
-- [ ] État "données indisponibles" explicite par widget
-- [ ] Test E2E : ressource manquante → bannière visible
+### Étape 5 — Gestion d'erreur visible ✅
+- [x] `fetchJson(url, {required, fallback})` + `showErrorBanner()` dans `utils.js` (message bilingue indépendant de l'i18n)
+- [x] `Promise.all` de l'orchestrateur réécrit avec `fetchJson` (requis vs optionnel), `.catch(() => null)` supprimés
+- [x] Dégradation propre par widget (teammates "indisponible" déjà géré, circuits/duel non bloquants)
+- [x] Tests E2E : ressource requise manquante → bannière ; ressource optionnelle → dégradation sans bannière
 
 ### Étape 6 — Performance
 - [ ] Baseline Lighthouse (desktop + mobile), consignée ici

@@ -6,7 +6,7 @@
  */
 
 import { setI18n, t, LANG, applyStaticI18n, setupLangSwitcher } from "./modules/i18n.js";
-import { shortName, formatDate, formatCountdown } from "./modules/utils.js";
+import { shortName, formatDate, formatCountdown, fetchJson } from "./modules/utils.js";
 import { initStandings } from "./modules/render/standings.js";
 import { initDuel } from "./modules/render/duel.js";
 import { initTeammates } from "./modules/render/teammates.js";
@@ -14,23 +14,17 @@ import { initCalendar, scrollCalendarToNext } from "./modules/render/calendar.js
 import { initEmbed } from "./modules/render/embed.js";
 
 (async function () {
+  // Ressources requises : leur échec affiche une bannière et interrompt le rendu.
+  // Ressources optionnelles : dégradation propre (widget marqué indisponible).
   const [dashRes, teamsRes, manifestRes, qualiRes, circuitsRes, i18nRes, historyRes] =
     await Promise.all([
-      fetch("data/dashboard_2026.json").then((r) => r.json()),
-      fetch("assets/teams.json").then((r) => r.json()),
-      fetch("assets/manifest.json").then((r) => r.json()),
-      fetch("data/qualifying_2026.json")
-        .then((r) => (r.ok ? r.json() : null))
-        .catch(() => null),
-      fetch("data/circuits_2026.json")
-        .then((r) => (r.ok ? r.json() : null))
-        .catch(() => null),
-      fetch("assets/i18n.json")
-        .then((r) => r.json())
-        .catch(() => ({})),
-      fetch("data/gp_history.json")
-        .then((r) => (r.ok ? r.json() : null))
-        .catch(() => null),
+      fetchJson("data/dashboard_2026.json", { required: true }),
+      fetchJson("assets/teams.json", { required: true }),
+      fetchJson("assets/manifest.json", { required: true }),
+      fetchJson("data/qualifying_2026.json"),
+      fetchJson("data/circuits_2026.json"),
+      fetchJson("assets/i18n.json", { fallback: {} }),
+      fetchJson("data/gp_history.json"),
     ]);
 
   setI18n(i18nRes);
