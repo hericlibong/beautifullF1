@@ -79,10 +79,11 @@ Découpage sous `web/assets/` : `dashboard.js` (orchestrateur, 1294 → ~190 lig
 - [x] `projects/dashboard/README.md` (refresh après GP, ajout circuit, archi web/↔docs/, lancer les tests)
 - [x] `PLAN.md` (tâches transverses cochées) et `CLAUDE.md` (structure modules ES6, fetchJson, lazy-load, tests) mis à jour
 
-### Étape 8 — Clôture
-- [ ] `pytest` complet vert + `ruff check .` + `black --check .`
-- [ ] `build_all.py --skip-fetch` OK (propagation intacte)
-- [ ] Toutes les cases cochées
+### Étape 8 — Clôture ✅
+- [x] `pytest` complet vert (26 unitaires + 16 E2E) + `ruff check .` + `black --check .`
+- [x] `build_all.py --skip-fetch` OK, zéro dérive de données (propagation intacte)
+- [x] Nettoyage annexe : variable morte + format dans `build_gp_history.py`
+- [x] Toutes les cases cochées
 - [ ] Merge `refactor/dashboard-cleanup` → `main`
 
 ---

@@ -43,13 +43,33 @@ CACHE_DIR = HERE / ".cache"
 
 # Nationalité (Ergast, anglais) -> emoji drapeau
 NAT_FLAG = {
-    "British": "🇬🇧", "German": "🇩🇪", "French": "🇫🇷", "Italian": "🇮🇹",
-    "Spanish": "🇪🇸", "Finnish": "🇫🇮", "Brazilian": "🇧🇷", "Dutch": "🇳🇱",
-    "Austrian": "🇦🇹", "Australian": "🇦🇺", "Canadian": "🇨🇦", "Mexican": "🇲🇽",
-    "American": "🇺🇸", "Belgian": "🇧🇪", "Swedish": "🇸🇪", "Swiss": "🇨🇭",
-    "Argentine": "🇦🇷", "Colombian": "🇨🇴", "Japanese": "🇯🇵", "Monegasque": "🇲🇨",
-    "Polish": "🇵🇱", "Danish": "🇩🇰", "Russian": "🇷🇺", "Thai": "🇹🇭",
-    "New Zealander": "🇳🇿", "Portuguese": "🇵🇹", "Irish": "🇮🇪",
+    "British": "🇬🇧",
+    "German": "🇩🇪",
+    "French": "🇫🇷",
+    "Italian": "🇮🇹",
+    "Spanish": "🇪🇸",
+    "Finnish": "🇫🇮",
+    "Brazilian": "🇧🇷",
+    "Dutch": "🇳🇱",
+    "Austrian": "🇦🇹",
+    "Australian": "🇦🇺",
+    "Canadian": "🇨🇦",
+    "Mexican": "🇲🇽",
+    "American": "🇺🇸",
+    "Belgian": "🇧🇪",
+    "Swedish": "🇸🇪",
+    "Swiss": "🇨🇭",
+    "Argentine": "🇦🇷",
+    "Colombian": "🇨🇴",
+    "Japanese": "🇯🇵",
+    "Monegasque": "🇲🇨",
+    "Polish": "🇵🇱",
+    "Danish": "🇩🇰",
+    "Russian": "🇷🇺",
+    "Thai": "🇹🇭",
+    "New Zealander": "🇳🇿",
+    "Portuguese": "🇵🇹",
+    "Irish": "🇮🇪",
 }
 
 
@@ -123,7 +143,6 @@ def build_circuit(circuit: str, year_from: int, year_to: int, label: str) -> dic
         year = int(race["season"])
         if year < year_from or year > year_to:
             continue
-        circuit_name = race["Circuit"]["circuitName"]
 
         # podium complet (P1-P3) pour cette édition
         time.sleep(0.6)
@@ -135,7 +154,9 @@ def build_circuit(circuit: str, year_from: int, year_to: int, label: str) -> dic
         # poleman : qualifs si dispo (1994+), sinon grille==1
         poleman, pole_time = None, None
         time.sleep(0.6)
-        ql = _get(f"{ERGAST}/{year}/circuits/{circuit}/qualifying.json?limit=1")["RaceTable"]["Races"]
+        ql = _get(f"{ERGAST}/{year}/circuits/{circuit}/qualifying.json?limit=1")["RaceTable"][
+            "Races"
+        ]
         if ql and ql[0].get("QualifyingResults"):
             q = ql[0]["QualifyingResults"][0]
             poleman = f"{q['Driver']['givenName']} {q['Driver']['familyName']}"
@@ -155,23 +176,27 @@ def build_circuit(circuit: str, year_from: int, year_to: int, label: str) -> dic
         champion = champ_cache.get(year)
 
         nat = win["Driver"]["nationality"]
-        editions.append({
-            "year": year,
-            "winner": f"{win['Driver']['givenName']} {win['Driver']['familyName']}",
-            "flag": NAT_FLAG.get(nat, ""),
-            "nationality": nat,
-            "team": win["Constructor"]["name"],
-            "teamId": win["Constructor"]["constructorId"],
-            "engine": engine_for(emap, year, win["Constructor"]["constructorId"]),
-            "grid": int(win["grid"]) if win["grid"].isdigit() else None,
-            "raceTime": (win.get("Time") or {}).get("time"),
-            "poleman": poleman,
-            "poleTime": pole_time,
-            "podium": podium,
-            "champion": champion,
-            "photo": driver_photo(win["Driver"]["url"], photo_cache),
-        })
-        print(f"    {year}  {editions[-1]['winner']:<22} {editions[-1]['team']:<14} {editions[-1]['engine']}")
+        editions.append(
+            {
+                "year": year,
+                "winner": f"{win['Driver']['givenName']} {win['Driver']['familyName']}",
+                "flag": NAT_FLAG.get(nat, ""),
+                "nationality": nat,
+                "team": win["Constructor"]["name"],
+                "teamId": win["Constructor"]["constructorId"],
+                "engine": engine_for(emap, year, win["Constructor"]["constructorId"]),
+                "grid": int(win["grid"]) if win["grid"].isdigit() else None,
+                "raceTime": (win.get("Time") or {}).get("time"),
+                "poleman": poleman,
+                "poleTime": pole_time,
+                "podium": podium,
+                "champion": champion,
+                "photo": driver_photo(win["Driver"]["url"], photo_cache),
+            }
+        )
+        print(
+            f"    {year}  {editions[-1]['winner']:<22} {editions[-1]['team']:<14} {editions[-1]['engine']}"
+        )
 
     editions.sort(key=lambda e: e["year"])
 
