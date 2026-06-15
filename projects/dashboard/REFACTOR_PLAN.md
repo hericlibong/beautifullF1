@@ -84,7 +84,7 @@ Découpage sous `web/assets/` : `dashboard.js` (orchestrateur, 1294 → ~190 lig
 - [x] `build_all.py --skip-fetch` OK, zéro dérive de données (propagation intacte)
 - [x] Nettoyage annexe : variable morte + format dans `build_gp_history.py`
 - [x] Toutes les cases cochées
-- [ ] Merge `refactor/dashboard-cleanup` → `main`
+- [x] Merge `refactor/dashboard-cleanup` → `main`
 
 ---
 
