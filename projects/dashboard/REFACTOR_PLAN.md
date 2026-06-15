@@ -31,21 +31,22 @@ Le dashboard 2026 est fonctionnellement abouti mais une évaluation a révélé 
 - [x] Créer ce `REFACTOR_PLAN.md`
 - [ ] Capturer un état de référence avant refacto (screenshots desktop + mobile des 5 onglets + drill-downs)
 
-### Étape 1 — Filet de sécurité Python (tests unitaires d'abord)
-- [ ] Étendre `tests/test_build.py` → `compute_standings`, `compute_kpis`, calendrier, collision "Spain" (round 7 vs 14)
-- [ ] `tests/test_qualifying.py` — structure `qualifying_2026.json`
-- [ ] `tests/test_gp_history.py` — schéma `gp_history.json`
-- [ ] `tests/test_sync.py` — `sync_to_docs.py` copie tout `web/` (modules `.js` inclus) vers `docs/`
-- [ ] `pytest projects/dashboard/tests -q` vert, couverture en hausse
+### Étape 1 — Filet de sécurité Python (tests unitaires d'abord) ✅
+- [x] Étendre `tests/test_build.py` → `compute_standings`, `compute_kpis`, calendrier, collision "Spain" (round 7 vs 14)
+- [x] `tests/test_qualifying.py` — `format_lap`, `build_teammate_pairs` (logique duels)
+- [x] `tests/test_gp_history.py` — `engine_for`, `merge_write` (read-merge-write par circuit)
+- [x] `tests/test_sync.py` — `sync_to_docs.py` copie tout `web/` (modules `.js` inclus) vers `docs/`
+- [x] `pytest projects/dashboard/tests -q` vert (3 → 26 tests)
 
-### Étape 2 — Refacto `dashboard.js` en modules ES6 (PRIORITÉ)
-Découpage cible sous `web/assets/` : `dashboard.js` (orchestrateur) + `modules/{i18n,utils,constants}.js` + `modules/render/{standings,driver,duel,teammates,circuit,history,calendar,embed}.js`.
-- [ ] Extraire `i18n.js`, `utils.js`, `constants.js` (briques de base) + `export`
-- [ ] Extraire chaque `render/*` avec `import` explicite des dépendances
-- [ ] Réduire `dashboard.js` à l'orchestrateur (fetch + câblage + restauration d'état)
-- [ ] `index.html` → `<script type="module" src="assets/dashboard.js">`
-- [ ] `sync_to_docs.py` puis vérifier que tous les modules arrivent dans `docs/`
-- [ ] Vérif manuelle : 5 onglets, 2 drill-downs, switch FR/EN, embed viz, countdown identiques
+### Étape 2 — Refacto `dashboard.js` en modules ES6 (PRIORITÉ) ✅
+Découpage sous `web/assets/` : `dashboard.js` (orchestrateur, 1294 → ~190 lignes) + `modules/{i18n,utils,constants}.js` + `modules/render/{standings,driver,duel,teammates,circuit,history,calendar,embed}.js`.
+- [x] Extraire `i18n.js`, `utils.js`, `constants.js` (briques de base) + `export`
+- [x] Extraire chaque `render/*` avec `import` explicite des dépendances
+- [x] Réduire `dashboard.js` à l'orchestrateur (fetch + câblage + restauration d'état)
+- [x] `index.html` → `<script type="module" src="assets/dashboard.js">`
+- [x] `sync_to_docs.py` puis vérifier que tous les modules arrivent dans `docs/`
+- [x] Vérif iso-fonctionnelle via E2E navigateur (8/8 verts) : onglets, drill-downs, FR/EN, embed
+- [x] Nettoyage : variables mortes supprimées (`avg/scored/ties` dans le duel)
 
 ### Étape 3 — Tests E2E (pytest-playwright)
 - [ ] `pytest-playwright` dans `requirements.txt` (+ note `playwright install chromium`)
