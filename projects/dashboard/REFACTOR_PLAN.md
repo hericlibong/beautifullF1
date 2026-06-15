@@ -48,12 +48,13 @@ Découpage sous `web/assets/` : `dashboard.js` (orchestrateur, 1294 → ~190 lig
 - [x] Vérif iso-fonctionnelle via E2E navigateur (8/8 verts) : onglets, drill-downs, FR/EN, embed
 - [x] Nettoyage : variables mortes supprimées (`avg/scored/ties` dans le duel)
 
-### Étape 3 — Tests E2E (pytest-playwright)
-- [ ] `pytest-playwright` dans `requirements.txt` (+ note `playwright install chromium`)
-- [ ] `tests/e2e/conftest.py` — fixture serveur `http.server` + page Playwright
-- [ ] `tests/e2e/test_dashboard.py` — KPI, 5 onglets, drill-down pilote/circuit, FR/EN, embed
-- [ ] `tests/e2e/test_responsive.py` — pas de débordement à 375/768/1024 px
-- [ ] Câbler l'E2E au CI (`python-app.yml`), **pas** dans `refresh-after-gp.yml`
+### Étape 3 — Tests E2E (pytest-playwright) ✅
+- [x] `pytest-playwright` (+ deps) dans `requirements.txt`
+- [x] `tests/e2e/conftest.py` — fixture serveur `http.server` sur `docs/` + page Playwright
+- [x] `tests/e2e/test_dashboard.py` — KPI, 5 onglets, drill-down pilote/circuit+histoire, FR/EN, embed (8/8 verts)
+- [x] Marqueur `e2e` déclaré dans `pyproject.toml`
+- [x] Câbler au CI `python-app.yml` : pytest réactivé (unitaires + E2E avec `playwright install`), **pas** dans `refresh-after-gp.yml`
+- [→] `tests/e2e/test_responsive.py` — écrit, livré avec l'étape 4 (pilote les correctifs CSS)
 
 ### Étape 4 — Responsive
 - [ ] Audit à 375/768/1024 px de chaque onglet + drill-down
