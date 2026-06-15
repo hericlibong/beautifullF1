@@ -1346,3 +1346,21 @@ a { color: inherit; text-decoration: none; }
   .dash-grid--kpi { grid-template-columns: repeat(2, 1fr); }
   .dash-kpi-value { font-size: var(--fs-xl); }
 }
+
+/* ---------- Responsive : anti-débordement horizontal (cartes / onglets / tableaux) ---------- */
+@media (max-width: 900px) {
+  /* Sans min-width:0, un item de grille s'élargit à la taille intrinsèque de son
+     contenu (tableau, barre d'onglets) et déborde la piste 1fr → débordement page. */
+  .dash-main-grid > *,
+  .dash-card { min-width: 0; }
+  /* Barre d'onglets : passage à la ligne plutôt que débordement horizontal. */
+  .dash-tabs { flex-wrap: wrap; }
+}
+
+@media (max-width: 600px) {
+  /* Contenu intrinsèquement large (classements, duel, coéquipiers) : scroll interne
+     au panneau, jamais à la page. Garantit document.scrollWidth <= clientWidth. */
+  .dash-tab-pane { overflow-x: auto; }
+  /* Sélecteurs du duel : empilage si l'espace manque. */
+  .dash-duel-pickers { flex-wrap: wrap; }
+}

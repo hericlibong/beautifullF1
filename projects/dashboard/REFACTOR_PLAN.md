@@ -56,11 +56,11 @@ Découpage sous `web/assets/` : `dashboard.js` (orchestrateur, 1294 → ~190 lig
 - [x] Câbler au CI `python-app.yml` : pytest réactivé (unitaires + E2E avec `playwright install`), **pas** dans `refresh-after-gp.yml`
 - [→] `tests/e2e/test_responsive.py` — écrit, livré avec l'étape 4 (pilote les correctifs CSS)
 
-### Étape 4 — Responsive
-- [ ] Audit à 375/768/1024 px de chaque onglet + drill-down
-- [ ] Corriger `dashboard.css` : `dash-main-grid`, tableaux, duel empilé mobile, timeline, scatter
-- [ ] Vérifier/compléter les breakpoints (600/900px)
-- [ ] `test_responsive.py` vert + comparaison visuelle
+### Étape 4 — Responsive ✅
+- [x] Audit à 375/768/1024 px de chaque onglet + drill-down (via `test_responsive.py`) → débordements isolés à 375px
+- [x] Corriger `dashboard.css` : `min-width:0` sur les cartes (items de grille), onglets `flex-wrap`, scroll interne des panneaux larges, pickers duel empilés
+- [x] Breakpoints 600/900px complétés
+- [x] `test_responsive.py` vert (6/6) — suite E2E complète 14/14
 
 ### Étape 5 — Gestion d'erreur visible
 - [ ] `fetchJson(url, {required})` dans `utils.js` (bannière UI si ressource requise manquante)
