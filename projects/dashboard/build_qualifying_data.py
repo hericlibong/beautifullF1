@@ -120,6 +120,27 @@ def load_calendar() -> dict:
     return json.loads(CALENDAR_PATH.read_text(encoding="utf-8"))
 
 
+def load_previous_sessions() -> dict[tuple[int, str], dict]:
+    """Retourne les sessions du fichier existant, indexées par (round, type).
+
+    Sert de fallback : si un chargement FastF1 échoue au run courant mais
+    qu'on avait déjà la session, on la préserve au lieu d'écraser avec du vide.
+    """
+    if not OUT_WEB.exists():
+        return {}
+    try:
+        prev = json.loads(OUT_WEB.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    out: dict[tuple[int, str], dict] = {}
+    for s in prev.get("sessions", []):
+        try:
+            out[(int(s["round"]), s["type"])] = s
+        except (KeyError, TypeError, ValueError):
+            continue
+    return out
+
+
 def load_played_gp_names() -> list[str]:
     """Liste des GP déjà courus, lue depuis le CSV race_chart (col names hors meta)."""
     META = {"Pilote", "image", "team", "start"}
@@ -216,36 +237,46 @@ def main() -> int:
     rounds_in_scope = [r for r in cal["rounds"] if r["name"] in played]
     print(f"[INFO] {len(rounds_in_scope)} GP joués détectés")
 
-    sessions_data = []
+    previous_sessions = load_previous_sessions()
+
+    def append_or_fallback(sessions_data: list, meta: dict, drivers: list | None) -> None:
+        """Ajoute la session ou, si le chargement a échoué, réutilise la précédente."""
+        stype = meta["type"]
+        rnd = meta["round"]
+        if drivers is not None:
+            sessions_data.append({**meta, "drivers": drivers})
+            return
+        fallback = previous_sessions.get((rnd, stype))
+        if fallback is not None:
+            print(
+                f"  [FALLBACK {meta['shortName']} {stype}] chargement échoué — "
+                f"préservation de la session précédente",
+                file=sys.stderr,
+            )
+            sessions_data.append(fallback)
+        else:
+            print(
+                f"  [MISS {meta['shortName']} {stype}] chargement échoué et aucune donnée antérieure",
+                file=sys.stderr,
+            )
+
+    sessions_data: list[dict] = []
     for r in rounds_in_scope:
         is_sprint = bool(r.get("isSprint", False))
+        meta_q = {
+            "round": r["round"],
+            "gp": r["name"],
+            "shortName": r["shortName"],
+            "type": "Q",
+        }
         # Session principale : Qualifying
         print(f"  - {r['shortName']} (Q)")
-        drivers_q = load_round_session(SEASON, r["name"], "Q")
-        if drivers_q is not None:
-            sessions_data.append(
-                {
-                    "round": r["round"],
-                    "gp": r["name"],
-                    "shortName": r["shortName"],
-                    "type": "Q",
-                    "drivers": drivers_q,
-                }
-            )
+        append_or_fallback(sessions_data, meta_q, load_round_session(SEASON, r["name"], "Q"))
         # Sprint Qualifying (uniquement week-ends sprint)
         if is_sprint:
+            meta_sq = {**meta_q, "type": "SQ"}
             print(f"  - {r['shortName']} (SQ)")
-            drivers_sq = load_round_session(SEASON, r["name"], "SQ")
-            if drivers_sq is not None:
-                sessions_data.append(
-                    {
-                        "round": r["round"],
-                        "gp": r["name"],
-                        "shortName": r["shortName"],
-                        "type": "SQ",
-                        "drivers": drivers_sq,
-                    }
-                )
+            append_or_fallback(sessions_data, meta_sq, load_round_session(SEASON, r["name"], "SQ"))
 
     teammates = build_teammate_pairs(sessions_data)
 
