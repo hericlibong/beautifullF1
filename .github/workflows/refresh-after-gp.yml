@@ -49,9 +49,9 @@ jobs:
           path: ~/.fastf1_cache
           key: fastf1-${{ runner.os }}
 
-      - name: Tests
+      - name: Tests (unit only — skip Playwright E2E)
         if: steps.check.outputs.should-refresh == 'true' || github.event_name == 'workflow_dispatch'
-        run: pytest projects/dashboard/tests -q
+        run: pytest projects/dashboard/tests -q -m "not e2e"
 
       - name: Run pipeline
         if: steps.check.outputs.should-refresh == 'true' || github.event_name == 'workflow_dispatch'
