@@ -4,7 +4,7 @@ name: Refresh data after GP
 #   - Cron lundi 14h UTC (race F1 = dimanche, FastF1 a propagé les résultats)
 #   - Cron mardi 14h UTC (filet de sécurité si FastF1 avait du retard lundi)
 #   - workflow_dispatch (bouton "Run workflow" dans l'onglet Actions)
-on:
+"on":
   schedule:
     - cron: "0 14 * * 1"
     - cron: "0 14 * * 2"
