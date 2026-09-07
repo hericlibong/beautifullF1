@@ -67,18 +67,26 @@ def best_time_for_driver(row: pd.Series) -> tuple[float | None, bool]:
     return best, q3 is not None
 
 
-def load_round_session(year: int, gp_name: str, session_code: str) -> list[dict] | None:
+def load_round_session(
+    year: int, round_no: int, session_code: str, label: str = ""
+) -> list[dict] | None:
     """Charge une session ('Q' ou 'SQ') et retourne la liste pilotes avec leur temps de référence.
+
+    Le GP est désigné par son NUMÉRO DE ROUND, jamais par son nom : FastF1 fait
+    un fuzzy match sur les noms, et "Spain" y désigne le Spanish Grand Prix,
+    c'est-à-dire Madrid (round 14) — pas Barcelone (round 7). Passer le nom
+    ramenait donc les qualifs du mauvais GP espagnol.
 
     Pour SQ, Ergast n'a pas les données : on utilise le meilleur tour de chaque pilote
     via session.laps (donc on charge les laps dans ce cas-là).
     """
+    label = label or f"round {round_no}"
     needs_laps = session_code == "SQ"
     try:
-        session = fastf1.get_session(year, gp_name, session_code)
+        session = fastf1.get_session(year, round_no, session_code)
         session.load(laps=needs_laps, telemetry=False, weather=False, messages=False)
     except Exception as e:
-        print(f"  [SKIP {gp_name} {session_code}] impossible de charger : {e}", file=sys.stderr)
+        print(f"  [SKIP {label} {session_code}] impossible de charger : {e}", file=sys.stderr)
         return None
 
     results = session.results
@@ -271,12 +279,16 @@ def main() -> int:
         }
         # Session principale : Qualifying
         print(f"  - {r['shortName']} (Q)")
-        append_or_fallback(sessions_data, meta_q, load_round_session(SEASON, r["name"], "Q"))
+        append_or_fallback(
+            sessions_data, meta_q, load_round_session(SEASON, r["round"], "Q", r["shortName"])
+        )
         # Sprint Qualifying (uniquement week-ends sprint)
         if is_sprint:
             meta_sq = {**meta_q, "type": "SQ"}
             print(f"  - {r['shortName']} (SQ)")
-            append_or_fallback(sessions_data, meta_sq, load_round_session(SEASON, r["name"], "SQ"))
+            append_or_fallback(
+                sessions_data, meta_sq, load_round_session(SEASON, r["round"], "SQ", r["shortName"])
+            )
 
     teammates = build_teammate_pairs(sessions_data)
 

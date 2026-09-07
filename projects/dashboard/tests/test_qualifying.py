@@ -118,3 +118,31 @@ def test_build_teammate_pairs_sprint_quali_no_q3() -> None:
     assert team["q3Count"] == {}
     assert team["sessions"][0]["type"] == "SQ"
     assert team["h2h"]["SQ"]["George Russell"] == 1
+
+
+# ---------- désignation de la session (non-régression "Spain") ----------
+
+
+def test_load_round_session_asks_fastf1_by_round_number(monkeypatch) -> None:
+    """La session doit être demandée par numéro de round, pas par nom de GP.
+
+    FastF1 fuzzy-matche les noms : "Spain" y désigne le Spanish Grand Prix,
+    donc Madrid (round 14), et ramenait les qualifs de Madrid sous Barcelone.
+    """
+    captured: dict = {}
+
+    class _FakeSession:
+        results = None
+
+        def load(self, **kwargs):
+            return None
+
+    def fake_get_session(year, gp, code):
+        captured["gp"] = gp
+        return _FakeSession()
+
+    monkeypatch.setattr(bq.fastf1, "get_session", fake_get_session)
+    bq.load_round_session(2026, 7, "Q", "Barcelona")
+
+    assert captured["gp"] == 7
+    assert isinstance(captured["gp"], int)
