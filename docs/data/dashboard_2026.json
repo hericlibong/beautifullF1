@@ -35,7 +35,7 @@
       "gp": "Italy - Monza"
     },
     "raceCount": 13,
-    "totalRaces": 22
+    "totalRaces": 23
   },
   "standings": {
     "drivers": [
@@ -2380,6 +2380,15 @@
     },
     {
       "round": 16,
+      "name": "Bahrain",
+      "shortName": "Sepang",
+      "date": "2026-10-04",
+      "isSprint": false,
+      "status": "upcoming",
+      "winner": null
+    },
+    {
+      "round": 17,
       "name": "Singapore",
       "shortName": "Singapore",
       "date": "2026-10-11",
@@ -2388,7 +2397,7 @@
       "winner": null
     },
     {
-      "round": 17,
+      "round": 18,
       "name": "United States - Austin",
       "shortName": "Austin",
       "date": "2026-10-25",
@@ -2397,7 +2406,7 @@
       "winner": null
     },
     {
-      "round": 18,
+      "round": 19,
       "name": "Mexico",
       "shortName": "Mexico",
       "date": "2026-11-01",
@@ -2406,7 +2415,7 @@
       "winner": null
     },
     {
-      "round": 19,
+      "round": 20,
       "name": "Brazil",
       "shortName": "Interlagos",
       "date": "2026-11-08",
@@ -2415,7 +2424,7 @@
       "winner": null
     },
     {
-      "round": 20,
+      "round": 21,
       "name": "United States - Las Vegas",
       "shortName": "Las Vegas",
       "date": "2026-11-21",
@@ -2424,7 +2433,7 @@
       "winner": null
     },
     {
-      "round": 21,
+      "round": 22,
       "name": "Qatar",
       "shortName": "Lusail",
       "date": "2026-11-29",
@@ -2433,7 +2442,7 @@
       "winner": null
     },
     {
-      "round": 22,
+      "round": 23,
       "name": "United Arab Emirates",
       "shortName": "Yas Marina",
       "date": "2026-12-06",

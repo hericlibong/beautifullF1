@@ -1,6 +1,6 @@
 {
   "season": 2026,
-  "totalRaces": 22,
+  "totalRaces": 23,
   "rounds": [
     {
       "round": 1,
@@ -98,8 +98,7 @@
       "name": "Spain - Madrid",
       "shortName": "Madrid",
       "date": "2026-09-13",
-      "isSprint": false,
-      "fastf1Name": null
+      "isSprint": false
     },
     {
       "round": 15,
@@ -110,48 +109,55 @@
     },
     {
       "round": 16,
+      "name": "Bahrain",
+      "shortName": "Sepang",
+      "date": "2026-10-04",
+      "isSprint": false
+    },
+    {
+      "round": 17,
       "name": "Singapore",
       "shortName": "Singapore",
       "date": "2026-10-11",
       "isSprint": true
     },
     {
-      "round": 17,
+      "round": 18,
       "name": "United States - Austin",
       "shortName": "Austin",
       "date": "2026-10-25",
       "isSprint": false
     },
     {
-      "round": 18,
+      "round": 19,
       "name": "Mexico",
       "shortName": "Mexico",
       "date": "2026-11-01",
       "isSprint": false
     },
     {
-      "round": 19,
+      "round": 20,
       "name": "Brazil",
       "shortName": "Interlagos",
       "date": "2026-11-08",
       "isSprint": false
     },
     {
-      "round": 20,
+      "round": 21,
       "name": "United States - Las Vegas",
       "shortName": "Las Vegas",
       "date": "2026-11-21",
       "isSprint": false
     },
     {
-      "round": 21,
+      "round": 22,
       "name": "Qatar",
       "shortName": "Lusail",
       "date": "2026-11-29",
       "isSprint": false
     },
     {
-      "round": 22,
+      "round": 23,
       "name": "United Arab Emirates",
       "shortName": "Yas Marina",
       "date": "2026-12-06",
