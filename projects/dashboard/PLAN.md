@@ -242,7 +242,7 @@ Ajoute, dans le drill-down circuit, une zone **"Histoire"** = scatter inline (r�
 
 ## Bugs / dettes connus
 
-- [x] **Collision "Spain"** — partiellement réglé côté calendrier/dashboard/circuits : round 7 = Barcelona (name "Spain"), round 14 = Madrid (name "Spain - Madrid", fiche vide). ⚠️ Reste à traiter dans `race_chart_builder._col_name` ET `season_summary_heatmap` avant que Madrid soit couru (round 14, sept. 2026), sinon les deux GP partageront la même colonne CSV.
+- [x] **Collision "Spain"** — **entièrement réglé** (07/09/2026, avant Madrid). Le nommage des GP vit désormais dans **`projects/gp_naming.py`**, source unique de vérité partagée par `race_chart_builder_fastf1.py` et `fetch_calendar.py` : `col_name()` suffixe par la localité pour les pays à plusieurs GP (`MULTI_GP_COUNTRIES` = USA, Italy, Spain), avec `COUNTRY_ONLY` pour les GP déjà publiés sous le seul nom du pays. Round 7 = Barcelone → `"Spain"` (inchangé, colonne CSV et clés front préservées), round 14 = Madrid → `"Spain - Madrid"`. `check_unique()` fait échouer le build au lieu d'écraser une colonne si un pays accueille un GP supplémentaire non déclaré. Côté heatmap, pas de collision (FastF1 distingue "Barcelona GP" / "Spanish GP") mais la colonne de Madrid est forcée à `Madrid` via `EVENT_LABEL_OVERRIDES`. Non-régression : `projects/dashboard/tests/test_gp_naming.py`.
 - [x] **Photos pilotes vides sur le site déployé** — réglé via `projects/dashboard/driver_images.json` (mapping abréviation FIA → URL), utilisé en fallback quand FastF1 ne fournit pas `HeadshotUrl` (runner Linux).
 
 ## Décisions à reprendre plus tard

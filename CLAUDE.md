@@ -76,7 +76,7 @@ Single page, vanilla JS in **native ES6 modules** (no bundler). `index.html` loa
 
 ## Known traps
 
-- **"Spain" collision**: 2026 has two Spanish GPs — round 7 Barcelona (`name: "Spain"`) and round 14 Madrid (`name: "Spain - Madrid"`). Handled in dashboard/calendar/circuits, but NOT yet in `race_chart_builder._col_name` or `season_summary_heatmap` — must be fixed before Madrid (Sept 2026) or both GPs share one CSV column.
+- **GP naming is centralised in `projects/gp_naming.py`** — single source of truth for the label that identifies a GP across the whole chain (race chart CSV column == `name` key in `calendar_2026.json` == key in `circuits_2026.json` == `data-gp` in the front-end). `col_name(country, location)` returns `"{Country}"`, or `"{Country} - {Location}"` for countries hosting several GPs (`MULTI_GP_COUNTRIES`), minus the `COUNTRY_ONLY` exceptions (GPs already published under the bare country name). 2026's two Spanish GPs: round 7 Barcelona = `"Spain"` (kept as-is), round 14 Madrid = `"Spain - Madrid"`. `check_unique()` makes the builders fail loudly rather than silently overwrite a column — extend `MULTI_GP_COUNTRIES` (and `SHORT_NAMES`) when a country gains a second GP, never patch a builder locally.
 - **Driver photos**: FastF1's `HeadshotUrl` is unreliable on CI; `projects/dashboard/driver_images.json` is the fallback mapping (FIA abbreviation → URL).
 - Coverage/ruff/black all exclude `test_computing/`, `projects/*/drafts/`, and the paused projects (`quali_duels`, `wdc_projection_repo`) — don't "fix" those.
 - `projects/dashboard/PLAN.md` is the living roadmap (decisions, done/remaining work) — update it as features land; read it first for context on the dashboard.

@@ -5,6 +5,12 @@ import pandas as pd
 
 SPRINT_EVENT_FORMATS = {"sprint", "sprint_shootout", "sprint_qualifying"}
 
+# Libellés de colonne forcés, indexés par (Country, Location). FastF1 nomme le
+# GP de Madrid "Spanish Grand Prix" — Barcelone étant le "Barcelona Grand Prix"
+# — la colonne s'afficherait donc "Spanish". L'index par localité évite de
+# renommer le GP d'Espagne des saisons antérieures, couru à Barcelone.
+EVENT_LABEL_OVERRIDES = {("Spain", "Madrid"): "Madrid"}
+
 
 class F1FlourishExporterLead:
     """
@@ -36,6 +42,13 @@ class F1FlourishExporterLead:
         schedule = ff1.get_event_schedule(self.season, include_testing=False)
         schedule = schedule.copy()
         schedule["ShortEventName"] = schedule["EventName"].str.replace("Grand Prix", "").str.strip()
+        if {"Country", "Location"}.issubset(schedule.columns):
+            schedule["ShortEventName"] = [
+                EVENT_LABEL_OVERRIDES.get((country, location), short)
+                for country, location, short in zip(
+                    schedule["Country"], schedule["Location"], schedule["ShortEventName"]
+                )
+            ]
         return schedule
 
     def _has_sprint(self, event):

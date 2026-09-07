@@ -4,9 +4,9 @@
 calendrier officiel évolue). Le fichier produit est ensuite consommé par
 build_dashboard_data.py.
 
-Convention des noms de GP : alignée sur race_chart_builder._col_name :
-    - "{Country} - {Location}" pour USA et Italy (pays à plusieurs GP)
-    - "{Country}" sinon
+Convention des noms de GP : définie une seule fois dans projects/gp_naming.py,
+partagée avec race_chart_builder pour que les colonnes du CSV et les clés du
+calendrier soient rigoureusement identiques.
 """
 
 from __future__ import annotations
@@ -18,44 +18,17 @@ from pathlib import Path
 import fastf1
 
 HERE = Path(__file__).resolve().parent
+
+# projects/ n'est pas un package installé : on l'ajoute à sys.path pour importer
+# le nommage partagé (voir aussi race_chart_builder_fastf1.py).
+_PROJECTS_DIR = str(HERE.parent)
+if _PROJECTS_DIR not in sys.path:
+    sys.path.insert(0, _PROJECTS_DIR)
+
+from gp_naming import check_unique, col_name, short_name  # noqa: E402
+
 OUT = HERE / "calendar_2026.json"
 SEASON = 2026
-
-DUAL_LOCATION_COUNTRIES = {"United States", "USA", "Italy"}
-
-SHORT_NAMES = {
-    "Australia": "Australia",
-    "China": "China",
-    "Japan": "Japan",
-    "United States - Miami Gardens": "Miami",
-    "Canada": "Canada",
-    "Monaco": "Monaco",
-    "Spain": "Madrid",
-    "Austria": "Austria",
-    "United Kingdom": "Silverstone",
-    "Belgium": "Spa",
-    "Hungary": "Hungaroring",
-    "Netherlands": "Zandvoort",
-    "Italy - Monza": "Monza",
-    "Azerbaijan": "Baku",
-    "Singapore": "Singapore",
-    "United States - Austin": "Austin",
-    "Mexico": "Mexico",
-    "Brazil": "Interlagos",
-    "United States - Las Vegas": "Las Vegas",
-    "Qatar": "Lusail",
-    "United Arab Emirates": "Yas Marina",
-}
-
-
-def col_name(country: str, location: str) -> str:
-    if country in DUAL_LOCATION_COUNTRIES:
-        return f"{country} - {location}"
-    return country
-
-
-def short_name(name: str, location: str) -> str:
-    return SHORT_NAMES.get(name) or location or name
 
 
 def main() -> int:
@@ -74,6 +47,10 @@ def main() -> int:
                 "isSprint": str(row.get("EventFormat", "")).startswith("sprint"),
             }
         )
+
+    # Deux GP ne peuvent pas partager un "name" : c'est la clé de rapprochement
+    # avec les colonnes du CSV race chart dans build_dashboard_data.py.
+    check_unique([r["name"] for r in rounds], context="calendar_2026.json")
 
     payload = {
         "season": SEASON,

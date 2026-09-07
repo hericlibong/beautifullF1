@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import sys
 from datetime import datetime
 
 import fastf1
@@ -10,9 +11,19 @@ import pandas as pd
 
 # fastf1.Cache.enable_cache("cache")  # cache local
 
+_HERE = os.path.dirname(os.path.abspath(__file__))
+
+# Le nommage des GP est partagé avec le dashboard (projects/gp_naming.py). Ce
+# script étant lancé en sous-processus par build_all.py, projects/ n'est pas sur
+# sys.path : on l'ajoute avant l'import.
+_PROJECTS_DIR = os.path.dirname(_HERE)
+if _PROJECTS_DIR not in sys.path:
+    sys.path.insert(0, _PROJECTS_DIR)
+
+from gp_naming import check_unique, col_name  # noqa: E402
+
 # Mapping fallback des photos pilotes (utilisé quand FastF1 ne fournit pas
 # HeadshotUrl, ce qui arrive notamment sur runners Linux / cache vide).
-_HERE = os.path.dirname(__file__)
 DRIVER_IMAGES_PATH = os.path.join(_HERE, "..", "dashboard", "driver_images.json")
 
 
@@ -46,10 +57,9 @@ class RaceChartBuilderFastF1:
 
     @staticmethod
     def _col_name(country: str, locality: str) -> str:
-        # Dédoublage minimaliste et robuste pour les pays à plusieurs GPs
-        if country in ("United States", "USA", "Italy"):
-            return f"{country} - {locality}"
-        return country
+        # Délègue à projects/gp_naming.py : les colonnes de ce CSV servent de
+        # clés au calendrier du dashboard, les deux doivent suivre la même règle.
+        return col_name(country, locality)
 
     def build_results_table(self):
         schedule = fastf1.get_event_schedule(self.season)
@@ -100,6 +110,11 @@ class RaceChartBuilderFastF1:
 
         # 2) TRIER par date réelle de la course (ordre effectif des GP)
         past_events_payload.sort(key=lambda x: x[0])
+
+        # Garde-fou : un GP = une colonne. Sans ça, deux GP d'un même pays
+        # (Barcelone et Madrid en 2026) écraseraient mutuellement leur cumul et
+        # l'un des deux ne serait jamais marqué comme disputé côté dashboard.
+        check_unique([p[2] for p in past_events_payload], context="le CSV race chart")
 
         # 3) Construire le cumul dans cet ordre
         for idx, (race_date, round_no, col_name, race_results, sprint_points) in enumerate(
