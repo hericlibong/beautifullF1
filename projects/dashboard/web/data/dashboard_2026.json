@@ -1,10 +1,10 @@
 {
   "season": 2026,
-  "generatedAt": "2026-09-08",
+  "generatedAt": "2026-09-14",
   "lastGp": {
-    "name": "Italy - Monza",
-    "shortName": "Monza",
-    "date": "2026-09-06",
+    "name": "Spain - Madrid",
+    "shortName": "Madrid",
+    "date": "2026-09-13",
     "isSprint": false,
     "winner": {
       "name": "Andrea Kimi Antonelli",
@@ -12,9 +12,9 @@
     }
   },
   "nextGp": {
-    "name": "Spain - Madrid",
-    "shortName": "Madrid",
-    "date": "2026-09-13",
+    "name": "Azerbaijan",
+    "shortName": "Baku",
+    "date": "2026-09-26",
     "isSprint": false
   },
   "kpis": {
@@ -26,13 +26,13 @@
     "second": {
       "name": "George Russell",
       "team": "Mercedes",
-      "points": 201
+      "points": 211
     },
-    "leaderGap": 66,
+    "leaderGap": 56,
     "lastWinner": {
       "name": "Andrea Kimi Antonelli",
       "team": "Mercedes",
-      "gp": "Italy - Monza"
+      "gp": "Spain - Madrid"
     },
     "raceCount": 13,
     "totalRaces": 23
@@ -102,26 +102,26 @@
             "cumulative": 179
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 25,
-            "cumulative": 204
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 15,
-            "cumulative": 219
+            "cumulative": 194
           },
           {
             "gp": "Netherlands",
             "shortName": "Zandvoort",
             "gain": 23,
-            "cumulative": 242
+            "cumulative": 217
           },
           {
             "gp": "Italy - Monza",
             "shortName": "Monza",
+            "gain": 25,
+            "cumulative": 242
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
             "gain": 25,
             "cumulative": 267
           }
@@ -134,8 +134,8 @@
         "shortName": "G. Russell",
         "team": "Mercedes",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/G/GEORUS01_George_Russell/georus01.png.transform/1col/image.png",
-        "points": 201,
-        "deltaLastGp": 18,
+        "points": 211,
+        "deltaLastGp": 10,
         "progress": [
           {
             "gp": "Australia",
@@ -192,12 +192,6 @@
             "cumulative": 154
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 0,
-            "cumulative": 154
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 6,
@@ -214,108 +208,24 @@
             "shortName": "Monza",
             "gain": 18,
             "cumulative": 201
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
+            "gain": 10,
+            "cumulative": 211
           }
         ],
         "rank": 2,
-        "leaderGap": -66
-      },
-      {
-        "name": "Lewis Hamilton",
-        "shortName": "L. Hamilton",
-        "team": "Ferrari",
-        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LEWHAM01_Lewis_Hamilton/lewham01.png.transform/1col/image.png",
-        "points": 191,
-        "deltaLastGp": 8,
-        "progress": [
-          {
-            "gp": "Australia",
-            "shortName": "Australia",
-            "gain": 12,
-            "cumulative": 12
-          },
-          {
-            "gp": "China",
-            "shortName": "China",
-            "gain": 21,
-            "cumulative": 33
-          },
-          {
-            "gp": "Japan",
-            "shortName": "Japan",
-            "gain": 8,
-            "cumulative": 41
-          },
-          {
-            "gp": "United States - Miami Gardens",
-            "shortName": "Miami",
-            "gain": 10,
-            "cumulative": 51
-          },
-          {
-            "gp": "Canada",
-            "shortName": "Canada",
-            "gain": 21,
-            "cumulative": 72
-          },
-          {
-            "gp": "Monaco",
-            "shortName": "Monaco",
-            "gain": 18,
-            "cumulative": 90
-          },
-          {
-            "gp": "Spain",
-            "shortName": "Barcelona",
-            "gain": 25,
-            "cumulative": 115
-          },
-          {
-            "gp": "Austria",
-            "shortName": "Austria",
-            "gain": 10,
-            "cumulative": 125
-          },
-          {
-            "gp": "United Kingdom",
-            "shortName": "Silverstone",
-            "gain": 22,
-            "cumulative": 147
-          },
-          {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 12,
-            "cumulative": 159
-          },
-          {
-            "gp": "Hungary",
-            "shortName": "Hungaroring",
-            "gain": 10,
-            "cumulative": 169
-          },
-          {
-            "gp": "Netherlands",
-            "shortName": "Zandvoort",
-            "gain": 14,
-            "cumulative": 183
-          },
-          {
-            "gp": "Italy - Monza",
-            "shortName": "Monza",
-            "gain": 8,
-            "cumulative": 191
-          }
-        ],
-        "rank": 3,
-        "leaderGap": -76
+        "leaderGap": -56
       },
       {
         "name": "Lando Norris",
         "shortName": "L. Norris",
         "team": "McLaren",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LANNOR01_Lando_Norris/lannor01.png.transform/1col/image.png",
-        "points": 171,
-        "deltaLastGp": 12,
+        "points": 180,
+        "deltaLastGp": 15,
         "progress": [
           {
             "gp": "Australia",
@@ -372,40 +282,130 @@
             "cumulative": 97
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 6,
-            "cumulative": 103
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 25,
-            "cumulative": 128
+            "cumulative": 122
           },
           {
             "gp": "Netherlands",
             "shortName": "Zandvoort",
             "gain": 31,
-            "cumulative": 159
+            "cumulative": 153
           },
           {
             "gp": "Italy - Monza",
             "shortName": "Monza",
             "gain": 12,
+            "cumulative": 165
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
+            "gain": 15,
+            "cumulative": 180
+          }
+        ],
+        "rank": 3,
+        "leaderGap": -87
+      },
+      {
+        "name": "Lewis Hamilton",
+        "shortName": "L. Hamilton",
+        "team": "Ferrari",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LEWHAM01_Lewis_Hamilton/lewham01.png.transform/1col/image.png",
+        "points": 179,
+        "deltaLastGp": 0,
+        "progress": [
+          {
+            "gp": "Australia",
+            "shortName": "Australia",
+            "gain": 12,
+            "cumulative": 12
+          },
+          {
+            "gp": "China",
+            "shortName": "China",
+            "gain": 21,
+            "cumulative": 33
+          },
+          {
+            "gp": "Japan",
+            "shortName": "Japan",
+            "gain": 8,
+            "cumulative": 41
+          },
+          {
+            "gp": "United States - Miami Gardens",
+            "shortName": "Miami",
+            "gain": 10,
+            "cumulative": 51
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 21,
+            "cumulative": 72
+          },
+          {
+            "gp": "Monaco",
+            "shortName": "Monaco",
+            "gain": 18,
+            "cumulative": 90
+          },
+          {
+            "gp": "Spain",
+            "shortName": "Barcelona",
+            "gain": 25,
+            "cumulative": 115
+          },
+          {
+            "gp": "Austria",
+            "shortName": "Austria",
+            "gain": 10,
+            "cumulative": 125
+          },
+          {
+            "gp": "United Kingdom",
+            "shortName": "Silverstone",
+            "gain": 22,
+            "cumulative": 147
+          },
+          {
+            "gp": "Hungary",
+            "shortName": "Hungaroring",
+            "gain": 10,
+            "cumulative": 157
+          },
+          {
+            "gp": "Netherlands",
+            "shortName": "Zandvoort",
+            "gain": 14,
             "cumulative": 171
+          },
+          {
+            "gp": "Italy - Monza",
+            "shortName": "Monza",
+            "gain": 8,
+            "cumulative": 179
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
+            "gain": 0,
+            "cumulative": 179
           }
         ],
         "rank": 4,
-        "leaderGap": -96
+        "leaderGap": -88
       },
       {
         "name": "Charles Leclerc",
         "shortName": "C. Leclerc",
         "team": "Ferrari",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/C/CHALEC01_Charles_Leclerc/chalec01.png.transform/1col/image.png",
-        "points": 155,
-        "deltaLastGp": 0,
+        "points": 149,
+        "deltaLastGp": 12,
         "progress": [
           {
             "gp": "Australia",
@@ -462,40 +462,40 @@
             "cumulative": 108
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 18,
-            "cumulative": 126
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 12,
-            "cumulative": 138
+            "cumulative": 120
           },
           {
             "gp": "Netherlands",
             "shortName": "Zandvoort",
             "gain": 17,
-            "cumulative": 155
+            "cumulative": 137
           },
           {
             "gp": "Italy - Monza",
             "shortName": "Monza",
             "gain": 0,
-            "cumulative": 155
+            "cumulative": 137
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
+            "gain": 12,
+            "cumulative": 149
           }
         ],
         "rank": 5,
-        "leaderGap": -112
+        "leaderGap": -118
       },
       {
         "name": "Max Verstappen",
         "shortName": "M. Verstappen",
         "team": "Red Bull",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png.transform/1col/image.png",
-        "points": 127,
-        "deltaLastGp": 15,
+        "points": 130,
+        "deltaLastGp": 18,
         "progress": [
           {
             "gp": "Australia",
@@ -552,40 +552,40 @@
             "cumulative": 76
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 15,
-            "cumulative": 91
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 18,
-            "cumulative": 109
+            "cumulative": 94
           },
           {
             "gp": "Netherlands",
             "shortName": "Zandvoort",
             "gain": 3,
-            "cumulative": 112
+            "cumulative": 97
           },
           {
             "gp": "Italy - Monza",
             "shortName": "Monza",
             "gain": 15,
-            "cumulative": 127
+            "cumulative": 112
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
+            "gain": 18,
+            "cumulative": 130
           }
         ],
         "rank": 6,
-        "leaderGap": -140
+        "leaderGap": -137
       },
       {
         "name": "Oscar Piastri",
         "shortName": "O. Piastri",
         "team": "McLaren",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/O/OSCPIA01_Oscar_Piastri/oscpia01.png.transform/1col/image.png",
-        "points": 116,
-        "deltaLastGp": 10,
+        "points": 110,
+        "deltaLastGp": 4,
         "progress": [
           {
             "gp": "Australia",
@@ -642,39 +642,39 @@
             "cumulative": 84
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 10,
-            "cumulative": 94
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 0,
-            "cumulative": 94
+            "cumulative": 84
           },
           {
             "gp": "Netherlands",
             "shortName": "Zandvoort",
             "gain": 12,
-            "cumulative": 106
+            "cumulative": 96
           },
           {
             "gp": "Italy - Monza",
             "shortName": "Monza",
             "gain": 10,
-            "cumulative": 116
+            "cumulative": 106
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
+            "gain": 4,
+            "cumulative": 110
           }
         ],
         "rank": 7,
-        "leaderGap": -151
+        "leaderGap": -157
       },
       {
         "name": "Isack Hadjar",
         "shortName": "I. Hadjar",
         "team": "Red Bull",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/I/ISAHAD01_Isack_Hadjar/isahad01.png.transform/1col/image.png",
-        "points": 71,
+        "points": 63,
         "deltaLastGp": 0,
         "progress": [
           {
@@ -732,40 +732,40 @@
             "cumulative": 55
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 8,
-            "cumulative": 63
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 8,
-            "cumulative": 71
+            "cumulative": 63
           },
           {
             "gp": "Netherlands",
             "shortName": "Zandvoort",
             "gain": 0,
-            "cumulative": 71
+            "cumulative": 63
           },
           {
             "gp": "Italy - Monza",
             "shortName": "Monza",
             "gain": 0,
-            "cumulative": 71
+            "cumulative": 63
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
+            "gain": 0,
+            "cumulative": 63
           }
         ],
         "rank": 8,
-        "leaderGap": -196
+        "leaderGap": -204
       },
       {
         "name": "Liam Lawson",
         "shortName": "L. Lawson",
         "team": "RB F1 Team",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LIALAW01_Liam_Lawson/lialaw01.png.transform/1col/image.png",
-        "points": 51,
-        "deltaLastGp": 0,
+        "points": 59,
+        "deltaLastGp": 8,
         "progress": [
           {
             "gp": "Australia",
@@ -822,12 +822,6 @@
             "cumulative": 41
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 0,
-            "cumulative": 41
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 4,
@@ -844,10 +838,16 @@
             "shortName": "Monza",
             "gain": 0,
             "cumulative": 51
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
+            "gain": 8,
+            "cumulative": 59
           }
         ],
         "rank": 9,
-        "leaderGap": -216
+        "leaderGap": -208
       },
       {
         "name": "Pierre Gasly",
@@ -855,7 +855,7 @@
         "team": "Alpine F1 Team",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/P/PIEGAS01_Pierre_Gasly/piegas01.png.transform/1col/image.png",
         "points": 41,
-        "deltaLastGp": 6,
+        "deltaLastGp": 0,
         "progress": [
           {
             "gp": "Australia",
@@ -912,12 +912,6 @@
             "cumulative": 33
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 0,
-            "cumulative": 33
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 0,
@@ -934,6 +928,12 @@
             "shortName": "Monza",
             "gain": 6,
             "cumulative": 41
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
+            "gain": 0,
+            "cumulative": 41
           }
         ],
         "rank": 10,
@@ -945,7 +945,7 @@
         "team": "RB F1 Team",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/A/ARVLIN01_Arvid_Lindblad/arvlin01.png.transform/1col/image.png",
         "points": 29,
-        "deltaLastGp": 4,
+        "deltaLastGp": 2,
         "progress": [
           {
             "gp": "Australia",
@@ -1002,27 +1002,27 @@
             "cumulative": 22
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 2,
-            "cumulative": 24
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 1,
-            "cumulative": 25
+            "cumulative": 23
           },
           {
             "gp": "Netherlands",
             "shortName": "Zandvoort",
             "gain": 0,
-            "cumulative": 25
+            "cumulative": 23
           },
           {
             "gp": "Italy - Monza",
             "shortName": "Monza",
             "gain": 4,
+            "cumulative": 27
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
+            "gain": 2,
             "cumulative": 29
           }
         ],
@@ -1034,8 +1034,8 @@
         "shortName": "F. Colapinto",
         "team": "Alpine F1 Team",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/F/FRACOL01_Franco_Colapinto/fracol01.png.transform/1col/image.png",
-        "points": 21,
-        "deltaLastGp": 2,
+        "points": 26,
+        "deltaLastGp": 6,
         "progress": [
           {
             "gp": "Australia",
@@ -1092,32 +1092,32 @@
             "cumulative": 18
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 1,
-            "cumulative": 19
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 0,
-            "cumulative": 19
+            "cumulative": 18
           },
           {
             "gp": "Netherlands",
             "shortName": "Zandvoort",
             "gain": 0,
-            "cumulative": 19
+            "cumulative": 18
           },
           {
             "gp": "Italy - Monza",
             "shortName": "Monza",
             "gain": 2,
-            "cumulative": 21
+            "cumulative": 20
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
+            "gain": 6,
+            "cumulative": 26
           }
         ],
         "rank": 12,
-        "leaderGap": -246
+        "leaderGap": -241
       },
       {
         "name": "Oliver Bearman",
@@ -1182,12 +1182,6 @@
             "cumulative": 18
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 0,
-            "cumulative": 18
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 0,
@@ -1202,6 +1196,12 @@
           {
             "gp": "Italy - Monza",
             "shortName": "Monza",
+            "gain": 0,
+            "cumulative": 18
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
             "gain": 0,
             "cumulative": 18
           }
@@ -1210,94 +1210,94 @@
         "leaderGap": -249
       },
       {
-        "name": "Gabriel Bortoleto",
-        "shortName": "G. Bortoleto",
+        "name": "Nico Hülkenberg",
+        "shortName": "N. Hülkenberg",
         "team": "Audi",
-        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/G/GABBOR01_Gabriel_Bortoleto/gabbor01.png.transform/1col/image.png",
-        "points": 10,
-        "deltaLastGp": 0,
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/N/NICHUL01_Nico_Hulkenberg/nichul01.png.transform/1col/image.png",
+        "points": 7,
+        "deltaLastGp": 1,
         "progress": [
           {
             "gp": "Australia",
             "shortName": "Australia",
-            "gain": 2,
-            "cumulative": 2
+            "gain": 0,
+            "cumulative": 0
           },
           {
             "gp": "China",
             "shortName": "China",
             "gain": 0,
-            "cumulative": 2
+            "cumulative": 0
           },
           {
             "gp": "Japan",
             "shortName": "Japan",
             "gain": 0,
-            "cumulative": 2
+            "cumulative": 0
           },
           {
             "gp": "United States - Miami Gardens",
             "shortName": "Miami",
             "gain": 0,
-            "cumulative": 2
+            "cumulative": 0
           },
           {
             "gp": "Canada",
             "shortName": "Canada",
             "gain": 0,
-            "cumulative": 2
+            "cumulative": 0
           },
           {
             "gp": "Monaco",
             "shortName": "Monaco",
             "gain": 0,
-            "cumulative": 2
+            "cumulative": 0
           },
           {
             "gp": "Spain",
             "shortName": "Barcelona",
             "gain": 0,
-            "cumulative": 2
+            "cumulative": 0
           },
           {
             "gp": "Austria",
             "shortName": "Austria",
             "gain": 0,
-            "cumulative": 2
+            "cumulative": 0
           },
           {
             "gp": "United Kingdom",
             "shortName": "Silverstone",
-            "gain": 4,
-            "cumulative": 6
-          },
-          {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 4,
-            "cumulative": 10
+            "gain": 0,
+            "cumulative": 0
           },
           {
             "gp": "Hungary",
             "shortName": "Hungaroring",
-            "gain": 0,
-            "cumulative": 10
+            "gain": 2,
+            "cumulative": 2
           },
           {
             "gp": "Netherlands",
             "shortName": "Zandvoort",
-            "gain": 0,
-            "cumulative": 10
+            "gain": 4,
+            "cumulative": 6
           },
           {
             "gp": "Italy - Monza",
             "shortName": "Monza",
             "gain": 0,
-            "cumulative": 10
+            "cumulative": 6
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
+            "gain": 1,
+            "cumulative": 7
           }
         ],
         "rank": 14,
-        "leaderGap": -257
+        "leaderGap": -260
       },
       {
         "name": "Carlos Sainz",
@@ -1362,12 +1362,6 @@
             "cumulative": 6
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 0,
-            "cumulative": 6
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 0,
@@ -1382,6 +1376,12 @@
           {
             "gp": "Italy - Monza",
             "shortName": "Monza",
+            "gain": 0,
+            "cumulative": 6
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
             "gain": 0,
             "cumulative": 6
           }
@@ -1390,88 +1390,88 @@
         "leaderGap": -261
       },
       {
-        "name": "Nico Hülkenberg",
-        "shortName": "N. Hülkenberg",
+        "name": "Gabriel Bortoleto",
+        "shortName": "G. Bortoleto",
         "team": "Audi",
-        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/N/NICHUL01_Nico_Hulkenberg/nichul01.png.transform/1col/image.png",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/G/GABBOR01_Gabriel_Bortoleto/gabbor01.png.transform/1col/image.png",
         "points": 6,
         "deltaLastGp": 0,
         "progress": [
           {
             "gp": "Australia",
             "shortName": "Australia",
-            "gain": 0,
-            "cumulative": 0
+            "gain": 2,
+            "cumulative": 2
           },
           {
             "gp": "China",
             "shortName": "China",
             "gain": 0,
-            "cumulative": 0
+            "cumulative": 2
           },
           {
             "gp": "Japan",
             "shortName": "Japan",
             "gain": 0,
-            "cumulative": 0
+            "cumulative": 2
           },
           {
             "gp": "United States - Miami Gardens",
             "shortName": "Miami",
             "gain": 0,
-            "cumulative": 0
+            "cumulative": 2
           },
           {
             "gp": "Canada",
             "shortName": "Canada",
             "gain": 0,
-            "cumulative": 0
+            "cumulative": 2
           },
           {
             "gp": "Monaco",
             "shortName": "Monaco",
             "gain": 0,
-            "cumulative": 0
+            "cumulative": 2
           },
           {
             "gp": "Spain",
             "shortName": "Barcelona",
             "gain": 0,
-            "cumulative": 0
+            "cumulative": 2
           },
           {
             "gp": "Austria",
             "shortName": "Austria",
             "gain": 0,
-            "cumulative": 0
+            "cumulative": 2
           },
           {
             "gp": "United Kingdom",
             "shortName": "Silverstone",
-            "gain": 0,
-            "cumulative": 0
-          },
-          {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 0,
-            "cumulative": 0
+            "gain": 4,
+            "cumulative": 6
           },
           {
             "gp": "Hungary",
             "shortName": "Hungaroring",
-            "gain": 2,
-            "cumulative": 2
+            "gain": 0,
+            "cumulative": 6
           },
           {
             "gp": "Netherlands",
             "shortName": "Zandvoort",
-            "gain": 4,
+            "gain": 0,
             "cumulative": 6
           },
           {
             "gp": "Italy - Monza",
             "shortName": "Monza",
+            "gain": 0,
+            "cumulative": 6
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
             "gain": 0,
             "cumulative": 6
           }
@@ -1542,12 +1542,6 @@
             "cumulative": 5
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 0,
-            "cumulative": 5
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 0,
@@ -1562,6 +1556,12 @@
           {
             "gp": "Italy - Monza",
             "shortName": "Monza",
+            "gain": 0,
+            "cumulative": 5
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
             "gain": 0,
             "cumulative": 5
           }
@@ -1632,12 +1632,6 @@
             "cumulative": 3
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 0,
-            "cumulative": 3
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 0,
@@ -1652,6 +1646,12 @@
           {
             "gp": "Italy - Monza",
             "shortName": "Monza",
+            "gain": 0,
+            "cumulative": 3
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
             "gain": 0,
             "cumulative": 3
           }
@@ -1722,12 +1722,6 @@
             "cumulative": 1
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 0,
-            "cumulative": 1
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 0,
@@ -1744,6 +1738,12 @@
             "shortName": "Monza",
             "gain": 0,
             "cumulative": 3
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
+            "gain": 0,
+            "cumulative": 3
           }
         ],
         "rank": 19,
@@ -1755,7 +1755,7 @@
         "team": "RB F1 Team",
         "image": "",
         "points": 1,
-        "deltaLastGp": 1,
+        "deltaLastGp": 0,
         "progress": [
           {
             "gp": "Australia",
@@ -1812,12 +1812,6 @@
             "cumulative": 0
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 0,
-            "cumulative": 0
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 0,
@@ -1833,6 +1827,12 @@
             "gp": "Italy - Monza",
             "shortName": "Monza",
             "gain": 1,
+            "cumulative": 1
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
+            "gain": 0,
             "cumulative": 1
           }
         ],
@@ -1902,12 +1902,6 @@
             "cumulative": 0
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 0,
-            "cumulative": 0
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 0,
@@ -1922,6 +1916,12 @@
           {
             "gp": "Italy - Monza",
             "shortName": "Monza",
+            "gain": 0,
+            "cumulative": 0
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
             "gain": 0,
             "cumulative": 0
           }
@@ -1992,12 +1992,6 @@
             "cumulative": 0
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 0,
-            "cumulative": 0
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 0,
@@ -2012,6 +2006,12 @@
           {
             "gp": "Italy - Monza",
             "shortName": "Monza",
+            "gain": 0,
+            "cumulative": 0
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
             "gain": 0,
             "cumulative": 0
           }
@@ -2082,12 +2082,6 @@
             "cumulative": 0
           },
           {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 0,
-            "cumulative": 0
-          },
-          {
             "gp": "Hungary",
             "shortName": "Hungaroring",
             "gain": 0,
@@ -2104,6 +2098,12 @@
             "shortName": "Monza",
             "gain": 0,
             "cumulative": 0
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
+            "gain": 0,
+            "cumulative": 0
           }
         ],
         "rank": 23,
@@ -2113,80 +2113,80 @@
     "constructors": [
       {
         "team": "Mercedes",
-        "points": 468,
-        "deltaLastGp": 43,
+        "points": 478,
+        "deltaLastGp": 35,
         "rank": 1,
         "leaderGap": 0
       },
       {
         "team": "Ferrari",
-        "points": 346,
-        "deltaLastGp": 8,
+        "points": 328,
+        "deltaLastGp": 12,
         "rank": 2,
-        "leaderGap": -122
+        "leaderGap": -150
       },
       {
         "team": "McLaren",
-        "points": 287,
-        "deltaLastGp": 22,
+        "points": 290,
+        "deltaLastGp": 19,
         "rank": 3,
-        "leaderGap": -181
+        "leaderGap": -188
       },
       {
         "team": "Red Bull",
-        "points": 198,
-        "deltaLastGp": 15,
+        "points": 193,
+        "deltaLastGp": 18,
         "rank": 4,
-        "leaderGap": -270
+        "leaderGap": -285
       },
       {
         "team": "RB F1 Team",
-        "points": 81,
-        "deltaLastGp": 5,
+        "points": 89,
+        "deltaLastGp": 10,
         "rank": 5,
-        "leaderGap": -387
+        "leaderGap": -389
       },
       {
         "team": "Alpine F1 Team",
-        "points": 62,
-        "deltaLastGp": 8,
+        "points": 67,
+        "deltaLastGp": 6,
         "rank": 6,
-        "leaderGap": -406
+        "leaderGap": -411
       },
       {
         "team": "Haas F1 Team",
         "points": 21,
         "deltaLastGp": 0,
         "rank": 7,
-        "leaderGap": -447
+        "leaderGap": -457
       },
       {
         "team": "Audi",
-        "points": 16,
-        "deltaLastGp": 0,
+        "points": 13,
+        "deltaLastGp": 1,
         "rank": 8,
-        "leaderGap": -452
+        "leaderGap": -465
       },
       {
         "team": "Williams",
         "points": 11,
         "deltaLastGp": 0,
         "rank": 9,
-        "leaderGap": -457
+        "leaderGap": -467
       },
       {
         "team": "Aston Martin",
         "points": 3,
         "deltaLastGp": 0,
         "rank": 10,
-        "leaderGap": -465
+        "leaderGap": -475
       },
       {
         "team": "Cadillac F1 Team",
         "points": 0,
         "deltaLastGp": 0,
         "rank": 11,
-        "leaderGap": -468
+        "leaderGap": -478
       }
     ]
   },
@@ -2314,12 +2314,8 @@
       "shortName": "Spa",
       "date": "2026-07-19",
       "isSprint": false,
-      "status": "played",
-      "winner": {
-        "name": "Andrea Kimi Antonelli",
-        "team": "Mercedes",
-        "shortName": "A. Kimi Antonelli"
-      }
+      "status": "upcoming",
+      "winner": null
     },
     {
       "round": 11,
@@ -2366,8 +2362,12 @@
       "shortName": "Madrid",
       "date": "2026-09-13",
       "isSprint": false,
-      "status": "next",
-      "winner": null
+      "status": "played",
+      "winner": {
+        "name": "Andrea Kimi Antonelli",
+        "team": "Mercedes",
+        "shortName": "A. Kimi Antonelli"
+      }
     },
     {
       "round": 15,
@@ -2375,7 +2375,7 @@
       "shortName": "Baku",
       "date": "2026-09-26",
       "isSprint": false,
-      "status": "upcoming",
+      "status": "next",
       "winner": null
     },
     {

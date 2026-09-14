@@ -1,6 +1,6 @@
 {
   "season": 2026,
-  "generatedAt": "2026-09-08",
+  "generatedAt": "2026-09-14",
   "sessions": [
     {
       "round": 1,
@@ -2654,212 +2654,6 @@
       ]
     },
     {
-      "round": 10,
-      "gp": "Belgium",
-      "shortName": "Spa",
-      "type": "Q",
-      "drivers": [
-        {
-          "fullName": "Andrea Kimi Antonelli",
-          "abbr": "ANT",
-          "team": "Mercedes",
-          "position": 1,
-          "bestTimeSec": 104.361,
-          "bestTimeStr": "1:44.361",
-          "q3": true
-        },
-        {
-          "fullName": "Max Verstappen",
-          "abbr": "VER",
-          "team": "Red Bull",
-          "position": 2,
-          "bestTimeSec": 104.678,
-          "bestTimeStr": "1:44.678",
-          "q3": true
-        },
-        {
-          "fullName": "Lando Norris",
-          "abbr": "NOR",
-          "team": "McLaren",
-          "position": 3,
-          "bestTimeSec": 104.801,
-          "bestTimeStr": "1:44.801",
-          "q3": true
-        },
-        {
-          "fullName": "George Russell",
-          "abbr": "RUS",
-          "team": "Mercedes",
-          "position": 4,
-          "bestTimeSec": 104.869,
-          "bestTimeStr": "1:44.869",
-          "q3": true
-        },
-        {
-          "fullName": "Charles Leclerc",
-          "abbr": "LEC",
-          "team": "Ferrari",
-          "position": 5,
-          "bestTimeSec": 104.893,
-          "bestTimeStr": "1:44.893",
-          "q3": true
-        },
-        {
-          "fullName": "Lewis Hamilton",
-          "abbr": "HAM",
-          "team": "Ferrari",
-          "position": 6,
-          "bestTimeSec": 104.895,
-          "bestTimeStr": "1:44.895",
-          "q3": true
-        },
-        {
-          "fullName": "Oscar Piastri",
-          "abbr": "PIA",
-          "team": "McLaren",
-          "position": 7,
-          "bestTimeSec": 105.016,
-          "bestTimeStr": "1:45.016",
-          "q3": true
-        },
-        {
-          "fullName": "Arvid Lindblad",
-          "abbr": "LIN",
-          "team": "RB F1 Team",
-          "position": 8,
-          "bestTimeSec": 105.143,
-          "bestTimeStr": "1:45.143",
-          "q3": true
-        },
-        {
-          "fullName": "Gabriel Bortoleto",
-          "abbr": "BOR",
-          "team": "Audi",
-          "position": 9,
-          "bestTimeSec": 105.628,
-          "bestTimeStr": "1:45.628",
-          "q3": true
-        },
-        {
-          "fullName": "Isack Hadjar",
-          "abbr": "HAD",
-          "team": "Red Bull",
-          "position": 10,
-          "bestTimeSec": 105.823,
-          "bestTimeStr": "1:45.823",
-          "q3": false
-        },
-        {
-          "fullName": "Liam Lawson",
-          "abbr": "LAW",
-          "team": "RB F1 Team",
-          "position": 11,
-          "bestTimeSec": 106.12,
-          "bestTimeStr": "1:46.120",
-          "q3": false
-        },
-        {
-          "fullName": "Pierre Gasly",
-          "abbr": "GAS",
-          "team": "Alpine F1 Team",
-          "position": 12,
-          "bestTimeSec": 106.331,
-          "bestTimeStr": "1:46.331",
-          "q3": false
-        },
-        {
-          "fullName": "Franco Colapinto",
-          "abbr": "COL",
-          "team": "Alpine F1 Team",
-          "position": 13,
-          "bestTimeSec": 106.392,
-          "bestTimeStr": "1:46.392",
-          "q3": false
-        },
-        {
-          "fullName": "Nico Hülkenberg",
-          "abbr": "HUL",
-          "team": "Audi",
-          "position": 14,
-          "bestTimeSec": 106.671,
-          "bestTimeStr": "1:46.671",
-          "q3": false
-        },
-        {
-          "fullName": "Carlos Sainz",
-          "abbr": "SAI",
-          "team": "Williams",
-          "position": 15,
-          "bestTimeSec": 106.777,
-          "bestTimeStr": "1:46.777",
-          "q3": false
-        },
-        {
-          "fullName": "Oliver Bearman",
-          "abbr": "BEA",
-          "team": "Haas F1 Team",
-          "position": 16,
-          "bestTimeSec": 106.779,
-          "bestTimeStr": "1:46.779",
-          "q3": false
-        },
-        {
-          "fullName": "Alexander Albon",
-          "abbr": "ALB",
-          "team": "Williams",
-          "position": 17,
-          "bestTimeSec": 107.12,
-          "bestTimeStr": "1:47.120",
-          "q3": false
-        },
-        {
-          "fullName": "Esteban Ocon",
-          "abbr": "OCO",
-          "team": "Haas F1 Team",
-          "position": 18,
-          "bestTimeSec": 107.801,
-          "bestTimeStr": "1:47.801",
-          "q3": false
-        },
-        {
-          "fullName": "Valtteri Bottas",
-          "abbr": "BOT",
-          "team": "Cadillac F1 Team",
-          "position": 19,
-          "bestTimeSec": 107.823,
-          "bestTimeStr": "1:47.823",
-          "q3": false
-        },
-        {
-          "fullName": "Sergio Pérez",
-          "abbr": "PER",
-          "team": "Cadillac F1 Team",
-          "position": 20,
-          "bestTimeSec": 107.971,
-          "bestTimeStr": "1:47.971",
-          "q3": false
-        },
-        {
-          "fullName": "Fernando Alonso",
-          "abbr": "ALO",
-          "team": "Aston Martin",
-          "position": 21,
-          "bestTimeSec": 110.002,
-          "bestTimeStr": "1:50.002",
-          "q3": false
-        },
-        {
-          "fullName": "Lance Stroll",
-          "abbr": "STR",
-          "team": "Aston Martin",
-          "position": 22,
-          "bestTimeSec": 110.177,
-          "bestTimeStr": "1:50.177",
-          "q3": false
-        }
-      ]
-    },
-    {
       "round": 11,
       "gp": "Hungary",
       "shortName": "Hungaroring",
@@ -3682,6 +3476,194 @@
           "q3": false
         }
       ]
+    },
+    {
+      "round": 14,
+      "gp": "Spain - Madrid",
+      "shortName": "Madrid",
+      "type": "Q",
+      "drivers": [
+        {
+          "fullName": "Lando Norris",
+          "abbr": "NOR",
+          "team": "McLaren",
+          "position": 1,
+          "bestTimeSec": 91.824,
+          "bestTimeStr": "1:31.824",
+          "q3": true
+        },
+        {
+          "fullName": "Andrea Kimi Antonelli",
+          "abbr": "ANT",
+          "team": "Mercedes",
+          "position": 2,
+          "bestTimeSec": 91.835,
+          "bestTimeStr": "1:31.835",
+          "q3": true
+        },
+        {
+          "fullName": "Max Verstappen",
+          "abbr": "VER",
+          "team": "Red Bull",
+          "position": 3,
+          "bestTimeSec": 91.964,
+          "bestTimeStr": "1:31.964",
+          "q3": true
+        },
+        {
+          "fullName": "Lewis Hamilton",
+          "abbr": "HAM",
+          "team": "Ferrari",
+          "position": 4,
+          "bestTimeSec": 92.013,
+          "bestTimeStr": "1:32.013",
+          "q3": true
+        },
+        {
+          "fullName": "Charles Leclerc",
+          "abbr": "LEC",
+          "team": "Ferrari",
+          "position": 5,
+          "bestTimeSec": 92.019,
+          "bestTimeStr": "1:32.019",
+          "q3": true
+        },
+        {
+          "fullName": "George Russell",
+          "abbr": "RUS",
+          "team": "Mercedes",
+          "position": 6,
+          "bestTimeSec": 92.149,
+          "bestTimeStr": "1:32.149",
+          "q3": true
+        },
+        {
+          "fullName": "Oscar Piastri",
+          "abbr": "PIA",
+          "team": "McLaren",
+          "position": 7,
+          "bestTimeSec": 92.294,
+          "bestTimeStr": "1:32.294",
+          "q3": true
+        },
+        {
+          "fullName": "Liam Lawson",
+          "abbr": "LAW",
+          "team": "Red Bull",
+          "position": 8,
+          "bestTimeSec": 92.316,
+          "bestTimeStr": "1:32.316",
+          "q3": true
+        },
+        {
+          "fullName": "Franco Colapinto",
+          "abbr": "COL",
+          "team": "Alpine F1 Team",
+          "position": 9,
+          "bestTimeSec": 92.903,
+          "bestTimeStr": "1:32.903",
+          "q3": true
+        },
+        {
+          "fullName": "Arvid Lindblad",
+          "abbr": "LIN",
+          "team": "RB F1 Team",
+          "position": 10,
+          "bestTimeSec": 93.041,
+          "bestTimeStr": "1:33.041",
+          "q3": true
+        },
+        {
+          "fullName": "Nico Hülkenberg",
+          "abbr": "HUL",
+          "team": "Audi",
+          "position": 11,
+          "bestTimeSec": 93.223,
+          "bestTimeStr": "1:33.223",
+          "q3": false
+        },
+        {
+          "fullName": "Gabriel Bortoleto",
+          "abbr": "BOR",
+          "team": "Audi",
+          "position": 12,
+          "bestTimeSec": 93.388,
+          "bestTimeStr": "1:33.388",
+          "q3": false
+        },
+        {
+          "fullName": "Esteban Ocon",
+          "abbr": "OCO",
+          "team": "Haas F1 Team",
+          "position": 13,
+          "bestTimeSec": 93.667,
+          "bestTimeStr": "1:33.667",
+          "q3": false
+        },
+        {
+          "fullName": "Pierre Gasly",
+          "abbr": "GAS",
+          "team": "Alpine F1 Team",
+          "position": 14,
+          "bestTimeSec": 93.753,
+          "bestTimeStr": "1:33.753",
+          "q3": false
+        },
+        {
+          "fullName": "Yuki Tsunoda",
+          "abbr": "TSU",
+          "team": "RB F1 Team",
+          "position": 15,
+          "bestTimeSec": 94.084,
+          "bestTimeStr": "1:34.084",
+          "q3": false
+        },
+        {
+          "fullName": "Alexander Albon",
+          "abbr": "ALB",
+          "team": "Williams",
+          "position": 16,
+          "bestTimeSec": 95.532,
+          "bestTimeStr": "1:35.532",
+          "q3": false
+        },
+        {
+          "fullName": "Carlos Sainz",
+          "abbr": "SAI",
+          "team": "Williams",
+          "position": 17,
+          "bestTimeSec": 95.312,
+          "bestTimeStr": "1:35.312",
+          "q3": false
+        },
+        {
+          "fullName": "Fernando Alonso",
+          "abbr": "ALO",
+          "team": "Aston Martin",
+          "position": 18,
+          "bestTimeSec": 95.388,
+          "bestTimeStr": "1:35.388",
+          "q3": false
+        },
+        {
+          "fullName": "Sergio Pérez",
+          "abbr": "PER",
+          "team": "Cadillac F1 Team",
+          "position": 19,
+          "bestTimeSec": 95.913,
+          "bestTimeStr": "1:35.913",
+          "q3": false
+        },
+        {
+          "fullName": "Valtteri Bottas",
+          "abbr": "BOT",
+          "team": "Cadillac F1 Team",
+          "position": 20,
+          "bestTimeSec": 98.011,
+          "bestTimeStr": "1:38.011",
+          "q3": false
+        }
+      ]
     }
   ],
   "teammates": [
@@ -3813,18 +3795,6 @@
           "posB": 4
         },
         {
-          "round": 10,
-          "gp": "Belgium",
-          "shortName": "Spa",
-          "type": "Q",
-          "fastest": "Andrea Kimi Antonelli",
-          "gapSec": 0.508,
-          "timeA": "1:44.361",
-          "timeB": "1:44.869",
-          "posA": 1,
-          "posB": 4
-        },
-        {
           "round": 11,
           "gp": "Hungary",
           "shortName": "Hungaroring",
@@ -3859,6 +3829,18 @@
           "timeB": "1:21.846",
           "posA": 7,
           "posB": 2
+        },
+        {
+          "round": 14,
+          "gp": "Spain - Madrid",
+          "shortName": "Madrid",
+          "type": "Q",
+          "fastest": "Andrea Kimi Antonelli",
+          "gapSec": 0.314,
+          "timeA": "1:31.835",
+          "timeB": "1:32.149",
+          "posA": 2,
+          "posB": 6
         }
       ]
     },
@@ -3876,7 +3858,7 @@
       "q3Count": {
         "Isack Hadjar": 9,
         "Max Verstappen": 11,
-        "Liam Lawson": 1
+        "Liam Lawson": 2
       },
       "sessions": []
     },
@@ -3888,8 +3870,8 @@
       ],
       "h2h": {
         "Q": {
-          "Charles Leclerc": 7,
-          "Lewis Hamilton": 6
+          "Charles Leclerc": 6,
+          "Lewis Hamilton": 7
         },
         "SQ": {
           "Lewis Hamilton": 3,
@@ -4058,18 +4040,6 @@
           "posB": null
         },
         {
-          "round": 10,
-          "gp": "Belgium",
-          "shortName": "Spa",
-          "type": "Q",
-          "fastest": "Charles Leclerc",
-          "gapSec": 0.002,
-          "timeA": "1:44.893",
-          "timeB": "1:44.895",
-          "posA": 5,
-          "posB": 6
-        },
-        {
           "round": 11,
           "gp": "Hungary",
           "shortName": "Hungaroring",
@@ -4116,6 +4086,18 @@
           "timeB": "1:22.011",
           "posA": 4,
           "posB": 5
+        },
+        {
+          "round": 14,
+          "gp": "Spain - Madrid",
+          "shortName": "Madrid",
+          "type": "Q",
+          "fastest": "Lewis Hamilton",
+          "gapSec": 0.006,
+          "timeA": "1:32.019",
+          "timeB": "1:32.013",
+          "posA": 5,
+          "posB": 4
         }
       ]
     },
@@ -4296,18 +4278,6 @@
           "posB": null
         },
         {
-          "round": 10,
-          "gp": "Belgium",
-          "shortName": "Spa",
-          "type": "Q",
-          "fastest": "Lando Norris",
-          "gapSec": 0.215,
-          "timeA": "1:44.801",
-          "timeB": "1:45.016",
-          "posA": 3,
-          "posB": 7
-        },
-        {
           "round": 11,
           "gp": "Hungary",
           "shortName": "Hungaroring",
@@ -4354,6 +4324,18 @@
           "timeB": "1:21.966",
           "posA": 9,
           "posB": 3
+        },
+        {
+          "round": 14,
+          "gp": "Spain - Madrid",
+          "shortName": "Madrid",
+          "type": "Q",
+          "fastest": "Lando Norris",
+          "gapSec": 0.47,
+          "timeA": "1:31.824",
+          "timeB": "1:32.294",
+          "posA": 1,
+          "posB": 7
         }
       ]
     },
@@ -4367,7 +4349,7 @@
       "h2h": {
         "Q": {
           "Liam Lawson": 5,
-          "Arvid Lindblad": 6
+          "Arvid Lindblad": 5
         },
         "SQ": {}
       },
@@ -4485,18 +4467,6 @@
           "posB": 10
         },
         {
-          "round": 10,
-          "gp": "Belgium",
-          "shortName": "Spa",
-          "type": "Q",
-          "fastest": "Arvid Lindblad",
-          "gapSec": 0.977,
-          "timeA": "1:45.143",
-          "timeB": "1:46.120",
-          "posA": 8,
-          "posB": 11
-        },
-        {
           "round": 11,
           "gp": "Hungary",
           "shortName": "Hungaroring",
@@ -4525,7 +4495,7 @@
         }
       },
       "q3Count": {
-        "Gabriel Bortoleto": 3,
+        "Gabriel Bortoleto": 2,
         "Nico Hülkenberg": 2
       },
       "sessions": [
@@ -4599,7 +4569,7 @@
       ],
       "h2h": {
         "Q": {
-          "Oliver Bearman": 9,
+          "Oliver Bearman": 8,
           "Esteban Ocon": 4
         },
         "SQ": {
@@ -4768,18 +4738,6 @@
           "posB": null
         },
         {
-          "round": 10,
-          "gp": "Belgium",
-          "shortName": "Spa",
-          "type": "Q",
-          "fastest": "Oliver Bearman",
-          "gapSec": 1.022,
-          "timeA": "1:47.801",
-          "timeB": "1:46.779",
-          "posA": 18,
-          "posB": 16
-        },
-        {
           "round": 11,
           "gp": "Hungary",
           "shortName": "Hungaroring",
@@ -4837,14 +4795,14 @@
       ],
       "h2h": {
         "Q": {
-          "Pierre Gasly": 10,
-          "Franco Colapinto": 3
+          "Pierre Gasly": 9,
+          "Franco Colapinto": 4
         },
         "SQ": {}
       },
       "q3Count": {
         "Pierre Gasly": 5,
-        "Franco Colapinto": 3
+        "Franco Colapinto": 4
       },
       "sessions": [
         {
@@ -4956,18 +4914,6 @@
           "posB": 12
         },
         {
-          "round": 10,
-          "gp": "Belgium",
-          "shortName": "Spa",
-          "type": "Q",
-          "fastest": "Pierre Gasly",
-          "gapSec": 0.061,
-          "timeA": "1:46.392",
-          "timeB": "1:46.331",
-          "posA": 13,
-          "posB": 12
-        },
-        {
           "round": 11,
           "gp": "Hungary",
           "shortName": "Hungaroring",
@@ -5002,6 +4948,18 @@
           "timeB": "1:21.786",
           "posA": 8,
           "posB": 1
+        },
+        {
+          "round": 14,
+          "gp": "Spain - Madrid",
+          "shortName": "Madrid",
+          "type": "Q",
+          "fastest": "Franco Colapinto",
+          "gapSec": 0.85,
+          "timeA": "1:32.903",
+          "timeB": "1:33.753",
+          "posA": 9,
+          "posB": 14
         }
       ]
     },
@@ -5156,18 +5114,6 @@
           "posB": null
         },
         {
-          "round": 10,
-          "gp": "Belgium",
-          "shortName": "Spa",
-          "type": "Q",
-          "fastest": "Carlos Sainz",
-          "gapSec": 0.343,
-          "timeA": "1:47.120",
-          "timeB": "1:46.777",
-          "posA": 17,
-          "posB": 15
-        },
-        {
           "round": 11,
           "gp": "Hungary",
           "shortName": "Hungaroring",
@@ -5214,6 +5160,18 @@
           "timeB": "1:23.453",
           "posA": 18,
           "posB": 15
+        },
+        {
+          "round": 14,
+          "gp": "Spain - Madrid",
+          "shortName": "Madrid",
+          "type": "Q",
+          "fastest": "Carlos Sainz",
+          "gapSec": 0.22,
+          "timeA": "1:35.532",
+          "timeB": "1:35.312",
+          "posA": 16,
+          "posB": 17
         }
       ]
     },
@@ -5225,7 +5183,7 @@
       ],
       "h2h": {
         "Q": {
-          "Fernando Alonso": 10,
+          "Fernando Alonso": 9,
           "Lance Stroll": 2
         },
         "SQ": {
@@ -5380,18 +5338,6 @@
           "posB": null
         },
         {
-          "round": 10,
-          "gp": "Belgium",
-          "shortName": "Spa",
-          "type": "Q",
-          "fastest": "Fernando Alonso",
-          "gapSec": 0.175,
-          "timeA": "1:50.002",
-          "timeB": "1:50.177",
-          "posA": 21,
-          "posB": 22
-        },
-        {
           "round": 11,
           "gp": "Hungary",
           "shortName": "Hungaroring",
@@ -5449,8 +5395,8 @@
       ],
       "h2h": {
         "Q": {
-          "Sergio Pérez": 6,
-          "Valtteri Bottas": 7
+          "Sergio Pérez": 7,
+          "Valtteri Bottas": 6
         },
         "SQ": {}
       },
@@ -5565,18 +5511,6 @@
           "posB": 18
         },
         {
-          "round": 10,
-          "gp": "Belgium",
-          "shortName": "Spa",
-          "type": "Q",
-          "fastest": "Valtteri Bottas",
-          "gapSec": 0.148,
-          "timeA": "1:47.971",
-          "timeB": "1:47.823",
-          "posA": 20,
-          "posB": 19
-        },
-        {
           "round": 11,
           "gp": "Hungary",
           "shortName": "Hungaroring",
@@ -5611,6 +5545,18 @@
           "timeB": "1:24.364",
           "posA": 20,
           "posB": 19
+        },
+        {
+          "round": 14,
+          "gp": "Spain - Madrid",
+          "shortName": "Madrid",
+          "type": "Q",
+          "fastest": "Sergio Pérez",
+          "gapSec": 2.098,
+          "timeA": "1:35.913",
+          "timeB": "1:38.011",
+          "posA": 19,
+          "posB": 20
         }
       ]
     },
