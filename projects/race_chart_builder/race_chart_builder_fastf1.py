@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import argparse
+import csv
 import json
 import os
 import sys
+import time
 from datetime import datetime
 
 import fastf1
@@ -21,10 +23,14 @@ if _PROJECTS_DIR not in sys.path:
     sys.path.insert(0, _PROJECTS_DIR)
 
 from gp_naming import check_unique, col_name  # noqa: E402
+from team_naming import canonical_team  # noqa: E402
 
 # Mapping fallback des photos pilotes (utilisé quand FastF1 ne fournit pas
 # HeadshotUrl, ce qui arrive notamment sur runners Linux / cache vide).
 DRIVER_IMAGES_PATH = os.path.join(_HERE, "..", "dashboard", "driver_images.json")
+
+# Colonnes non-GP du CSV : tout le reste est une colonne de Grand Prix.
+META_COLUMNS = {"Pilote", "image", "team", "start"}
 
 
 def load_driver_images_fallback() -> dict[str, str]:
@@ -53,6 +59,7 @@ class RaceChartBuilderFastF1:
         self.output_file = os.path.join(outputs_dir, output_file)
         self.drivers_data = {}
         self.race_keys = []
+        self.failed_rounds: list[tuple[int, str]] = []
         self.driver_images_fallback = load_driver_images_fallback()
 
     @staticmethod
@@ -60,6 +67,60 @@ class RaceChartBuilderFastF1:
         # Délègue à projects/gp_naming.py : les colonnes de ce CSV servent de
         # clés au calendrier du dashboard, les deux doivent suivre la même règle.
         return col_name(country, locality)
+
+    def _load_race_with_retry(self, round_no: int, col_name: str, attempts: int = 3):
+        """Charge la session Race d'un round, avec retry exponentiel.
+
+        Retourne la session chargée, ou None si tous les essais ont échoué.
+        Les échecs sont journalisés : un GP qui disparaît silencieusement fausse
+        tout le cumul en aval (dashboard, duels qualif), le bruit est voulu.
+        """
+        for attempt in range(1, attempts + 1):
+            try:
+                race = fastf1.get_session(self.season, round_no, "Race")
+                race.load()
+                if race.results is None or len(race.results) == 0:
+                    raise ValueError("résultats vides")
+                return race
+            except Exception as exc:  # noqa: BLE001 - on veut tout retenter
+                print(
+                    f"[!] round {round_no} ({col_name}) : echec {attempt}/{attempts} - {exc}",
+                    file=sys.stderr,
+                )
+                if attempt < attempts:
+                    time.sleep(2**attempt)
+        return None
+
+    def _existing_race_columns(self) -> list[str]:
+        """Colonnes de GP présentes dans le CSV déjà écrit (vide s'il n'existe pas)."""
+        if not os.path.exists(self.output_file):
+            return []
+        try:
+            with open(self.output_file, encoding="utf-8-sig", newline="") as f:
+                header = next(csv.reader(f))
+        except (OSError, StopIteration):
+            return []
+        return [c for c in header if c not in META_COLUMNS]
+
+    def _assert_no_regression(self) -> None:
+        """Interdit d'écrire un CSV qui perdrait un GP déjà publié.
+
+        Le CSV est reconstruit intégralement à chaque run : une session
+        momentanément indisponible côté FastF1 (ce qui est arrivé à Spa lors du
+        refresh post-Madrid) supprimait la colonne du GP et retirait ses points
+        du cumul de tous les pilotes. Mieux vaut échouer et garder le fichier
+        précédent que publier un classement faux.
+        """
+        missing = [c for c in self._existing_race_columns() if c not in self.race_keys]
+        if not missing:
+            return
+        details = ", ".join(f"round {r} ({n})" for r, n in self.failed_rounds) or "aucun"
+        raise SystemExit(
+            "[ECHEC] Le CSV regenere perdrait des GP deja publies : "
+            f"{', '.join(missing)}.\n"
+            f"        Sessions non chargees ce run : {details}.\n"
+            "        Fichier existant conserve, rien n'a ete ecrit."
+        )
 
     def build_results_table(self):
         schedule = fastf1.get_event_schedule(self.season)
@@ -85,12 +146,12 @@ class RaceChartBuilderFastF1:
             round_no = int(event["RoundNumber"])
             col_name = self._col_name(event["Country"], event["Location"])
 
-            try:
-                race = fastf1.get_session(self.season, round_no, "Race")
-                race.load()
-                if race.results is None or len(race.results) == 0:
-                    continue
-            except Exception:
+            # Un GP passé qui n'a pas pu être chargé n'est PAS "pas encore
+            # couru" : on retente, puis on le mémorise pour que export_csv()
+            # refuse d'écrire un CSV amputé (cf. _assert_no_regression).
+            race = self._load_race_with_retry(round_no, col_name)
+            if race is None:
+                self.failed_rounds.append((round_no, col_name))
                 continue
 
             # On garde la même logique ensuite
@@ -125,7 +186,7 @@ class RaceChartBuilderFastF1:
             # cumuler les points (Race + Sprint éventuel)
             for _, row in race_results.iterrows():
                 full_name = row.FullName
-                team = row.TeamName
+                team = canonical_team(row.TeamName)
                 # 1) HeadshotUrl FastF1 si fourni (cas idéal)
                 # 2) sinon fallback via driver_images.json (par abréviation FIA)
                 # 3) sinon chaîne vide (comportement historique)
@@ -146,6 +207,14 @@ class RaceChartBuilderFastF1:
                     # initialiser toutes les colonnes passées à 0
                     for past in self.race_keys:
                         self.drivers_data[full_name][past] = 0
+                else:
+                    # Les GP sont parcourus dans l'ordre : l'écurie du dernier GP
+                    # couru fait foi. Sans ça, un pilote transféré en cours de
+                    # saison (Lawson → Red Bull à Zandvoort) resterait affiché
+                    # sous son écurie de début d'année.
+                    self.drivers_data[full_name]["team"] = team
+                    if image:
+                        self.drivers_data[full_name]["image"] = image
 
                 # cumul
                 if idx == 0:
@@ -167,6 +236,8 @@ class RaceChartBuilderFastF1:
         if not self.race_keys:
             print("[!] Aucun GP couru detecte - rien a exporter.")
             return
+
+        self._assert_no_regression()
 
         last_gp = self.race_keys[-1]
         df = df.sort_values(by=last_gp, ascending=False)

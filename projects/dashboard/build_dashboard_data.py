@@ -25,6 +25,9 @@ ROOT = HERE.parents[1]
 CSV_SRC = (
     ROOT / "projects" / "race_chart_builder" / "web" / "data" / "f1_race_chart_fastf1_2026.csv"
 )
+HEATMAP_CSV = (
+    ROOT / "projects" / "season_summary_heatmap" / "outputs" / "f1_2026_leaders_heatmap.csv"
+)
 CALENDAR_PATH = HERE / "calendar_2026.json"
 OUT_WEB = HERE / "web" / "data" / "dashboard_2026.json"
 OUT_DOCS = ROOT / "docs" / "data" / "dashboard_2026.json"
@@ -52,6 +55,74 @@ def to_float(v: str | None) -> float:
         return float(v) if v not in (None, "") else 0.0
     except ValueError:
         return 0.0
+
+
+def load_points_by_gp() -> list[dict] | None:
+    """Points marqués par (pilote, GP) avec l'écurie de l'époque, lus dans la heatmap.
+
+    Le CSV race chart ne porte qu'une écurie par pilote (la dernière connue) :
+    il ne permet pas d'attribuer correctement les points d'un pilote transféré
+    en cours de saison. Le CSV de la heatmap, lui, historise l'écurie GP par GP.
+    Retourne None si le fichier est absent — l'appelant retombe alors sur
+    l'agrégation par écurie courante.
+    """
+    if not HEATMAP_CSV.exists():
+        return None
+    try:
+        with HEATMAP_CSV.open(encoding="utf-8", newline="") as f:
+            rows = list(csv.DictReader(f))
+    except OSError:
+        return None
+    if not rows:
+        return None
+    return rows
+
+
+def aggregate_constructors(
+    points_rows: list[dict] | None, expected_total: int
+) -> dict[str, dict] | None:
+    """Agrège les points par écurie, en créditant l'écurie du jour du GP.
+
+    Retourne None si la heatmap ne totalise pas exactement les mêmes points que
+    le classement pilotes : les deux CSV sont produits par des builders
+    distincts et peuvent être désynchronisés d'un GP (c'est arrivé après
+    Madrid). Dans ce cas l'appelant retombe sur l'agrégation par écurie
+    courante, approximative mais jamais incohérente avec les pilotes affichés.
+    """
+    if not points_rows:
+        return None
+    # Le CSV heatmap n'expose pas le numéro de round, mais chaque pilote y voit
+    # ses GP listés dans l'ordre chronologique : l'ordre de première apparition
+    # des libellés reconstitue donc le calendrier, dernier GP inclus — y compris
+    # si le pilote écrit en dernier a manqué la course finale.
+    seen: list[str] = []
+    for r in points_rows:
+        event = r.get("EventNameFull", "")
+        if event and event not in seen:
+            seen.append(event)
+    if not seen:
+        return None
+    last_event = seen[-1]
+
+    teams: dict[str, dict] = {}
+    for r in points_rows:
+        team = r.get("Team", "")
+        if not team:
+            continue
+        bucket = teams.setdefault(team, {"team": team, "points": 0, "deltaLastGp": 0})
+        pts = int(to_float(r.get("Points")))
+        bucket["points"] += pts
+        if r.get("EventNameFull") == last_event:
+            bucket["deltaLastGp"] += pts
+
+    if sum(b["points"] for b in teams.values()) != expected_total:
+        print(
+            "[!] heatmap desynchronisee du classement pilotes - "
+            "agregation constructeurs par ecurie courante",
+            file=sys.stderr,
+        )
+        return None
+    return teams
 
 
 def compute_kpis(rows: list[dict], gp_columns: list[str]) -> tuple[dict, str]:
@@ -161,15 +232,20 @@ def compute_standings(
         d["rank"] = i + 1
         d["leaderGap"] = d["points"] - leader_pts  # 0 ou négatif
 
-    # Constructeurs : agrégation par écurie
-    teams: dict[str, dict] = {}
-    for d in drivers:
-        t = d["team"]
-        if not t:
-            continue
-        bucket = teams.setdefault(t, {"team": t, "points": 0, "deltaLastGp": 0})
-        bucket["points"] += d["points"]
-        bucket["deltaLastGp"] += d["deltaLastGp"]
+    # Constructeurs : agrégation GP par GP (et non par l'écurie actuelle du
+    # pilote). Un transfert en cours de saison — Lawson passé de Racing Bulls à
+    # Red Bull Racing à Zandvoort — créditerait sinon sa nouvelle écurie des
+    # points marqués pour l'ancienne.
+    teams = aggregate_constructors(load_points_by_gp(), sum(d["points"] for d in drivers))
+    if teams is None:
+        teams = {}
+        for d in drivers:
+            t = d["team"]
+            if not t:
+                continue
+            bucket = teams.setdefault(t, {"team": t, "points": 0, "deltaLastGp": 0})
+            bucket["points"] += d["points"]
+            bucket["deltaLastGp"] += d["deltaLastGp"]
 
     constructors = sorted(teams.values(), key=lambda x: x["points"], reverse=True)
     leader_team_pts = constructors[0]["points"] if constructors else 0

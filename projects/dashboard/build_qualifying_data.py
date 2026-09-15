@@ -30,10 +30,18 @@ import pandas as pd
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
+
+# Nommage des écuries partagé avec les autres builders.
+if str(ROOT / "projects") not in sys.path:
+    sys.path.insert(0, str(ROOT / "projects"))
+
+from team_naming import canonical_team  # noqa: E402
+
 CALENDAR_PATH = HERE / "calendar_2026.json"
 RACE_CHART_CSV = (
     ROOT / "projects" / "race_chart_builder" / "web" / "data" / "f1_race_chart_fastf1_2026.csv"
 )
+DRIVER_IMAGES_PATH = HERE / "driver_images.json"
 OUT_WEB = HERE / "web" / "data" / "qualifying_2026.json"
 OUT_DOCS = ROOT / "docs" / "data" / "qualifying_2026.json"
 
@@ -67,8 +75,47 @@ def best_time_for_driver(row: pd.Series) -> tuple[float | None, bool]:
     return best, q3 is not None
 
 
+def load_display_names() -> dict[str, str]:
+    """Table { abréviation FIA : nom affiché par le dashboard }.
+
+    FastF1 ne renvoie pas un nom de pilote stable d'une session à l'autre : les
+    Q donnent "Andrea Kimi Antonelli" là où les SQ donnent "Kimi Antonelli",
+    "Nico Hülkenberg" alterne avec "Nico Hulkenberg". Sans normalisation, le
+    même pilote compte pour deux dans les duels coéquipiers et l'écurie se
+    retrouve avec trois pilotes. L'abréviation FIA, elle, est stable.
+
+    Le nom retenu est celui du CSV race chart (ce que le classement affiche),
+    relié à l'abréviation via l'URL de photo de driver_images.json ; à défaut,
+    le nom de driver_images.json.
+    """
+    try:
+        images = json.loads(DRIVER_IMAGES_PATH.read_text(encoding="utf-8")).get("drivers", {})
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+    names_by_image: dict[str, str] = {}
+    try:
+        df = pd.read_csv(RACE_CHART_CSV, encoding="utf-8-sig")
+        for _, row in df.iterrows():
+            image = str(row.get("image", "") or "")
+            if image:
+                names_by_image[image] = str(row["Pilote"])
+    except (OSError, pd.errors.ParserError, KeyError):
+        pass
+
+    out: dict[str, str] = {}
+    for abbr, info in images.items():
+        image = info.get("image", "")
+        out[abbr] = names_by_image.get(image) or info.get("name", "")
+    return {k: v for k, v in out.items() if v}
+
+
 def load_round_session(
-    year: int, round_no: int, session_code: str, label: str = ""
+    year: int,
+    round_no: int,
+    session_code: str,
+    label: str = "",
+    display_names: dict[str, str] | None = None,
 ) -> list[dict] | None:
     """Charge une session ('Q' ou 'SQ') et retourne la liste pilotes avec leur temps de référence.
 
@@ -101,20 +148,22 @@ def load_round_session(
             if fastest is not None and not pd.isna(fastest.get("LapTime")):
                 best_lap_by_driver[str(drv)] = to_seconds(fastest["LapTime"])
 
+    display_names = display_names or {}
     out = []
     for _, row in results.iterrows():
+        abbr = str(row.get("Abbreviation", ""))
         if session_code == "Q":
             best, did_q3 = best_time_for_driver(row)
         else:
             # SQ : meilleur tour via les laps, indexé par Abbreviation (DriverCode)
-            abbr = str(row.get("Abbreviation", ""))
             best = best_lap_by_driver.get(abbr)
             did_q3 = False  # Q3 ne s'applique qu'aux Q régulières
+        raw_name = f"{row.get('FirstName','').strip()} {row.get('LastName','').strip()}".strip()
         out.append(
             {
-                "fullName": f"{row.get('FirstName','').strip()} {row.get('LastName','').strip()}".strip(),
-                "abbr": str(row.get("Abbreviation", "")),
-                "team": str(row.get("TeamName", "")),
+                "fullName": display_names.get(abbr, raw_name),
+                "abbr": abbr,
+                "team": canonical_team(row.get("TeamName", "")),
                 "position": int(row["Position"]) if not pd.isna(row.get("Position")) else None,
                 "bestTimeSec": best,
                 "bestTimeStr": format_lap(best),
@@ -156,6 +205,33 @@ def load_played_gp_names() -> list[str]:
     return [c for c in df.columns if c not in META]
 
 
+def normalize_session(session: dict, display_names: dict[str, str]) -> dict:
+    """Réapplique le nommage canonique pilote/écurie à une session déjà stockée."""
+    drivers = []
+    for d in session.get("drivers", []):
+        drivers.append(
+            {
+                **d,
+                "fullName": display_names.get(d.get("abbr", ""), d.get("fullName", "")),
+                "team": canonical_team(d.get("team", "")),
+            }
+        )
+    return {**session, "drivers": drivers}
+
+
+def current_pair(items: list[tuple[dict, list[dict]]]) -> list[str]:
+    """Duo courant d'une écurie : les 2 pilotes du dernier GP où elle en alignait 2.
+
+    Retourne les deux noms triés par ordre alphabétique (le front s'appuie sur
+    cet ordre pour fixer les côtés A/B de la timeline), ou [] si l'écurie n'a
+    jamais aligné exactement deux pilotes.
+    """
+    for meta, drvs in sorted(items, key=lambda it: (it[0]["round"], it[0]["type"]), reverse=True):
+        if len(drvs) == 2:
+            return sorted(d["fullName"] for d in drvs)
+    return []
+
+
 def build_teammate_pairs(sessions_data: list[dict]) -> list[dict]:
     """Pour chaque écurie, agrège les duels coéquipier sur Q + SQ.
 
@@ -173,12 +249,14 @@ def build_teammate_pairs(sessions_data: list[dict]) -> list[dict]:
 
     teams_out = []
     for team, items in by_team.items():
-        # Pilotes "titulaires" (apparaissent au moins une fois) — ordre alpha
-        names_set = set()
-        for _, drvs in items:
-            for d in drvs:
-                names_set.add(d["fullName"])
-        names = sorted(names_set)
+        # Paire de référence = le dernier duo aligné par l'écurie, pas l'union de
+        # tous les pilotes vus. Un transfert en cours de saison (Lawson chez Red
+        # Bull à Zandvoort, Tsunoda chez Racing Bulls) faisait sinon apparaître
+        # trois pilotes, et le front n'en affichait que les deux premiers par
+        # ordre alphabétique — donc un duel qui n'a jamais eu lieu.
+        names = current_pair(items)
+        if not names:
+            continue
 
         h2h = {"Q": defaultdict(int), "SQ": defaultdict(int)}
         q3_count = defaultdict(int)
@@ -189,7 +267,7 @@ def build_teammate_pairs(sessions_data: list[dict]) -> list[dict]:
             # Compteur Q3 (sessions Q uniquement — Q3 n'existe pas en SQ)
             if stype == "Q":
                 for d in drvs:
-                    if d["q3"]:
+                    if d["q3"] and d["fullName"] in names:
                         q3_count[d["fullName"]] += 1
 
             # Duel : exactement 2 pilotes du team, deux temps présents
@@ -246,6 +324,7 @@ def main() -> int:
     print(f"[INFO] {len(rounds_in_scope)} GP joués détectés")
 
     previous_sessions = load_previous_sessions()
+    display_names = load_display_names()
 
     def append_or_fallback(sessions_data: list, meta: dict, drivers: list | None) -> None:
         """Ajoute la session ou, si le chargement a échoué, réutilise la précédente."""
@@ -261,7 +340,9 @@ def main() -> int:
                 f"préservation de la session précédente",
                 file=sys.stderr,
             )
-            sessions_data.append(fallback)
+            # La session préservée a pu être écrite avant la normalisation :
+            # on la repasse au même moule que les sessions fraîches.
+            sessions_data.append(normalize_session(fallback, display_names))
         else:
             print(
                 f"  [MISS {meta['shortName']} {stype}] chargement échoué et aucune donnée antérieure",
@@ -280,14 +361,18 @@ def main() -> int:
         # Session principale : Qualifying
         print(f"  - {r['shortName']} (Q)")
         append_or_fallback(
-            sessions_data, meta_q, load_round_session(SEASON, r["round"], "Q", r["shortName"])
+            sessions_data,
+            meta_q,
+            load_round_session(SEASON, r["round"], "Q", r["shortName"], display_names),
         )
         # Sprint Qualifying (uniquement week-ends sprint)
         if is_sprint:
             meta_sq = {**meta_q, "type": "SQ"}
             print(f"  - {r['shortName']} (SQ)")
             append_or_fallback(
-                sessions_data, meta_sq, load_round_session(SEASON, r["round"], "SQ", r["shortName"])
+                sessions_data,
+                meta_sq,
+                load_round_session(SEASON, r["round"], "SQ", r["shortName"], display_names),
             )
 
     teammates = build_teammate_pairs(sessions_data)

@@ -146,3 +146,68 @@ def test_load_round_session_asks_fastf1_by_round_number(monkeypatch) -> None:
 
     assert captured["gp"] == 7
     assert isinstance(captured["gp"], int)
+
+
+def test_build_teammate_pairs_midseason_transfer() -> None:
+    """Un transfert en cours de saison ne doit pas produire une écurie à 3 pilotes.
+
+    Lawson est passé de Racing Bulls à Red Bull Racing à Zandvoort : l'union de
+    tous les pilotes vus donnait [Hadjar, Lawson, Verstappen] chez Red Bull, et
+    le front n'affichait que les deux premiers par ordre alphabétique — soit un
+    duel Hadjar/Lawson qui n'a jamais eu lieu. Seul le duo courant compte.
+    """
+    sessions = [
+        _session(
+            11,
+            "Hungary",
+            "Hungaroring",
+            "Q",
+            [
+                _driver("Max Verstappen", "Red Bull Racing", 75.100, q3=True),
+                _driver("Isack Hadjar", "Red Bull Racing", 75.400, q3=True),
+            ],
+        ),
+        _session(
+            12,
+            "Netherlands",
+            "Zandvoort",
+            "Q",
+            [
+                _driver("Max Verstappen", "Red Bull Racing", 70.200, q3=True),
+                _driver("Liam Lawson", "Red Bull Racing", 70.500, q3=True),
+            ],
+        ),
+    ]
+    team = bq.build_teammate_pairs(sessions)[0]
+    assert team["drivers"] == ["Liam Lawson", "Max Verstappen"]
+    # Seule la session du duo courant est comptée
+    assert [s["round"] for s in team["sessions"]] == [12]
+    # Hadjar n'apparaît nulle part, y compris dans le compteur Q3
+    assert "Isack Hadjar" not in team["q3Count"]
+    # Le compteur Q3 reste une stat individuelle de saison : Verstappen garde
+    # ses deux Q3, même si le duel Hadjar n'est plus comptabilisé.
+    assert team["q3Count"]["Max Verstappen"] == 2
+
+
+def test_current_pair_ignores_solo_entries() -> None:
+    """Une écurie n'ayant jamais aligné deux pilotes ne produit pas de duel."""
+    sessions = [
+        _session(1, "Australia", "Melbourne", "Q", [_driver("Solo Driver", "Ghost", 80.0)]),
+    ]
+    assert bq.build_teammate_pairs(sessions) == []
+
+
+def test_normalize_session_applies_canonical_names() -> None:
+    """Une session préservée (fallback) repasse par le nommage canonique."""
+    stored = _session(
+        2,
+        "China",
+        "Shanghai",
+        "SQ",
+        [
+            {**_driver("Kimi Antonelli", "RB F1 Team", 90.0), "abbr": "ANT"},
+        ],
+    )
+    out = bq.normalize_session(stored, {"ANT": "Andrea Kimi Antonelli"})
+    assert out["drivers"][0]["fullName"] == "Andrea Kimi Antonelli"
+    assert out["drivers"][0]["team"] == "Racing Bulls"

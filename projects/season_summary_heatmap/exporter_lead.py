@@ -1,7 +1,15 @@
 import os
+import sys
 
 import fastf1 as ff1
 import pandas as pd
+
+# Le nommage des écuries est partagé avec le dashboard (projects/team_naming.py).
+_PROJECTS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _PROJECTS_DIR not in sys.path:
+    sys.path.insert(0, _PROJECTS_DIR)
+
+from team_naming import canonical_team  # noqa: E402
 
 SPRINT_EVENT_FORMATS = {"sprint", "sprint_shootout", "sprint_qualifying"}
 
@@ -89,7 +97,7 @@ class F1FlourishExporterLead:
 
                 for _, driver_row in race.results.iterrows():
                     abbreviation = driver_row["Abbreviation"]
-                    team = driver_row["TeamName"]
+                    team = canonical_team(driver_row["TeamName"])
                     driver_name = driver_row["FullName"]
                     points = driver_row["Points"]
                     grid_position = driver_row.get(
