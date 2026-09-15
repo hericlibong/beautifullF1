@@ -178,33 +178,6 @@
           "bestTimeSec": 83.244,
           "bestTimeStr": "1:23.244",
           "q3": false
-        },
-        {
-          "fullName": "Lance Stroll",
-          "abbr": "STR",
-          "team": "Aston Martin",
-          "position": null,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
-        },
-        {
-          "fullName": "Max Verstappen",
-          "abbr": "VER",
-          "team": "Red Bull Racing",
-          "position": null,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
-        },
-        {
-          "fullName": "Carlos Sainz",
-          "abbr": "SAI",
-          "team": "Williams",
-          "position": null,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
         }
       ]
     },
@@ -3894,24 +3867,6 @@
           "position": 20,
           "bestTimeSec": 98.011,
           "bestTimeStr": "1:38.011",
-          "q3": false
-        },
-        {
-          "fullName": "Lance Stroll",
-          "abbr": "STR",
-          "team": "Aston Martin",
-          "position": null,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
-        },
-        {
-          "fullName": "Oliver Bearman",
-          "abbr": "BEA",
-          "team": "Haas F1 Team",
-          "position": null,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
           "q3": false
         }
       ]
