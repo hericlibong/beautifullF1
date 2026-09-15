@@ -121,6 +121,16 @@ def main() -> int:
     else:
         print("\n>>> 5b/6 build_qualifying_data (sauté via --skip-fetch)")
 
+    # 5c) Contrôle de cohérence : on ne propage rien si les builders se
+    # contredisent (un GP perdu par l'un et pas par l'autre, cf. Spa le
+    # 14/09/2026). En CI, l'échec ici empêche l'étape de commit.
+    ok = run_step(
+        "5c/6 validate_outputs",
+        [PYTHON, str(db_root / "validate_outputs.py")],
+    )
+    if not ok:
+        return 1
+
     # 6) Sync vers docs/ (les 3 projets)
     for label, script in [
         ("race_chart sync", rc_root / "sync_to_docs.py"),
