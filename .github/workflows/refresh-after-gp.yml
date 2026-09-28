@@ -1,13 +1,18 @@
 name: Refresh data after GP
 
 # Déclenchement :
-#   - Cron lundi 14h UTC (race F1 = dimanche, FastF1 a propagé les résultats)
-#   - Cron mardi 14h UTC (filet de sécurité si FastF1 avait du retard lundi)
+#   - Cron quotidien 14h UTC
 #   - workflow_dispatch (bouton "Run workflow" dans l'onglet Actions)
+#
+# Pourquoi quotidien et non "le lundi après la course" : un cron GitHub Actions
+# est best-effort, il peut être retardé de plusieurs heures ou abandonné. Avec
+# deux crons hebdomadaires, un cron sauté = un GP perdu en silence (incident du
+# 28/09/2026, GP de Bakou). check_should_refresh.py compare les GP disputés aux
+# GP publiés : les jours sans retard, le job s'arrête après l'étape de contrôle
+# (~40 s) ; n'importe quel run ultérieur rattrape un run manqué.
 "on":
   schedule:
-    - cron: "0 14 * * 1"
-    - cron: "0 14 * * 2"
+    - cron: "0 14 * * *"
   workflow_dispatch: {}
 
 permissions:
