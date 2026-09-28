@@ -350,3 +350,56 @@ En cas de problème avec le nouveau cron, `workflow_dispatch` reste disponible.
 Le retour temporaire à une autre minute ne doit pas réintroduire une exécution
 uniquement hebdomadaire ni la logique de fenêtre glissante supprimée par
 `7e24957`.
+
+## 10. Revue complémentaire du 29/09/2026
+
+Une revue externe de l'implémentation a confirmé le diagnostic et relevé quatre
+points non bloquants. Aucun changement de code n'est engagé à ce stade.
+
+### 10.1 Premier run réellement planifié
+
+Au 29/09 à 00:49 heure de Paris, aucun run `schedule` utilisant le nouveau cron
+n'avait encore pu avoir lieu. Le premier créneau attendu est le 29/09 après
+14:23 UTC, soit 16:23 heure de Paris. Il faut observer plusieurs runs avant de
+comparer utilement leur retard aux anciennes mesures.
+
+**Classement :** preuve opérationnelle encore attendue, mais pas un défaut de
+code ni un blocage avant l'heure planifiée.
+
+### 10.2 Seuil du bandeau à 48 heures
+
+Avec le rattrapage quotidien, un cron du lundi sauté peut faire apparaître le
+bandeau le mardi avant que le run de 14:23 UTC ne corrige automatiquement les
+données. Le signal reste factuellement exact, mais peut sembler plus alarmant
+que nécessaire pendant cette fenêtre.
+
+**Décision :** conserver 48 heures pour le moment. Réévaluer après quelques
+runs réels ; options futures : seuil de trois jours ou deux niveaux de message
+(`rattrapage attendu` puis `retard anormal`).
+
+### 10.3 Sémantique ARIA du bandeau
+
+Le conteneur combine actuellement `role="alert"` et `aria-live="polite"`.
+`role="alert"` implique normalement une annonce assertive ; la combinaison est
+donc ambiguë selon les lecteurs d'écran.
+
+**Décision :** correction différée car elle ne bloque ni l'affichage ni la
+publication. Au prochain passage front-end/accessibilité, retenir une seule
+sémantique : probablement `role="status"` avec `aria-live="polite"` pour cette
+alerte non urgente.
+
+### 10.4 Couverture unitaire de `checkFreshness`
+
+Les tests E2E couvrent les données courantes et un GP manquant, mais pas encore
+la branche plusieurs GP, la valeur exacte de `daysLate` ni la borne du seuil.
+
+**Décision :** dette de test acceptée. La couverture navigateur actuelle est
+suffisante pour la mise en production ; compléter ces cas lors d'un futur
+chantier de tests JavaScript, sans introduire maintenant une infrastructure
+Node dans le pipeline.
+
+### 10.5 Priorité restante
+
+Le risque le plus important reste la désactivation après 60 jours d'inactivité.
+Le watchdog externe doit être choisi et déployé avant l'intersaison de décembre
+2026. Le bandeau actuel ne remplace pas une notification proactive.
