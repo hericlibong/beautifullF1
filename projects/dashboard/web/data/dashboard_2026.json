@@ -1,40 +1,40 @@
 {
   "season": 2026,
-  "generatedAt": "2026-09-15",
+  "generatedAt": "2026-09-28",
   "lastGp": {
-    "name": "Spain - Madrid",
-    "shortName": "Madrid",
-    "date": "2026-09-13",
+    "name": "Azerbaijan",
+    "shortName": "Baku",
+    "date": "2026-09-26",
     "isSprint": false,
     "winner": {
-      "name": "Andrea Kimi Antonelli",
+      "name": "George Russell",
       "team": "Mercedes"
     }
   },
   "nextGp": {
-    "name": "Azerbaijan",
-    "shortName": "Baku",
-    "date": "2026-09-26",
+    "name": "Bahrain",
+    "shortName": "Sepang",
+    "date": "2026-10-04",
     "isSprint": false
   },
   "kpis": {
     "leader": {
       "name": "Andrea Kimi Antonelli",
       "team": "Mercedes",
-      "points": 292
+      "points": 302
     },
     "second": {
       "name": "George Russell",
       "team": "Mercedes",
-      "points": 211
+      "points": 236
     },
-    "leaderGap": 81,
+    "leaderGap": 66,
     "lastWinner": {
-      "name": "Andrea Kimi Antonelli",
+      "name": "George Russell",
       "team": "Mercedes",
-      "gp": "Spain - Madrid"
+      "gp": "Azerbaijan"
     },
-    "raceCount": 14,
+    "raceCount": 15,
     "totalRaces": 23
   },
   "standings": {
@@ -44,8 +44,8 @@
         "shortName": "A. Kimi Antonelli",
         "team": "Mercedes",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/K/ANDANT01_Kimi_Antonelli/andant01.png.transform/1col/image.png",
-        "points": 292,
-        "deltaLastGp": 25,
+        "points": 302,
+        "deltaLastGp": 10,
         "progress": [
           {
             "gp": "Australia",
@@ -130,6 +130,12 @@
             "shortName": "Madrid",
             "gain": 25,
             "cumulative": 292
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 10,
+            "cumulative": 302
           }
         ],
         "rank": 1,
@@ -140,8 +146,8 @@
         "shortName": "G. Russell",
         "team": "Mercedes",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/G/GEORUS01_George_Russell/georus01.png.transform/1col/image.png",
-        "points": 211,
-        "deltaLastGp": 10,
+        "points": 236,
+        "deltaLastGp": 25,
         "progress": [
           {
             "gp": "Australia",
@@ -226,18 +232,24 @@
             "shortName": "Madrid",
             "gain": 10,
             "cumulative": 211
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 25,
+            "cumulative": 236
           }
         ],
         "rank": 2,
-        "leaderGap": -81
+        "leaderGap": -66
       },
       {
         "name": "Lewis Hamilton",
         "shortName": "L. Hamilton",
         "team": "Ferrari",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LEWHAM01_Lewis_Hamilton/lewham01.png.transform/1col/image.png",
-        "points": 191,
-        "deltaLastGp": 0,
+        "points": 199,
+        "deltaLastGp": 8,
         "progress": [
           {
             "gp": "Australia",
@@ -322,10 +334,16 @@
             "shortName": "Madrid",
             "gain": 0,
             "cumulative": 191
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 8,
+            "cumulative": 199
           }
         ],
         "rank": 3,
-        "leaderGap": -101
+        "leaderGap": -103
       },
       {
         "name": "Lando Norris",
@@ -333,7 +351,7 @@
         "team": "McLaren",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LANNOR01_Lando_Norris/lannor01.png.transform/1col/image.png",
         "points": 186,
-        "deltaLastGp": 15,
+        "deltaLastGp": 0,
         "progress": [
           {
             "gp": "Australia",
@@ -418,17 +436,23 @@
             "shortName": "Madrid",
             "gain": 15,
             "cumulative": 186
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 0,
+            "cumulative": 186
           }
         ],
         "rank": 4,
-        "leaderGap": -106
+        "leaderGap": -116
       },
       {
         "name": "Charles Leclerc",
         "shortName": "C. Leclerc",
         "team": "Ferrari",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/C/CHALEC01_Charles_Leclerc/chalec01.png.transform/1col/image.png",
-        "points": 167,
+        "points": 179,
         "deltaLastGp": 12,
         "progress": [
           {
@@ -514,17 +538,23 @@
             "shortName": "Madrid",
             "gain": 12,
             "cumulative": 167
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 12,
+            "cumulative": 179
           }
         ],
         "rank": 5,
-        "leaderGap": -125
+        "leaderGap": -123
       },
       {
         "name": "Max Verstappen",
         "shortName": "M. Verstappen",
         "team": "Red Bull Racing",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png.transform/1col/image.png",
-        "points": 145,
+        "points": 163,
         "deltaLastGp": 18,
         "progress": [
           {
@@ -610,10 +640,16 @@
             "shortName": "Madrid",
             "gain": 18,
             "cumulative": 145
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 18,
+            "cumulative": 163
           }
         ],
         "rank": 6,
-        "leaderGap": -147
+        "leaderGap": -139
       },
       {
         "name": "Oscar Piastri",
@@ -621,7 +657,7 @@
         "team": "McLaren",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/O/OSCPIA01_Oscar_Piastri/oscpia01.png.transform/1col/image.png",
         "points": 120,
-        "deltaLastGp": 4,
+        "deltaLastGp": 0,
         "progress": [
           {
             "gp": "Australia",
@@ -706,18 +742,24 @@
             "shortName": "Madrid",
             "gain": 4,
             "cumulative": 120
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 0,
+            "cumulative": 120
           }
         ],
         "rank": 7,
-        "leaderGap": -172
+        "leaderGap": -182
       },
       {
         "name": "Isack Hadjar",
         "shortName": "I. Hadjar",
         "team": "Red Bull Racing",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/I/ISAHAD01_Isack_Hadjar/isahad01.png.transform/1col/image.png",
-        "points": 71,
-        "deltaLastGp": 0,
+        "points": 86,
+        "deltaLastGp": 15,
         "progress": [
           {
             "gp": "Australia",
@@ -802,18 +844,24 @@
             "shortName": "Madrid",
             "gain": 0,
             "cumulative": 71
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 15,
+            "cumulative": 86
           }
         ],
         "rank": 8,
-        "leaderGap": -221
+        "leaderGap": -216
       },
       {
         "name": "Liam Lawson",
         "shortName": "L. Lawson",
-        "team": "Red Bull Racing",
+        "team": "Racing Bulls",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LIALAW01_Liam_Lawson/lialaw01.png.transform/1col/image.png",
         "points": 59,
-        "deltaLastGp": 8,
+        "deltaLastGp": 0,
         "progress": [
           {
             "gp": "Australia",
@@ -898,10 +946,16 @@
             "shortName": "Madrid",
             "gain": 8,
             "cumulative": 59
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 0,
+            "cumulative": 59
           }
         ],
         "rank": 9,
-        "leaderGap": -233
+        "leaderGap": -243
       },
       {
         "name": "Pierre Gasly",
@@ -994,18 +1048,24 @@
             "shortName": "Madrid",
             "gain": 0,
             "cumulative": 41
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 0,
+            "cumulative": 41
           }
         ],
         "rank": 10,
-        "leaderGap": -251
+        "leaderGap": -261
       },
       {
         "name": "Arvid Lindblad",
         "shortName": "A. Lindblad",
         "team": "Racing Bulls",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/A/ARVLIN01_Arvid_Lindblad/arvlin01.png.transform/1col/image.png",
-        "points": 31,
-        "deltaLastGp": 2,
+        "points": 37,
+        "deltaLastGp": 6,
         "progress": [
           {
             "gp": "Australia",
@@ -1090,10 +1150,16 @@
             "shortName": "Madrid",
             "gain": 2,
             "cumulative": 31
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 6,
+            "cumulative": 37
           }
         ],
         "rank": 11,
-        "leaderGap": -261
+        "leaderGap": -265
       },
       {
         "name": "Franco Colapinto",
@@ -1101,7 +1167,7 @@
         "team": "Alpine",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/F/FRACOL01_Franco_Colapinto/fracol01.png.transform/1col/image.png",
         "points": 27,
-        "deltaLastGp": 6,
+        "deltaLastGp": 0,
         "progress": [
           {
             "gp": "Australia",
@@ -1186,18 +1252,24 @@
             "shortName": "Madrid",
             "gain": 6,
             "cumulative": 27
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 0,
+            "cumulative": 27
           }
         ],
         "rank": 12,
-        "leaderGap": -265
+        "leaderGap": -275
       },
       {
         "name": "Oliver Bearman",
         "shortName": "O. Bearman",
         "team": "Haas F1 Team",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/O/OLIBEA01_Oliver_Bearman/olibea01.png.transform/1col/image.png",
-        "points": 18,
-        "deltaLastGp": 0,
+        "points": 20,
+        "deltaLastGp": 2,
         "progress": [
           {
             "gp": "Australia",
@@ -1282,10 +1354,16 @@
             "shortName": "Madrid",
             "gain": 0,
             "cumulative": 18
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 2,
+            "cumulative": 20
           }
         ],
         "rank": 13,
-        "leaderGap": -274
+        "leaderGap": -282
       },
       {
         "name": "Gabriel Bortoleto",
@@ -1378,10 +1456,118 @@
             "shortName": "Madrid",
             "gain": 0,
             "cumulative": 10
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 0,
+            "cumulative": 10
           }
         ],
         "rank": 14,
-        "leaderGap": -282
+        "leaderGap": -292
+      },
+      {
+        "name": "Esteban Ocon",
+        "shortName": "E. Ocon",
+        "team": "Haas F1 Team",
+        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/E/ESTOCO01_Esteban_Ocon/estoco01.png.transform/1col/image.png",
+        "points": 7,
+        "deltaLastGp": 4,
+        "progress": [
+          {
+            "gp": "Australia",
+            "shortName": "Australia",
+            "gain": 0,
+            "cumulative": 0
+          },
+          {
+            "gp": "China",
+            "shortName": "China",
+            "gain": 0,
+            "cumulative": 0
+          },
+          {
+            "gp": "Japan",
+            "shortName": "Japan",
+            "gain": 1,
+            "cumulative": 1
+          },
+          {
+            "gp": "United States - Miami Gardens",
+            "shortName": "Miami",
+            "gain": 0,
+            "cumulative": 1
+          },
+          {
+            "gp": "Canada",
+            "shortName": "Canada",
+            "gain": 0,
+            "cumulative": 1
+          },
+          {
+            "gp": "Monaco",
+            "shortName": "Monaco",
+            "gain": 2,
+            "cumulative": 3
+          },
+          {
+            "gp": "Spain",
+            "shortName": "Barcelona",
+            "gain": 0,
+            "cumulative": 3
+          },
+          {
+            "gp": "Austria",
+            "shortName": "Austria",
+            "gain": 0,
+            "cumulative": 3
+          },
+          {
+            "gp": "United Kingdom",
+            "shortName": "Silverstone",
+            "gain": 0,
+            "cumulative": 3
+          },
+          {
+            "gp": "Belgium",
+            "shortName": "Spa",
+            "gain": 0,
+            "cumulative": 3
+          },
+          {
+            "gp": "Hungary",
+            "shortName": "Hungaroring",
+            "gain": 0,
+            "cumulative": 3
+          },
+          {
+            "gp": "Netherlands",
+            "shortName": "Zandvoort",
+            "gain": 0,
+            "cumulative": 3
+          },
+          {
+            "gp": "Italy - Monza",
+            "shortName": "Monza",
+            "gain": 0,
+            "cumulative": 3
+          },
+          {
+            "gp": "Spain - Madrid",
+            "shortName": "Madrid",
+            "gain": 0,
+            "cumulative": 3
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 4,
+            "cumulative": 7
+          }
+        ],
+        "rank": 15,
+        "leaderGap": -295
       },
       {
         "name": "Nico Hülkenberg",
@@ -1389,7 +1575,7 @@
         "team": "Audi",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/N/NICHUL01_Nico_Hulkenberg/nichul01.png.transform/1col/image.png",
         "points": 7,
-        "deltaLastGp": 1,
+        "deltaLastGp": 0,
         "progress": [
           {
             "gp": "Australia",
@@ -1474,18 +1660,24 @@
             "shortName": "Madrid",
             "gain": 1,
             "cumulative": 7
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 0,
+            "cumulative": 7
           }
         ],
-        "rank": 15,
-        "leaderGap": -285
+        "rank": 16,
+        "leaderGap": -295
       },
       {
         "name": "Carlos Sainz",
         "shortName": "C. Sainz",
         "team": "Williams",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/C/CARSAI01_Carlos_Sainz/carsai01.png.transform/1col/image.png",
-        "points": 6,
-        "deltaLastGp": 0,
+        "points": 7,
+        "deltaLastGp": 1,
         "progress": [
           {
             "gp": "Australia",
@@ -1570,10 +1762,16 @@
             "shortName": "Madrid",
             "gain": 0,
             "cumulative": 6
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 1,
+            "cumulative": 7
           }
         ],
-        "rank": 16,
-        "leaderGap": -286
+        "rank": 17,
+        "leaderGap": -295
       },
       {
         "name": "Alexander Albon",
@@ -1666,106 +1864,16 @@
             "shortName": "Madrid",
             "gain": 0,
             "cumulative": 5
-          }
-        ],
-        "rank": 17,
-        "leaderGap": -287
-      },
-      {
-        "name": "Esteban Ocon",
-        "shortName": "E. Ocon",
-        "team": "Haas F1 Team",
-        "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/E/ESTOCO01_Esteban_Ocon/estoco01.png.transform/1col/image.png",
-        "points": 3,
-        "deltaLastGp": 0,
-        "progress": [
+          },
           {
-            "gp": "Australia",
-            "shortName": "Australia",
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
             "gain": 0,
-            "cumulative": 0
-          },
-          {
-            "gp": "China",
-            "shortName": "China",
-            "gain": 0,
-            "cumulative": 0
-          },
-          {
-            "gp": "Japan",
-            "shortName": "Japan",
-            "gain": 1,
-            "cumulative": 1
-          },
-          {
-            "gp": "United States - Miami Gardens",
-            "shortName": "Miami",
-            "gain": 0,
-            "cumulative": 1
-          },
-          {
-            "gp": "Canada",
-            "shortName": "Canada",
-            "gain": 0,
-            "cumulative": 1
-          },
-          {
-            "gp": "Monaco",
-            "shortName": "Monaco",
-            "gain": 2,
-            "cumulative": 3
-          },
-          {
-            "gp": "Spain",
-            "shortName": "Barcelona",
-            "gain": 0,
-            "cumulative": 3
-          },
-          {
-            "gp": "Austria",
-            "shortName": "Austria",
-            "gain": 0,
-            "cumulative": 3
-          },
-          {
-            "gp": "United Kingdom",
-            "shortName": "Silverstone",
-            "gain": 0,
-            "cumulative": 3
-          },
-          {
-            "gp": "Belgium",
-            "shortName": "Spa",
-            "gain": 0,
-            "cumulative": 3
-          },
-          {
-            "gp": "Hungary",
-            "shortName": "Hungaroring",
-            "gain": 0,
-            "cumulative": 3
-          },
-          {
-            "gp": "Netherlands",
-            "shortName": "Zandvoort",
-            "gain": 0,
-            "cumulative": 3
-          },
-          {
-            "gp": "Italy - Monza",
-            "shortName": "Monza",
-            "gain": 0,
-            "cumulative": 3
-          },
-          {
-            "gp": "Spain - Madrid",
-            "shortName": "Madrid",
-            "gain": 0,
-            "cumulative": 3
+            "cumulative": 5
           }
         ],
         "rank": 18,
-        "leaderGap": -289
+        "leaderGap": -297
       },
       {
         "name": "Fernando Alonso",
@@ -1858,10 +1966,16 @@
             "shortName": "Madrid",
             "gain": 0,
             "cumulative": 3
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 0,
+            "cumulative": 3
           }
         ],
         "rank": 19,
-        "leaderGap": -289
+        "leaderGap": -299
       },
       {
         "name": "Yuki Tsunoda",
@@ -1954,10 +2068,16 @@
             "shortName": "Madrid",
             "gain": 0,
             "cumulative": 1
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 0,
+            "cumulative": 1
           }
         ],
         "rank": 20,
-        "leaderGap": -291
+        "leaderGap": -301
       },
       {
         "name": "Valtteri Bottas",
@@ -2050,10 +2170,16 @@
             "shortName": "Madrid",
             "gain": 0,
             "cumulative": 0
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 0,
+            "cumulative": 0
           }
         ],
         "rank": 21,
-        "leaderGap": -292
+        "leaderGap": -302
       },
       {
         "name": "Sergio Pérez",
@@ -2146,10 +2272,16 @@
             "shortName": "Madrid",
             "gain": 0,
             "cumulative": 0
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 0,
+            "cumulative": 0
           }
         ],
         "rank": 22,
-        "leaderGap": -292
+        "leaderGap": -302
       },
       {
         "name": "Lance Stroll",
@@ -2242,89 +2374,95 @@
             "shortName": "Madrid",
             "gain": 0,
             "cumulative": 0
+          },
+          {
+            "gp": "Azerbaijan",
+            "shortName": "Baku",
+            "gain": 0,
+            "cumulative": 0
           }
         ],
         "rank": 23,
-        "leaderGap": -292
+        "leaderGap": -302
       }
     ],
     "constructors": [
       {
         "team": "Mercedes",
-        "points": 503,
+        "points": 538,
         "deltaLastGp": 35,
         "rank": 1,
         "leaderGap": 0
       },
       {
         "team": "Ferrari",
-        "points": 358,
-        "deltaLastGp": 12,
+        "points": 378,
+        "deltaLastGp": 20,
         "rank": 2,
-        "leaderGap": -145
+        "leaderGap": -160
       },
       {
         "team": "McLaren",
         "points": 306,
-        "deltaLastGp": 19,
+        "deltaLastGp": 0,
         "rank": 3,
-        "leaderGap": -197
+        "leaderGap": -232
       },
       {
         "team": "Red Bull Racing",
-        "points": 230,
-        "deltaLastGp": 26,
+        "points": 263,
+        "deltaLastGp": 33,
         "rank": 4,
-        "leaderGap": -273
+        "leaderGap": -275
       },
       {
         "team": "Racing Bulls",
-        "points": 77,
-        "deltaLastGp": 2,
+        "points": 83,
+        "deltaLastGp": 6,
         "rank": 5,
-        "leaderGap": -426
+        "leaderGap": -455
       },
       {
         "team": "Alpine",
         "points": 68,
-        "deltaLastGp": 6,
+        "deltaLastGp": 0,
         "rank": 6,
-        "leaderGap": -435
+        "leaderGap": -470
       },
       {
         "team": "Haas F1 Team",
-        "points": 21,
-        "deltaLastGp": 0,
+        "points": 27,
+        "deltaLastGp": 6,
         "rank": 7,
-        "leaderGap": -482
+        "leaderGap": -511
       },
       {
         "team": "Audi",
         "points": 17,
-        "deltaLastGp": 1,
+        "deltaLastGp": 0,
         "rank": 8,
-        "leaderGap": -486
+        "leaderGap": -521
       },
       {
         "team": "Williams",
-        "points": 11,
-        "deltaLastGp": 0,
+        "points": 12,
+        "deltaLastGp": 1,
         "rank": 9,
-        "leaderGap": -492
+        "leaderGap": -526
       },
       {
         "team": "Aston Martin",
         "points": 3,
         "deltaLastGp": 0,
         "rank": 10,
-        "leaderGap": -500
+        "leaderGap": -535
       },
       {
         "team": "Cadillac",
         "points": 0,
         "deltaLastGp": 0,
         "rank": 11,
-        "leaderGap": -503
+        "leaderGap": -538
       }
     ]
   },
@@ -2517,8 +2655,12 @@
       "shortName": "Baku",
       "date": "2026-09-26",
       "isSprint": false,
-      "status": "next",
-      "winner": null
+      "status": "played",
+      "winner": {
+        "name": "George Russell",
+        "team": "Mercedes",
+        "shortName": "G. Russell"
+      }
     },
     {
       "round": 16,
@@ -2526,7 +2668,7 @@
       "shortName": "Sepang",
       "date": "2026-10-04",
       "isSprint": false,
-      "status": "upcoming",
+      "status": "next",
       "winner": null
     },
     {
