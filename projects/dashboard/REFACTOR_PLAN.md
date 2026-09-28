@@ -14,7 +14,7 @@ Le dashboard 2026 est fonctionnellement abouti mais une évaluation a révélé 
 5. **Erreurs silencieuses** — `.catch(() => null)` masque les données manquantes.
 6. **Performance non mesurée** — `circuits_2026.json` 152 Ko chargé d'emblée, rien minifié, pas de lazy-load.
 
-**Contrainte non négociable** : le dashboard est réactualisé **chaque lundi (+ mardi) après chaque GP** via `refresh-after-gp.yml` → `build_all.py` → `sync_to_docs.py`. `docs/` est servi par GitHub Pages **sans bundler ni build step**. La refacto ne doit pas introduire de Node/npm dans le chemin de refresh, et `sync_to_docs.py` (copie récursive de `web/`) doit continuer à tout propager.
+**Contrainte non négociable** : le dashboard est contrôlé **chaque jour à 14h23 UTC** via `refresh-after-gp.yml`; `check_should_refresh.py` ne lance `build_all.py` → `sync_to_docs.py` que si un GP disputé manque. `docs/` est servi par GitHub Pages **sans bundler ni build step**. La refacto ne doit pas introduire de Node/npm dans le chemin de refresh, et `sync_to_docs.py` (copie récursive de `web/`) doit continuer à tout propager.
 
 ## Décisions actées
 

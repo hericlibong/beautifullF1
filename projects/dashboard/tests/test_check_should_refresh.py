@@ -100,11 +100,10 @@ def test_dashboard_illisible_declenche_une_generation(tmp_path, monkeypatch):
     assert "illisible" in reason
 
 
-def test_calendar_absent_ne_declenche_rien(tmp_path, monkeypatch):
+def test_calendar_absent_fait_echouer_le_controle(tmp_path, monkeypatch):
     monkeypatch.setattr(mod, "CALENDAR_PATH", tmp_path / "nope.json")
-    ok, reason = mod.should_refresh(date(2026, 9, 28))
-    assert not ok
-    assert "introuvable" in reason
+    with pytest.raises(mod.RefreshCheckError, match="introuvable"):
+        mod.should_refresh(date(2026, 9, 28))
 
 
 def test_avant_le_premier_gp(tmp_path, monkeypatch):
@@ -114,8 +113,28 @@ def test_avant_le_premier_gp(tmp_path, monkeypatch):
     assert "aucun GP disputé" in reason
 
 
-def test_dates_invalides_ignorees(tmp_path, monkeypatch):
+def test_date_invalide_fait_echouer_le_controle(tmp_path, monkeypatch):
     calendar = {"rounds": [{"name": "Bogus", "date": "pas-une-date"}, *CALENDAR["rounds"]]}
     _write(tmp_path, monkeypatch, calendar=calendar, played=UP_TO_BAKU)
-    ok, _ = mod.should_refresh(date(2026, 9, 28))
-    assert not ok
+    with pytest.raises(mod.RefreshCheckError, match="date 'pas-une-date'"):
+        mod.should_refresh(date(2026, 9, 28))
+
+
+def test_calendar_json_invalide_fait_echouer_le_controle(tmp_path, monkeypatch):
+    cal = tmp_path / "calendar_2026.json"
+    cal.write_text("{ pas du json", encoding="utf-8")
+    monkeypatch.setattr(mod, "CALENDAR_PATH", cal)
+
+    with pytest.raises(mod.RefreshCheckError, match="illisible"):
+        mod.should_refresh(date(2026, 9, 28))
+
+
+def test_calendar_sans_rounds_fait_echouer_le_controle(tmp_path, monkeypatch):
+    _write(tmp_path, monkeypatch, calendar={"rounds": []}, played=())
+    with pytest.raises(mod.RefreshCheckError, match="liste non vide"):
+        mod.should_refresh(date(2026, 9, 28))
+
+
+def test_main_retourne_un_code_erreur_si_le_controle_est_impossible(tmp_path, monkeypatch):
+    monkeypatch.setattr(mod, "CALENDAR_PATH", tmp_path / "nope.json")
+    assert mod.main() == 1

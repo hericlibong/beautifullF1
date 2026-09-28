@@ -27,6 +27,7 @@ def test_sync_copies_nested_modules(tmp_path: Path, monkeypatch) -> None:
             "index.html": "<html>",
             "assets/dashboard.js": "// orchestrateur",
             "assets/modules/i18n.js": "export const t = () => {};",
+            "assets/modules/freshness.js": "export function checkFreshness(){}",
             "assets/modules/render/duel.js": "export function renderDuelPanel(){}",
             "data/dashboard_2026.json": "{}",
         },
@@ -41,6 +42,7 @@ def test_sync_copies_nested_modules(tmp_path: Path, monkeypatch) -> None:
         "index.html",
         "assets/dashboard.js",
         "assets/modules/i18n.js",
+        "assets/modules/freshness.js",
         "assets/modules/render/duel.js",
         "data/dashboard_2026.json",
     ):

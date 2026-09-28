@@ -9,8 +9,14 @@ Builders Python → JSON → front-end vanilla JS (modules ES6), publié dans `d
 ## Après chaque Grand Prix (refresh des données)
 
 Le refresh est **automatique** : le workflow `.github/workflows/refresh-after-gp.yml`
-tourne lundi + mardi à 14h UTC après un GP, lance `build_all.py` et committe les
-données (bot `github-actions`). `check_should_refresh.py` décide s'il doit s'exécuter.
+effectue un contrôle quotidien à 14h23 UTC. `check_should_refresh.py` compare les GP
+disputés aux GP publiés ; il lance `build_all.py` uniquement si une course manque,
+puis committe les données avec le bot `github-actions`. Un run sauté peut ainsi être
+rattrapé n'importe quel jour suivant.
+
+Le dashboard affiche aussi la date de génération des données. Si un GP vieux de plus
+de 48 heures reste absent, un bandeau est calculé directement dans le navigateur :
+ce signal reste disponible même lorsqu'aucun workflow GitHub n'a démarré.
 
 Pour rejouer **manuellement** le refresh (depuis la racine du repo) :
 
@@ -64,6 +70,7 @@ assets/
   dashboard.js              orchestrateur : fetch + KPI + câblage des modules
   modules/
     i18n.js                 FR/EN (t, setI18n, switcher)
+    freshness.js            date de publication + alerte de retard > 48 h
     utils.js                formatage + fetchJson + bannière d'erreur
     constants.js            GP_TO_CIRCUIT, couleurs historiques
     render/

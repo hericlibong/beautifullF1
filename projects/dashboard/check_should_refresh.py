@@ -11,10 +11,11 @@ un cron sauté = un GP perdu définitivement, en silence. Avec une comparaison
 couru/publié, n'importe quel run ultérieur rattrape le retard, et un run de
 trop ne coûte que quelques dizaines de secondes.
 
-Le script ne s'arrête JAMAIS avec un code d'erreur — il écrit simplement la
-décision dans la variable de sortie GitHub Actions :
+Le script écrit la décision dans la variable de sortie GitHub Actions :
     should-refresh=true   → la pipeline doit tourner
     should-refresh=false  → on saute
+Une erreur de calendrier retourne un code non nul : l'absence de décision doit
+être visible, jamais transformée silencieusement en ``false``.
 
 Utilisation locale (debug) :
     python projects/dashboard/check_should_refresh.py
@@ -39,6 +40,46 @@ DASHBOARD_PATH = HERE / "web" / "data" / "dashboard_2026.json"
 PUBLISH_DELAY_DAYS = 1
 
 
+class RefreshCheckError(RuntimeError):
+    """Le contrôle ne peut pas rendre une décision fiable."""
+
+
+def _load_calendar() -> dict:
+    """Charge et valide les champs indispensables du calendrier.
+
+    Une erreur de calendrier doit faire échouer le workflow : répondre
+    silencieusement ``should-refresh=false`` masquerait exactement le type de
+    panne que ce contrôle est censé rendre visible.
+    """
+    if not CALENDAR_PATH.exists():
+        raise RefreshCheckError(f"calendar introuvable ({CALENDAR_PATH})")
+
+    try:
+        calendar = json.loads(CALENDAR_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise RefreshCheckError(f"calendar illisible ({CALENDAR_PATH}) : {exc}") from exc
+
+    rounds = calendar.get("rounds") if isinstance(calendar, dict) else None
+    if not isinstance(rounds, list) or not rounds:
+        raise RefreshCheckError("calendar invalide : 'rounds' doit être une liste non vide")
+
+    for index, race in enumerate(rounds, start=1):
+        if not isinstance(race, dict):
+            raise RefreshCheckError(f"calendar invalide : entrée #{index} non structurée")
+        name = race.get("name")
+        gp_date = race.get("date")
+        if not isinstance(name, str) or not name.strip():
+            raise RefreshCheckError(f"calendar invalide : nom absent à l'entrée #{index}")
+        if not isinstance(gp_date, str):
+            raise RefreshCheckError(f"calendar invalide : date absente pour {name}")
+        try:
+            date.fromisoformat(gp_date)
+        except ValueError as exc:
+            raise RefreshCheckError(f"calendar invalide : date '{gp_date}' pour {name}") from exc
+
+    return calendar
+
+
 def _played_gp_names(dashboard: dict) -> set[str]:
     """Noms des GP que le dashboard publié considère comme disputés."""
     return {
@@ -50,23 +91,14 @@ def _played_gp_names(dashboard: dict) -> set[str]:
 
 def should_refresh(today: date | None = None) -> tuple[bool, str]:
     today = today or date.today()
-
-    if not CALENDAR_PATH.exists():
-        return False, f"calendar introuvable ({CALENDAR_PATH})"
-
-    calendar = json.loads(CALENDAR_PATH.read_text(encoding="utf-8"))
+    calendar = _load_calendar()
     cutoff = today - timedelta(days=PUBLISH_DELAY_DAYS)
 
     raced: list[tuple[str, str]] = []
     for r in calendar.get("rounds", []):
         gp_date_str = r.get("date")
         name = r.get("name")
-        if not gp_date_str or not name:
-            continue
-        try:
-            gp_date = date.fromisoformat(gp_date_str)
-        except ValueError:
-            continue
+        gp_date = date.fromisoformat(gp_date_str)
         if gp_date <= cutoff:
             raced.append((name, gp_date_str))
 
@@ -93,7 +125,11 @@ def should_refresh(today: date | None = None) -> tuple[bool, str]:
 
 
 def main() -> int:
-    ok, reason = should_refresh()
+    try:
+        ok, reason = should_refresh()
+    except RefreshCheckError as exc:
+        print(f"check-error={exc}", file=sys.stderr)
+        return 1
     print(f"should-refresh={'true' if ok else 'false'} — {reason}")
 
     gh_out = os.environ.get("GITHUB_OUTPUT")

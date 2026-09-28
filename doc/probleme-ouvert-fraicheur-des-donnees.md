@@ -1,9 +1,11 @@
 # Problème ouvert — rien ne garantit ni ne surveille la publication des données
 
 **Ouvert le :** 28/09/2026
-**Statut :** non résolu — hors de portée d'un correctif dans ce repo seul
+**Statut :** partiellement résolu dans le dépôt le 29/09/2026 ; garantie externe encore à déployer
 **Lié à :** `incident-2026-09-14-refresh-madrid.md`, `incident-2026-09-28-refresh-baku.md`
 **À qui ça appartient :** décision d'infrastructure (choix d'un déclencheur et d'un canal d'alerte)
+
+> Mise en œuvre et preuves : voir `resolution-fraicheur-des-donnees.md`.
 
 Ce document décrit ce qui reste cassé *après* le correctif du 28/09, pourquoi ce
 reste ne peut pas être réglé par du code dans ce dépôt, et quelles options
@@ -110,9 +112,9 @@ différents.
 **Ce que c'est :** best-effort documenté, voir §4.
 **Sous notre contrôle :** partiellement — on peut réduire la probabilité
 (décaler l'heure, augmenter la fréquence) mais pas l'éliminer.
-**Couverture actuelle :** cron passé au quotidien le 28/09. Il faut désormais
-plusieurs jours consécutifs sautés pour perdre un GP, au lieu d'un seul. Gain
-réel mais probabiliste.
+**Couverture actuelle :** cron passé au quotidien le 28/09 puis décalé à
+14:23 UTC le 29/09. Il faut désormais plusieurs jours consécutifs sautés pour
+perdre un GP, au lieu d'un seul. Gain réel mais probabiliste.
 
 ### P2 — Le workflow peut être désactivé pour inactivité
 
@@ -134,8 +136,10 @@ dans la boîte de réception n'est pas un mécanisme).
 tous manifestés de la même façon : **des données fausses ou figées, aucun run en
 échec, découverte à l'œil par l'utilisateur.**
 **Sous notre contrôle :** oui, entièrement.
-**Couverture actuelle :** aucune. `validate_outputs.py` (ajouté le 15/09) vérifie
-la *justesse* de ce qui est produit ; il ne dit rien quand rien n'est produit.
+**Couverture actuelle :** depuis le 29/09, le site affiche toujours la date de
+génération et calcule dans le navigateur un bandeau si un GP manque depuis plus
+de 48 h. Cette détection ne dépend pas d'un run GitHub. Il n'existe toutefois
+pas encore de notification proactive hors du site.
 
 **L'angle mort décisif, à bien comprendre avant de choisir une solution :** une
 alerte hébergée dans un workflow GitHub planifié hérite exactement de la
@@ -145,8 +149,8 @@ qui dépend du mécanisme surveillé ne surveille rien.**
 
 ## 6. Ce que le correctif du 28/09 couvre exactement
 
-Commit `7e24957` (au 28/09 : **non poussé**, le correctif n'est donc pas encore
-actif en production).
+Commit `7e24957`, poussé sur `origin/main` le 28/09. Au moment de l'ouverture de
+ce document il n'avait pas encore subi son premier cycle planifié quotidien.
 
 | Problème | Couvert ? |
 |--|--|
@@ -154,7 +158,7 @@ actif en production).
 | Perte définitive après un seul cron sauté | **oui** — tout run ultérieur rattrape |
 | P1 — cron qui ne part pas | partiellement (probabilité réduite) |
 | P2 — désactivation à 60 jours | **non** |
-| P3 — absence de détection | **non** |
+| P3 — absence de détection | **oui sur le site** ; notification proactive non couverte |
 
 Effet secondaire introduit, à connaître : si un GP passé ne peut jamais être
 intégré (course annulée mais laissée au calendrier, panne durable de FastF1),
@@ -175,7 +179,7 @@ schedule:
 **Coût :** une ligne.
 **Couvre :** réduit le retard et le risque d'abandon (recommandation officielle
 GitHub, cf. §4). **Ne règle rien structurellement** — c'est une optimisation.
-**Verdict :** à faire dans tous les cas, ne dispense d'aucune autre option.
+**Verdict :** mis en œuvre le 29/09, ne dispense d'aucune autre option.
 
 ### Option B — Alerte de fraîcheur dans un workflow GitHub
 
@@ -200,8 +204,10 @@ ailleurs.
 
 **Coût :** un token (PAT à portée restreinte, stocké en secret) + un service
 externe à maintenir. C'est la seule option qui sort du repo.
-**Couvre :** **P1 et P2** — l'exécution ne dépend plus de la planification
-GitHub, et l'appel API compte comme activité du dépôt.
+**Couvre :** **P1**. Pour couvrir aussi P2, le service doit appeler l'API
+d'activation du workflow avant le dispatch lorsqu'il est en état
+`disabled_inactivity` ; un simple dispatch n'est pas considéré ici comme une
+garantie suffisante contre la désactivation.
 **Compromis :** introduit une dépendance externe et un secret à faire tourner ;
 le service externe devient à son tour un maillon à surveiller.
 **Verdict :** la seule option qui apporte une garantie d'exécution.
@@ -220,15 +226,15 @@ Aurait fonctionné le 28/09, et fonctionnerait même workflow désactivé.
 **Ne couvre pas :** ne répare rien, ne prévient personne activement — il faut
 ouvrir le site. Mais il rend la panne impossible à manquer au lieu d'exiger de
 comparer mentalement le classement à la réalité.
-**Verdict :** meilleur rapport couverture/coût du lot. Bénéfice éditorial en
-prime : afficher la fraîcheur d'une donnée publiée est de toute façon une bonne
-pratique.
+**Verdict :** mis en œuvre le 29/09. C'est le meilleur rapport couverture/coût
+du lot. Bénéfice éditorial en prime : afficher la fraîcheur d'une donnée publiée
+est de toute façon une bonne pratique.
 
 ### Option E — Traiter la désactivation à 60 jours (P2)
 
-Trois approches : un commit automatique périodique pendant l'intersaison ;
-l'appel API de l'option C, qui compte comme activité ; ou assumer le risque et
-réactiver le workflow à la main en février, avec un rappel calendaire.
+Trois approches : un commit automatique périodique pendant l'intersaison ; un
+watchdog externe qui vérifie l'état, réactive puis déclenche le workflow ; ou
+assumer le risque et le réactiver à la main en février, avec un rappel calendaire.
 
 **Verdict :** à décider avant décembre 2026. C'est une échéance datée, pas une
 question ouverte.
@@ -252,9 +258,9 @@ une détection qui ne dépend de rien.
 
 1. Accepte-t-on une dépendance externe (option C) ou reste-t-on strictement dans
    GitHub, en assumant qu'aucune exécution n'est garantie ?
-2. Si alerte il y a, par quel canal doit-elle arriver — run rouge dans l'onglet
-   Actions, e-mail, bandeau sur le site ? Les trois ont des propriétés de
-   fiabilité différentes ; seul le bandeau ne dépend d'aucun cron.
+2. Le bandeau sur le site est retenu et mis en œuvre. Reste à choisir, si
+   souhaité, un canal de notification proactive (e-mail ou autre) porté par le
+   watchdog externe.
 3. Que fait-on pour l'intersaison (P2) ? Échéance : avant décembre 2026.
 4. Quel seuil de retard déclenche une alerte ? 48 h est un point de départ
    raisonnable (FastF1 publie sous 24 h en pratique), pas une valeur étudiée.

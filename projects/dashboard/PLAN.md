@@ -3,7 +3,7 @@
 Tableau de bord statique consolidant les visualisations existantes (race chart, heatmap) + nouveaux widgets, alimenté par FastF1 et publié sur GitHub Pages.
 
 **Périmètre** : saison 2026 uniquement.
-**Refresh** : automatique via GitHub Actions (`.github/workflows/refresh-after-gp.yml`), lundi + mardi 14h UTC après chaque GP. Trigger manuel possible depuis l'onglet Actions du repo.
+**Refresh** : contrôle quotidien à 14h23 UTC via GitHub Actions (`.github/workflows/refresh-after-gp.yml`). Le pipeline complet ne tourne que si un GP disputé manque aux données. Déclenchement manuel possible depuis l'onglet Actions du repo.
 
 ---
 
@@ -120,7 +120,8 @@ Tâches issues du feedback en cours de route.
 
 ## Hors plan — livré en cours de route
 - [x] **Cleanup repo** : 17 fichiers obsolètes supprimés (~4000 lignes mortes)
-- [x] **Refresh auto GitHub Actions** : `.github/workflows/refresh-after-gp.yml` (lundi + mardi 14h UTC) + `check_should_refresh.py` ; tests pytest avant commit
+- [x] **Refresh auto GitHub Actions** : contrôle quotidien à 14h23 UTC + comparaison GP courus/publiés dans `check_should_refresh.py` ; rattrapage automatique d'un cron sauté ; tests pytest avant commit
+- [x] **Visibilité de la fraîcheur** : date de génération toujours affichée et bandeau client si un GP manque depuis plus de 48 h
 - [x] **driver_images.json** : fallback photos pilotes
 
 ### 3.6 Calendrier interactif — drill-down circuit
@@ -248,6 +249,6 @@ Ajoute, dans le drill-down circuit, une zone **"Histoire"** = scatter inline (r�
 
 ## Décisions à reprendre plus tard
 
-- Pipeline GitHub Actions automatique (rejeté pour l'instant — refresh manuel suffit)
+- Watchdog externe indépendant de GitHub Actions (plateforme et canal d'alerte à choisir)
 - Multi-saisons (rejeté — focus 2026)
 - Backend dynamique (non — restera statique)

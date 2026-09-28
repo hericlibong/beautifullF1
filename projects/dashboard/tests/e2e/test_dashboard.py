@@ -6,9 +6,19 @@ des données, navigation par onglets, drill-downs, switch de langue, embed viz.
 
 from __future__ import annotations
 
+import json
+from datetime import date, timedelta
+from pathlib import Path
+
 import pytest
 
 pytestmark = pytest.mark.e2e
+
+DATA_PATH = Path(__file__).resolve().parents[2] / "web" / "data" / "dashboard_2026.json"
+
+
+def _dashboard_payload():
+    return json.loads(DATA_PATH.read_text(encoding="utf-8"))
 
 
 def test_kpis_and_header_load(page, base_url):
@@ -19,6 +29,38 @@ def test_kpis_and_header_load(page, base_url):
     # Le sous-titre n'est plus "Chargement…" (données chargées)
     subtitle = page.locator("#dash-subtitle").inner_text()
     assert "Chargement" not in subtitle and subtitle.strip() != ""
+
+
+def test_freshness_stamp_is_rendered_without_warning_when_data_is_current(page, base_url):
+    payload = _dashboard_payload()
+    payload["generatedAt"] = date.today().isoformat()
+    for race in payload["calendar"]:
+        race["status"] = "played"
+    page.route("**/data/dashboard_2026.json", lambda route: route.fulfill(json=payload))
+
+    page.goto(base_url)
+    page.wait_for_selector("#dash-updated:not(:empty)")
+    assert page.locator("#dash-freshness").is_hidden()
+
+
+def test_freshness_warning_is_visible_when_an_old_race_is_missing(page, base_url):
+    payload = _dashboard_payload()
+    for race in payload["calendar"]:
+        race["status"] = "played"
+    payload["calendar"][0].update(
+        {
+            "name": "Test Grand Prix",
+            "shortName": "Test GP",
+            "date": (date.today() - timedelta(days=3)).isoformat(),
+            "status": "upcoming",
+        }
+    )
+    page.route("**/data/dashboard_2026.json", lambda route: route.fulfill(json=payload))
+
+    page.goto(base_url)
+    warning = page.locator("#dash-freshness")
+    warning.wait_for(state="visible")
+    assert "Test GP" in warning.inner_text()
 
 
 def test_standings_drivers_table_populated(page, base_url):

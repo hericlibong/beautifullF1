@@ -18,6 +18,11 @@
 
   <main class="dash-container">
 
+    <!-- Alerte de fraîcheur : rempli par modules/freshness.js quand un GP couru
+         n'apparaît pas encore dans les données publiées. Le seul signal de panne
+         qui ne dépend pas du cron de publication. -->
+    <div id="dash-freshness" class="dash-freshness" role="alert" aria-live="polite" hidden></div>
+
     <!-- Bandeau KPI (4 tuiles, dont countdown) -->
     <section class="dash-section" aria-label="Indicateurs clés">
       <div id="dash-kpis" class="dash-grid dash-grid--kpi" role="list"></div>
@@ -92,6 +97,7 @@
 
   <footer class="dash-footer">
     <small data-i18n="footer.text">Beautiful F1 — Dashboard saison 2026 • Données : FastF1 • <a href="https://github.com/hericlibong/beautifullF1">GitHub</a></small>
+    <small id="dash-updated" class="dash-updated"></small>
   </footer>
 
   <script src="assets/navbar.js" data-base="./" defer></script>

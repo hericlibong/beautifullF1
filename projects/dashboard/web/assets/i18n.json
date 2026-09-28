@@ -5,6 +5,10 @@
     "header.lastRace": "Dernier GP joué : {gp} ({date}) • {n} / {total} GP",
     "header.loadError": "Erreur de chargement des données.",
 
+    "freshness.updated": "Données mises à jour le {date}.",
+    "freshness.staleOne": "Données potentiellement périmées : {gp} devrait être publié depuis {days} jours.",
+    "freshness.staleMany": "Données potentiellement périmées : {n} GP manquent ({list}). Retard maximal : {days} jours.",
+
     "kpi.leader": "Leader actuel",
     "kpi.gap": "Écart leader / 2e",
     "kpi.gapSub": "vs {name} ({pts} pts)",
@@ -113,6 +117,10 @@
     "header.loading": "Loading…",
     "header.lastRace": "Last race: {gp} ({date}) • {n} / {total} races",
     "header.loadError": "Failed to load data.",
+
+    "freshness.updated": "Data updated on {date}.",
+    "freshness.staleOne": "Data may be stale: {gp} should have been published {days} days ago.",
+    "freshness.staleMany": "Data may be stale: {n} races are missing ({list}). Maximum delay: {days} days.",
 
     "kpi.leader": "Current leader",
     "kpi.gap": "Gap leader / 2nd",

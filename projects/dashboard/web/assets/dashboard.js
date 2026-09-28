@@ -12,6 +12,7 @@ import { initDuel } from "./modules/render/duel.js";
 import { initTeammates } from "./modules/render/teammates.js";
 import { initCalendar, scrollCalendarToNext } from "./modules/render/calendar.js";
 import { initEmbed } from "./modules/render/embed.js";
+import { initFreshness } from "./modules/freshness.js";
 
 (async function () {
   // Chargement initial : uniquement le strict nécessaire à la première vue (onglet Pilotes).
@@ -28,6 +29,7 @@ import { initEmbed } from "./modules/render/embed.js";
   document.documentElement.lang = LANG;
   applyStaticI18n();
   setupLangSwitcher();
+  initFreshness(dashRes);
 
   const teams = teamsRes.teams || {};
   const teamColor = (name) => (teams[name] && teams[name].color) || teamsRes.fallbackColor;

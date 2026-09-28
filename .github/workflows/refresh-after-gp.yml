@@ -1,8 +1,9 @@
 name: Refresh data after GP
 
 # Déclenchement :
-#   - Cron quotidien 14h UTC
+#   - Cron quotidien 14h23 UTC
 #   - workflow_dispatch (bouton "Run workflow" dans l'onglet Actions)
+#   - repository_dispatch "scheduled-refresh" (point d'entrée pour un watchdog externe)
 #
 # Pourquoi quotidien et non "le lundi après la course" : un cron GitHub Actions
 # est best-effort, il peut être retardé de plusieurs heures ou abandonné. Avec
@@ -10,10 +11,23 @@ name: Refresh data after GP
 # 28/09/2026, GP de Bakou). check_should_refresh.py compare les GP disputés aux
 # GP publiés : les jours sans retard, le job s'arrête après l'étape de contrôle
 # (~40 s) ; n'importe quel run ultérieur rattrape un run manqué.
+#
+# Pourquoi 14:23 et non 14:00 : GitHub cite le début d'heure comme le créneau le
+# plus chargé et recommande de décaler. Mesuré sur les 36 premiers runs de ce
+# workflow (planifiés à 14:00 pile) : aucun n'est parti à l'heure, retard médian
+# 2 h 36, maximum 5 h 52. Voir doc/probleme-ouvert-fraicheur-des-donnees.md.
 "on":
   schedule:
-    - cron: "0 14 * * *"
+    - cron: "23 14 * * *"
   workflow_dispatch: {}
+  repository_dispatch:
+    types: [scheduled-refresh]
+
+# Un clic manuel, un cron GitHub et un appel externe peuvent arriver presque
+# simultanément. Les sérialiser évite deux builds et deux git push concurrents.
+concurrency:
+  group: refresh-after-gp
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -32,19 +46,23 @@ jobs:
           python-version: "3.12"
           cache: "pip"
 
-      - name: Install dependencies
-        run: pip install -r requirements.txt
-
-      # Décide s'il y a eu un GP dans les 2 derniers jours. Sinon, on saute proprement.
-      - name: Check if a GP occurred recently
+      # Compare les GP disputés aux GP déjà publiés. Le script échoue
+      # explicitement si le calendrier est absent ou invalide.
+      - name: Check whether published data is stale
         id: check
         run: python projects/dashboard/check_should_refresh.py
 
       - name: Skip notice
         if: steps.check.outputs.should-refresh != 'true' && github.event_name != 'workflow_dispatch'
         run: |
-          echo "Pas de GP récent — pipeline non lancé."
+          echo "Données à jour — pipeline non lancé."
           echo "Raison : ${{ steps.check.outputs.reason }}"
+
+      # L'installation lourde est inutile lors des contrôles quotidiens sans GP
+      # manquant. workflow_dispatch reste volontairement un forçage complet.
+      - name: Install dependencies
+        if: steps.check.outputs.should-refresh == 'true' || github.event_name == 'workflow_dispatch'
+        run: pip install -r requirements.txt
 
       # Cache du dossier FastF1 (sessions déjà téléchargées) pour accélérer les runs suivants
       - name: Cache FastF1

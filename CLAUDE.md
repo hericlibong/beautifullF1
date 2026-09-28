@@ -57,7 +57,7 @@ outputs/*.csv, web/data/*.json     (per-project)
 docs/   (GitHub Pages: dashboard home + viz subfolders)
 ```
 
-- `projects/dashboard/build_all.py` orchestrates the regular refresh: race chart CSV → heatmap CSV → `dashboard_2026.json` → 3× sync. Run automatically by `.github/workflows/refresh-after-gp.yml` (Mon+Tue 14:00 UTC after a GP; `check_should_refresh.py` gates it; commits as github-actions bot).
+- `projects/dashboard/build_all.py` orchestrates the regular refresh: race chart CSV → heatmap CSV → `dashboard_2026.json` → 3× sync. `.github/workflows/refresh-after-gp.yml` checks daily at 14:23 UTC; `check_should_refresh.py` runs the pipeline only when a raced GP is absent, then commits as github-actions bot.
 - Two builders are **manual only** (too slow / rate-limited for CI): `build_circuits_data.py` (FastF1 telemetry → `circuits_2026.json`) and `build_gp_history.py` (Jolpica + f1db + Wikipedia → `gp_history.json`, read-merge-write per `circuitId` key).
 - Jolpica/Ergast rate-limits (HTTP 429): builders use sleeps + exponential retry — keep this when extending them.
 
