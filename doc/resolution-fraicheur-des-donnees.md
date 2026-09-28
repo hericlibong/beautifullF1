@@ -7,8 +7,9 @@
 **Incidents liés :** `incident-2026-09-14-refresh-madrid.md`,
 `incident-2026-09-28-refresh-baku.md`
 
-**Statut :** mise en œuvre et validation locale terminées ; publication et
-validation GitHub restantes ; watchdog externe non déployé
+**Statut :** mise en œuvre, publication et validations locale/distante
+terminées ; premier cron automatique à 14:23 UTC encore à observer ; watchdog
+externe non déployé
 
 ---
 
@@ -246,15 +247,64 @@ d'environnement n'était pas une erreur du dashboard.
 
 ## 6. Validation après publication
 
-Ces preuves exigent un push et l'exécution de GitHub ; elles ne peuvent pas
-être remplacées par les tests locaux :
+### 6.1 Publication du correctif
 
-1. le workflow est toujours `active` ;
-2. un `workflow_dispatch` réussit et ne crée qu'un seul commit de données ;
-3. GitHub Pages sert `freshness.js` et affiche la date `generatedAt` ;
-4. le premier cron suivant apparaît à partir de `14:23 UTC` ;
-5. un jour sans GP, le workflow s'arrête avant l'installation des dépendances ;
-6. après un GP, un retard du lundi reste détectable et rattrapable le mardi.
+- commit publié sur `main` : `7f6da74` —
+  `fix(ci): fiabilise et rend visible la fraîcheur des données` ;
+- workflow `Refresh data after GP` toujours actif, identifiant `282902040` ;
+- contrôle qualité `Python scripts quality check` : **succès** sur `7f6da74` ;
+- déploiement `pages-build-deployment` : **succès** sur `7f6da74`.
+
+### 6.2 Run de validation forcé
+
+Run GitHub Actions :
+`https://github.com/hericlibong/beautifullF1/actions/runs/36492539108`
+
+Résultat : **succès**, 3 min 44 s, sur le commit `7f6da74`.
+
+Preuves relevées dans les logs :
+
+- `check_should_refresh.py` : `should-refresh=false`, 15 GP publiés, dernier
+  Azerbaijan le 26/09 ;
+- `workflow_dispatch` a correctement forcé la suite du pipeline ;
+- installation des dépendances : succès ;
+- tests unitaires du workflow : succès ;
+- `validate_outputs.py` : succès ;
+- synchronisation dashboard : 23 fichiers ;
+- pipeline complet : succès ;
+- étape de commit : `Aucun changement à pousser.`
+
+Ce dernier point confirme qu'un lancement manuel sur des données déjà à jour
+reste idempotent et ne crée pas un commit artificiel.
+
+### 6.3 GitHub Pages
+
+Vérification directe de `https://hericlibong.github.io/beautifullF1/` :
+
+- le HTML public contient `#dash-freshness` et `#dash-updated` ;
+- `assets/modules/freshness.js` répond en HTTP **200** ;
+- le module public expose `STALE_AFTER_DAYS = 2`, `checkFreshness` et
+  `initFreshness`.
+
+### 6.4 Preuves qui demandent encore du temps réel
+
+Les points suivants ne peuvent pas être simulés par un run manuel :
+
+1. observer le premier événement `schedule` créé à partir de 14:23 UTC ;
+2. confirmer qu'un jour sans GP ce run s'arrête avant l'installation des
+   dépendances ;
+3. lors du prochain GP, confirmer le comportement automatique complet sans
+   intervention manuelle.
+
+### 6.5 Avertissements GitHub non bloquants
+
+Le run a remonté deux avis de maintenance sans impact sur son résultat :
+
+- GitHub force actuellement les actions `checkout@v4`, `setup-python@v5` et
+  `cache@v4` de Node.js 20 vers Node.js 24 ; il faudra suivre les futures
+  versions majeures de ces actions ;
+- l'image `ubuntu-latest` doit migrer vers Ubuntu 26 à partir du 19/10/2026 ;
+  la prochaine exécution après migration devra être surveillée.
 
 ## 7. Watchdog externe : préparé mais non déployé
 
