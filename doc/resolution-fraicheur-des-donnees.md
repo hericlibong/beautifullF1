@@ -477,6 +477,11 @@ Fichiers régénérés et publiés :
 - le déploiement GitHub Pages
   ([38301109130](https://github.com/hericlibong/beautifullF1/actions/runs/38301109130))
   a réussi et la donnée publique a été relue avec Singapour comme dernier GP.
+- un contrôle supplémentaire « données déjà à jour », déclenché via
+  `repository_dispatch`, s'est terminé avec succès en ignorant normalement les
+  étapes lourdes
+  ([38301412640](https://github.com/hericlibong/beautifullF1/actions/runs/38301412640)).
+  Il confirme que la suppression du cache pip corrige bien les faux runs rouges.
 
 La récupération de la Sprint Qualifying de Singapour a émis un avertissement
 FastF1 non bloquant. Il concerne les données de qualifications, pas les points
