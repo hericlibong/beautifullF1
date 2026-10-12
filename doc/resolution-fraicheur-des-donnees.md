@@ -403,3 +403,82 @@ Node dans le pipeline.
 Le risque le plus important reste la désactivation après 60 jours d'inactivité.
 Le watchdog externe doit être choisi et déployé avant l'intersaison de décembre
 2026. Le bandeau actuel ne remplace pas une notification proactive.
+
+## 11. Incident et rattrapage du GP de Singapour — 12/10/2026
+
+### 11.1 Constat
+
+Le 12/10 au soir, l'application publique était encore arrêtée au GP de Bahreïn
+du 04/10 : `generatedAt` valait `2026-10-05`, le compteur affichait 16 GP et
+Singapour était encore marqué comme prochain GP. Aucun run planifié du 12/10
+n'avait été créé au moment du contrôle, bien que le créneau théorique de
+14:23 UTC fût passé.
+
+Les runs planifiés du 07 au 11/10 étaient rouges, mais leur étape de contrôle
+avait correctement conclu que les données étaient à jour. Jusqu'au 11/10
+inclus, Singapour ne devait pas encore être publié : le délai de sécurité
+`PUBLISH_DELAY_DAYS = 1` rend le GP du 11/10 éligible le 12/10.
+
+### 11.2 Cause du faux échec quotidien
+
+`actions/setup-python` utilisait `cache: "pip"`, alors que l'installation des
+dépendances est volontairement ignorée les jours sans GP manquant. Dans ce cas,
+le dossier `~/.cache/pip` n'existait pas et le post-traitement de l'action
+transformait un contrôle réussi en run rouge avec l'erreur :
+
+> Cache folder path is retrieved for pip but doesn't exist on disk.
+
+Le calcul de fraîcheur n'était donc pas en échec. Il s'agissait d'un défaut de
+présentation de l'état du workflow, introduit lorsque l'installation lourde a
+été rendue conditionnelle.
+
+### 11.3 Correction appliquée
+
+Le fichier `.github/workflows/refresh-after-gp.yml` a été modifié pour retirer
+le cache pip intégré à `actions/setup-python`. Les dépendances ne sont
+installées qu'environ une fois par GP ; supprimer ce cache évite les faux
+échecs sans modifier la logique de déclenchement ni le calcul des données.
+
+Correction publiée dans le commit `46235d6` :
+`fix(ci): évite les faux échecs sans actualisation`.
+
+### 11.4 Rattrapage manuel et fichiers régénérés
+
+Le workflow a ensuite été forcé par `workflow_dispatch`. Le run n°54
+([38300619418](https://github.com/hericlibong/beautifullF1/actions/runs/38300619418))
+a réussi en 4 min 26 s et a créé le commit automatique `7cb2981` :
+`chore(data): auto-refresh after GP (run #54)`.
+
+Fichiers régénérés et publiés :
+
+- `docs/data/dashboard_2026.json` ;
+- `docs/data/qualifying_2026.json` ;
+- `docs/race_chart_builder/data/f1_race_chart_fastf1_2026.csv` ;
+- `docs/season_summary_heatmap/f1_2026_leaders_heatmap.csv` ;
+- `projects/dashboard/web/data/dashboard_2026.json` ;
+- `projects/dashboard/web/data/qualifying_2026.json` ;
+- `projects/race_chart_builder/outputs/f1_race_chart_fastf1_2026.csv` ;
+- `projects/race_chart_builder/web/data/f1_race_chart_fastf1_2026.csv` ;
+- `projects/season_summary_heatmap/d3_dataviz/f1_2026_leaders_heatmap.csv` ;
+- `projects/season_summary_heatmap/outputs/f1_2026_leaders_heatmap.csv`.
+
+### 11.5 Vérifications effectuées
+
+- 83 tests unitaires ont réussi ;
+- le pipeline a chargé explicitement les sessions `Singapore Grand Prix - Race`
+  et `Singapore Grand Prix - Sprint` ;
+- le validateur a confirmé la cohérence entre race chart, heatmap et dashboard ;
+- Singapour est maintenant le dernier GP, marqué `played`, avec Max Verstappen
+  comme vainqueur ;
+- le compteur est passé de 16 à 17 GP et `generatedAt` vaut `2026-10-12` ;
+- 137 points ont été ajoutés à Singapour : 101 pour la course et 36 pour le
+  sprint. Max Verstappen gagne notamment 33 points, soit 25 + 8, ce qui prouve
+  que le cumul ne s'est pas arrêté au sprint ;
+- le déploiement GitHub Pages
+  ([38301109130](https://github.com/hericlibong/beautifullF1/actions/runs/38301109130))
+  a réussi et la donnée publique a été relue avec Singapour comme dernier GP.
+
+La récupération de la Sprint Qualifying de Singapour a émis un avertissement
+FastF1 non bloquant. Il concerne les données de qualifications, pas les points
+du sprint ni de la course ; aucune correction supplémentaire n'est nécessaire
+pour la fraîcheur ou le classement.
