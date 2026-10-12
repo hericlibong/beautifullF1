@@ -44,7 +44,11 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-          cache: "pip"
+
+      # Ne pas activer le cache pip de setup-python ici : les jours où les
+      # données sont à jour, l'installation est volontairement sautée et le
+      # dossier ~/.cache/pip n'existe pas. Le post-step de setup-python
+      # transformerait alors à tort ce contrôle réussi en run rouge.
 
       # Compare les GP disputés aux GP déjà publiés. Le script échoue
       # explicitement si le calendrier est absent ou invalide.
