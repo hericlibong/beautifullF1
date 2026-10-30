@@ -8,6 +8,7 @@ __pycache__/
 .DS_Store
 .env
 projects/dashboard/.cache/
+.cache/
 
 # --- Bac à sable local (non versionné)
 test_computing/

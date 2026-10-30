@@ -328,6 +328,7 @@ def build(today: date | None = None) -> dict:
                 "name": next_round["name"],
                 "shortName": next_round["shortName"],
                 "date": next_round["date"],
+                "raceStartUtc": next_round.get("raceStartUtc"),
                 "isSprint": bool(next_round.get("isSprint", False)),
             }
             if next_round

@@ -88,7 +88,7 @@ import { initFreshness } from "./modules/freshness.js";
 
   // Initialise + tick le countdown
   if (dashRes.nextGp && dashRes.nextGp.date) {
-    const targetDate = dashRes.nextGp.date + "T14:00:00"; // ~ heure typique de course (locale)
+    const targetDate = dashRes.nextGp.raceStartUtc || dashRes.nextGp.date + "T14:00:00";
     const tile = kpiContainer.querySelector(".dash-kpi--countdown .dash-kpi-value");
     const tick = () => {
       if (!tile) return;

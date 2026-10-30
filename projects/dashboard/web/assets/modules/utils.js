@@ -32,7 +32,7 @@ export function showErrorBanner(message) {
  */
 export async function fetchJson(url, { required = false, fallback = null } = {}) {
   try {
-    const r = await fetch(url);
+    const r = await fetch(url, { cache: "no-cache" });
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     return await r.json();
   } catch (e) {
@@ -56,6 +56,7 @@ export function escapeAttr(s) {
 }
 
 export function formatCountdown(diffMs) {
+  if (diffMs < -24 * 60 * 60 * 1000) return t("countdown.awaitingResults");
   if (diffMs <= 0) return t("countdown.ongoing");
   const totalMin = Math.floor(diffMs / 60_000);
   const days = Math.floor(totalMin / (24 * 60));

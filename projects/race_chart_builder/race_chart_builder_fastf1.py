@@ -5,7 +5,6 @@ import csv
 import json
 import os
 import sys
-import time
 from datetime import datetime
 
 import fastf1
@@ -23,6 +22,7 @@ if _PROJECTS_DIR not in sys.path:
     sys.path.insert(0, _PROJECTS_DIR)
 
 from gp_naming import check_unique, col_name  # noqa: E402
+from session_results import load_results  # noqa: E402
 from team_naming import canonical_team  # noqa: E402
 
 # Mapping fallback des photos pilotes (utilisé quand FastF1 ne fournit pas
@@ -69,27 +69,11 @@ class RaceChartBuilderFastF1:
         return col_name(country, locality)
 
     def _load_race_with_retry(self, round_no: int, col_name: str, attempts: int = 3):
-        """Charge la session Race d'un round, avec retry exponentiel.
+        """Charge les résultats seuls ; lève une erreur après les retries.
 
-        Retourne la session chargée, ou None si tous les essais ont échoué.
-        Les échecs sont journalisés : un GP qui disparaît silencieusement fausse
-        tout le cumul en aval (dashboard, duels qualif), le bruit est voulu.
+        Un nouveau GP manquant doit interrompre le build autant qu'un ancien.
         """
-        for attempt in range(1, attempts + 1):
-            try:
-                race = fastf1.get_session(self.season, round_no, "Race")
-                race.load()
-                if race.results is None or len(race.results) == 0:
-                    raise ValueError("résultats vides")
-                return race
-            except Exception as exc:  # noqa: BLE001 - on veut tout retenter
-                print(
-                    f"[!] round {round_no} ({col_name}) : echec {attempt}/{attempts} - {exc}",
-                    file=sys.stderr,
-                )
-                if attempt < attempts:
-                    time.sleep(2**attempt)
-        return None
+        return load_results(self.season, round_no, "Race", attempts=attempts)
 
     def _existing_race_columns(self) -> list[str]:
         """Colonnes de GP présentes dans le CSV déjà écrit (vide s'il n'existe pas)."""
@@ -123,7 +107,7 @@ class RaceChartBuilderFastF1:
         )
 
     def build_results_table(self):
-        schedule = fastf1.get_event_schedule(self.season)
+        schedule = fastf1.get_event_schedule(self.season, include_testing=False)
 
         # 1) On collecte d'abord toutes les courses PASSÉES avec leurs données + date réelle de la session Race
         past_events_payload = (
@@ -136,7 +120,7 @@ class RaceChartBuilderFastF1:
             # 1️⃣ Identifier la date réelle de la course (session Race)
             race_date = event.get("Session5DateUtc", None)
             if pd.isna(race_date):
-                continue
+                raise ValueError(f"Date de course absente : {event['EventName']}")
             race_date = pd.to_datetime(race_date).to_pydatetime().replace(tzinfo=timezone.utc)
 
             # 2️⃣ Si la course n’a pas encore eu lieu → on saute
@@ -146,24 +130,16 @@ class RaceChartBuilderFastF1:
             round_no = int(event["RoundNumber"])
             col_name = self._col_name(event["Country"], event["Location"])
 
-            # Un GP passé qui n'a pas pu être chargé n'est PAS "pas encore
-            # couru" : on retente, puis on le mémorise pour que export_csv()
-            # refuse d'écrire un CSV amputé (cf. _assert_no_regression).
+            # Un GP passé indisponible interrompt le build, même s'il n'a
+            # encore jamais été publié (cas d'Austin le 26/10/2026).
             race = self._load_race_with_retry(round_no, col_name)
-            if race is None:
-                self.failed_rounds.append((round_no, col_name))
-                continue
 
             # On garde la même logique ensuite
             sprint_points = {}
-            try:
-                sprint = fastf1.get_session(self.season, round_no, "Sprint")
-                sprint.load()
-                if sprint.results is not None and len(sprint.results) > 0:
-                    for _, row in sprint.results.iterrows():
-                        sprint_points[row.FullName] = float(row.Points or 0.0)
-            except Exception:
-                pass
+            if str(event.get("EventFormat", "")).startswith("sprint"):
+                sprint = load_results(self.season, round_no, "Sprint")
+                for _, row in sprint.results.iterrows():
+                    sprint_points[row.FullName] = float(row.Points)
 
             past_events_payload.append(
                 (race_date, round_no, col_name, race.results.copy(), sprint_points)

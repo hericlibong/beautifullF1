@@ -1,40 +1,41 @@
 {
   "season": 2026,
-  "generatedAt": "2026-10-12",
+  "generatedAt": "2026-10-30",
   "lastGp": {
-    "name": "Singapore",
-    "shortName": "Singapore",
-    "date": "2026-10-11",
-    "isSprint": true,
-    "winner": {
-      "name": "Max Verstappen",
-      "team": "Red Bull Racing"
-    }
-  },
-  "nextGp": {
     "name": "United States - Austin",
     "shortName": "Austin",
     "date": "2026-10-25",
+    "isSprint": false,
+    "winner": {
+      "name": "Andrea Kimi Antonelli",
+      "team": "Mercedes"
+    }
+  },
+  "nextGp": {
+    "name": "Mexico",
+    "shortName": "Mexico",
+    "date": "2026-11-01",
+    "raceStartUtc": "2026-11-01T20:00:00Z",
     "isSprint": false
   },
   "kpis": {
     "leader": {
       "name": "Andrea Kimi Antonelli",
       "team": "Mercedes",
-      "points": 340
+      "points": 365
     },
     "second": {
       "name": "George Russell",
       "team": "Mercedes",
-      "points": 238
+      "points": 242
     },
-    "leaderGap": 102,
+    "leaderGap": 123,
     "lastWinner": {
-      "name": "Max Verstappen",
-      "team": "Red Bull Racing",
-      "gp": "Singapore"
+      "name": "Andrea Kimi Antonelli",
+      "team": "Mercedes",
+      "gp": "United States - Austin"
     },
-    "raceCount": 17,
+    "raceCount": 18,
     "totalRaces": 23
   },
   "standings": {
@@ -44,8 +45,8 @@
         "shortName": "A. Kimi Antonelli",
         "team": "Mercedes",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/K/ANDANT01_Kimi_Antonelli/andant01.png.transform/1col/image.png",
-        "points": 340,
-        "deltaLastGp": 20,
+        "points": 365,
+        "deltaLastGp": 25,
         "progress": [
           {
             "gp": "Australia",
@@ -148,6 +149,12 @@
             "shortName": "Singapore",
             "gain": 20,
             "cumulative": 340
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 25,
+            "cumulative": 365
           }
         ],
         "rank": 1,
@@ -158,8 +165,8 @@
         "shortName": "G. Russell",
         "team": "Mercedes",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/G/GEORUS01_George_Russell/georus01.png.transform/1col/image.png",
-        "points": 238,
-        "deltaLastGp": 2,
+        "points": 242,
+        "deltaLastGp": 4,
         "progress": [
           {
             "gp": "Australia",
@@ -262,18 +269,24 @@
             "shortName": "Singapore",
             "gain": 2,
             "cumulative": 238
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 4,
+            "cumulative": 242
           }
         ],
         "rank": 2,
-        "leaderGap": -102
+        "leaderGap": -123
       },
       {
         "name": "Lewis Hamilton",
         "shortName": "L. Hamilton",
         "team": "Ferrari",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LEWHAM01_Lewis_Hamilton/lewham01.png.transform/1col/image.png",
-        "points": 229,
-        "deltaLastGp": 15,
+        "points": 241,
+        "deltaLastGp": 12,
         "progress": [
           {
             "gp": "Australia",
@@ -376,18 +389,24 @@
             "shortName": "Singapore",
             "gain": 15,
             "cumulative": 229
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 12,
+            "cumulative": 241
           }
         ],
         "rank": 3,
-        "leaderGap": -111
+        "leaderGap": -124
       },
       {
         "name": "Max Verstappen",
         "shortName": "M. Verstappen",
         "team": "Red Bull Racing",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/M/MAXVER01_Max_Verstappen/maxver01.png.transform/1col/image.png",
-        "points": 221,
-        "deltaLastGp": 33,
+        "points": 236,
+        "deltaLastGp": 15,
         "progress": [
           {
             "gp": "Australia",
@@ -490,18 +509,24 @@
             "shortName": "Singapore",
             "gain": 33,
             "cumulative": 221
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 15,
+            "cumulative": 236
           }
         ],
         "rank": 4,
-        "leaderGap": -119
+        "leaderGap": -129
       },
       {
         "name": "Charles Leclerc",
         "shortName": "C. Leclerc",
         "team": "Ferrari",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/C/CHALEC01_Charles_Leclerc/chalec01.png.transform/1col/image.png",
-        "points": 215,
-        "deltaLastGp": 24,
+        "points": 233,
+        "deltaLastGp": 18,
         "progress": [
           {
             "gp": "Australia",
@@ -604,18 +629,24 @@
             "shortName": "Singapore",
             "gain": 24,
             "cumulative": 215
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 18,
+            "cumulative": 233
           }
         ],
         "rank": 5,
-        "leaderGap": -125
+        "leaderGap": -132
       },
       {
         "name": "Lando Norris",
         "shortName": "L. Norris",
         "team": "McLaren",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LANNOR01_Lando_Norris/lannor01.png.transform/1col/image.png",
-        "points": 201,
-        "deltaLastGp": 13,
+        "points": 211,
+        "deltaLastGp": 10,
         "progress": [
           {
             "gp": "Australia",
@@ -718,18 +749,24 @@
             "shortName": "Singapore",
             "gain": 13,
             "cumulative": 201
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 10,
+            "cumulative": 211
           }
         ],
         "rank": 6,
-        "leaderGap": -139
+        "leaderGap": -154
       },
       {
         "name": "Oscar Piastri",
         "shortName": "O. Piastri",
         "team": "McLaren",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/O/OSCPIA01_Oscar_Piastri/oscpia01.png.transform/1col/image.png",
-        "points": 138,
-        "deltaLastGp": 10,
+        "points": 144,
+        "deltaLastGp": 6,
         "progress": [
           {
             "gp": "Australia",
@@ -832,18 +869,24 @@
             "shortName": "Singapore",
             "gain": 10,
             "cumulative": 138
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 6,
+            "cumulative": 144
           }
         ],
         "rank": 7,
-        "leaderGap": -202
+        "leaderGap": -221
       },
       {
         "name": "Isack Hadjar",
         "shortName": "I. Hadjar",
         "team": "Red Bull Racing",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/I/ISAHAD01_Isack_Hadjar/isahad01.png.transform/1col/image.png",
-        "points": 97,
-        "deltaLastGp": 1,
+        "points": 105,
+        "deltaLastGp": 8,
         "progress": [
           {
             "gp": "Australia",
@@ -946,18 +989,24 @@
             "shortName": "Singapore",
             "gain": 1,
             "cumulative": 97
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 8,
+            "cumulative": 105
           }
         ],
         "rank": 8,
-        "leaderGap": -243
+        "leaderGap": -260
       },
       {
         "name": "Liam Lawson",
         "shortName": "L. Lawson",
         "team": "Racing Bulls",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LIALAW01_Liam_Lawson/lialaw01.png.transform/1col/image.png",
-        "points": 75,
-        "deltaLastGp": 10,
+        "points": 77,
+        "deltaLastGp": 2,
         "progress": [
           {
             "gp": "Australia",
@@ -1060,18 +1109,24 @@
             "shortName": "Singapore",
             "gain": 10,
             "cumulative": 75
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 2,
+            "cumulative": 77
           }
         ],
         "rank": 9,
-        "leaderGap": -265
+        "leaderGap": -288
       },
       {
         "name": "Pierre Gasly",
         "shortName": "P. Gasly",
         "team": "Alpine",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/P/PIEGAS01_Pierre_Gasly/piegas01.png.transform/1col/image.png",
-        "points": 41,
-        "deltaLastGp": 0,
+        "points": 42,
+        "deltaLastGp": 1,
         "progress": [
           {
             "gp": "Australia",
@@ -1174,10 +1229,16 @@
             "shortName": "Singapore",
             "gain": 0,
             "cumulative": 41
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 1,
+            "cumulative": 42
           }
         ],
         "rank": 10,
-        "leaderGap": -299
+        "leaderGap": -323
       },
       {
         "name": "Arvid Lindblad",
@@ -1288,10 +1349,16 @@
             "shortName": "Singapore",
             "gain": 0,
             "cumulative": 38
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 0,
+            "cumulative": 38
           }
         ],
         "rank": 11,
-        "leaderGap": -302
+        "leaderGap": -327
       },
       {
         "name": "Franco Colapinto",
@@ -1402,10 +1469,16 @@
             "shortName": "Singapore",
             "gain": 0,
             "cumulative": 27
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 0,
+            "cumulative": 27
           }
         ],
         "rank": 12,
-        "leaderGap": -313
+        "leaderGap": -338
       },
       {
         "name": "Oliver Bearman",
@@ -1413,7 +1486,7 @@
         "team": "Haas F1 Team",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/O/OLIBEA01_Oliver_Bearman/olibea01.png.transform/1col/image.png",
         "points": 23,
-        "deltaLastGp": 3,
+        "deltaLastGp": 0,
         "progress": [
           {
             "gp": "Australia",
@@ -1516,10 +1589,16 @@
             "shortName": "Singapore",
             "gain": 3,
             "cumulative": 23
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 0,
+            "cumulative": 23
           }
         ],
         "rank": 13,
-        "leaderGap": -317
+        "leaderGap": -342
       },
       {
         "name": "Nico Hülkenberg",
@@ -1527,7 +1606,7 @@
         "team": "Audi",
         "image": "https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/N/NICHUL01_Nico_Hulkenberg/nichul01.png.transform/1col/image.png",
         "points": 13,
-        "deltaLastGp": 6,
+        "deltaLastGp": 0,
         "progress": [
           {
             "gp": "Australia",
@@ -1630,10 +1709,16 @@
             "shortName": "Singapore",
             "gain": 6,
             "cumulative": 13
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 0,
+            "cumulative": 13
           }
         ],
         "rank": 14,
-        "leaderGap": -327
+        "leaderGap": -352
       },
       {
         "name": "Gabriel Bortoleto",
@@ -1744,10 +1829,16 @@
             "shortName": "Singapore",
             "gain": 0,
             "cumulative": 10
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 0,
+            "cumulative": 10
           }
         ],
         "rank": 15,
-        "leaderGap": -330
+        "leaderGap": -355
       },
       {
         "name": "Esteban Ocon",
@@ -1858,10 +1949,16 @@
             "shortName": "Singapore",
             "gain": 0,
             "cumulative": 7
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 0,
+            "cumulative": 7
           }
         ],
         "rank": 16,
-        "leaderGap": -333
+        "leaderGap": -358
       },
       {
         "name": "Carlos Sainz",
@@ -1972,10 +2069,16 @@
             "shortName": "Singapore",
             "gain": 0,
             "cumulative": 7
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 0,
+            "cumulative": 7
           }
         ],
         "rank": 17,
-        "leaderGap": -333
+        "leaderGap": -358
       },
       {
         "name": "Fernando Alonso",
@@ -2086,10 +2189,16 @@
             "shortName": "Singapore",
             "gain": 0,
             "cumulative": 7
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 0,
+            "cumulative": 7
           }
         ],
         "rank": 18,
-        "leaderGap": -333
+        "leaderGap": -358
       },
       {
         "name": "Alexander Albon",
@@ -2200,10 +2309,16 @@
             "shortName": "Singapore",
             "gain": 0,
             "cumulative": 5
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 0,
+            "cumulative": 5
           }
         ],
         "rank": 19,
-        "leaderGap": -335
+        "leaderGap": -360
       },
       {
         "name": "Yuki Tsunoda",
@@ -2314,10 +2429,16 @@
             "shortName": "Singapore",
             "gain": 0,
             "cumulative": 1
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 0,
+            "cumulative": 1
           }
         ],
         "rank": 20,
-        "leaderGap": -339
+        "leaderGap": -364
       },
       {
         "name": "Valtteri Bottas",
@@ -2428,10 +2549,16 @@
             "shortName": "Singapore",
             "gain": 0,
             "cumulative": 0
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 0,
+            "cumulative": 0
           }
         ],
         "rank": 21,
-        "leaderGap": -340
+        "leaderGap": -365
       },
       {
         "name": "Sergio Pérez",
@@ -2542,10 +2669,16 @@
             "shortName": "Singapore",
             "gain": 0,
             "cumulative": 0
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 0,
+            "cumulative": 0
           }
         ],
         "rank": 22,
-        "leaderGap": -340
+        "leaderGap": -365
       },
       {
         "name": "Lance Stroll",
@@ -2656,89 +2789,95 @@
             "shortName": "Singapore",
             "gain": 0,
             "cumulative": 0
+          },
+          {
+            "gp": "United States - Austin",
+            "shortName": "Austin",
+            "gain": 0,
+            "cumulative": 0
           }
         ],
         "rank": 23,
-        "leaderGap": -340
+        "leaderGap": -365
       }
     ],
     "constructors": [
       {
         "team": "Mercedes",
-        "points": 578,
-        "deltaLastGp": 22,
+        "points": 607,
+        "deltaLastGp": 29,
         "rank": 1,
         "leaderGap": 0
       },
       {
         "team": "Ferrari",
-        "points": 444,
-        "deltaLastGp": 39,
+        "points": 474,
+        "deltaLastGp": 30,
         "rank": 2,
-        "leaderGap": -134
-      },
-      {
-        "team": "McLaren",
-        "points": 339,
-        "deltaLastGp": 23,
-        "rank": 3,
-        "leaderGap": -239
+        "leaderGap": -133
       },
       {
         "team": "Red Bull Racing",
-        "points": 332,
-        "deltaLastGp": 34,
+        "points": 355,
+        "deltaLastGp": 23,
+        "rank": 3,
+        "leaderGap": -252
+      },
+      {
+        "team": "McLaren",
+        "points": 355,
+        "deltaLastGp": 16,
         "rank": 4,
-        "leaderGap": -246
+        "leaderGap": -252
       },
       {
         "team": "Racing Bulls",
-        "points": 100,
-        "deltaLastGp": 10,
+        "points": 102,
+        "deltaLastGp": 2,
         "rank": 5,
-        "leaderGap": -478
+        "leaderGap": -505
       },
       {
         "team": "Alpine",
-        "points": 68,
-        "deltaLastGp": 0,
+        "points": 69,
+        "deltaLastGp": 1,
         "rank": 6,
-        "leaderGap": -510
+        "leaderGap": -538
       },
       {
         "team": "Haas F1 Team",
         "points": 30,
-        "deltaLastGp": 3,
+        "deltaLastGp": 0,
         "rank": 7,
-        "leaderGap": -548
+        "leaderGap": -577
       },
       {
         "team": "Audi",
         "points": 23,
-        "deltaLastGp": 6,
+        "deltaLastGp": 0,
         "rank": 8,
-        "leaderGap": -555
+        "leaderGap": -584
       },
       {
         "team": "Williams",
         "points": 12,
         "deltaLastGp": 0,
         "rank": 9,
-        "leaderGap": -566
+        "leaderGap": -595
       },
       {
         "team": "Aston Martin",
         "points": 7,
         "deltaLastGp": 0,
         "rank": 10,
-        "leaderGap": -571
+        "leaderGap": -600
       },
       {
         "team": "Cadillac",
         "points": 0,
         "deltaLastGp": 0,
         "rank": 11,
-        "leaderGap": -578
+        "leaderGap": -607
       }
     ]
   },
@@ -2970,8 +3109,12 @@
       "shortName": "Austin",
       "date": "2026-10-25",
       "isSprint": false,
-      "status": "next",
-      "winner": null
+      "status": "played",
+      "winner": {
+        "name": "Andrea Kimi Antonelli",
+        "team": "Mercedes",
+        "shortName": "A. Kimi Antonelli"
+      }
     },
     {
       "round": 19,
@@ -2979,7 +3122,7 @@
       "shortName": "Mexico",
       "date": "2026-11-01",
       "isSprint": false,
-      "status": "upcoming",
+      "status": "next",
       "winner": null
     },
     {

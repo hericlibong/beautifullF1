@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import csv
 import json
+from datetime import date
 from pathlib import Path
 
 import pytest
@@ -153,3 +154,40 @@ def test_dashboard_detects_uncounted_past_gp(
     errors: list[str] = []
     vo.check_dashboard(errors)
     assert any("China" in e for e in errors)
+
+
+def test_both_builders_stale_cannot_pass_as_consistent(tmp_path, monkeypatch):
+    """Deux sources arrêtées à Singapour ne prouvent pas qu'Austin est publié."""
+    dashboard = tmp_path / "dashboard.json"
+    dashboard.write_text(
+        json.dumps(
+            {
+                "kpis": {"raceCount": 1},
+                "lastGp": {"date": "2026-10-11"},
+                "standings": {
+                    "drivers": [{"name": "Max", "points": 33, "progress": [{"gp": "Singapore"}]}],
+                    "constructors": [{"team": "Red Bull Racing", "points": 33}],
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+    calendar = tmp_path / "calendar.json"
+    calendar.write_text(
+        json.dumps(
+            {
+                "rounds": [
+                    {"name": "Singapore", "date": "2026-10-11"},
+                    {"name": "United States - Austin", "date": "2026-10-25"},
+                    {"name": "Mexico", "date": "2026-11-01"},
+                ]
+            }
+        ),
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(vo, "DASHBOARD_JSON", dashboard)
+    monkeypatch.setattr(vo, "CALENDAR_PATH", calendar)
+    errors = []
+    vo.check_dashboard(errors, today=date(2026, 10, 30))
+    assert any("Austin" in e for e in errors)
+    assert not any("Mexico" in e for e in errors)

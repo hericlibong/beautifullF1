@@ -13,13 +13,14 @@ Usage :
     5. build_dashboard_data.py             → docs/data/dashboard_<season>.json
     6. sync_to_docs.py × 3                 (race_chart, heatmap, dashboard)
 
-Le calendrier (calendar_<season>.json) n'est pas régénéré ici — il évolue
-rarement, lance fetch_calendar.py manuellement si besoin.
+Le calendrier est actualisé avant les résultats, pour conserver les horaires
+officiels du prochain Grand Prix.
 """
 
 from __future__ import annotations
 
 import argparse
+import os
 import shutil
 import subprocess
 import sys
@@ -59,10 +60,16 @@ def main() -> int:
     )
     args = parser.parse_args()
     season = args.season
+    if os.environ.get("FASTF1_CACHE"):
+        Path(os.environ["FASTF1_CACHE"]).mkdir(parents=True, exist_ok=True)
 
     rc_root = ROOT / "projects" / "race_chart_builder"
     hm_root = ROOT / "projects" / "season_summary_heatmap"
     db_root = ROOT / "projects" / "dashboard"
+
+    if not args.skip_fetch:
+        if not run_step("0/6 calendrier", [PYTHON, str(db_root / "fetch_calendar.py")]):
+            return 1
 
     # 1) Race chart : fetch + génération CSV brut
     if not args.skip_fetch:

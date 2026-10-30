@@ -44,6 +44,7 @@ def main() -> int:
                 "name": name,
                 "shortName": short_name(name, location),
                 "date": str(row["EventDate"])[:10],
+                "raceStartUtc": row["Session5DateUtc"].isoformat() + "Z",
                 "isSprint": str(row.get("EventFormat", "")).startswith("sprint"),
             }
         )

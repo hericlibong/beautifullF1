@@ -7,7 +7,7 @@ des données, navigation par onglets, drill-downs, switch de langue, embed viz.
 from __future__ import annotations
 
 import json
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import pytest
@@ -67,6 +67,28 @@ def test_standings_drivers_table_populated(page, base_url):
     page.goto(base_url)
     page.wait_for_selector("#standings-drivers tr.t-clickable")
     assert page.locator("#standings-drivers tr.t-clickable").count() > 0
+
+
+def test_finished_race_waiting_for_publication_is_not_ongoing(page, base_url):
+    payload = _dashboard_payload()
+    payload["nextGp"]["date"] = (date.today() - timedelta(days=3)).isoformat()
+    payload["nextGp"]["raceStartUtc"] = payload["nextGp"]["date"] + "T20:00:00Z"
+    page.route("**/data/dashboard_2026.json", lambda route: route.fulfill(json=payload))
+    page.goto(base_url)
+    value = page.locator(".dash-kpi--countdown .dash-kpi-value")
+    value.wait_for()
+    assert value.inner_text() in ("Résultats en attente", "Awaiting results")
+
+
+def test_countdown_uses_official_race_start(page, base_url):
+    payload = _dashboard_payload()
+    payload["nextGp"].update({"date": "2026-11-01", "raceStartUtc": "2026-11-01T20:00:00Z"})
+    page.clock.set_fixed_time(datetime(2026, 11, 1, 10, tzinfo=timezone.utc))
+    page.route("**/data/dashboard_2026.json", lambda route: route.fulfill(json=payload))
+    page.goto(base_url)
+    value = page.locator(".dash-kpi--countdown .dash-kpi-value")
+    value.wait_for()
+    assert "10" in value.inner_text()
 
 
 def test_tabs_switch(page, base_url):

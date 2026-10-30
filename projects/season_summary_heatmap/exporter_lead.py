@@ -1,5 +1,6 @@
 import os
 import sys
+from datetime import datetime, timezone
 
 import fastf1 as ff1
 import pandas as pd
@@ -9,6 +10,7 @@ _PROJECTS_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if _PROJECTS_DIR not in sys.path:
     sys.path.insert(0, _PROJECTS_DIR)
 
+from session_results import load_results  # noqa: E402
 from team_naming import canonical_team  # noqa: E402
 
 SPRINT_EVENT_FORMATS = {"sprint", "sprint_shootout", "sprint_qualifying"}
@@ -79,19 +81,22 @@ class F1FlourishExporterLead:
 
     def fetch_results(self):
         for _, event in self.schedule.iterrows():
+            race_date = pd.to_datetime(event["Session5DateUtc"], utc=True)
+            if pd.isna(race_date):
+                raise ValueError(f"Date de course absente : {event['EventName']}")
+            if race_date > datetime.now(timezone.utc):
+                continue
             event_name = event["EventName"]
             has_sprint = self._has_sprint(event)
             round_label = event["ShortEventName"] + ("*" if has_sprint else "")
             round_number = event["RoundNumber"]
 
             try:
-                race = ff1.get_session(self.season, event_name, "R")
-                race.load(laps=False, telemetry=False, weather=False, messages=False)
+                race = load_results(self.season, int(round_number), "Race")
 
                 sprint_points_map = {}
                 if has_sprint:
-                    sprint = ff1.get_session(self.season, event_name, "S")
-                    sprint.load(laps=False, telemetry=False, weather=False, messages=False)
+                    sprint = load_results(self.season, int(round_number), "Sprint")
                     for _, srow in sprint.results.iterrows():
                         sprint_points_map[srow["Abbreviation"]] = srow["Points"]
 
@@ -125,8 +130,8 @@ class F1FlourishExporterLead:
                             "HeadshotUrl": headshot_url,
                         }
                     )
-            except Exception:
-                continue  # GP non couru ou data absente
+            except Exception as exc:
+                raise RuntimeError(f"Impossible de publier {event_name}") from exc
 
     def build_dataframe(self):
         self.df = pd.DataFrame(self.standings)

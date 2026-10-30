@@ -7,6 +7,7 @@
       "name": "Australia",
       "shortName": "Australia",
       "date": "2026-03-08",
+      "raceStartUtc": "2026-03-08T04:00:00Z",
       "isSprint": false
     },
     {
@@ -14,6 +15,7 @@
       "name": "China",
       "shortName": "China",
       "date": "2026-03-15",
+      "raceStartUtc": "2026-03-15T07:00:00Z",
       "isSprint": true
     },
     {
@@ -21,6 +23,7 @@
       "name": "Japan",
       "shortName": "Japan",
       "date": "2026-03-29",
+      "raceStartUtc": "2026-03-29T05:00:00Z",
       "isSprint": false
     },
     {
@@ -28,6 +31,7 @@
       "name": "United States - Miami Gardens",
       "shortName": "Miami",
       "date": "2026-05-03",
+      "raceStartUtc": "2026-05-03T17:00:00Z",
       "isSprint": true
     },
     {
@@ -35,6 +39,7 @@
       "name": "Canada",
       "shortName": "Canada",
       "date": "2026-05-24",
+      "raceStartUtc": "2026-05-24T20:00:00Z",
       "isSprint": true
     },
     {
@@ -42,6 +47,7 @@
       "name": "Monaco",
       "shortName": "Monaco",
       "date": "2026-06-07",
+      "raceStartUtc": "2026-06-07T13:00:00Z",
       "isSprint": false
     },
     {
@@ -49,6 +55,7 @@
       "name": "Spain",
       "shortName": "Barcelona",
       "date": "2026-06-14",
+      "raceStartUtc": "2026-06-14T13:00:00Z",
       "isSprint": false
     },
     {
@@ -56,6 +63,7 @@
       "name": "Austria",
       "shortName": "Austria",
       "date": "2026-06-28",
+      "raceStartUtc": "2026-06-28T13:00:00Z",
       "isSprint": false
     },
     {
@@ -63,6 +71,7 @@
       "name": "United Kingdom",
       "shortName": "Silverstone",
       "date": "2026-07-05",
+      "raceStartUtc": "2026-07-05T14:00:00Z",
       "isSprint": true
     },
     {
@@ -70,6 +79,7 @@
       "name": "Belgium",
       "shortName": "Spa",
       "date": "2026-07-19",
+      "raceStartUtc": "2026-07-19T13:00:00Z",
       "isSprint": false
     },
     {
@@ -77,6 +87,7 @@
       "name": "Hungary",
       "shortName": "Hungaroring",
       "date": "2026-07-26",
+      "raceStartUtc": "2026-07-26T13:00:00Z",
       "isSprint": false
     },
     {
@@ -84,6 +95,7 @@
       "name": "Netherlands",
       "shortName": "Zandvoort",
       "date": "2026-08-23",
+      "raceStartUtc": "2026-08-23T13:00:00Z",
       "isSprint": true
     },
     {
@@ -91,6 +103,7 @@
       "name": "Italy - Monza",
       "shortName": "Monza",
       "date": "2026-09-06",
+      "raceStartUtc": "2026-09-06T13:00:00Z",
       "isSprint": false
     },
     {
@@ -98,6 +111,7 @@
       "name": "Spain - Madrid",
       "shortName": "Madrid",
       "date": "2026-09-13",
+      "raceStartUtc": "2026-09-13T13:00:00Z",
       "isSprint": false
     },
     {
@@ -105,6 +119,7 @@
       "name": "Azerbaijan",
       "shortName": "Baku",
       "date": "2026-09-26",
+      "raceStartUtc": "2026-09-26T11:00:00Z",
       "isSprint": false
     },
     {
@@ -112,6 +127,7 @@
       "name": "Bahrain",
       "shortName": "Sepang",
       "date": "2026-10-04",
+      "raceStartUtc": "2026-10-04T07:00:00Z",
       "isSprint": false
     },
     {
@@ -119,6 +135,7 @@
       "name": "Singapore",
       "shortName": "Singapore",
       "date": "2026-10-11",
+      "raceStartUtc": "2026-10-11T12:00:00Z",
       "isSprint": true
     },
     {
@@ -126,6 +143,7 @@
       "name": "United States - Austin",
       "shortName": "Austin",
       "date": "2026-10-25",
+      "raceStartUtc": "2026-10-25T20:00:00Z",
       "isSprint": false
     },
     {
@@ -133,6 +151,7 @@
       "name": "Mexico",
       "shortName": "Mexico",
       "date": "2026-11-01",
+      "raceStartUtc": "2026-11-01T20:00:00Z",
       "isSprint": false
     },
     {
@@ -140,6 +159,7 @@
       "name": "Brazil",
       "shortName": "Interlagos",
       "date": "2026-11-08",
+      "raceStartUtc": "2026-11-08T17:00:00Z",
       "isSprint": false
     },
     {
@@ -147,6 +167,7 @@
       "name": "United States - Las Vegas",
       "shortName": "Las Vegas",
       "date": "2026-11-21",
+      "raceStartUtc": "2026-11-22T04:00:00Z",
       "isSprint": false
     },
     {
@@ -154,6 +175,7 @@
       "name": "Qatar",
       "shortName": "Lusail",
       "date": "2026-11-29",
+      "raceStartUtc": "2026-11-29T16:00:00Z",
       "isSprint": false
     },
     {
@@ -161,6 +183,7 @@
       "name": "United Arab Emirates",
       "shortName": "Yas Marina",
       "date": "2026-12-06",
+      "raceStartUtc": "2026-12-06T13:00:00Z",
       "isSprint": false
     }
   ]

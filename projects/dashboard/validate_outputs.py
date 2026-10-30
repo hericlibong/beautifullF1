@@ -26,6 +26,7 @@ from __future__ import annotations
 import csv
 import json
 import sys
+from datetime import date, timedelta
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -93,7 +94,7 @@ def check_race_chart_vs_heatmap(errors: list[str]) -> None:
             errors.append(f"{name} : {rc_points} pts (race chart) vs {hm_points} pts (heatmap)")
 
 
-def check_dashboard(errors: list[str]) -> None:
+def check_dashboard(errors: list[str], today: date | None = None) -> None:
     """Le JSON publié doit être interne­ment cohérent et couvrir tous les GP courus."""
     if not DASHBOARD_JSON.exists():
         errors.append("dashboard_2026.json manquant")
@@ -119,15 +120,16 @@ def check_dashboard(errors: list[str]) -> None:
     # symptôme direct d'un GP perdu par un builder.
     calendar = json.loads(CALENDAR_PATH.read_text(encoding="utf-8"))
     last_gp_date = data.get("lastGp", {}).get("date", "")
-    expected = [r for r in calendar["rounds"] if r["date"] <= last_gp_date]
+    cutoff = max(last_gp_date, ((today or date.today()) - timedelta(days=1)).isoformat())
+    expected = [r for r in calendar["rounds"] if r["date"] <= cutoff]
     if len(expected) != race_count:
         missing = [
             r["name"]
             for r in expected
-            if r["name"] not in {p["gp"] for p in drivers[0]["progress"]}
+            if r["name"] not in {p["gp"] for d in drivers[:1] for p in d["progress"]}
         ]
         errors.append(
-            f"{len(expected)} GP courus au calendrier jusqu'au {last_gp_date} "
+            f"{len(expected)} GP attendus au calendrier jusqu'au {cutoff} "
             f"mais raceCount={race_count}"
             + (f" — manquant(s) : {', '.join(missing)}" if missing else "")
         )

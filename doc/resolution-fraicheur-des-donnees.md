@@ -487,3 +487,22 @@ La récupération de la Sprint Qualifying de Singapour a émis un avertissement
 FastF1 non bloquant. Il concerne les données de qualifications, pas les points
 du sprint ni de la course ; aucune correction supplémentaire n'est nécessaire
 pour la fraîcheur ou le classement.
+
+## 12. Austin : correction de la récupération et vérification publique — 30/10/2026
+
+La panne s'est reproduite après Austin malgré quatre déclenchements automatiques.
+Le race chart demandait toute la télémétrie et récupérait des résultats vides,
+alors que la heatmap chargeait correctement les seuls classements. Le
+validateur bloquait donc chaque publication. Le cache annoncé n'était pas actif.
+
+Le chargement des résultats est désormais partagé, léger, contrôlé et retenté.
+La perte silencieuse des sprints est interdite. Le calendrier est actualisé,
+le compte à rebours utilise l'heure officielle, quatre contrôles quotidiens
+remplacent le contrôle unique et le workflow vérifie les données publiques
+après déploiement, même les jours sans reconstruction.
+
+Le détail des causes, de chaque fichier modifié/créé, des sorties régénérées et
+des preuves est consigné dans
+[incident-2026-10-30-refresh-austin.md](incident-2026-10-30-refresh-austin.md).
+Ce rapport remplace toute interprétation des précédentes validations comme
+une garantie de fonctionnement futur sans surveillance externe.

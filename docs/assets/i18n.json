@@ -18,6 +18,7 @@
     "kpi.points": "{n} pts • {team}",
 
     "countdown.ongoing": "🏁 En cours",
+    "countdown.awaitingResults": "Résultats en attente",
     "countdown.days": "{days} jours",
     "countdown.dayHour": "{days}j {hours}h",
     "countdown.hourMin": "{hours}h {min}m",
@@ -131,6 +132,7 @@
     "kpi.points": "{n} pts • {team}",
 
     "countdown.ongoing": "🏁 Ongoing",
+    "countdown.awaitingResults": "Awaiting results",
     "countdown.days": "{days} days",
     "countdown.dayHour": "{days}d {hours}h",
     "countdown.hourMin": "{hours}h {min}m",
