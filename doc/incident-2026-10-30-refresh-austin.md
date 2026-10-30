@@ -110,6 +110,16 @@ afin de conserver une trace continue des corrections successives.
 - La CI qualité a validé Ruff, Black et les tests unitaires, puis a identifié
   l'incompatibilité Playwright/Ubuntu 26 mentionnée dans la table des fichiers.
   L'image du job navigateur est donc fixée à Ubuntu 24.04.
+- Correctif de compatibilité publié dans `306703f` ; la
+  [CI complète sur Ubuntu 24.04](https://github.com/hericlibong/beautifullF1/actions/runs/41036349975)
+  a ensuite réussi en 1 min 17 s : Ruff, Black, tous les tests unitaires,
+  installation Chromium et les 20 tests navigateur.
+- Le [contrôle sans reconstruction](https://github.com/hericlibong/beautifullF1/actions/runs/41036353860),
+  déclenché via `repository_dispatch`, a réussi : 18 GP publiés, étapes lourdes
+  ignorées, quatre fichiers publics vérifiés. Il teste le même chemin que le
+  cron lorsqu'aucun GP ne manque, sans prétendre prouver l'heure du futur cron.
+- Le [déploiement suivant](https://github.com/hericlibong/beautifullF1/actions/runs/41036349021)
+  a également réussi. Aucun résultat n'a été saisi ou corrigé manuellement.
 
 ## Limites opérationnelles
 
