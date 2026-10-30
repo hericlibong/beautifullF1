@@ -48,6 +48,7 @@ qu'aucun répertoire n'était à sauvegarder.
 | `docs/assets/dashboard.js`, `docs/assets/modules/utils.js`, `docs/assets/i18n.json` | Miroirs des trois sources front-end, synchronisés pour Pages |
 | `projects/dashboard/verify_publication.py` (créé) | Vérification des quatre fichiers de données réellement servis par Pages, avec attente de déploiement et comparaison de contenu normalisée CRLF/LF |
 | `.github/workflows/refresh-after-gp.yml` | Quatre contrôles quotidiens (02:23, 08:23, 14:23, 20:23 UTC), trois tentatives de pipeline, cache actif `.cache/fastf1`, diagnostics conservés 14 jours, contrôle public même sans reconstruction |
+| `.github/workflows/python-app.yml` | Image Ubuntu 24.04 explicite : Playwright 1.60 refuse Ubuntu 26, devenu `ubuntu-latest`. Ce second défaut a été découvert pendant la validation distante et empêchait les tests navigateur en CI |
 | `.gitignore` | Exclusion du cache de données réseau `.cache/` |
 
 Les nouveaux tests rejouent les symptômes :
@@ -92,6 +93,23 @@ afin de conserver une trace continue des corrections successives.
 - 92 tests unitaires dashboard réussis.
 - 20 tests navigateur Chromium réussis, dont les deux scénarios ajoutés pour
   la course passée et le compte à rebours officiel de Mexico.
+
+## Publication et validation opérationnelle
+
+- Correction et données publiées dans le commit `66d23b8`.
+- [Déploiement Pages initial](https://github.com/hericlibong/beautifullF1/actions/runs/41035880736)
+  réussi ; les quatre fichiers publics ont ensuite été comparés aux fichiers
+  validés avec succès.
+- Contrôle Chromium sur le site public : Austin figure parmi les GP joués,
+  le bandeau est absent et la tuile du prochain GP indique Mexico.
+- [Reconstruction complète distante](https://github.com/hericlibong/beautifullF1/actions/runs/41035898961)
+  réussie en 2 min 43 s : tests, pipeline, validation et vérification publique.
+  Les fichiers reconstruits sous Linux sont identiques à ceux préparés sous
+  Windows : aucun nouveau changement à pousser. Le cache est réellement
+  sauvegardé (`fastf1-results-Linux-41035898961`).
+- La CI qualité a validé Ruff, Black et les tests unitaires, puis a identifié
+  l'incompatibilité Playwright/Ubuntu 26 mentionnée dans la table des fichiers.
+  L'image du job navigateur est donc fixée à Ubuntu 24.04.
 
 ## Limites opérationnelles
 

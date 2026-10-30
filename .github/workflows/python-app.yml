@@ -9,7 +9,9 @@ on:
 jobs:
   build:
     name: Build & Test
-    runs-on: ubuntu-latest
+    # Playwright 1.60 ne fournit pas ses dépendances pour Ubuntu 26.
+    # Garder une image compatible plutôt que subir les migrations de latest.
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout repository
