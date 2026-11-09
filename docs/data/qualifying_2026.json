@@ -1,6 +1,6 @@
 {
   "season": 2026,
-  "generatedAt": "2026-11-02",
+  "generatedAt": "2026-11-09",
   "sessions": [
     {
       "round": 1,
@@ -4900,6 +4900,212 @@
           "q3": false
         }
       ]
+    },
+    {
+      "round": 20,
+      "gp": "Brazil",
+      "shortName": "Interlagos",
+      "type": "Q",
+      "drivers": [
+        {
+          "fullName": "Lando Norris",
+          "abbr": "NOR",
+          "team": "McLaren",
+          "position": 1,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "George Russell",
+          "abbr": "RUS",
+          "team": "Mercedes",
+          "position": 2,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Andrea Kimi Antonelli",
+          "abbr": "ANT",
+          "team": "Mercedes",
+          "position": 3,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Charles Leclerc",
+          "abbr": "LEC",
+          "team": "Ferrari",
+          "position": 4,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Liam Lawson",
+          "abbr": "LAW",
+          "team": "Racing Bulls",
+          "position": 5,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Nico Hülkenberg",
+          "abbr": "HUL",
+          "team": "Audi",
+          "position": 6,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Isack Hadjar",
+          "abbr": "HAD",
+          "team": "Red Bull Racing",
+          "position": 7,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Oliver Bearman",
+          "abbr": "BEA",
+          "team": "Haas F1 Team",
+          "position": 8,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Fernando Alonso",
+          "abbr": "ALO",
+          "team": "Aston Martin",
+          "position": 9,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Alexander Albon",
+          "abbr": "ALB",
+          "team": "Williams",
+          "position": 10,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Lewis Hamilton",
+          "abbr": "HAM",
+          "team": "Ferrari",
+          "position": 11,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Oscar Piastri",
+          "abbr": "PIA",
+          "team": "McLaren",
+          "position": 12,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Rafael Camara",
+          "abbr": "nan",
+          "team": "Haas F1 Team",
+          "position": 13,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Arvid Lindblad",
+          "abbr": "LIN",
+          "team": "Racing Bulls",
+          "position": 14,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Carlos Sainz",
+          "abbr": "SAI",
+          "team": "Williams",
+          "position": 15,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Max Verstappen",
+          "abbr": "VER",
+          "team": "Red Bull Racing",
+          "position": 16,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Franco Colapinto",
+          "abbr": "COL",
+          "team": "Alpine",
+          "position": 17,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Pierre Gasly",
+          "abbr": "GAS",
+          "team": "Alpine",
+          "position": 18,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Lance Stroll",
+          "abbr": "STR",
+          "team": "Aston Martin",
+          "position": 19,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Valtteri Bottas",
+          "abbr": "BOT",
+          "team": "Cadillac",
+          "position": 20,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Sergio Pérez",
+          "abbr": "PER",
+          "team": "Cadillac",
+          "position": 21,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        },
+        {
+          "fullName": "Gabriel Bortoleto",
+          "abbr": "BOR",
+          "team": "Audi",
+          "position": 22,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
+        }
+      ]
     }
   ],
   "teammates": [
@@ -6627,31 +6833,16 @@
       "team": "Haas F1 Team",
       "drivers": [
         "Oliver Bearman",
-        "Ryo Hirakawa"
+        "Rafael Camara"
       ],
       "h2h": {
-        "Q": {
-          "Oliver Bearman": 1
-        },
+        "Q": {},
         "SQ": {}
       },
       "q3Count": {
         "Oliver Bearman": 1
       },
-      "sessions": [
-        {
-          "round": 19,
-          "gp": "Mexico",
-          "shortName": "Mexico",
-          "type": "Q",
-          "fastest": "Oliver Bearman",
-          "gapSec": 0.875,
-          "timeA": "1:18.083",
-          "timeB": "1:18.958",
-          "posA": 14,
-          "posB": 18
-        }
-      ]
+      "sessions": []
     },
     {
       "team": "Alpine",
