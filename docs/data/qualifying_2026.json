@@ -1,6 +1,6 @@
 {
   "season": 2026,
-  "generatedAt": "2026-11-09",
+  "generatedAt": "2026-11-22",
   "sessions": [
     {
       "round": 1,
@@ -4774,15 +4774,6 @@
           "q3": true
         },
         {
-          "fullName": "Liam Lawson",
-          "abbr": "LAW",
-          "team": "Racing Bulls",
-          "position": 8,
-          "bestTimeSec": 77.029,
-          "bestTimeStr": "1:17.029",
-          "q3": true
-        },
-        {
           "fullName": "Pierre Gasly",
           "abbr": "GAS",
           "team": "Alpine",
@@ -4898,6 +4889,15 @@
           "bestTimeSec": 79.852,
           "bestTimeStr": "1:19.852",
           "q3": false
+        },
+        {
+          "fullName": "Liam Lawson",
+          "abbr": "LAW",
+          "team": "Racing Bulls",
+          "position": 22,
+          "bestTimeSec": null,
+          "bestTimeStr": null,
+          "q3": false
         }
       ]
     },
@@ -4912,98 +4912,98 @@
           "abbr": "NOR",
           "team": "McLaren",
           "position": 1,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
+          "bestTimeSec": 87.47,
+          "bestTimeStr": "1:27.470",
+          "q3": true
         },
         {
           "fullName": "George Russell",
           "abbr": "RUS",
           "team": "Mercedes",
           "position": 2,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
+          "bestTimeSec": 87.674,
+          "bestTimeStr": "1:27.674",
+          "q3": true
         },
         {
           "fullName": "Andrea Kimi Antonelli",
           "abbr": "ANT",
           "team": "Mercedes",
           "position": 3,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
+          "bestTimeSec": 88.095,
+          "bestTimeStr": "1:28.095",
+          "q3": true
         },
         {
           "fullName": "Charles Leclerc",
           "abbr": "LEC",
           "team": "Ferrari",
           "position": 4,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
+          "bestTimeSec": 88.289,
+          "bestTimeStr": "1:28.289",
+          "q3": true
         },
         {
           "fullName": "Liam Lawson",
           "abbr": "LAW",
           "team": "Racing Bulls",
           "position": 5,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
+          "bestTimeSec": 88.321,
+          "bestTimeStr": "1:28.321",
+          "q3": true
         },
         {
           "fullName": "Nico Hülkenberg",
           "abbr": "HUL",
           "team": "Audi",
           "position": 6,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
+          "bestTimeSec": 88.668,
+          "bestTimeStr": "1:28.668",
+          "q3": true
         },
         {
           "fullName": "Isack Hadjar",
           "abbr": "HAD",
           "team": "Red Bull Racing",
           "position": 7,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
+          "bestTimeSec": 88.763,
+          "bestTimeStr": "1:28.763",
+          "q3": true
         },
         {
           "fullName": "Oliver Bearman",
           "abbr": "BEA",
           "team": "Haas F1 Team",
           "position": 8,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
+          "bestTimeSec": 89.831,
+          "bestTimeStr": "1:29.831",
+          "q3": true
         },
         {
           "fullName": "Fernando Alonso",
           "abbr": "ALO",
           "team": "Aston Martin",
           "position": 9,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
+          "bestTimeSec": 90.311,
+          "bestTimeStr": "1:30.311",
+          "q3": true
         },
         {
           "fullName": "Alexander Albon",
           "abbr": "ALB",
           "team": "Williams",
           "position": 10,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
-          "q3": false
+          "bestTimeSec": 90.456,
+          "bestTimeStr": "1:30.456",
+          "q3": true
         },
         {
           "fullName": "Lewis Hamilton",
           "abbr": "HAM",
           "team": "Ferrari",
           "position": 11,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
+          "bestTimeSec": 90.001,
+          "bestTimeStr": "1:30.001",
           "q3": false
         },
         {
@@ -5011,17 +5011,17 @@
           "abbr": "PIA",
           "team": "McLaren",
           "position": 12,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
+          "bestTimeSec": 90.369,
+          "bestTimeStr": "1:30.369",
           "q3": false
         },
         {
           "fullName": "Rafael Camara",
-          "abbr": "nan",
+          "abbr": "CAM",
           "team": "Haas F1 Team",
           "position": 13,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
+          "bestTimeSec": 91.515,
+          "bestTimeStr": "1:31.515",
           "q3": false
         },
         {
@@ -5029,8 +5029,8 @@
           "abbr": "LIN",
           "team": "Racing Bulls",
           "position": 14,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
+          "bestTimeSec": 91.687,
+          "bestTimeStr": "1:31.687",
           "q3": false
         },
         {
@@ -5038,8 +5038,8 @@
           "abbr": "SAI",
           "team": "Williams",
           "position": 15,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
+          "bestTimeSec": 91.785,
+          "bestTimeStr": "1:31.785",
           "q3": false
         },
         {
@@ -5047,8 +5047,8 @@
           "abbr": "VER",
           "team": "Red Bull Racing",
           "position": 16,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
+          "bestTimeSec": 91.238,
+          "bestTimeStr": "1:31.238",
           "q3": false
         },
         {
@@ -5056,8 +5056,8 @@
           "abbr": "COL",
           "team": "Alpine",
           "position": 17,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
+          "bestTimeSec": 93.327,
+          "bestTimeStr": "1:33.327",
           "q3": false
         },
         {
@@ -5065,8 +5065,8 @@
           "abbr": "GAS",
           "team": "Alpine",
           "position": 18,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
+          "bestTimeSec": 93.449,
+          "bestTimeStr": "1:33.449",
           "q3": false
         },
         {
@@ -5074,8 +5074,8 @@
           "abbr": "STR",
           "team": "Aston Martin",
           "position": 19,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
+          "bestTimeSec": 93.653,
+          "bestTimeStr": "1:33.653",
           "q3": false
         },
         {
@@ -5083,8 +5083,8 @@
           "abbr": "BOT",
           "team": "Cadillac",
           "position": 20,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
+          "bestTimeSec": 93.774,
+          "bestTimeStr": "1:33.774",
           "q3": false
         },
         {
@@ -5092,8 +5092,8 @@
           "abbr": "PER",
           "team": "Cadillac",
           "position": 21,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
+          "bestTimeSec": 94.509,
+          "bestTimeStr": "1:34.509",
           "q3": false
         },
         {
@@ -5101,8 +5101,214 @@
           "abbr": "BOR",
           "team": "Audi",
           "position": 22,
-          "bestTimeSec": null,
-          "bestTimeStr": null,
+          "bestTimeSec": 101.564,
+          "bestTimeStr": "1:41.564",
+          "q3": false
+        }
+      ]
+    },
+    {
+      "round": 21,
+      "gp": "United States - Las Vegas",
+      "shortName": "Las Vegas",
+      "type": "Q",
+      "drivers": [
+        {
+          "fullName": "Andrea Kimi Antonelli",
+          "abbr": "ANT",
+          "team": "Mercedes",
+          "position": 1,
+          "bestTimeSec": 93.893,
+          "bestTimeStr": "1:33.893",
+          "q3": true
+        },
+        {
+          "fullName": "Max Verstappen",
+          "abbr": "VER",
+          "team": "Red Bull Racing",
+          "position": 2,
+          "bestTimeSec": 94.151,
+          "bestTimeStr": "1:34.151",
+          "q3": true
+        },
+        {
+          "fullName": "George Russell",
+          "abbr": "RUS",
+          "team": "Mercedes",
+          "position": 3,
+          "bestTimeSec": 94.224,
+          "bestTimeStr": "1:34.224",
+          "q3": true
+        },
+        {
+          "fullName": "Lando Norris",
+          "abbr": "NOR",
+          "team": "McLaren",
+          "position": 4,
+          "bestTimeSec": 94.244,
+          "bestTimeStr": "1:34.244",
+          "q3": true
+        },
+        {
+          "fullName": "Isack Hadjar",
+          "abbr": "HAD",
+          "team": "Red Bull Racing",
+          "position": 5,
+          "bestTimeSec": 94.592,
+          "bestTimeStr": "1:34.592",
+          "q3": true
+        },
+        {
+          "fullName": "Arvid Lindblad",
+          "abbr": "LIN",
+          "team": "Racing Bulls",
+          "position": 6,
+          "bestTimeSec": 94.668,
+          "bestTimeStr": "1:34.668",
+          "q3": true
+        },
+        {
+          "fullName": "Oscar Piastri",
+          "abbr": "PIA",
+          "team": "McLaren",
+          "position": 7,
+          "bestTimeSec": 94.899,
+          "bestTimeStr": "1:34.899",
+          "q3": true
+        },
+        {
+          "fullName": "Liam Lawson",
+          "abbr": "LAW",
+          "team": "Racing Bulls",
+          "position": 8,
+          "bestTimeSec": 95.09,
+          "bestTimeStr": "1:35.090",
+          "q3": true
+        },
+        {
+          "fullName": "Pierre Gasly",
+          "abbr": "GAS",
+          "team": "Alpine",
+          "position": 9,
+          "bestTimeSec": 95.105,
+          "bestTimeStr": "1:35.105",
+          "q3": true
+        },
+        {
+          "fullName": "Franco Colapinto",
+          "abbr": "COL",
+          "team": "Alpine",
+          "position": 10,
+          "bestTimeSec": 95.314,
+          "bestTimeStr": "1:35.314",
+          "q3": true
+        },
+        {
+          "fullName": "Charles Leclerc",
+          "abbr": "LEC",
+          "team": "Ferrari",
+          "position": 11,
+          "bestTimeSec": 95.197,
+          "bestTimeStr": "1:35.197",
+          "q3": false
+        },
+        {
+          "fullName": "Lewis Hamilton",
+          "abbr": "HAM",
+          "team": "Ferrari",
+          "position": 12,
+          "bestTimeSec": 95.253,
+          "bestTimeStr": "1:35.253",
+          "q3": false
+        },
+        {
+          "fullName": "Nico Hülkenberg",
+          "abbr": "HUL",
+          "team": "Audi",
+          "position": 13,
+          "bestTimeSec": 95.46,
+          "bestTimeStr": "1:35.460",
+          "q3": false
+        },
+        {
+          "fullName": "Carlos Sainz",
+          "abbr": "SAI",
+          "team": "Williams",
+          "position": 14,
+          "bestTimeSec": 95.641,
+          "bestTimeStr": "1:35.641",
+          "q3": false
+        },
+        {
+          "fullName": "Gabriel Bortoleto",
+          "abbr": "BOR",
+          "team": "Audi",
+          "position": 15,
+          "bestTimeSec": 95.993,
+          "bestTimeStr": "1:35.993",
+          "q3": false
+        },
+        {
+          "fullName": "Alexander Albon",
+          "abbr": "ALB",
+          "team": "Williams",
+          "position": 16,
+          "bestTimeSec": 96.125,
+          "bestTimeStr": "1:36.125",
+          "q3": false
+        },
+        {
+          "fullName": "Rafael Camara",
+          "abbr": "CAM",
+          "team": "Haas F1 Team",
+          "position": 17,
+          "bestTimeSec": 96.22,
+          "bestTimeStr": "1:36.220",
+          "q3": false
+        },
+        {
+          "fullName": "Sergio Pérez",
+          "abbr": "PER",
+          "team": "Cadillac",
+          "position": 18,
+          "bestTimeSec": 97.383,
+          "bestTimeStr": "1:37.383",
+          "q3": false
+        },
+        {
+          "fullName": "Fernando Alonso",
+          "abbr": "ALO",
+          "team": "Aston Martin",
+          "position": 19,
+          "bestTimeSec": 97.4,
+          "bestTimeStr": "1:37.400",
+          "q3": false
+        },
+        {
+          "fullName": "Lance Stroll",
+          "abbr": "STR",
+          "team": "Aston Martin",
+          "position": 20,
+          "bestTimeSec": 97.55,
+          "bestTimeStr": "1:37.550",
+          "q3": false
+        },
+        {
+          "fullName": "Valtteri Bottas",
+          "abbr": "BOT",
+          "team": "Cadillac",
+          "position": 21,
+          "bestTimeSec": 97.601,
+          "bestTimeStr": "1:37.601",
+          "q3": false
+        },
+        {
+          "fullName": "Oliver Bearman",
+          "abbr": "BEA",
+          "team": "Haas F1 Team",
+          "position": 22,
+          "bestTimeSec": 108.005,
+          "bestTimeStr": "1:48.005",
           "q3": false
         }
       ]
@@ -5117,8 +5323,8 @@
       ],
       "h2h": {
         "Q": {
-          "George Russell": 8,
-          "Andrea Kimi Antonelli": 11
+          "George Russell": 9,
+          "Andrea Kimi Antonelli": 12
         },
         "SQ": {
           "George Russell": 3,
@@ -5126,8 +5332,8 @@
         }
       },
       "q3Count": {
-        "George Russell": 19,
-        "Andrea Kimi Antonelli": 18
+        "George Russell": 21,
+        "Andrea Kimi Antonelli": 20
       },
       "sessions": [
         {
@@ -5417,6 +5623,30 @@
           "timeB": "1:16.523",
           "posA": 5,
           "posB": 2
+        },
+        {
+          "round": 20,
+          "gp": "Brazil",
+          "shortName": "Interlagos",
+          "type": "Q",
+          "fastest": "George Russell",
+          "gapSec": 0.421,
+          "timeA": "1:28.095",
+          "timeB": "1:27.674",
+          "posA": 3,
+          "posB": 2
+        },
+        {
+          "round": 21,
+          "gp": "United States - Las Vegas",
+          "shortName": "Las Vegas",
+          "type": "Q",
+          "fastest": "Andrea Kimi Antonelli",
+          "gapSec": 0.331,
+          "timeA": "1:33.893",
+          "timeB": "1:34.224",
+          "posA": 1,
+          "posB": 3
         }
       ]
     },
@@ -5428,16 +5658,16 @@
       ],
       "h2h": {
         "Q": {
-          "Max Verstappen": 10,
-          "Isack Hadjar": 3
+          "Max Verstappen": 11,
+          "Isack Hadjar": 4
         },
         "SQ": {
           "Max Verstappen": 4
         }
       },
       "q3Count": {
-        "Isack Hadjar": 13,
-        "Max Verstappen": 17
+        "Isack Hadjar": 15,
+        "Max Verstappen": 18
       },
       "sessions": [
         {
@@ -5643,6 +5873,30 @@
           "timeB": "1:16.692",
           "posA": 7,
           "posB": 4
+        },
+        {
+          "round": 20,
+          "gp": "Brazil",
+          "shortName": "Interlagos",
+          "type": "Q",
+          "fastest": "Isack Hadjar",
+          "gapSec": 2.475,
+          "timeA": "1:28.763",
+          "timeB": "1:31.238",
+          "posA": 7,
+          "posB": 16
+        },
+        {
+          "round": 21,
+          "gp": "United States - Las Vegas",
+          "shortName": "Las Vegas",
+          "type": "Q",
+          "fastest": "Max Verstappen",
+          "gapSec": 0.441,
+          "timeA": "1:34.592",
+          "timeB": "1:34.151",
+          "posA": 5,
+          "posB": 2
         }
       ]
     },
@@ -5654,7 +5908,7 @@
       ],
       "h2h": {
         "Q": {
-          "Charles Leclerc": 10,
+          "Charles Leclerc": 12,
           "Lewis Hamilton": 9
         },
         "SQ": {
@@ -5663,7 +5917,7 @@
         }
       },
       "q3Count": {
-        "Charles Leclerc": 18,
+        "Charles Leclerc": 19,
         "Lewis Hamilton": 19
       },
       "sessions": [
@@ -5954,6 +6208,30 @@
           "timeB": "1:16.514",
           "posA": 3,
           "posB": 1
+        },
+        {
+          "round": 20,
+          "gp": "Brazil",
+          "shortName": "Interlagos",
+          "type": "Q",
+          "fastest": "Charles Leclerc",
+          "gapSec": 1.712,
+          "timeA": "1:28.289",
+          "timeB": "1:30.001",
+          "posA": 4,
+          "posB": 11
+        },
+        {
+          "round": 21,
+          "gp": "United States - Las Vegas",
+          "shortName": "Las Vegas",
+          "type": "Q",
+          "fastest": "Charles Leclerc",
+          "gapSec": 0.056,
+          "timeA": "1:35.197",
+          "timeB": "1:35.253",
+          "posA": 11,
+          "posB": 12
         }
       ]
     },
@@ -5966,15 +6244,15 @@
       "h2h": {
         "Q": {
           "Oscar Piastri": 7,
-          "Lando Norris": 12
+          "Lando Norris": 14
         },
         "SQ": {
           "Lando Norris": 5
         }
       },
       "q3Count": {
-        "Oscar Piastri": 18,
-        "Lando Norris": 19
+        "Oscar Piastri": 19,
+        "Lando Norris": 21
       },
       "sessions": [
         {
@@ -6264,6 +6542,30 @@
           "timeB": "1:17.646",
           "posA": 6,
           "posB": 12
+        },
+        {
+          "round": 20,
+          "gp": "Brazil",
+          "shortName": "Interlagos",
+          "type": "Q",
+          "fastest": "Lando Norris",
+          "gapSec": 2.899,
+          "timeA": "1:27.470",
+          "timeB": "1:30.369",
+          "posA": 1,
+          "posB": 12
+        },
+        {
+          "round": 21,
+          "gp": "United States - Las Vegas",
+          "shortName": "Las Vegas",
+          "type": "Q",
+          "fastest": "Lando Norris",
+          "gapSec": 0.655,
+          "timeA": "1:34.244",
+          "timeB": "1:34.899",
+          "posA": 4,
+          "posB": 7
         }
       ]
     },
@@ -6276,7 +6578,7 @@
       "h2h": {
         "Q": {
           "Liam Lawson": 10,
-          "Arvid Lindblad": 6
+          "Arvid Lindblad": 7
         },
         "SQ": {
           "Liam Lawson": 2,
@@ -6284,8 +6586,8 @@
         }
       },
       "q3Count": {
-        "Liam Lawson": 7,
-        "Arvid Lindblad": 13
+        "Liam Lawson": 8,
+        "Arvid Lindblad": 14
       },
       "sessions": [
         {
@@ -6505,15 +6807,27 @@
           "posB": 10
         },
         {
-          "round": 19,
-          "gp": "Mexico",
-          "shortName": "Mexico",
+          "round": 20,
+          "gp": "Brazil",
+          "shortName": "Interlagos",
           "type": "Q",
           "fastest": "Liam Lawson",
-          "gapSec": 0.088,
-          "timeA": "1:17.117",
-          "timeB": "1:17.029",
-          "posA": 8,
+          "gapSec": 3.366,
+          "timeA": "1:31.687",
+          "timeB": "1:28.321",
+          "posA": 14,
+          "posB": 5
+        },
+        {
+          "round": 21,
+          "gp": "United States - Las Vegas",
+          "shortName": "Las Vegas",
+          "type": "Q",
+          "fastest": "Arvid Lindblad",
+          "gapSec": 0.422,
+          "timeA": "1:34.668",
+          "timeB": "1:35.090",
+          "posA": 6,
           "posB": 8
         }
       ]
@@ -6527,7 +6841,7 @@
       "h2h": {
         "Q": {
           "Gabriel Bortoleto": 10,
-          "Nico Hülkenberg": 9
+          "Nico Hülkenberg": 11
         },
         "SQ": {
           "Nico Hülkenberg": 2,
@@ -6536,7 +6850,7 @@
       },
       "q3Count": {
         "Gabriel Bortoleto": 4,
-        "Nico Hülkenberg": 2
+        "Nico Hülkenberg": 3
       },
       "sessions": [
         {
@@ -6826,6 +7140,30 @@
           "timeB": "1:17.306",
           "posA": 13,
           "posB": 10
+        },
+        {
+          "round": 20,
+          "gp": "Brazil",
+          "shortName": "Interlagos",
+          "type": "Q",
+          "fastest": "Nico Hülkenberg",
+          "gapSec": 12.896,
+          "timeA": "1:41.564",
+          "timeB": "1:28.668",
+          "posA": 22,
+          "posB": 6
+        },
+        {
+          "round": 21,
+          "gp": "United States - Las Vegas",
+          "shortName": "Las Vegas",
+          "type": "Q",
+          "fastest": "Nico Hülkenberg",
+          "gapSec": 0.533,
+          "timeA": "1:35.993",
+          "timeB": "1:35.460",
+          "posA": 15,
+          "posB": 13
         }
       ]
     },
@@ -6836,13 +7174,41 @@
         "Rafael Camara"
       ],
       "h2h": {
-        "Q": {},
+        "Q": {
+          "Oliver Bearman": 1,
+          "Rafael Camara": 1
+        },
         "SQ": {}
       },
       "q3Count": {
-        "Oliver Bearman": 1
+        "Oliver Bearman": 2
       },
-      "sessions": []
+      "sessions": [
+        {
+          "round": 20,
+          "gp": "Brazil",
+          "shortName": "Interlagos",
+          "type": "Q",
+          "fastest": "Oliver Bearman",
+          "gapSec": 1.684,
+          "timeA": "1:29.831",
+          "timeB": "1:31.515",
+          "posA": 8,
+          "posB": 13
+        },
+        {
+          "round": 21,
+          "gp": "United States - Las Vegas",
+          "shortName": "Las Vegas",
+          "type": "Q",
+          "fastest": "Rafael Camara",
+          "gapSec": 11.785,
+          "timeA": "1:48.005",
+          "timeB": "1:36.220",
+          "posA": 22,
+          "posB": 17
+        }
+      ]
     },
     {
       "team": "Alpine",
@@ -6852,8 +7218,8 @@
       ],
       "h2h": {
         "Q": {
-          "Pierre Gasly": 14,
-          "Franco Colapinto": 5
+          "Pierre Gasly": 15,
+          "Franco Colapinto": 6
         },
         "SQ": {
           "Pierre Gasly": 3,
@@ -6861,8 +7227,8 @@
         }
       },
       "q3Count": {
-        "Pierre Gasly": 9,
-        "Franco Colapinto": 5
+        "Pierre Gasly": 10,
+        "Franco Colapinto": 6
       },
       "sessions": [
         {
@@ -7152,6 +7518,30 @@
           "timeB": "1:17.153",
           "posA": 11,
           "posB": 9
+        },
+        {
+          "round": 20,
+          "gp": "Brazil",
+          "shortName": "Interlagos",
+          "type": "Q",
+          "fastest": "Franco Colapinto",
+          "gapSec": 0.122,
+          "timeA": "1:33.327",
+          "timeB": "1:33.449",
+          "posA": 17,
+          "posB": 18
+        },
+        {
+          "round": 21,
+          "gp": "United States - Las Vegas",
+          "shortName": "Las Vegas",
+          "type": "Q",
+          "fastest": "Pierre Gasly",
+          "gapSec": 0.209,
+          "timeA": "1:35.314",
+          "timeB": "1:35.105",
+          "posA": 10,
+          "posB": 9
         }
       ]
     },
@@ -7163,8 +7553,8 @@
       ],
       "h2h": {
         "Q": {
-          "Carlos Sainz": 14,
-          "Alexander Albon": 4
+          "Carlos Sainz": 15,
+          "Alexander Albon": 5
         },
         "SQ": {
           "Carlos Sainz": 2,
@@ -7172,7 +7562,8 @@
         }
       },
       "q3Count": {
-        "Carlos Sainz": 1
+        "Carlos Sainz": 1,
+        "Alexander Albon": 1
       },
       "sessions": [
         {
@@ -7438,6 +7829,30 @@
           "timeB": "1:18.885",
           "posA": 16,
           "posB": 15
+        },
+        {
+          "round": 20,
+          "gp": "Brazil",
+          "shortName": "Interlagos",
+          "type": "Q",
+          "fastest": "Alexander Albon",
+          "gapSec": 1.329,
+          "timeA": "1:30.456",
+          "timeB": "1:31.785",
+          "posA": 10,
+          "posB": 15
+        },
+        {
+          "round": 21,
+          "gp": "United States - Las Vegas",
+          "shortName": "Las Vegas",
+          "type": "Q",
+          "fastest": "Carlos Sainz",
+          "gapSec": 0.484,
+          "timeA": "1:36.125",
+          "timeB": "1:35.641",
+          "posA": 16,
+          "posB": 14
         }
       ]
     },
@@ -7449,7 +7864,7 @@
       ],
       "h2h": {
         "Q": {
-          "Fernando Alonso": 15,
+          "Fernando Alonso": 17,
           "Lance Stroll": 2
         },
         "SQ": {
@@ -7457,7 +7872,9 @@
           "Lance Stroll": 1
         }
       },
-      "q3Count": {},
+      "q3Count": {
+        "Fernando Alonso": 1
+      },
       "sessions": [
         {
           "round": 2,
@@ -7722,6 +8139,30 @@
           "timeB": "1:19.072",
           "posA": 17,
           "posB": 19
+        },
+        {
+          "round": 20,
+          "gp": "Brazil",
+          "shortName": "Interlagos",
+          "type": "Q",
+          "fastest": "Fernando Alonso",
+          "gapSec": 3.342,
+          "timeA": "1:30.311",
+          "timeB": "1:33.653",
+          "posA": 9,
+          "posB": 19
+        },
+        {
+          "round": 21,
+          "gp": "United States - Las Vegas",
+          "shortName": "Las Vegas",
+          "type": "Q",
+          "fastest": "Fernando Alonso",
+          "gapSec": 0.15,
+          "timeA": "1:37.400",
+          "timeB": "1:37.550",
+          "posA": 19,
+          "posB": 20
         }
       ]
     },
@@ -7733,8 +8174,8 @@
       ],
       "h2h": {
         "Q": {
-          "Sergio Pérez": 11,
-          "Valtteri Bottas": 8
+          "Sergio Pérez": 12,
+          "Valtteri Bottas": 9
         },
         "SQ": {
           "Sergio Pérez": 3,
@@ -8017,6 +8458,30 @@
           "timeA": "1:19.105",
           "timeB": "1:19.852",
           "posA": 20,
+          "posB": 21
+        },
+        {
+          "round": 20,
+          "gp": "Brazil",
+          "shortName": "Interlagos",
+          "type": "Q",
+          "fastest": "Valtteri Bottas",
+          "gapSec": 0.735,
+          "timeA": "1:34.509",
+          "timeB": "1:33.774",
+          "posA": 21,
+          "posB": 20
+        },
+        {
+          "round": 21,
+          "gp": "United States - Las Vegas",
+          "shortName": "Las Vegas",
+          "type": "Q",
+          "fastest": "Sergio Pérez",
+          "gapSec": 0.218,
+          "timeA": "1:37.383",
+          "timeB": "1:37.601",
+          "posA": 18,
           "posB": 21
         }
       ]
